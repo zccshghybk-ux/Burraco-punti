@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Burraco Punti">
+    <meta name="theme-color" content="#144d18">
+    <title>Burraco Punti</title>
+    <style>
+        :root {
+            --giallo-burraco: #ffd700;
+            --testo-scuro-swift: #1a1a1a;
+            --sfondo-menu: rgba(0, 0, 0, 0.7);
+            --sfondo-card: rgba(0, 0, 0, 0.45);
+            --bg-gradiente: radial-gradient(circle at center, #2e7d32 0%, #144d18 100%);
+            --menu-bg-1: rgba(0,35,10,0.92);
+            --menu-bg-2: rgba(0,15,5,0.92);
+        }
+
+        /* TEMI COLORE */
+        body.tema-verde {
+            --bg-gradiente: radial-gradient(circle at center, #2e7d32 0%, #144d18 100%);
+            --menu-bg-1: rgba(0,35,10,0.92);
+            --menu-bg-2: rgba(0,15,5,0.92);
+        }
+        body.tema-blu {
+            --bg-gradiente: radial-gradient(circle at center, #1565c0 0%, #0d2e5e 100%);
+            --menu-bg-1: rgba(0,25,55,0.92);
+            --menu-bg-2: rgba(0,10,30,0.92);
+        }
+        body.tema-rosso {
+            --bg-gradiente: radial-gradient(circle at center, #8e1b1b 0%, #4a0a0a 100%);
+            --menu-bg-1: rgba(55,10,10,0.92);
+            --menu-bg-2: rgba(30,3,3,0.92);
+        }
+        body.tema-beige {
+            --bg-gradiente: radial-gradient(circle at center, #d4b896 0%, #8b6f47 100%);
+            --menu-bg-1: rgba(80,65,45,0.92);
+            --menu-bg-2: rgba(50,40,25,0.92);
+        }
+        body.tema-viola {
+            --bg-gradiente: radial-gradient(circle at center, #6a1b9a 0%, #2a0a3d 100%);
+            --menu-bg-1: rgba(45,10,65,0.92);
+            --menu-bg-2: rgba(20,5,35,0.92);
+        }
+
+        body.dark-mode {
+            --sfondo-card: rgba(25, 25, 25, 0.85);
+        }
+        body.dark-mode.tema-verde { --bg-gradiente: radial-gradient(circle at center, #002200 0%, #000000 100%); }
+        body.dark-mode.tema-blu { --bg-gradiente: radial-gradient(circle at center, #001a33 0%, #000000 100%); }
+        body.dark-mode.tema-rosso { --bg-gradiente: radial-gradient(circle at center, #2a0000 0%, #000000 100%); }
+        body.dark-mode.tema-beige { --bg-gradiente: radial-gradient(circle at center, #1a1508 0%, #000000 100%); }
+        body.dark-mode.tema-viola { --bg-gradiente: radial-gradient(circle at center, #1a0022 0%, #000000 100%); }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        html {
+            background: #144d18;
+            height: 100%;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: '-apple-system', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background: var(--bg-gradiente); color: white;
+            min-height: 100vh; display: flex; flex-direction: column;
+            user-select: none; -webkit-user-select: none;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        .header-nuovo {
+            padding: 22px 10px 26px;
+            display: flex; align-items: center; justify-content: center;
+            gap: 24px; position: relative;
+            min-height: 160px; overflow: visible;
+        }
+
+        .header-cards { display: flex; align-items: center; flex-shrink: 0; }
+
+        .play-card {
+            width: 78px; height: 110px;
+            background: linear-gradient(160deg, #ffffff 0%, #f2ede0 100%);
+            border-radius: 9px;
+            border: 1px solid #1a1a1a;
+            box-shadow:
+                3px 5px 12px rgba(0,0,0,0.65),
+                0 0 0 1px rgba(255,255,255,0.2),
+                0 0 0 2px rgba(180, 140, 0, 0.7),
+                inset 0 0 0 1.5px rgba(255,255,255,0.95);
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s;
+            cursor: pointer;
+        }
+        .play-card + .play-card { margin-left: -32px; }
+        .play-card:hover {
+            transform: translateY(-18px) scale(1.18) rotate(0deg) !important;
+            z-index: 100 !important;
+            box-shadow:
+                6px 14px 28px rgba(0,0,0,0.8),
+                0 0 35px rgba(255, 215, 0, 0.9),
+                0 0 0 2px rgba(255, 215, 0, 1),
+                inset 0 0 0 1.5px rgba(255,255,255,0.95);
+        }
+
+        .card-corner {
+            position: absolute; top: 5px; left: 7px;
+            display: flex; flex-direction: column; align-items: center;
+            line-height: 0.95; font-weight: bold;
+        }
+        .card-corner .rank { font-size: 16px; font-weight: bold; letter-spacing: -0.5px; }
+        .card-corner .suit { font-size: 14px; margin-top: 1px; }
+        .card-corner.bottom { top: auto; left: auto; bottom: 5px; right: 7px; transform: rotate(180deg); }
+        .card-center { font-size: 46px; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.15); }
+
+        .play-card.rosso { color: #c62828; }
+        .play-card.nero { color: #1a1a1a; }
+
+        .play-card.joker {
+            background: linear-gradient(160deg, #fff8e1 0%, #ffd54f 100%);
+            color: #5d3d00; border-color: #8a6d00;
+            box-shadow:
+                3px 5px 12px rgba(0,0,0,0.65),
+                0 0 0 2px rgba(255, 215, 0, 1),
+                0 0 20px rgba(255, 215, 0, 0.4),
+                inset 0 0 0 1.5px rgba(255,255,255,0.95);
+        }
+        .play-card.joker .card-center { font-size: 42px; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.35)); }
+        .play-card.joker .card-corner .rank { font-size: 12px; color: #5d3d00; font-family: 'Georgia', serif; }
+
+        .carta-1 { transform: rotate(-18deg) translateY(10px); z-index: 1; }
+        .carta-2 { transform: rotate(-9deg) translateY(3px); z-index: 2; }
+        .carta-3 { transform: rotate(-1deg) translateY(-3px); z-index: 3; }
+        .carta-4 { transform: rotate(1deg) translateY(-3px); z-index: 3; }
+        .carta-5 { transform: rotate(9deg) translateY(3px); z-index: 2; }
+        .carta-6 { transform: rotate(18deg) translateY(10px); z-index: 1; }
+
+        .titolo-container {
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; padding: 0 8px; position: relative;
+        }
+
+        .titolo-app {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 72px;
+            background: linear-gradient(180deg, #fff3b0 0%, #ffd700 45%, #d4a017 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--giallo-burraco);
+            margin: 0; padding-bottom: 14px; position: relative;
+            filter:
+                drop-shadow(3px 3px 3px rgba(0,0,0,0.85))
+                drop-shadow(0 0 25px rgba(255, 215, 0, 0.55))
+                drop-shadow(0 0 50px rgba(255, 215, 0, 0.3));
+            letter-spacing: 2px; white-space: nowrap; font-weight: bold;
+        }
+        .titolo-app::after {
+            content: '';
+            position: absolute; left: 5%; right: 5%; bottom: 0; height: 3px;
+            background: linear-gradient(90deg, transparent 0%, #ffd700 15%, #fff3b0 50%, #ffd700 85%, transparent 100%);
+            border-radius: 3px;
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.9), 0 0 24px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Titoli generici (Optima) */
+        .titolo-optima {
+            font-family: 'Optima', 'Georgia', 'Times New Roman', serif;
+            color: var(--giallo-burraco);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.55), 0 0 12px rgba(255,215,0,0.25);
+            margin: 0;
+            line-height: 1.2;
+        }
+        h2.titolo-optima { font-size: 22px; font-weight: bold; }
+        h3.titolo-optima { font-size: 18px; font-weight: bold; }
+
+        @media (max-width: 1000px) {
+            .header-nuovo { gap: 18px; padding: 18px 8px 22px; min-height: 140px; }
+            .play-card { width: 66px; height: 92px; border-radius: 8px; }
+            .play-card + .play-card { margin-left: -28px; }
+            .card-center { font-size: 38px; }
+            .card-corner .rank { font-size: 14px; }
+            .card-corner .suit { font-size: 12px; }
+            .play-card.joker .card-center { font-size: 34px; }
+            .play-card.joker .card-corner .rank { font-size: 10px; }
+            .titolo-app { font-size: 56px; letter-spacing: 1.5px; padding-bottom: 12px; }
+        }
+        @media (max-width: 720px) {
+            .header-nuovo { gap: 10px; padding: 14px 4px 18px; min-height: 110px; }
+            .play-card { width: 48px; height: 68px; border-radius: 6px; }
+            .play-card + .play-card { margin-left: -22px; }
+            .card-center { font-size: 26px; }
+            .card-corner { top: 3px; left: 4px; }
+            .card-corner .rank { font-size: 10px; }
+            .card-corner .suit { font-size: 9px; }
+            .card-corner.bottom { bottom: 3px; right: 4px; }
+            .play-card.joker .card-center { font-size: 24px; }
+            .play-card.joker .card-corner .rank { font-size: 8px; }
+            .titolo-app { font-size: 42px; letter-spacing: 1px; padding-bottom: 10px; }
+            .titolo-app::after { height: 2.5px; }
+        }
+        @media (max-width: 520px) {
+            .header-nuovo { gap: 6px; padding: 12px 2px 15px; min-height: 90px; }
+            .play-card { width: 38px; height: 54px; border-radius: 5px; }
+            .play-card + .play-card { margin-left: -18px; }
+            .card-center { font-size: 20px; }
+            .card-corner { top: 2px; left: 3px; }
+            .card-corner .rank { font-size: 8px; }
+            .card-corner .suit { font-size: 7px; }
+            .card-corner.bottom { bottom: 2px; right: 3px; }
+            .play-card.joker .card-center { font-size: 18px; }
+            .play-card.joker .card-corner .rank { font-size: 6px; }
+            .titolo-app { font-size: 32px; letter-spacing: 0.5px; padding-bottom: 8px; }
+            .titolo-app::after { height: 2px; }
+        }
+        @media (max-width: 400px) {
+            .play-card { width: 32px; height: 46px; }
+            .play-card + .play-card { margin-left: -15px; }
+            .card-center { font-size: 16px; }
+            .card-corner { display: none; }
+            .titolo-app { font-size: 26px; padding-bottom: 7px; }
+            .titolo-app::after { height: 2px; }
+        }
+
+        .menu-mobile {
+            display: flex; background-color: var(--sfondo-menu);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 10px 12px; overflow-x: auto; white-space: nowrap;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        .menu-mobile::-webkit-scrollbar { display: none; }
+        .swift-capsule {
+            display: inline-flex; padding: 8px 16px; margin-right: 8px;
+            background: rgba(255,255,255,0.15); border-radius: 20px;
+            color: white; font-size: 14px; font-weight: 600;
+            border: none; cursor: pointer; transition: 0.2s;
+        }
+        .swift-capsule.attiva { background: var(--giallo-burraco); color: var(--testo-scuro-swift); font-weight: bold; }
+
+        .layout-principale { display: flex; flex-grow: 1; overflow: hidden; }
+
+        .menu-laterale {
+            width: 275px;
+            background: linear-gradient(180deg, var(--menu-bg-1) 0%, var(--menu-bg-2) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex; flex-direction: column;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-left: none; border-bottom: none;
+            border-top-right-radius: 24px;
+            box-shadow: 4px 0 25px rgba(0,0,0,0.55);
+            transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden; flex-shrink: 0;
+            position: relative; z-index: 10;
+            margin-top: 22px;
+        }
+        .menu-laterale.ridotto { width: 84px; border-top-right-radius: 24px; }
+
+        .intestazione-menu {
+            display: flex; align-items: center; justify-content: center;
+            padding: 4px 14px 4px 14px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.28);
+            background: linear-gradient(180deg, rgba(255,215,0,0.1) 0%, transparent 100%);
+            min-height: 46px; gap: 8px;
+            position: relative;
+            border-top-right-radius: 23px;
+        }
+        .titolo-menu-laterale {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 3px; width: 100%; overflow: hidden;
+        }
+        .testo-titolo-menu {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 20px; font-weight: bold;
+            color: var(--giallo-burraco);
+            letter-spacing: 3px;
+            text-shadow:
+                0 0 10px rgba(255,215,0,0.75),
+                0 0 20px rgba(255,215,0,0.4),
+                2px 2px 3px rgba(0,0,0,0.7);
+            text-transform: uppercase; text-align: center; line-height: 1;
+        }
+        .separatore-menu {
+            display: flex; align-items: center; justify-content: center;
+            gap: 6px; width: 100%;
+        }
+        .separatore-menu .linea {
+            flex: 1; max-width: 45px; height: 1.2px;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.7) 40%, rgba(255,215,0,0.9) 100%);
+            border-radius: 2px;
+            box-shadow: 0 0 6px rgba(255,215,0,0.6);
+        }
+        .separatore-menu .linea.destra {
+            background: linear-gradient(90deg, rgba(255,215,0,0.9) 0%, rgba(255,215,0,0.7) 60%, transparent 100%);
+        }
+        .separatore-menu .simbolo {
+            color: var(--giallo-burraco);
+            font-size: 10px;
+            text-shadow: 0 0 8px rgba(255,215,0,0.9), 0 0 14px rgba(255,215,0,0.5);
+            line-height: 1; flex-shrink: 0;
+        }
+
+        .btn-toggle-menu {
+            background: linear-gradient(145deg, rgba(255,215,0,0.25), rgba(255,215,0,0.08));
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            color: var(--giallo-burraco);
+            width: 28px; height: 28px;
+            border-radius: 8px; font-size: 15px; font-weight: bold;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: all 0.2s;
+            padding: 0; line-height: 1;
+            position: absolute; top: 50%; right: 12px;
+            transform: translateY(-50%);
+        }
+        .btn-toggle-menu:hover {
+            background: linear-gradient(145deg, rgba(255,215,0,0.5), rgba(255,215,0,0.2));
+            box-shadow: 0 0 12px rgba(255,215,0,0.6);
+            transform: translateY(-50%) scale(1.08);
+        }
+        .btn-toggle-menu:active { transform: translateY(-50%) scale(0.94); }
+
+        .contenuto-menu {
+            display: flex; flex-direction: column;
+            padding: 12px 10px; gap: 6px;
+            flex: 1; overflow-y: auto;
+        }
+        .contenuto-menu::-webkit-scrollbar { width: 4px; }
+        .contenuto-menu::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.3); border-radius: 4px; }
+
+        .voce-menu {
+            display: flex; align-items: center; gap: 14px;
+            padding: 10px 12px;
+            color: #e8e8e8; font-size: 15px; font-weight: 500;
+            cursor: pointer; border-radius: 12px;
+            transition: all 0.2s ease;
+            position: relative; white-space: nowrap; overflow: hidden;
+        }
+        .voce-menu .icona-voce {
+            font-size: 26px; width: 46px; height: 46px;
+            border-radius: 14px;
+            background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 60%, rgba(0,0,0,0.15) 100%);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: all 0.25s ease;
+            border: 1.5px solid rgba(255,255,255,0.12);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.35), inset 0 1px 1px rgba(255,255,255,0.1);
+            line-height: 1; text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        }
+        .voce-menu .testo-menu { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+
+        .voce-menu:hover {
+            background: linear-gradient(90deg, rgba(255,215,0,0.18) 0%, rgba(255,215,0,0.05) 100%);
+            color: var(--giallo-burraco); transform: translateX(3px);
+        }
+        .voce-menu:hover .icona-voce {
+            background: radial-gradient(circle at 30% 25%, rgba(255,215,0,0.4) 0%, rgba(255,215,0,0.15) 60%, rgba(180,140,0,0.3) 100%);
+            border-color: rgba(255,215,0,0.7);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 0 18px rgba(255,215,0,0.55), inset 0 1px 1px rgba(255,255,255,0.25);
+            transform: scale(1.08) rotate(-3deg);
+        }
+
+        .voce-menu.attiva {
+            background: linear-gradient(90deg, rgba(255,215,0,0.35) 0%, rgba(255,215,0,0.08) 100%);
+            color: var(--giallo-burraco); font-weight: bold;
+        }
+        .voce-menu.attiva::before {
+            content: '';
+            position: absolute; left: 0; top: 15%; bottom: 15%; width: 4px;
+            border-radius: 0 4px 4px 0;
+            background: linear-gradient(180deg, #fff3b0, #ffd700, #d4a017);
+            box-shadow: 0 0 12px rgba(255,215,0,0.9);
+        }
+        .voce-menu.attiva .icona-voce {
+            background: radial-gradient(circle at 30% 25%, #fff3b0 0%, #ffd700 50%, #d4a017 100%);
+            border-color: rgba(255,255,255,0.9);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.45), 0 0 22px rgba(255,215,0,0.85), inset 0 1px 1px rgba(255,255,255,0.6);
+            color: #1a1a1a; text-shadow: none; transform: scale(1.05);
+        }
+
+        .menu-laterale.ridotto .intestazione-menu { padding: 4px 8px; justify-content: center; min-height: 46px; }
+        .menu-laterale.ridotto .titolo-menu-laterale { display: none; }
+        .menu-laterale.ridotto .btn-toggle-menu {
+            position: static; width: 40px; height: 40px;
+            font-size: 18px; border-radius: 12px;
+            background: linear-gradient(145deg, #ffe066 0%, #ffd700 45%, #d4a017 100%);
+            color: #1a1a1a;
+            border: 2px solid rgba(255, 255, 255, 0.75);
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.5),
+                0 0 25px rgba(255, 215, 0, 0.75),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+            transform: none;
+        }
+        .menu-laterale.ridotto .btn-toggle-menu:hover {
+            background: linear-gradient(145deg, #fff3b0 0%, #ffe066 45%, #ffd700 100%);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 215, 0, 1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+        .menu-laterale.ridotto .btn-toggle-menu:active { transform: scale(0.95); }
+        .menu-laterale.ridotto .voce-menu { justify-content: center; padding: 10px 8px; gap: 0; }
+        .menu-laterale.ridotto .voce-menu .testo-menu { display: none; }
+        .menu-laterale.ridotto .voce-menu:hover { transform: scale(1.05); }
+        .menu-laterale.ridotto .voce-menu.attiva::before { top: 20%; bottom: 20%; width: 3px; }
+
+        main { flex-grow: 1; padding: 20px; padding-bottom: 60px; overflow-y: auto; }
+        .schermata { display: none; width: 100%; max-width: 750px; margin: 0 auto; flex-direction: column; gap: 20px; }
+        .schermata.attiva { display: flex; }
+
+        .segment-control { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 4px; display: flex; gap: 4px; }
+        .segment-btn {
+            flex: 1; background: transparent; color: white; border: none;
+            padding: 10px 4px; border-radius: 8px; font-size: 13px; font-weight: bold;
+            cursor: pointer; transition: 0.2s; text-align: center;
+        }
+        .segment-btn.attivo { background: var(--giallo-burraco); color: var(--testo-scuro-swift); box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
+
+        .tavolo-swift {
+            background: rgba(0, 40, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px; padding: 20px;
+            display: flex; justify-content: space-around; align-items: center;
+            flex-wrap: wrap; gap: 15px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        }
+        .posto-giocatore { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
+        .cerchio-posto {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 2px dashed rgba(255,255,255,0.4);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 24px; color: rgba(255,255,255,0.6);
+            transition: 0.2s; overflow: hidden; position: relative;
+        }
+        .posto-giocatore.occupato .cerchio-posto {
+            background: var(--giallo-burraco);
+            border: 2px solid white;
+            color: var(--testo-scuro-swift);
+            font-weight: bold; transform: scale(1.05);
+        }
+        .nome-posto {
+            font-size: 13px; font-weight: bold;
+            background: rgba(0,0,0,0.5); padding: 3px 8px; border-radius: 6px;
+        }
+
+        .griglia-punti { display: grid; gap: 12px; align-items: start; }
+        .colonna-punti {
+            background: var(--sfondo-card); border-radius: 16px;
+            padding: 15px; border: 1px solid rgba(255,255,255,0.15);
+        }
+        .nome-squadra {
+            font-family: 'Optima', sans-serif; font-size: 18px; font-weight: bold;
+            color: var(--giallo-burraco); text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 8px; margin-bottom: 10px;
+        }
+        .punti-totali { text-align: center; font-size: 30px; font-weight: bold; margin-bottom: 15px; color: white; }
+
+        .stepper-row {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.06); padding: 8px 10px;
+            border-radius: 8px; margin-bottom: 8px;
+        }
+        .stepper-label { font-size: 12px; font-weight: bold; color: #ddd; }
+        .stepper-controls { display: flex; align-items: center; gap: 8px; }
+        .btn-stepper {
+            background: rgba(255,255,255,0.2); border: none; color: white;
+            width: 28px; height: 28px; border-radius: 6px;
+            font-size: 18px; font-weight: bold; cursor: pointer;
+        }
+        .valore-stepper { font-size: 16px; font-weight: bold; min-width: 20px; text-align: center; }
+
+        .input-carte {
+            width: 100%; padding: 10px; border-radius: 8px; border: none;
+            font-size: 16px; font-weight: bold; text-align: center;
+            background: rgba(255,255,255,0.9);
+        }
+        .btn-toggle {
+            width: 100%; padding: 10px; border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent; color: white;
+            font-weight: bold; margin-top: 8px; cursor: pointer;
+        }
+        .btn-toggle.attivo { background: #34C759; border-color: #34C759; color: white; }
+        .btn-toggle.penale { background: #ff3b30; border-color: #ff3b30; color: white; }
+
+        .btn-avvia-swift {
+            background: #34C759; color: white; font-size: 18px; font-weight: bold;
+            padding: 15px; border: none; border-radius: 12px;
+            cursor: pointer; width: 100%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .btn-danger {
+            background: #ff3b30; color: white; font-size: 16px; font-weight: bold;
+            padding: 14px; border: none; border-radius: 12px;
+            cursor: pointer; width: 100%;
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.15); color: white;
+            font-size: 16px; font-weight: bold;
+            padding: 14px; border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px; cursor: pointer; width: 100%;
+        }
+
+        .card-lista {
+            background: var(--sfondo-card); padding: 15px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .regola-titolo { font-weight: bold; font-size: 16px; color: var(--giallo-burraco); }
+        .regola-testo { font-size: 14px; line-height: 1.4; color: #eee; }
+
+        /* Badge DEMO nello storico */
+        .badge-demo {
+            display: inline-block;
+            background: linear-gradient(145deg, #ffd700, #d4a017);
+            color: #1a1a1a;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .swift-sheet-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            z-index: 2000; justify-content: center; align-items: flex-end;
+            padding-bottom: 20px;
+        }
+        .swift-sheet-content {
+            background: #1c1c1e; padding: 20px; border-radius: 20px;
+            width: 92%; max-width: 400px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        .btn-lista-gioc {
+            display: block; width: 100%;
+            background: rgba(255,255,255,0.1); color: white;
+            border: none; padding: 12px; margin-bottom: 8px;
+            border-radius: 10px; font-size: 15px; font-weight: bold;
+            cursor: pointer; text-align: left;
+        }
+
+        .btn-img-opzione {
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px; width: 100%; padding: 14px 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            background: linear-gradient(145deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
+            color: white; font-size: 15px; font-weight: bold;
+            cursor: pointer; transition: all 0.2s; text-align: center;
+        }
+        .btn-img-opzione:active { transform: scale(0.98); }
+        .btn-img-opzione .icona { font-size: 22px; flex-shrink: 0; }
+        .btn-img-opzione.emoji {
+            border-color: rgba(255, 215, 0, 0.5);
+            background: linear-gradient(145deg, rgba(255,215,0,0.2), rgba(255,215,0,0.05));
+        }
+        .btn-img-opzione.emoji.aperto {
+            background: linear-gradient(145deg, rgba(255,215,0,0.5), rgba(255,215,0,0.25));
+            border-color: var(--giallo-burraco);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+        .btn-img-opzione.foto {
+            border-color: rgba(52, 199, 89, 0.5);
+            background: linear-gradient(145deg, rgba(52,199,89,0.2), rgba(52,199,89,0.05));
+        }
+
+        /* PULSANTI TEMA COLORE — COMPATTI, 5 IN UNA RIGA */
+        .griglia-temi {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .btn-tema {
+            position: relative;
+            padding: 6px 2px;
+            border-radius: 8px;
+            border: 1.2px solid rgba(255,255,255,0.22);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            transition: all 0.2s;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            font-family: inherit;
+            min-width: 0;
+            line-height: 1;
+        }
+        .btn-tema:active {
+            transform: scale(0.94);
+        }
+        .btn-tema.attivo {
+            border-color: var(--giallo-burraco);
+            border-width: 2px;
+            box-shadow:
+                0 0 8px rgba(255,215,0,0.7),
+                inset 0 0 6px rgba(255,215,0,0.2);
+        }
+        .btn-tema.attivo::after {
+            content: '✓';
+            position: absolute;
+            top: 1px;
+            right: 3px;
+            font-size: 9px;
+            color: var(--giallo-burraco);
+            text-shadow: 0 0 6px rgba(255,215,0,0.9);
+            font-weight: bold;
+        }
+
+        .btn-tema[data-tema="verde"] { background: linear-gradient(145deg, #2e7d32, #144d18); }
+        .btn-tema[data-tema="blu"] { background: linear-gradient(145deg, #1565c0, #0d2e5e); }
+        .btn-tema[data-tema="rosso"] { background: linear-gradient(145deg, #8e1b1b, #4a0a0a); }
+        .btn-tema[data-tema="beige"] { background: linear-gradient(145deg, #d4b896, #8b6f47); color: #1a1a1a; text-shadow: 0 1px 1px rgba(255,255,255,0.3); }
+        .btn-tema[data-tema="viola"] { background: linear-gradient(145deg, #6a1b9a, #2a0a3d); }
+
+        .btn-tema .emoji-tema {
+            font-size: 15px;
+            line-height: 1;
+        }
+        .btn-tema .nome-tema {
+            font-size: 9px;
+            font-weight: bold;
+            letter-spacing: 0.2px;
+            line-height: 1;
+        }
+
+        @media (max-width: 400px) {
+            .griglia-temi { gap: 3px; }
+            .btn-tema { padding: 5px 1px; border-radius: 6px; }
+            .btn-tema .emoji-tema { font-size: 13px; }
+            .btn-tema .nome-tema { font-size: 8px; }
+            .btn-tema.attivo::after { font-size: 8px; }
+        }
+
+        @media (max-width: 768px) { .menu-laterale { display: none; } }
+        @media (min-width: 769px) { .menu-mobile { display: none; } }
+        @media (max-width: 700px) {
+            .griglia-punti { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body class="tema-verde">
+
+    <header class="header-nuovo">
+        <div class="header-cards">
+            <div class="play-card joker carta-1">
+                <div class="card-corner"><span class="rank">JOLLY</span></div>
+                <div class="card-center">🃏</div>
+                <div class="card-corner bottom"><span class="rank">JOLLY</span></div>
+            </div>
+            <div class="play-card nero carta-2">
+                <div class="card-corner"><span class="rank">A</span><span class="suit">♠</span></div>
+                <div class="card-center">♠</div>
+                <div class="card-corner bottom"><span class="rank">A</span><span class="suit">♠</span></div>
+            </div>
+            <div class="play-card rosso carta-3">
+                <div class="card-corner"><span class="rank">K</span><span class="suit">♥</span></div>
+                <div class="card-center">♥</div>
+                <div class="card-corner bottom"><span class="rank">K</span><span class="suit">♥</span></div>
+            </div>
+        </div>
+
+        <div class="titolo-container">
+            <h1 class="titolo-app">Burraco Punti</h1>
+        </div>
+
+        <div class="header-cards">
+            <div class="play-card nero carta-4">
+                <div class="card-corner"><span class="rank">2</span><span class="suit">♣</span></div>
+                <div class="card-center">♣</div>
+                <div class="card-corner bottom"><span class="rank">2</span><span class="suit">♣</span></div>
+            </div>
+            <div class="play-card rosso carta-5">
+                <div class="card-corner"><span class="rank">Q</span><span class="suit">♦</span></div>
+                <div class="card-center">♦</div>
+                <div class="card-corner bottom"><span class="rank">Q</span><span class="suit">♦</span></div>
+            </div>
+            <div class="play-card nero carta-6">
+                <div class="card-corner"><span class="rank">J</span><span class="suit">♠</span></div>
+                <div class="card-center">♠</div>
+                <div class="card-corner bottom"><span class="rank">J</span><span class="suit">♠</span></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-mobile">
+        <button class="swift-capsule attiva" onclick="cambiaSchermata('nuova-partita', this)">🎲 Nuova Partita</button>
+        <button class="swift-capsule" onclick="cambiaSchermata('partita-corso', this)">📝 Partita in Corso</button>
+        <button class="swift-capsule" onclick="cambiaSchermata('giocatori', this)">👥 Giocatori</button>
+        <button class="swift-capsule" onclick="cambiaSchermata('storico', this)">📜 Storico</button>
+        <button class="swift-capsule" onclick="cambiaSchermata('regole', this)">📚 Regole</button>
+        <button class="swift-capsule" onclick="cambiaSchermata('istruzioni', this)">💡 Istruzioni App</button>
+        <button class="swift-capsule" onclick="cambiaSchermata('impostazioni', this)">⚙️ Impostazioni</button>
+    </div>
+
+    <div class="layout-principale">
+        <nav class="menu-laterale" id="menu-laterale-id">
+            <div class="intestazione-menu">
+                <div class="titolo-menu-laterale">
+                    <span class="testo-titolo-menu">Menu</span>
+                    <div class="separatore-menu">
+                        <span class="linea"></span>
+                        <span class="simbolo">◆</span>
+                        <span class="linea destra"></span>
+                    </div>
+                </div>
+                <button class="btn-toggle-menu" id="btn-toggle-menu-id" onclick="toggleMenuLaterale()" title="Comprimi / Espandi menu">⟨</button>
+            </div>
+            <div class="contenuto-menu">
+                <div class="voce-menu attiva" id="nav-nuova-partita" onclick="cambiaSchermata('nuova-partita')">
+                    <span class="icona-voce">🎲</span><span class="testo-menu">Nuova Partita</span>
+                </div>
+                <div class="voce-menu" id="nav-partita-corso" onclick="cambiaSchermata('partita-corso')">
+                    <span class="icona-voce">📝</span><span class="testo-menu">Partita in Corso</span>
+                </div>
+                <div class="voce-menu" id="nav-giocatori" onclick="cambiaSchermata('giocatori')">
+                    <span class="icona-voce">👥</span><span class="testo-menu">Rubrica Giocatori</span>
+                </div>
+                <div class="voce-menu" id="nav-storico" onclick="cambiaSchermata('storico')">
+                    <span class="icona-voce">📜</span><span class="testo-menu">Storico Partite</span>
+                </div>
+                <div class="voce-menu" id="nav-regole" onclick="cambiaSchermata('regole')">
+                    <span class="icona-voce">📚</span><span class="testo-menu">Regole Burraco</span>
+                </div>
+                <div class="voce-menu" id="nav-istruzioni" onclick="cambiaSchermata('istruzioni')">
+                    <span class="icona-voce">💡</span><span class="testo-menu">Come Usare l'App</span>
+                </div>
+                <div class="voce-menu" id="nav-impostazioni" onclick="cambiaSchermata('impostazioni')">
+                    <span class="icona-voce">⚙️</span><span class="testo-menu">Impostazioni</span>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <div id="nuova-partita" class="schermata attiva">
+                <div>
+                    <h2 class="titolo-optima" style="margin-bottom:8px">1. Modalità Giocatori</h2>
+                    <div class="segment-control" id="seg-modalita"></div>
+                </div>
+
+                <div>
+                    <h2 class="titolo-optima" style="margin-bottom:8px">2. Punteggio Traguardo</h2>
+                    <div class="segment-control" id="seg-traguardo"></div>
+                </div>
+
+                <div>
+                    <h2 class="titolo-optima" style="margin-bottom:8px">3. Giocatori al Tavolo (Tocca i cerchi)</h2>
+                    <div class="tavolo-swift" id="tavolo-gioco"></div>
+                    <div id="anteprima-coppie" style="margin-top:12px; text-align:center; font-size:14px; color:var(--giallo-burraco); font-weight:bold;"></div>
+                </div>
+
+                <button class="btn-avvia-swift" onclick="iniziaPartita()">Avvia Partita ▶</button>
+            </div>
+
+            <div id="partita-corso" class="schermata">
+                <div id="partita-corso-content"></div>
+            </div>
+
+            <div id="giocatori" class="schermata">
+                <h2 class="titolo-optima">Rubrica Giocatori</h2>
+                <button class="btn-avvia-swift" onclick="apriModaleNuovoGiocatore()">➕ Aggiungi Nuovo Giocatore</button>
+                <div id="lista-rubrica" style="display:flex; flex-direction:column; gap:10px; margin-top:10px;"></div>
+            </div>
+
+            <div id="storico" class="schermata">
+                <h2 class="titolo-optima">Storico Partite Salvate</h2>
+                <button class="btn-secondary" id="btn-rimuovi-demo" onclick="rimuoviPartiteDemo()" style="display:none;">🗑️ Rimuovi Partite Demo</button>
+                <div id="lista-storico" style="display:flex; flex-direction:column; gap:10px;"></div>
+            </div>
+
+            <div id="regole" class="schermata">
+                <h2 class="titolo-optima">Regole e Punteggi FIBUR</h2>
+                <div id="lista-regole" style="display:flex; flex-direction:column; gap:10px;"></div>
+            </div>
+
+            <div id="istruzioni" class="schermata">
+                <h2 class="titolo-optima">Come Usare l'Applicazione</h2>
+                <div id="lista-istruzioni" style="display:flex; flex-direction:column; gap:10px;"></div>
+            </div>
+
+            <div id="impostazioni" class="schermata">
+                <h2 class="titolo-optima">Impostazioni App</h2>
+
+                <div>
+                    <h3 class="titolo-optima" style="font-size: 16px; margin-bottom: 4px;">🎨 Tema Colore</h3>
+                    <p style="font-size: 12px; color: #ccc; margin: 0 0 6px 0;">Scegli il colore principale dell'app</p>
+                    <div class="griglia-temi">
+                        <button type="button" class="btn-tema" data-tema="verde" onclick="cambiaTemaColore('verde')">
+                            <span class="emoji-tema">🟢</span>
+                            <span class="nome-tema">Verde</span>
+                        </button>
+                        <button type="button" class="btn-tema" data-tema="blu" onclick="cambiaTemaColore('blu')">
+                            <span class="emoji-tema">🔵</span>
+                            <span class="nome-tema">Blu</span>
+                        </button>
+                        <button type="button" class="btn-tema" data-tema="rosso" onclick="cambiaTemaColore('rosso')">
+                            <span class="emoji-tema">🔴</span>
+                            <span class="nome-tema">Rosso</span>
+                        </button>
+                        <button type="button" class="btn-tema" data-tema="beige" onclick="cambiaTemaColore('beige')">
+                            <span class="emoji-tema">🟤</span>
+                            <span class="nome-tema">Beige</span>
+                        </button>
+                        <button type="button" class="btn-tema" data-tema="viola" onclick="cambiaTemaColore('viola')">
+                            <span class="emoji-tema">🟣</span>
+                            <span class="nome-tema">Viola</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="btn-lista-gioc" style="text-align:center;" onclick="toggleTema()">🌙 Cambia Tema (Scuro / Chiaro)</button>
+                <button class="btn-secondary" onclick="esportaBackup()">📤 Esporta Backup Dati (JSON)</button>
+                <label for="input-import-backup" class="btn-secondary" style="text-align:center; display:block; cursor:pointer;">📥 Importa Backup Dati</label>
+                <input type="file" id="input-import-backup" accept="application/json,.json" style="display:none;" onchange="importaBackup(event)">
+                <button class="btn-danger" onclick="azzeraStorico()">📜 Azzera Storico Partite</button>
+                <button class="btn-danger" onclick="azzeraRubrica()">👥 Azzera Rubrica Giocatori</button>
+            </div>
+        </main>
+    </div>
+
+    <div id="modale-scegli-giocatore" class="swift-sheet-overlay">
+        <div class="swift-sheet-content">
+            <h3 class="titolo-optima" style="margin-top:0;">Seleziona Giocatore</h3>
+            <div id="lista-modale" style="max-height:50vh; overflow-y:auto; margin-bottom:15px;"></div>
+            <button class="btn-danger" onclick="chiudiModale()">Annulla</button>
+        </div>
+    </div>
+
+    <div id="modale-gestione-giocatore" class="swift-sheet-overlay">
+        <div class="swift-sheet-content" style="max-width: 440px; text-align: left; max-height: 92vh; overflow-y: auto;">
+            <h3 class="titolo-optima" style="text-align: center; margin-top:0;">Nuovo Giocatore</h3>
+
+            <div style="margin-bottom: 10px;">
+                <label style="font-size: 12px; color: #ccc;">Nome *</label>
+                <input type="text" id="input-nome-giocatore" placeholder="Nome o nickname..." style="width:100%; padding:10px; border-radius:8px; border:none; margin-top:4px; font-size:15px;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <label style="font-size: 12px; color: #ccc;">Soprannome (opzionale)</label>
+                <input type="text" id="input-soprannome-giocatore" placeholder="Es. Il Mago, King..." style="width:100%; padding:10px; border-radius:8px; border:none; margin-top:4px; font-size:15px;">
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <label style="font-size: 12px; color: #ccc; display:block; margin-bottom:6px;">Immagine Profilo</label>
+
+                <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+                    <div id="anteprima-cerchio-profilo" style="width: 76px; height: 76px; border-radius: 50%; background: #222; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; border: 2px solid var(--giallo-burraco);">
+                        <span id="anteprima-contenuto" style="font-size: 32px;">🧑‍💻</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                    <button type="button" class="btn-img-opzione emoji" id="btn-scegli-emoji" onclick="togglePannelloEmoji()">
+                        <span class="icona">😀</span> Scegli Emoji
+                    </button>
+
+                    <div id="pannello-emoji" style="display:none; background: rgba(0,0,0,0.4); border-radius: 10px; padding: 10px; border: 1px solid rgba(255,215,0,0.3);">
+                        <div style="font-size: 11px; color: #ffd700; text-align: center; margin-bottom: 8px; line-height: 1.4;">
+                            💡 <b>Su Mac</b>: clicca il campo sotto e premi <b>Cmd + Ctrl + Spazio</b> per aprire la tastiera emoji di sistema.<br>
+                            Oppure scegli direttamente dalla griglia qui sotto.
+                        </div>
+
+                        <input type="text"
+                               id="input-emoji-manuale"
+                               placeholder="✏️ Scrivi o incolla qui l'emoji..."
+                               maxlength="10"
+                               autocomplete="off"
+                               autocorrect="off"
+                               autocapitalize="off"
+                               spellcheck="false"
+                               style="width:100%; padding:10px 12px; border-radius:8px; border:2px solid rgba(255,215,0,0.5); font-size:20px; text-align:center; background:rgba(255,255,255,0.95); color:#000; margin-bottom:10px;"
+                               oninput="aggiornaEmojiManuale(this.value)">
+
+                        <div id="griglia-emoji" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; max-height: 180px; overflow-y: auto; text-align: center;"></div>
+                    </div>
+
+                    <button type="button" class="btn-img-opzione foto" onclick="apriSelettoreFoto()">
+                        <span class="icona">🖼️</span> Scegli una Foto
+                    </button>
+                </div>
+
+                <input type="file" id="input-file-foto" accept="image/*" style="display:none;" onchange="caricaImmagineLocale(event)">
+
+                <div id="controlli-zoom-container" style="display: none; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 8px; font-size: 11px; margin-bottom: 8px;">
+                    <div style="margin-bottom: 4px; display:flex; justify-content:space-between; align-items:center;"><span>Zoom:</span> <input type="range" id="range-zoom" min="1" max="3" step="0.1" value="1" oninput="aggiornaTransformFoto()" style="width:75%;"></div>
+                    <div style="margin-bottom: 4px; display:flex; justify-content:space-between; align-items:center;"><span>Orizzontale:</span> <input type="range" id="range-pos-x" min="-50" max="50" value="0" oninput="aggiornaTransformFoto()" style="width:75%;"></div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;"><span>Verticale:</span> <input type="range" id="range-pos-y" min="-50" max="50" value="0" oninput="aggiornaTransformFoto()" style="width:75%;"></div>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:15px;">
+                <button class="btn-avvia-swift" style="background:#34C759; padding:12px;" onclick="salvaNuovoGiocatore()">Salva Giocatore</button>
+                <button class="btn-danger" style="padding:12px;" onclick="chiudiModaleNuovoGiocatore()">Annulla</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modale-calcolatore-carte" class="swift-sheet-overlay">
+        <div class="swift-sheet-content" style="max-width: 420px;">
+            <h3 class="titolo-optima" style="margin-top:0;">Calcolatore Punti Carte</h3>
+            <p style="font-size:12px; color:#ccc; margin-bottom:15px;">Seleziona la quantità di ciascuna carta:</p>
+
+            <div id="griglia-calcolo-carte" style="display:flex; flex-direction:column; gap:8px; max-height:45vh; overflow-y:auto; margin-bottom:15px; text-align:left;"></div>
+
+            <div style="background:rgba(255,255,255,0.1); padding:10px; border-radius:10px; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-weight:bold; font-size:14px;">Totale Calcolato:</span>
+                <span id="totale-calcolato-anteprima" style="font-size:20px; font-weight:bold; color:var(--giallo-burraco);">0 pt</span>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+                <button class="btn-avvia-swift" style="background:#34C759; padding:10px;" onclick="applicaPuntiCalcolati()">Usa Totale</button>
+                <button class="btn-danger" style="padding:10px;" onclick="chiudiCalcolatoreCarte()">Annulla</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let appData = {
+            giocatori: [],
+            storico: [],
+            tema: 'chiaro',
+            temaColore: 'verde',
+            menuRidotto: false,
+            demoStoricoCaricato: false
+        };
+
+        let partita = {
+            inCorso: false,
+            modalita: '4 Coppie',
+            traguardo: '2005',
+            posti: [null, null, null, null],
+            squadre: [],
+            punteggiTotali: [],
+            manoCorrente: [],
+            storicoSmazzate: []
+        };
+
+        let opzioniMod = ["2 Gioc.", "3 Gioc.", "4 Coppie", "4 Singoli"];
+        let opzioniTrag = ["1005", "2005", "Smazzate"];
+        let slotModifica = null;
+
+        let nuovoGiocatoreStato = {
+            tipo: 'emoji',
+            valore: '🧑‍💻',
+            zoom: 1,
+            posX: 0,
+            posY: 0
+        };
+
+        const listaEmojiDisponibili = [
+            "🧑‍💻", "😎", "👩", "👧", "👨", "👦",
+            "🦊", "🦁", "🐯", "🐼", "🐨", "🐶",
+            "🐱", "🦄", "⭐", "🔥", "👑", "🍀",
+            "♠️", "♥️", "♦️", "♣️", "🃏", "🏆",
+            "🎩", "🎭", "🎲", "🎯", "🚀", "🎸",
+            "😀", "😂", "🤣", "😊", "😍", "🤩",
+            "😜", "🤔", "😏", "🙃", "😇", "🥳"
+        ];
+
+        function parsePuntiCarte(str) {
+            if (str === "" || str === null || str === undefined) return 0;
+            let n = parseFloat(String(str).replace(',', '.'));
+            return isNaN(n) ? 0 : n;
+        }
+
+        function vibra(ms) {
+            if (navigator.vibrate) { try { navigator.vibrate(ms || 10); } catch(e){} }
+        }
+
+        // Popola 4 giocatori demo se la rubrica è vuota
+        function popolaGiocatoriDemo() {
+            if (Array.isArray(appData.giocatori) && appData.giocatori.length > 0) return;
+            appData.giocatori = [
+                { nome: "Mario",  soprannome: "Il Re",     tipo: "emoji", valore: "😎", zoom: 1, posX: 0, posY: 0 },
+                { nome: "Luigi",  soprannome: "Volpe",     tipo: "emoji", valore: "🦊", zoom: 1, posX: 0, posY: 0 },
+                { nome: "Giulia", soprannome: "",          tipo: "emoji", valore: "👩", zoom: 1, posX: 0, posY: 0 },
+                { nome: "Sofia",  soprannome: "Unicorno",  tipo: "emoji", valore: "🦄", zoom: 1, posX: 0, posY: 0 }
+            ];
+            salvaDati();
+        }
+
+        // Popola 4 partite demo nello storico (una per ogni modalità), solo la prima volta
+        function popolaStoricoDemo() {
+            if (appData.demoStoricoCaricato) return;
+
+            const oggi = new Date();
+            const dataRelativa = (giorniFa, hh, mm) => {
+                let d = new Date(oggi);
+                d.setDate(d.getDate() - giorniFa);
+                d.setHours(hh, mm, 0, 0);
+                return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            };
+
+            const demos = [
+                {
+                    data: dataRelativa(0, 21, 15),
+                    modalita: '4 Coppie',
+                    traguardo: '2005',
+                    squadre: ['Mario & Giulia', 'Luigi & Sofia'],
+                    punti: [2010, 1850],
+                    demo: true
+                },
+                {
+                    data: dataRelativa(1, 20, 30),
+                    modalita: '2 Gioc.',
+                    traguardo: '1005',
+                    squadre: ['Mario', 'Luigi'],
+                    punti: [1050, 890],
+                    demo: true
+                },
+                {
+                    data: dataRelativa(2, 19, 45),
+                    modalita: '3 Gioc.',
+                    traguardo: '1005',
+                    squadre: ['Mario', 'Luigi', 'Giulia'],
+                    punti: [1050, 890, 720],
+                    demo: true
+                },
+                {
+                    data: dataRelativa(3, 22, 5),
+                    modalita: '4 Singoli',
+                    traguardo: '1005',
+                    squadre: ['Mario', 'Luigi', 'Giulia', 'Sofia'],
+                    punti: [1050, 890, 720, 650],
+                    demo: true
+                }
+            ];
+
+            appData.storico = [...demos, ...(appData.storico || [])];
+            appData.demoStoricoCaricato = true;
+            salvaDati();
+        }
+
+        function rimuoviPartiteDemo() {
+            if (!confirm("Rimuovere tutte le partite demo dallo storico?\nLe partite reali resteranno.")) return;
+            appData.storico = appData.storico.filter(s => !s.demo);
+            salvaDati();
+            renderStorico();
+            vibra(20);
+        }
+
+        function cambiaTemaColore(nome) {
+            if (!nome) return;
+            let temiValidi = ['verde', 'blu', 'rosso', 'beige', 'viola'];
+            if (!temiValidi.includes(nome)) return;
+
+            document.body.classList.remove('tema-verde', 'tema-blu', 'tema-rosso', 'tema-beige', 'tema-viola');
+            document.body.classList.add('tema-' + nome);
+
+            const bgColors = {
+                verde: '#144d18',
+                blu: '#0d2e5e',
+                rosso: '#4a0a0a',
+                beige: '#8b6f47',
+                viola: '#2a0a3d'
+            };
+            document.documentElement.style.background = bgColors[nome] || '#144d18';
+
+            appData.temaColore = nome;
+            salvaDati();
+
+            document.querySelectorAll('.btn-tema').forEach(b => {
+                b.classList.toggle('attivo', b.dataset.tema === nome);
+            });
+
+            vibra(20);
+        }
+
+        function applicaTemaColore() {
+            let nome = appData.temaColore || 'verde';
+            let temiValidi = ['verde', 'blu', 'rosso', 'beige', 'viola'];
+            if (!temiValidi.includes(nome)) nome = 'verde';
+
+            document.body.classList.remove('tema-verde', 'tema-blu', 'tema-rosso', 'tema-beige', 'tema-viola');
+            document.body.classList.add('tema-' + nome);
+
+            const bgColors = {
+                verde: '#144d18',
+                blu: '#0d2e5e',
+                rosso: '#4a0a0a',
+                beige: '#8b6f47',
+                viola: '#2a0a3d'
+            };
+            document.documentElement.style.background = bgColors[nome] || '#144d18';
+
+            document.querySelectorAll('.btn-tema').forEach(b => {
+                b.classList.toggle('attivo', b.dataset.tema === nome);
+            });
+        }
+
+        function toggleMenuLaterale() {
+            let menu = document.getElementById('menu-laterale-id');
+            let btn = document.getElementById('btn-toggle-menu-id');
+            if (!menu || !btn) return;
+
+            let ridotto = menu.classList.toggle('ridotto');
+            btn.innerText = ridotto ? '⟩' : '⟨';
+            btn.title = ridotto ? 'Espandi menu' : 'Comprimi menu';
+
+            appData.menuRidotto = ridotto;
+            salvaDati();
+            vibra(15);
+        }
+
+        function applicaStatoMenu() {
+            let menu = document.getElementById('menu-laterale-id');
+            let btn = document.getElementById('btn-toggle-menu-id');
+            if (!menu || !btn) return;
+            if (appData.menuRidotto) {
+                menu.classList.add('ridotto');
+                btn.innerText = '⟩';
+                btn.title = 'Espandi menu';
+            } else {
+                menu.classList.remove('ridotto');
+                btn.innerText = '⟨';
+                btn.title = 'Comprimi menu';
+            }
+        }
+
+        function apriModaleNuovoGiocatore() {
+            document.getElementById('input-nome-giocatore').value = '';
+            document.getElementById('input-soprannome-giocatore').value = '';
+            nuovoGiocatoreStato = { tipo: 'emoji', valore: '🧑‍💻', zoom: 1, posX: 0, posY: 0 };
+
+            let pannello = document.getElementById('pannello-emoji');
+            if (pannello) pannello.style.display = 'none';
+            let btnEmoji = document.getElementById('btn-scegli-emoji');
+            if (btnEmoji) btnEmoji.classList.remove('aperto');
+
+            let inpManuale = document.getElementById('input-emoji-manuale');
+            if (inpManuale) inpManuale.value = '';
+
+            let inpFoto = document.getElementById('input-file-foto');
+            if (inpFoto) inpFoto.value = '';
+
+            document.getElementById('controlli-zoom-container').style.display = 'none';
+
+            renderGrigliaEmoji();
+            aggiornaAnteprimaGiocatoreModal();
+            document.getElementById('modale-gestione-giocatore').style.display = 'flex';
+        }
+
+        function chiudiModaleNuovoGiocatore() {
+            document.getElementById('modale-gestione-giocatore').style.display = 'none';
+        }
+
+        function togglePannelloEmoji() {
+            let pannello = document.getElementById('pannello-emoji');
+            let btn = document.getElementById('btn-scegli-emoji');
+            if (!pannello) return;
+
+            let isNascosto = pannello.style.display === 'none' || pannello.style.display === '';
+            if (isNascosto) {
+                pannello.style.display = 'block';
+                btn.classList.add('aperto');
+                renderGrigliaEmoji();
+            } else {
+                pannello.style.display = 'none';
+                btn.classList.remove('aperto');
+            }
+        }
+
+        function aggiornaEmojiManuale(val) {
+            let clean = (val || '').trim();
+            if (clean.length > 0) {
+                nuovoGiocatoreStato.tipo = 'emoji';
+                nuovoGiocatoreStato.valore = clean;
+                aggiornaAnteprimaGiocatoreModal();
+            }
+        }
+
+        function renderGrigliaEmoji() {
+            let grid = document.getElementById('griglia-emoji');
+            if (!grid) return;
+            grid.innerHTML = '';
+            listaEmojiDisponibili.forEach(em => {
+                let isSelected = (nuovoGiocatoreStato.tipo === 'emoji' && nuovoGiocatoreStato.valore === em);
+                let bg = isSelected ? 'var(--giallo-burraco)' : 'rgba(255,255,255,0.08)';
+                grid.innerHTML += `
+                    <div onclick="selezionaEmoji('${em}')"
+                         style="font-size:26px; cursor:pointer; padding:6px; border-radius:8px; background:${bg}; transition:0.15s; display:flex; align-items:center; justify-content:center; height:40px;"
+                         onmouseover="this.style.background='rgba(255,215,0,0.35)'"
+                         onmouseout="this.style.background='${bg}'">${em}</div>
+                `;
+            });
+        }
+
+        function selezionaEmoji(em) {
+            nuovoGiocatoreStato.tipo = 'emoji';
+            nuovoGiocatoreStato.valore = em;
+            let inpManuale = document.getElementById('input-emoji-manuale');
+            if (inpManuale) inpManuale.value = '';
+            aggiornaAnteprimaGiocatoreModal();
+            renderGrigliaEmoji();
+            let pannello = document.getElementById('pannello-emoji');
+            let btn = document.getElementById('btn-scegli-emoji');
+            if (pannello && btn) {
+                pannello.style.display = 'none';
+                btn.classList.remove('aperto');
+            }
+        }
+
+        function apriSelettoreFoto() {
+            document.getElementById('input-file-foto').click();
+        }
+
+        function caricaImmagineLocale(event) {
+            let file = event.target.files[0];
+            if (!file) return;
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let img = new Image();
+                img.onload = function() {
+                    let max = 400;
+                    let w = img.width, h = img.height;
+                    if (w > h) { h = Math.round(h * max / w); w = max; }
+                    else       { w = Math.round(w * max / h); h = max; }
+
+                    let canvas = document.createElement('canvas');
+                    canvas.width = w; canvas.height = h;
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                    let compressed = canvas.toDataURL('image/jpeg', 0.85);
+
+                    nuovoGiocatoreStato.tipo = 'foto';
+                    nuovoGiocatoreStato.valore = compressed;
+                    nuovoGiocatoreStato.zoom = 1;
+                    nuovoGiocatoreStato.posX = 0;
+                    nuovoGiocatoreStato.posY = 0;
+
+                    let pannello = document.getElementById('pannello-emoji');
+                    if (pannello) pannello.style.display = 'none';
+                    let btn = document.getElementById('btn-scegli-emoji');
+                    if (btn) btn.classList.remove('aperto');
+
+                    let inpManuale = document.getElementById('input-emoji-manuale');
+                    if (inpManuale) inpManuale.value = '';
+
+                    document.getElementById('range-zoom').value = 1;
+                    document.getElementById('range-pos-x').value = 0;
+                    document.getElementById('range-pos-y').value = 0;
+                    document.getElementById('controlli-zoom-container').style.display = 'block';
+
+                    aggiornaAnteprimaGiocatoreModal();
+                    event.target.value = '';
+                };
+                img.onerror = function() { alert("Impossibile leggere l'immagine."); };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function aggiornaTransformFoto() {
+            let z = parseFloat(document.getElementById('range-zoom').value) || 1;
+            let x = parseFloat(document.getElementById('range-pos-x').value) || 0;
+            let y = parseFloat(document.getElementById('range-pos-y').value) || 0;
+
+            nuovoGiocatoreStato.zoom = z;
+            nuovoGiocatoreStato.posX = x;
+            nuovoGiocatoreStato.posY = y;
+
+            let img = document.getElementById('img-anteprima-foto');
+            if (img) {
+                img.style.transform = `scale(${z}) translate(${x}px, ${y}px)`;
+            }
+        }
+
+        function aggiornaAnteprimaGiocatoreModal() {
+            let container = document.getElementById('anteprima-contenuto');
+            if (!container) return;
+
+            if (nuovoGiocatoreStato.tipo === 'emoji') {
+                container.innerHTML = `<span style="font-size:36px;">${nuovoGiocatoreStato.valore}</span>`;
+            } else {
+                container.innerHTML = `<img id="img-anteprima-foto" src="${nuovoGiocatoreStato.valore}" style="width:100%; height:100%; object-fit:cover; transform: scale(${nuovoGiocatoreStato.zoom}) translate(${nuovoGiocatoreStato.posX}px, ${nuovoGiocatoreStato.posY}px); transition: transform 0.1s ease;">`;
+            }
+        }
+
+        function salvaNuovoGiocatore() {
+            let nomeVal = document.getElementById('input-nome-giocatore').value.trim();
+            let soprannomeVal = document.getElementById('input-soprannome-giocatore').value.trim();
+
+            if (!nomeVal) {
+                alert("⚠️ Inserisci almeno il nome del giocatore!");
+                return;
+            }
+
+            appData.giocatori.push({
+                nome: nomeVal,
+                soprannome: soprannomeVal,
+                tipo: nuovoGiocatoreStato.tipo,
+                valore: nuovoGiocatoreStato.valore,
+                zoom: nuovoGiocatoreStato.zoom,
+                posX: nuovoGiocatoreStato.posX,
+                posY: nuovoGiocatoreStato.posY
+            });
+
+            salvaDati();
+            renderRubrica();
+            chiudiModaleNuovoGiocatore();
+        }
+
+        let indiceSquadraCalcolo = null;
+        let conteggioCorrenteCarte = { jolly: 0, pinelle: 0, assi: 0, figure10: 0, basse: 0 };
+
+        const tipiCarteConfig = [
+            { chiave: 'jolly', nome: '🃏 Jolly (30 pt)', valore: 30 },
+            { chiave: 'pinelle', nome: '🂢 Pinelle - 2 (20 pt)', valore: 20 },
+            { chiave: 'assi', nome: '🂡 Assi (15 pt)', valore: 15 },
+            { chiave: 'figure10', nome: '👑 Re, Q, J, 10, 9, 8 (10 pt)', valore: 10 },
+            { chiave: 'basse', nome: '🔢 7, 6, 5, 4, 3 (5 pt)', valore: 5 }
+        ];
+
+        function apriCalcolatoreCarte(colIndex) {
+            indiceSquadraCalcolo = colIndex;
+            conteggioCorrenteCarte = { jolly: 0, pinelle: 0, assi: 0, figure10: 0, basse: 0 };
+            renderInterfacciaCalcolatore();
+            document.getElementById('modale-calcolatore-carte').style.display = 'flex';
+        }
+
+        function chiudiCalcolatoreCarte() {
+            document.getElementById('modale-calcolatore-carte').style.display = 'none';
+        }
+
+        function modCardCount(chiave, delta) {
+            vibra(10);
+            conteggioCorrenteCarte[chiave] += delta;
+            if (conteggioCorrenteCarte[chiave] < 0) conteggioCorrenteCarte[chiave] = 0;
+            renderInterfacciaCalcolatore();
+        }
+
+        function calcolaTotaleCorrente() {
+            let tot = 0;
+            tipiCarteConfig.forEach(t => { tot += conteggioCorrenteCarte[t.chiave] * t.valore; });
+            return tot;
+        }
+
+        function renderInterfacciaCalcolatore() {
+            let container = document.getElementById('griglia-calcolo-carte');
+            if (!container) return;
+            container.innerHTML = "";
+
+            tipiCarteConfig.forEach(t => {
+                let qta = conteggioCorrenteCarte[t.chiave];
+                container.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.05); padding:8px 10px; border-radius:8px;">
+                        <span style="font-size:13px; font-weight:bold;">${t.nome}</span>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <button class="btn-stepper" onclick="modCardCount('${t.chiave}', -1)">-</button>
+                            <span style="font-size:15px; font-weight:bold; min-width:20px; text-align:center;">${qta}</span>
+                            <button class="btn-stepper" onclick="modCardCount('${t.chiave}', 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('totale-calcolato-anteprima').innerText = calcolaTotaleCorrente() + " pt";
+        }
+
+        function applicaPuntiCalcolati() {
+            let totaleFinale = calcolaTotaleCorrente();
+            if (
+                indiceSquadraCalcolo !== null &&
+                Array.isArray(partita.manoCorrente) &&
+                partita.manoCorrente[indiceSquadraCalcolo]
+            ) {
+                partita.manoCorrente[indiceSquadraCalcolo].carte = totaleFinale.toString();
+                let el = document.getElementById('carte-' + indiceSquadraCalcolo);
+                if (el) el.value = totaleFinale;
+                aggiornaPreviewMano(indiceSquadraCalcolo);
+            }
+            chiudiCalcolatoreCarte();
+        }
+
+        window.onload = function() {
+            caricaDati();
+            popolaGiocatoriDemo();
+            popolaStoricoDemo();
+            if (appData.tema === 'scuro') document.body.classList.add("dark-mode");
+            applicaTemaColore();
+            applicaStatoMenu();
+
+            renderSegment("seg-modalita", opzioniMod, partita.modalita, (scelta) => {
+                partita.modalita = scelta;
+                let numPosti = scelta.includes('2') ? 2 : (scelta.includes('3') ? 3 : 4);
+                let vecchi = partita.posti || [];
+                partita.posti = new Array(numPosti).fill(null);
+                for (let i = 0; i < Math.min(numPosti, vecchi.length); i++) partita.posti[i] = vecchi[i];
+                renderTavolo();
+            });
+
+            renderSegment("seg-traguardo", opzioniTrag, partita.traguardo, (scelta) => {
+                partita.traguardo = scelta;
+            });
+
+            renderTavolo();
+            renderRubrica();
+            renderStorico();
+            renderRegole();
+            renderIstruzioni();
+            renderTabellone();
+        };
+
+        let _avvisoStorageMostrato = false;
+        function salvaDati() {
+            try {
+                localStorage.setItem('burracoData_v3', JSON.stringify(appData));
+                localStorage.setItem('burracoPartita_v3', JSON.stringify(partita));
+                _avvisoStorageMostrato = false;
+            } catch(e) {
+                console.warn("Errore salvataggio localStorage:", e);
+                if (!_avvisoStorageMostrato) {
+                    _avvisoStorageMostrato = true;
+                    alert("⚠️ Errore salvataggio: memoria piena.\nProva a eliminare qualche giocatore con foto oppure esporta un backup.");
+                }
+            }
+        }
+
+        function caricaDati() {
+            try {
+                let d = localStorage.getItem('burracoData_v3');
+                if (d) {
+                    let p = JSON.parse(d);
+                    if (p && Array.isArray(p.giocatori)) {
+                        appData.giocatori = p.giocatori.map(g => typeof g === 'string' ? { nome: g, soprannome: "", tipo: "emoji", valore: "👤", zoom: 1, posX: 0, posY: 0 } : g);
+                    }
+                    if (p && Array.isArray(p.storico)) appData.storico = p.storico;
+                    if (p && p.tema) appData.tema = p.tema;
+                    if (p && p.temaColore) appData.temaColore = p.temaColore;
+                    if (typeof p.menuRidotto === 'boolean') appData.menuRidotto = p.menuRidotto;
+                    if (typeof p.demoStoricoCaricato === 'boolean') appData.demoStoricoCaricato = p.demoStoricoCaricato;
+                }
+                let pt = localStorage.getItem('burracoPartita_v3');
+                if (pt) {
+                    let parsedP = JSON.parse(pt);
+                    if (parsedP && typeof parsedP === 'object') {
+                        // Se il traguardo salvato è "505" (non più disponibile), riportalo a 1005
+                        if (parsedP.traguardo === '505') parsedP.traguardo = '1005';
+
+                        if (parsedP.inCorso) {
+                            let ok = Array.isArray(parsedP.squadre) &&
+                                     Array.isArray(parsedP.manoCorrente) &&
+                                     Array.isArray(parsedP.punteggiTotali) &&
+                                     parsedP.manoCorrente.length === parsedP.squadre.length &&
+                                     parsedP.punteggiTotali.length === parsedP.squadre.length &&
+                                     parsedP.squadre.length > 0;
+                            if (!ok) {
+                                parsedP.inCorso = false;
+                                parsedP.squadre = [];
+                                parsedP.manoCorrente = [];
+                                parsedP.punteggiTotali = [];
+                            }
+                        }
+                        if (!Array.isArray(parsedP.storicoSmazzate)) parsedP.storicoSmazzate = [];
+                        partita = parsedP;
+                    }
+                }
+            } catch(e) { console.warn("Errore caricamento dati:", e); }
+        }
+
+        function cambiaSchermata(idScena, btn) {
+            document.querySelectorAll('.schermata').forEach(s => s.classList.remove('attiva'));
+            let target = document.getElementById(idScena);
+            if (target) target.classList.add('attiva');
+
+            document.querySelectorAll('.swift-capsule').forEach(b => b.classList.remove('attiva'));
+            document.querySelectorAll('.voce-menu').forEach(b => b.classList.remove('attiva'));
+
+            if (btn) btn.classList.add('attiva');
+
+            let deskNav = document.getElementById('nav-' + idScena);
+            if (deskNav) deskNav.classList.add('attiva');
+
+            if (idScena === 'impostazioni') {
+                document.querySelectorAll('.btn-tema').forEach(b => {
+                    b.classList.toggle('attivo', b.dataset.tema === (appData.temaColore || 'verde'));
+                });
+            }
+        }
+
+        function renderSegment(idDiv, opzioni, sceltaAttuale, callback) {
+            let div = document.getElementById(idDiv);
+            if (!div) return;
+            div.innerHTML = "";
+            opzioni.forEach(opz => {
+                let btn = document.createElement("button");
+                btn.className = "segment-btn" + (opz === sceltaAttuale ? " attivo" : "");
+                btn.innerText = opz;
+                btn.onclick = () => {
+                    Array.from(div.children).forEach(c => c.classList.remove("attivo"));
+                    btn.classList.add("attivo");
+                    callback(opz);
+                };
+                div.appendChild(btn);
+            });
+        }
+
+        function renderTavolo() {
+            let div = document.getElementById('tavolo-gioco');
+            if (!div) return;
+            div.innerHTML = "";
+
+            let numPosti = partita.modalita.includes('2') ? 2 : (partita.modalita.includes('3') ? 3 : 4);
+            if (!Array.isArray(partita.posti) || partita.posti.length !== numPosti) {
+                let vecchi = Array.isArray(partita.posti) ? partita.posti : [];
+                partita.posti = new Array(numPosti).fill(null);
+                for (let i = 0; i < Math.min(numPosti, vecchi.length); i++) partita.posti[i] = vecchi[i] || null;
+            }
+
+            partita.posti.forEach((giocatoreObj, i) => {
+                let occ = giocatoreObj ? 'occupato' : '';
+                let nomeVisualizzato = 'Posto ' + (i+1);
+                let contenutoCerchio = '+';
+
+                if (giocatoreObj) {
+                    nomeVisualizzato = giocatoreObj.nome;
+                    if (giocatoreObj.tipo === 'emoji') {
+                        contenutoCerchio = giocatoreObj.valore;
+                    } else {
+                        let z = giocatoreObj.zoom || 1;
+                        let x = giocatoreObj.posX || 0;
+                        let y = giocatoreObj.posY || 0;
+                        contenutoCerchio = `<img src="${giocatoreObj.valore}" style="width:100%; height:100%; object-fit:cover; transform: scale(${z}) translate(${x}px, ${y}px);">`;
+                    }
+                }
+
+                div.innerHTML += `
+                    <div class="posto-giocatore ${occ}" onclick="apriModale(${i})">
+                        <div class="cerchio-posto">${contenutoCerchio}</div>
+                        <span class="nome-posto">${nomeVisualizzato}</span>
+                    </div>`;
+            });
+
+            aggiornaAnteprimaCoppie();
+        }
+
+        function aggiornaAnteprimaCoppie() {
+            let div = document.getElementById('anteprima-coppie');
+            if (!div) return;
+            div.innerHTML = "";
+
+            if (partita.modalita === '4 Coppie' && partita.posti.length === 4) {
+                if (partita.posti.every(p => p !== null)) {
+                    div.innerHTML = `🤝 ${partita.posti[0].nome} + ${partita.posti[2].nome} &nbsp; VS &nbsp; ${partita.posti[1].nome} + ${partita.posti[3].nome}`;
+                } else {
+                    div.innerText = "Compila tutti i posti per vedere le coppie.";
+                    div.style.color = "#ccc";
+                }
+            }
+        }
+
+        function apriModale(indice) {
+            slotModifica = indice;
+            let lista = document.getElementById('lista-modale');
+            if (!lista) return;
+            lista.innerHTML = "";
+
+            if (appData.giocatori.length === 0) {
+                lista.innerHTML = `
+                    <p style="color:#ccc; text-align:center; padding:15px;">
+                        La rubrica è vuota.<br>
+                        Vai in <b>👥 Giocatori</b> e aggiungine almeno uno!
+                    </p>
+                `;
+                document.getElementById('modale-scegli-giocatore').style.display = 'flex';
+                return;
+            }
+
+            let nomiGiaAlTavolo = partita.posti.filter(p => p !== null).map(p => p.nome);
+
+            appData.giocatori.forEach(g => {
+                if (!nomiGiaAlTavolo.includes(g.nome)) {
+                    let btn = document.createElement('button');
+                    btn.className = 'btn-lista-gioc';
+                    let renderImg = g.tipo === 'emoji' ? g.valore : '📷';
+                    let subText = g.soprannome ? ` (${g.soprannome})` : '';
+                    btn.innerHTML = `${renderImg} <b>${g.nome}</b>${subText}`;
+                    btn.onclick = () => siedi(g);
+                    lista.appendChild(btn);
+                }
+            });
+
+            if (partita.posti[indice]) {
+                let btnRimuovi = document.createElement('button');
+                btnRimuovi.className = 'btn-danger';
+                btnRimuovi.style.marginTop = '10px';
+                btnRimuovi.innerText = "Rimuovi dal tavolo";
+                btnRimuovi.onclick = () => siedi(null);
+                lista.appendChild(btnRimuovi);
+            }
+
+            document.getElementById('modale-scegli-giocatore').style.display = 'flex';
+        }
+
+        function siedi(giocatoreObj) {
+            partita.posti[slotModifica] = giocatoreObj;
+            renderTavolo();
+            chiudiModale();
+        }
+
+        function chiudiModale() {
+            document.getElementById('modale-scegli-giocatore').style.display = 'none';
+        }
+
+        function iniziaPartita() {
+            if (partita.posti.includes(null)) {
+                alert("⚠️ Riempi tutti i posti al tavolo prima di iniziare!");
+                return;
+            }
+
+            partita.inCorso = true;
+            partita.storicoSmazzate = [];
+
+            if (partita.modalita === '4 Coppie') {
+                partita.squadre = [
+                    partita.posti[0].nome + " & " + partita.posti[2].nome,
+                    partita.posti[1].nome + " & " + partita.posti[3].nome
+                ];
+            } else {
+                partita.squadre = partita.posti.map(p => p.nome);
+            }
+
+            partita.punteggiTotali = new Array(partita.squadre.length).fill(0);
+            resetManoCorrente();
+            salvaDati();
+
+            cambiaSchermata('partita-corso');
+            renderTabellone();
+        }
+
+        function resetManoCorrente() {
+            partita.manoCorrente = partita.squadre.map(() => ({ puliti:0, semipuliti:0, sporchi:0, carte:"", chiuso:false, pozzetto:true }));
+        }
+
+        function renderTabellone() {
+            let container = document.getElementById('partita-corso-content');
+            if (!container) return;
+
+            if (!partita.inCorso || !partita.squadre || partita.squadre.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center; padding: 40px 10px;">
+                        <p style="font-size:18px; color:#ccc;">Nessuna partita attiva in questo momento.</p>
+                        <button class="btn-avvia-swift" onclick="cambiaSchermata('nuova-partita')">🎲 Configura Nuova Partita</button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Ripara manoCorrente se incoerente (es. dopo import/backup)
+            if (!Array.isArray(partita.manoCorrente) || partita.manoCorrente.length !== partita.squadre.length) {
+                resetManoCorrente();
+            }
+
+            let canUndo = partita.storicoSmazzate && partita.storicoSmazzate.length > 0;
+
+            container.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <h2 class="titolo-optima">Smazzata in Corso</h2>
+                    <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:8px; font-size:12px; font-weight:bold;">
+                        ${partita.modalita} (Target: ${partita.traguardo})
+                    </span>
+                </div>
+                <div id="griglia-tabellone" class="griglia-punti"></div>
+                <button class="btn-avvia-swift" style="margin-top:20px;" onclick="salvaSmazzata()">💾 Calcola e Registra Smazzata</button>
+                <button class="btn-secondary" style="margin-top:10px; ${canUndo ? '' : 'opacity:0.4; pointer-events:none;'}" onclick="annullaUltimaSmazzata()">↩️ Annulla Ultima Smazzata</button>
+                <button class="btn-danger" style="margin-top:10px;" onclick="chiudiPartita()">🛑 Termina Partita</button>
+            `;
+
+            let griglia = document.getElementById('griglia-tabellone');
+            griglia.style.gridTemplateColumns = `repeat(${partita.squadre.length}, 1fr)`;
+
+            partita.squadre.forEach((squadra, i) => {
+                let mano = partita.manoCorrente[i] || { puliti:0, semipuliti:0, sporchi:0, carte:"", chiuso:false, pozzetto:true };
+
+                let pozzClass = mano.pozzetto ? "btn-toggle attivo" : "btn-toggle penale";
+                let pozzTesto = mano.pozzetto ? "✔️ Pozzetto Preso" : "❌ No Pozzetto (-100)";
+
+                let chiusClass = mano.chiuso ? "btn-toggle attivo" : "btn-toggle";
+                let chiusTesto = mano.chiuso ? "🏆 Chiusura (+100)" : "Non ha chiuso";
+
+                griglia.innerHTML += `
+                    <div class="colonna-punti">
+                        <div class="nome-squadra">${squadra}</div>
+                        <div class="punti-totali">${partita.punteggiTotali[i]} <span style="font-size:14px">pt</span></div>
+
+                        <div class="stepper-row">
+                            <span class="stepper-label">Puliti (+200)</span>
+                            <div class="stepper-controls">
+                                <button class="btn-stepper" onclick="modStepper(${i}, 'puliti', -1)">-</button>
+                                <span class="valore-stepper" id="valore-${i}-puliti">${mano.puliti}</span>
+                                <button class="btn-stepper" onclick="modStepper(${i}, 'puliti', 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="stepper-row">
+                            <span class="stepper-label">Semi (+150)</span>
+                            <div class="stepper-controls">
+                                <button class="btn-stepper" onclick="modStepper(${i}, 'semipuliti', -1)">-</button>
+                                <span class="valore-stepper" id="valore-${i}-semipuliti">${mano.semipuliti}</span>
+                                <button class="btn-stepper" onclick="modStepper(${i}, 'semipuliti', 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="stepper-row">
+                            <span class="stepper-label">Sporchi (+100)</span>
+                            <div class="stepper-controls">
+                                <button class="btn-stepper" onclick="modStepper(${i}, 'sporchi', -1)">-</button>
+                                <span class="valore-stepper" id="valore-${i}-sporchi">${mano.sporchi}</span>
+                                <button class="btn-stepper" onclick="modStepper(${i}, 'sporchi', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:10px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:3px;">
+                                <label style="font-size:11px; color:#ccc;">Punti Carte (+/-)</label>
+                                <button style="background:none; border:none; color:var(--giallo-burraco); font-size:11px; font-weight:bold; cursor:pointer;" onclick="apriCalcolatoreCarte(${i})">🧮 Calcolatore</button>
+                            </div>
+                            <input type="number" class="input-carte" id="carte-${i}" placeholder="0" value="${mano.carte}" inputmode="decimal" step="any" oninput="aggiornaCarte(${i}, this.value)">
+                        </div>
+
+                        <button class="${pozzClass}" id="btn-pozzetto-${i}" onclick="togglePozzetto(${i})">${pozzTesto}</button>
+                        <button class="${chiusClass}" id="btn-chiusura-${i}" onclick="toggleChiusura(${i})">${chiusTesto}</button>
+
+                        <div id="preview-${i}" style="text-align:center; margin-top:10px; font-size:13px; color:#bbb;"></div>
+                    </div>
+                `;
+            });
+
+            partita.squadre.forEach((_, i) => aggiornaPreviewMano(i));
+        }
+
+        function aggiornaPreviewMano(col) {
+            let m = partita.manoCorrente[col];
+            if (!m) return;
+            let pC = parsePuntiCarte(m.carte);
+            let parziale = (m.puliti * 200) + (m.semipuliti * 150) + (m.sporchi * 100) + pC
+                         + (m.chiuso ? 100 : 0) + (!m.pozzetto ? -100 : 0);
+            let el = document.getElementById('preview-' + col);
+            if (el) {
+                let colore = parziale >= 0 ? '#7CFC00' : '#ff6b6b';
+                el.innerHTML = `Mano: <b style="color:${colore}">${parziale >= 0 ? '+' : ''}${parziale} pt</b>`;
+            }
+        }
+
+        // Aggiorna solo i bottoni di stato (evita rerender completo)
+        function aggiornaBottoniStato(col) {
+            let mano = partita.manoCorrente[col];
+            if (!mano) return;
+
+            let btnPozz = document.getElementById('btn-pozzetto-' + col);
+            if (btnPozz) {
+                btnPozz.className = mano.pozzetto ? "btn-toggle attivo" : "btn-toggle penale";
+                btnPozz.innerText = mano.pozzetto ? "✔️ Pozzetto Preso" : "❌ No Pozzetto (-100)";
+            }
+
+            let btnChiud = document.getElementById('btn-chiusura-' + col);
+            if (btnChiud) {
+                btnChiud.className = mano.chiuso ? "btn-toggle attivo" : "btn-toggle";
+                btnChiud.innerText = mano.chiuso ? "🏆 Chiusura (+100)" : "Non ha chiuso";
+            }
+
+            aggiornaPreviewMano(col);
+        }
+
+        function modStepper(col, tipo, val) {
+            vibra(10);
+            partita.manoCorrente[col][tipo] += val;
+            if (partita.manoCorrente[col][tipo] < 0) partita.manoCorrente[col][tipo] = 0;
+
+            let el = document.getElementById('valore-' + col + '-' + tipo);
+            if (el) el.innerText = partita.manoCorrente[col][tipo];
+
+            aggiornaPreviewMano(col);
+        }
+
+        function aggiornaCarte(col, val) {
+            partita.manoCorrente[col].carte = val;
+            aggiornaPreviewMano(col);
+        }
+
+        function togglePozzetto(col) {
+            vibra(15);
+            partita.manoCorrente[col].pozzetto = !partita.manoCorrente[col].pozzetto;
+            aggiornaBottoniStato(col);
+        }
+
+        function toggleChiusura(col) {
+            vibra(15);
+            partita.manoCorrente.forEach((m, idx) => { if (idx !== col) m.chiuso = false; });
+            partita.manoCorrente[col].chiuso = !partita.manoCorrente[col].chiuso;
+            if (partita.manoCorrente[col].chiuso) partita.manoCorrente[col].pozzetto = true;
+
+            partita.squadre.forEach((_, i) => aggiornaBottoniStato(i));
+        }
+
+        function salvaSmazzata() {
+            if (!partita.inCorso) return;
+
+            if (!Array.isArray(partita.storicoSmazzate)) partita.storicoSmazzate = [];
+            partita.storicoSmazzate.push({
+                punteggi: [...partita.punteggiTotali],
+                mano: JSON.parse(JSON.stringify(partita.manoCorrente))
+            });
+            if (partita.storicoSmazzate.length > 30) partita.storicoSmazzate.shift();
+
+            let targetNum = parseInt(partita.traguardo) || 99999;
+            let finePartita = false;
+            let vincitore = "";
+
+            partita.squadre.forEach((sq, i) => {
+                let m = partita.manoCorrente[i];
+                let pCarte = parsePuntiCarte(m.carte);
+
+                let parziale = (m.puliti * 200) + (m.semipuliti * 150) + (m.sporchi * 100) + pCarte;
+                if (m.chiuso) parziale += 100;
+                if (!m.pozzetto) parziale -= 100;
+
+                partita.punteggiTotali[i] += parziale;
+
+                if (partita.traguardo !== 'Smazzate' && partita.punteggiTotali[i] >= targetNum) {
+                    finePartita = true;
+                    vincitore = sq;
+                }
+            });
+
+            if (finePartita) {
+                alert("🎉 PARTITA FINITA!\nHa vinto: " + vincitore + " raggiungendo " + targetNum + " punti!");
+                chiudiPartita(true);
+            } else {
+                resetManoCorrente();
+                salvaDati();
+                renderTabellone();
+                alert("✅ Smazzata calcolata e registrata!");
+            }
+        }
+
+        function annullaUltimaSmazzata() {
+            if (!partita.storicoSmazzate || partita.storicoSmazzate.length === 0) {
+                alert("Nessuna smazzata da annullare.");
+                return;
+            }
+            if (!confirm("Annullare l'ultima smazzata registrata?")) return;
+
+            let prec = partita.storicoSmazzate.pop();
+            partita.punteggiTotali = prec.punteggi;
+            partita.manoCorrente = prec.mano;
+            salvaDati();
+            renderTabellone();
+            alert("↩️ Ultima smazzata annullata.");
+        }
+
+        function chiudiPartita(saltaConferma) {
+            if (!partita.inCorso) return;
+            if (!saltaConferma) {
+                if (!confirm("Terminare la partita? Verrà salvata nello storico.")) return;
+            }
+
+            let now = new Date();
+            appData.storico.unshift({
+                data: now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}),
+                modalita: partita.modalita,
+                traguardo: partita.traguardo,
+                squadre: [...partita.squadre],
+                punti: [...partita.punteggiTotali]
+            });
+
+            partita.inCorso = false;
+            let numPosti = partita.modalita.includes('2') ? 2
+                         : partita.modalita.includes('3') ? 3 : 4;
+            partita.posti = new Array(numPosti).fill(null);
+            partita.squadre = [];
+            partita.punteggiTotali = [];
+            partita.manoCorrente = [];
+            partita.storicoSmazzate = [];
+
+            salvaDati();
+            renderStorico();
+            renderTavolo();
+            renderTabellone();
+            cambiaSchermata('storico');
+        }
+
+        function renderRubrica() {
+            let div = document.getElementById('lista-rubrica');
+            if (!div) return;
+            div.innerHTML = "";
+
+            if (appData.giocatori.length === 0) {
+                div.innerHTML = `
+                    <div style="text-align:center; padding: 30px 15px; color:#bbb;">
+                        <div style="font-size:50px; margin-bottom:10px;">👥</div>
+                        <p style="font-size:15px; margin:0;">Nessun giocatore in rubrica.</p>
+                        <p style="font-size:13px; margin-top:6px;">Clicca <b>➕ Aggiungi Nuovo Giocatore</b> per iniziare!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            appData.giocatori.forEach((g, i) => {
+                let avatarHTML = g.tipo === 'emoji'
+                    ? `<span style="font-size:36px; line-height:1;">${g.valore}</span>`
+                    : `<img src="${g.valore}" style="width:100%; height:100%; object-fit:cover; transform: scale(${g.zoom||1}) translate(${g.posX||0}px, ${g.posY||0}px);">`;
+                let subTag = g.soprannome ? `<span style="font-size:12px; color:var(--giallo-burraco);">"${g.soprannome}"</span>` : '';
+
+                div.innerHTML += `
+                    <div class="card-lista" style="flex-direction:row; justify-content:space-between; align-items:center;">
+                        <div style="display:flex; align-items:center; gap:14px;">
+                            <div style="width:55px; height:55px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0;">${avatarHTML}</div>
+                            <div>
+                                <div style="font-size:17px; font-weight:bold;">${g.nome}</div>
+                                ${subTag}
+                            </div>
+                        </div>
+                        <button class="btn-danger" style="width:auto; padding:6px 12px; font-size:12px;" onclick="eliminaGiocatore(${i})">Elimina</button>
+                    </div>`;
+            });
+        }
+
+        function eliminaGiocatore(i) {
+            let g = appData.giocatori[i];
+            if (!g) return;
+            if (!confirm(`Eliminare "${g.nome}" dalla rubrica?`)) return;
+            appData.giocatori.splice(i, 1);
+            salvaDati();
+            renderRubrica();
+        }
+
+        function renderStorico() {
+            let div = document.getElementById('lista-storico');
+            if (!div) return;
+            div.innerHTML = "";
+
+            let btnDemo = document.getElementById('btn-rimuovi-demo');
+            if (btnDemo) {
+                let hasDemo = appData.storico.some(s => s.demo);
+                btnDemo.style.display = hasDemo ? 'block' : 'none';
+            }
+
+            if (appData.storico.length === 0) {
+                div.innerHTML = "<p style='color:#ccc; text-align:center;'>Nessuna partita archiviata nello storico.</p>";
+                return;
+            }
+
+            appData.storico.forEach(s => {
+                let res = "";
+                s.squadre.forEach((sq, idx) => { res += `${sq}: <b>${s.punti[idx]} pt</b><br>`; });
+                let trag = s.traguardo ? ` - Target: ${s.traguardo}` : '';
+                let demoBadge = s.demo ? `<span class="badge-demo">DEMO</span>` : '';
+
+                div.innerHTML += `
+                    <div class="card-lista" style="${s.demo ? 'border-color: rgba(255,215,0,0.4);' : ''}">
+                        <div style="color:var(--giallo-burraco); font-size:12px; font-weight:bold;">${s.data} - Modalità: ${s.modalita}${trag}${demoBadge}</div>
+                        <div style="font-size:15px; margin-top:4px;">${res}</div>
+                    </div>`;
+            });
+        }
+
+        function renderRegole() {
+            let regole = [
+                { titolo: "🃏 Valore delle Carte", testo: "<b>Jolly:</b> 30 punti<br><b>Pinella (2):</b> 20 punti<br><b>Asso:</b> 15 punti<br><b>Re, Donna, Jack, 10, 9, 8:</b> 10 punti<br><b>7, 6, 5, 4, 3:</b> 5 punti" },
+                { titolo: "🏆 Punteggi Burrachi", testo: "<b>Burraco Pulito:</b> 200 punti (7+ carte senza jolly o pinelle)<br><b>Burraco Semipulito:</b> 150 punti (7+ carte con una pinella)<br><b>Burraco Sporco:</b> 100 punti (7+ carte con jolly o pinella)" },
+                { titolo: "🎯 Chiusura e Pozzetto", testo: "<b>Chiusura della partita:</b> +100 punti bonus<br><b>Pozzetto non preso:</b> Penale di -100 punti" }
+            ];
+            let div = document.getElementById('lista-regole');
+            if (!div) return;
+            div.innerHTML = "";
+            regole.forEach(r => {
+                div.innerHTML += `
+                    <div class="card-lista">
+                        <span class="regola-titolo">${r.titolo}</span>
+                        <span class="regola-testo" style="margin-top:4px;">${r.testo}</span>
+                    </div>`;
+            });
+        }
+
+        function renderIstruzioni() {
+            let guida = [
+                { titolo: "🎲 1. Configurare una Nuova Partita", testo: "Dalla schermata <b>Nuova Partita</b> seleziona la modalità di gioco e il traguardo. Tocca ciascun cerchio attorno al tavolo per assegnare un giocatore della rubrica con foto/emoji personalizzata." },
+                { titolo: "📝 2. Contare i Punti della Partita", testo: "Usa i pulsanti <b>+</b> e <b>-</b> per indicare i Burrachi e il tasto <b>🧮 Calcolatore</b> o l'inserimento manuale per i punti carte. Il totale della mano si aggiorna in tempo reale." },
+                { titolo: "↩️ 3. Correggere un Errore", testo: "Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b> per tornare indietro senza perdere i dati." },
+                { titolo: "👥 4. Gestire la Rubrica Giocatori", testo: "Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici inserendo nome, soprannome e scegliendo un avatar: emoji dalla griglia (o tastiera di sistema su Mac), oppure una foto dal dispositivo." },
+                { titolo: "🎨 5. Scegliere un Tema Colore", testo: "In <b>Impostazioni</b> puoi scegliere tra 5 temi colorati: <b>Verde</b>, <b>Blu</b>, <b>Rosso</b>, <b>Beige</b> e <b>Viola</b>. Il tema cambia lo sfondo e il menu laterale dell'app. La scelta viene ricordata automaticamente." },
+                { titolo: "💾 6. Backup dei Dati", testo: "In <b>Impostazioni</b> puoi esportare un file JSON con tutti i tuoi dati (giocatori, storico) e reimportarlo su un altro dispositivo." },
+                { titolo: "📐 7. Comprimere il Menu", testo: "Clicca il tasto dorato in alto nel menu laterale per comprimerlo o riespanderlo. La scelta viene ricordata automaticamente." }
+            ];
+            let div = document.getElementById('lista-istruzioni');
+            if (!div) return;
+            div.innerHTML = "";
+            guida.forEach(g => {
+                div.innerHTML += `
+                    <div class="card-lista">
+                        <span class="regola-titolo">${g.titolo}</span>
+                        <span class="regola-testo" style="margin-top:4px;">${g.testo}</span>
+                    </div>`;
+            });
+        }
+
+        function toggleTema() {
+            let isDark = document.body.classList.toggle("dark-mode");
+            appData.tema = isDark ? 'scuro' : 'chiaro';
+            salvaDati();
+        }
+
+        function azzeraStorico() {
+            if (confirm("Sei sicuro di voler cancellare tutto lo storico delle partite?\n(Le partite demo non verranno ripristinate al prossimo avvio.)")) {
+                appData.storico = [];
+                appData.demoStoricoCaricato = true;
+                salvaDati();
+                renderStorico();
+                alert("Storico azzerato.");
+            }
+        }
+
+        function azzeraRubrica() {
+            if (confirm("Sei sicuro di voler cancellare TUTTI i giocatori dalla rubrica?")) {
+                appData.giocatori = [];
+                salvaDati();
+                renderRubrica();
+                renderTavolo();
+                alert("Rubrica azzerata completamente.");
+            }
+        }
+
+        function esportaBackup() {
+            let backup = {
+                versione: 3,
+                esportato: new Date().toISOString(),
+                appData: appData,
+                partita: partita
+            };
+            let blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            let stamp = new Date().toISOString().slice(0,10);
+            a.href = url;
+            a.download = `burraco-backup-${stamp}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            alert("📤 Backup esportato!");
+        }
+
+        function importaBackup(event) {
+            let file = event.target.files[0];
+            if (!file) return;
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    let dati = JSON.parse(e.target.result);
+                    if (!dati || typeof dati !== 'object') throw new Error("File non valido");
+
+                    if (!confirm("Sovrascrivere i dati attuali con quelli del backup?")) {
+                        event.target.value = '';
+                        return;
+                    }
+
+                    if (dati.appData) {
+                        if (Array.isArray(dati.appData.giocatori)) appData.giocatori = dati.appData.giocatori;
+                        if (Array.isArray(dati.appData.storico)) appData.storico = dati.appData.storico;
+                        if (dati.appData.tema) appData.tema = dati.appData.tema;
+                        if (dati.appData.temaColore) appData.temaColore = dati.appData.temaColore;
+                        if (typeof dati.appData.menuRidotto === 'boolean') appData.menuRidotto = dati.appData.menuRidotto;
+                        if (typeof dati.appData.demoStoricoCaricato === 'boolean') appData.demoStoricoCaricato = dati.appData.demoStoricoCaricato;
+                    }
+                    if (dati.partita && typeof dati.partita === 'object') {
+                        partita = dati.partita;
+                        if (!Array.isArray(partita.storicoSmazzate)) partita.storicoSmazzate = [];
+                        if (partita.traguardo === '505') partita.traguardo = '1005';
+                    }
+
+                    salvaDati();
+                    document.body.classList.toggle("dark-mode", appData.tema === 'scuro');
+                    applicaTemaColore();
+                    applicaStatoMenu();
+                    renderRubrica();
+                    renderStorico();
+                    renderTavolo();
+                    renderTabellone();
+                    alert("📥 Backup importato correttamente!");
+                } catch(err) {
+                    alert("❌ File di backup non valido: " + err.message);
+                }
+                event.target.value = '';
+            };
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>
