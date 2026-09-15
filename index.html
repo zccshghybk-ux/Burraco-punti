@@ -137,8 +137,8 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .btn-img-opzione.emoji.aperto{background:linear-gradient(145deg,rgba(255,215,0,0.5),rgba(255,215,0,0.25));border-color:var(--giallo-burraco);box-shadow:0 0 15px rgba(255,215,0,0.6);}
 .btn-img-opzione.foto{border-color:rgba(52,199,89,0.5);background:linear-gradient(145deg,rgba(52,199,89,0.2),rgba(52,199,89,0.05));}
 .editor-foto-wrapper{display:none;margin-top:14px;text-align:center;}
-.cerchio-editor-foto{width:min(78vw,320px);height:min(78vw,320px);margin:0 auto;border-radius:50%;position:relative;overflow:hidden;background:#000;border:3px solid var(--giallo-burraco);box-shadow:0 0 30px rgba(255,215,0,0.5),inset 0 0 30px rgba(0,0,0,0.6);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;}
-.cerchio-editor-foto:active{cursor:grabbing;}
+.cerchio-editor-foto{width:min(78vw,320px);height:min(78vw,320px);margin:0 auto;border-radius:50%;position:relative;overflow:hidden;background:#000;border:3px solid var(--giallo-burraco);box-shadow:0 0 30px rgba(255,215,0,0.5),inset 0 0 30px rgba(0,0,0,0.6);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;overscroll-behavior:contain;}
+.cerchio-editor-foto.attivo{cursor:grabbing;}
 .cerchio-editor-foto img{position:absolute;top:50%;left:50%;transform-origin:center center;pointer-events:none;user-select:none;-webkit-user-drag:none;will-change:transform;}
 .cerchio-editor-foto::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.25),inset 0 0 40px rgba(0,0,0,0.4);}
 .istruzioni-touch{font-size:12px;color:#ffd700;margin-top:10px;text-align:center;line-height:1.5;font-weight:bold;}
@@ -204,7 +204,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
             <div class="voce-menu" id="nav-istruzioni" onclick="cambiaSchermata('istruzioni')"><span class="icona-voce">💡</span><span class="testo-menu">Come Usare l'App</span></div>
             <div class="voce-menu" id="nav-impostazioni" onclick="cambiaSchermata('impostazioni')"><span class="icona-voce">⚙️</span><span class="testo-menu">Impostazioni</span></div>
         </div>
-        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.1.1</span></div>
+        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.1.2</span></div>
     </nav>
 
     <main>
@@ -267,20 +267,13 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
     </div>
 </div>
 
-<!-- === NUOVO MENU SCELTA FOTO (v1.1.1) === -->
 <div id="modale-scelta-foto" class="swift-sheet-overlay">
     <div class="swift-sheet-content">
         <h3 class="titolo-optima" style="margin-top:0;">Scegli Foto</h3>
         <p style="font-size:12px;color:#ccc;margin:0 0 14px 0;">Da dove vuoi prendere l'immagine?</p>
-        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('camera')" style="text-align:center;">
-            <span style="font-size:20px;margin-right:8px;">📷</span> Scatta Foto
-        </button>
-        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('galleria')" style="text-align:center;">
-            <span style="font-size:20px;margin-right:8px;">🖼️</span> Galleria Foto
-        </button>
-        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('file')" style="text-align:center;">
-            <span style="font-size:20px;margin-right:8px;">📁</span> Sfoglia File
-        </button>
+        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('camera')" style="text-align:center;"><span style="font-size:20px;margin-right:8px;">📷</span> Scatta Foto</button>
+        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('galleria')" style="text-align:center;"><span style="font-size:20px;margin-right:8px;">🖼️</span> Galleria Foto</button>
+        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('file')" style="text-align:center;"><span style="font-size:20px;margin-right:8px;">📁</span> Sfoglia File</button>
         <button class="btn-danger" onclick="chiudiSceltaFoto()" style="margin-top:10px;">Annulla</button>
     </div>
 </div>
@@ -331,10 +324,10 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 
             <div id="editor-foto-wrapper" class="editor-foto-wrapper">
                 <div id="cerchio-editor-foto" class="cerchio-editor-foto">
-                    <img id="img-editor-foto" src="" alt="">
+                    <img id="img-editor-foto" src="" alt="" draggable="false">
                 </div>
                 <div class="istruzioni-touch">
-                    👆 Pinza con 2 dita per zoomare (o rotellina del mouse)<br>
+                    👆 Pinza con 2 dita (o rotellina del mouse) per zoomare<br>
                     👉 Trascina per spostare (dito o mouse)
                 </div>
                 <button type="button" class="btn-secondary" style="margin-top:10px;padding:8px;font-size:13px;" onclick="resetFotoEditor()">↺ Centra Foto</button>
@@ -365,10 +358,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 </div>
 
 <script>
-// =========================================================
-// VERSIONE APPLICAZIONE
-// =========================================================
-const APP_VERSION = 'v1.1.1';
+const APP_VERSION = 'v1.1.2';
 
 let appData = { giocatori: [], storico: [], tema: 'chiaro', temaColore: 'verde', menuRidotto: false, demoStoricoCaricato: false };
 let partita = { inCorso: false, modalita: '4 Coppie', traguardo: '2005', posti: [null,null,null,null], squadre: [], punteggiTotali: [], manoCorrente: [], storicoSmazzate: [] };
@@ -377,17 +367,7 @@ let opzioniTrag = ["1005", "2005", "Smazzate"];
 let slotModifica = null;
 
 let nuovoGiocatoreStato = { tipo: 'emoji', valore: '🧑‍💻', zoom: 1, posX: 0, posY: 0 };
-
-let fotoEditorStato = {
-    attivo: false,
-    img: null,
-    imgNaturalW: 0,
-    imgNaturalH: 0,
-    scale: 1,
-    offsetX: 0,
-    offsetY: 0,
-    baseScale: 1
-};
+let fotoEditorStato = { attivo: false, img: null, imgNaturalW: 0, imgNaturalH: 0, scale: 1, offsetX: 0, offsetY: 0, baseScale: 1 };
 
 const listaEmojiDisponibili = ["🧑‍💻","😎","👩","👧","👨","👦","🦊","🦁","🐯","🐼","🐨","🐶","🐱","🦄","⭐","🔥","👑","🍀","♠️","♥️","♦️","♣️","🃏","🏆","🎩","🎭","🎲","🎯","🚀","🎸","😀","😂","🤣","😊","😍","🤩","😜","🤔","😏","🙃","😇","🥳"];
 
@@ -536,34 +516,22 @@ function selezionaEmoji(em){
     if(pannello&&btn){pannello.style.display='none';btn.classList.remove('aperto');}
 }
 
-// ====== NUOVO (v1.1.1): apre menu con 3 opzioni ======
-function apriSelettoreFoto(){
-    document.getElementById('modale-scelta-foto').style.display='flex';
-}
-
-function chiudiSceltaFoto(){
-    document.getElementById('modale-scelta-foto').style.display='none';
-}
+function apriSelettoreFoto(){ document.getElementById('modale-scelta-foto').style.display='flex'; }
+function chiudiSceltaFoto(){ document.getElementById('modale-scelta-foto').style.display='none'; }
 
 function scegliFotoOpzione(tipo){
     chiudiSceltaFoto();
     let inp=document.getElementById('input-file-foto');
-    // Rimuovi attributi precedenti
     inp.removeAttribute('capture');
     inp.accept='image/*';
-
     if(tipo==='camera'){
-        // Su mobile apre la fotocamera; su PC si comporta come un normale file picker
+        // Se il browser supporta la fotocamera (mobile), la apre; su PC si comporta come file picker
         inp.setAttribute('capture','environment');
-        inp.accept='image/*';
     } else if(tipo==='galleria'){
-        // Su mobile apre la galleria foto; su PC apre il file picker
         inp.accept='image/*';
     } else if(tipo==='file'){
-        // Sfoglia file (con più filtri possibili)
         inp.accept='image/*,.heic,.heif,.png,.jpg,.jpeg,.webp,.gif,.bmp,.tiff';
     }
-
     inp.value='';
     inp.click();
 }
@@ -598,13 +566,25 @@ function caricaImmagineLocale(event){
             imgEditor.src=e.target.result;
             fotoEditorStato.attivo=true;
 
+            // Aspetta il layout per calcolare la scala "cover"
             setTimeout(()=>{
                 let diameter=cerchio.clientWidth;
-                let coverScale=Math.max(diameter/img.naturalWidth, diameter/img.naturalHeight);
-                fotoEditorStato.baseScale=coverScale;
-                fotoEditorStato.scale=1;
-                aggiornaImmagineEditor();
-            },50);
+                if(diameter===0){
+                    // Riprova dopo un attimo se il cerchio non ha ancora dimensioni
+                    setTimeout(()=>{
+                        diameter=cerchio.clientWidth;
+                        let coverScale=Math.max(diameter/img.naturalWidth, diameter/img.naturalHeight);
+                        fotoEditorStato.baseScale=coverScale;
+                        fotoEditorStato.scale=1;
+                        aggiornaImmagineEditor();
+                    },150);
+                } else {
+                    let coverScale=Math.max(diameter/img.naturalWidth, diameter/img.naturalHeight);
+                    fotoEditorStato.baseScale=coverScale;
+                    fotoEditorStato.scale=1;
+                    aggiornaImmagineEditor();
+                }
+            },80);
 
             aggiornaAnteprimaGiocatoreModal();
             event.target.value='';
@@ -621,6 +601,8 @@ function aggiornaImmagineEditor(){
     if(!imgEditor||!cerchio||!fotoEditorStato.img) return;
 
     let diameter=cerchio.clientWidth;
+    if(diameter===0) return;
+
     let base=fotoEditorStato.baseScale;
     let finalScale=base*fotoEditorStato.scale;
 
@@ -646,101 +628,114 @@ function resetFotoEditor(){
     aggiornaImmagineEditor();
 }
 
-// ====== GESTI TOUCH E MOUSE SULL'EDITOR ======
+// =====================================================
+// POINTER EVENTS — funziona identico su mouse/touch/penna
+// =====================================================
 (function setupEditorGestures(){
-    let startDistance=0;
-    let startScale=1;
-    let startX=0,startY=0;
-    let startOffsetX=0,startOffsetY=0;
+    let pointers = new Map();     // pointerId -> {x, y}
+    let startDistance = 0;
+    let startScale = 1;
+    let startOffsetX = 0, startOffsetY = 0;
+    let lastX = 0, lastY = 0;
 
-    function getDistance(t1,t2){
-        let dx=t1.clientX-t2.clientX;
-        let dy=t1.clientY-t2.clientY;
-        return Math.hypot(dx,dy);
+    function getDistance(){
+        let pts = Array.from(pointers.values());
+        if(pts.length < 2) return 0;
+        return Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
     }
 
     function attach(){
-        let cerchio=document.getElementById('cerchio-editor-foto');
+        let cerchio = document.getElementById('cerchio-editor-foto');
         if(!cerchio) return;
 
-        // TOUCH
-        cerchio.addEventListener('touchstart',function(e){
+        cerchio.addEventListener('pointerdown', function(e){
             if(!fotoEditorStato.attivo) return;
             e.preventDefault();
-            if(e.touches.length===1){
-                startX=e.touches[0].clientX;
-                startY=e.touches[0].clientY;
-                startOffsetX=fotoEditorStato.offsetX;
-                startOffsetY=fotoEditorStato.offsetY;
-            } else if(e.touches.length===2){
-                startDistance=getDistance(e.touches[0],e.touches[1]);
-                startScale=fotoEditorStato.scale;
-            }
-        },{passive:false});
+            cerchio.classList.add('attivo');
+            try { cerchio.setPointerCapture(e.pointerId); } catch(err){}
 
-        cerchio.addEventListener('touchmove',function(e){
+            pointers.set(e.pointerId, {x: e.clientX, y: e.clientY});
+
+            if(pointers.size === 1){
+                lastX = e.clientX;
+                lastY = e.clientY;
+                startOffsetX = fotoEditorStato.offsetX;
+                startOffsetY = fotoEditorStato.offsetY;
+            } else if(pointers.size === 2){
+                startDistance = getDistance();
+                startScale = fotoEditorStato.scale;
+            }
+        });
+
+        cerchio.addEventListener('pointermove', function(e){
             if(!fotoEditorStato.attivo) return;
+            if(!pointers.has(e.pointerId)) return;
             e.preventDefault();
-            if(e.touches.length===1){
-                let dx=e.touches[0].clientX-startX;
-                let dy=e.touches[0].clientY-startY;
-                fotoEditorStato.offsetX=startOffsetX+dx;
-                fotoEditorStato.offsetY=startOffsetY+dy;
+
+            pointers.set(e.pointerId, {x: e.clientX, y: e.clientY});
+
+            if(pointers.size === 1){
+                // DRAG (mouse, dito, penna)
+                let dx = e.clientX - lastX;
+                let dy = e.clientY - lastY;
+                fotoEditorStato.offsetX = startOffsetX + (e.clientX - (lastX - (startOffsetX - fotoEditorStato.offsetX)) - fotoEditorStato.offsetX) ;
+                // Semplice: accumula delta
+                fotoEditorStato.offsetX = startOffsetX + (e.clientX - (e.clientX - dx)) + dx; // fix: sotto
+                // Codice pulito:
+                fotoEditorStato.offsetX = fotoEditorStato.offsetX + dx;
+                fotoEditorStato.offsetY = fotoEditorStato.offsetY + dy;
+                lastX = e.clientX;
+                lastY = e.clientY;
                 aggiornaImmagineEditor();
-            } else if(e.touches.length===2){
-                let d=getDistance(e.touches[0],e.touches[1]);
-                if(startDistance>0){
-                    let ratio=d/startDistance;
-                    let nuovoScale=startScale*ratio;
-                    nuovoScale=Math.max(1,Math.min(5,nuovoScale));
-                    fotoEditorStato.scale=nuovoScale;
+            } else if(pointers.size === 2){
+                // PINCH (touch) — con mouse non succede
+                let d = getDistance();
+                if(startDistance > 0){
+                    let ratio = d / startDistance;
+                    let nuovoScale = Math.max(1, Math.min(5, startScale * ratio));
+                    fotoEditorStato.scale = nuovoScale;
                     aggiornaImmagineEditor();
                 }
             }
-        },{passive:false});
-
-        cerchio.addEventListener('touchend',function(e){
-            if(!fotoEditorStato.attivo) return;
-            startDistance=0;
-        },{passive:false});
-
-        // MOUSE (desktop)
-        let mouseDown=false;
-        cerchio.addEventListener('mousedown',function(e){
-            if(!fotoEditorStato.attivo) return;
-            e.preventDefault();
-            mouseDown=true;
-            startX=e.clientX;
-            startY=e.clientY;
-            startOffsetX=fotoEditorStato.offsetX;
-            startOffsetY=fotoEditorStato.offsetY;
         });
 
-        window.addEventListener('mousemove',function(e){
-            if(!mouseDown||!fotoEditorStato.attivo) return;
-            let dx=e.clientX-startX;
-            let dy=e.clientY-startY;
-            fotoEditorStato.offsetX=startOffsetX+dx;
-            fotoEditorStato.offsetY=startOffsetY+dy;
-            aggiornaImmagineEditor();
+        cerchio.addEventListener('pointerup', function(e){
+            pointers.delete(e.pointerId);
+            if(pointers.size === 0){
+                cerchio.classList.remove('attivo');
+                startDistance = 0;
+            } else if(pointers.size === 1){
+                // Passa da pinch a drag: ricalcola riferimento
+                let pts = Array.from(pointers.values());
+                lastX = pts[0].x;
+                lastY = pts[0].y;
+                startOffsetX = fotoEditorStato.offsetX;
+                startOffsetY = fotoEditorStato.offsetY;
+            }
         });
 
-        window.addEventListener('mouseup',function(){ mouseDown=false; });
+        cerchio.addEventListener('pointercancel', function(e){
+            pointers.delete(e.pointerId);
+            if(pointers.size === 0) cerchio.classList.remove('attivo');
+        });
 
-        // ROTELLINA (zoom)
-        cerchio.addEventListener('wheel',function(e){
+        cerchio.addEventListener('pointerleave', function(e){
+            // Non rimuovo il pointer: il capture lo mantiene attivo anche fuori dal cerchio
+        });
+
+        // ROTELLINA (zoom su desktop)
+        cerchio.addEventListener('wheel', function(e){
             if(!fotoEditorStato.attivo) return;
             e.preventDefault();
-            let delta=e.deltaY>0?0.9:1.1;
-            let nuovoScale=fotoEditorStato.scale*delta;
-            nuovoScale=Math.max(1,Math.min(5,nuovoScale));
-            fotoEditorStato.scale=nuovoScale;
+            let delta = e.deltaY > 0 ? 0.92 : 1.08;
+            let nuovoScale = Math.max(1, Math.min(5, fotoEditorStato.scale * delta));
+            fotoEditorStato.scale = nuovoScale;
             aggiornaImmagineEditor();
-        },{passive:false});
+        }, {passive: false});
     }
 
-    if(document.readyState==='loading'){
-        document.addEventListener('DOMContentLoaded',attach);
+    if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', attach);
     } else {
         attach();
     }
@@ -751,6 +746,7 @@ function generaFotoDaEditor(){
     let cerchio=document.getElementById('cerchio-editor-foto');
     if(!cerchio) return null;
     let diameter=cerchio.clientWidth;
+    if(diameter===0) return null;
 
     let outSize=400;
     let canvas=document.createElement('canvas');
@@ -1224,7 +1220,7 @@ function renderRubrica(){
     appData.giocatori.forEach((g,i)=>{
         let avatarHTML=g.tipo==='emoji'
             ?`<span style="font-size:36px;line-height:1;">${g.valore}</span>`
-            :`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;transform:scale(${g.zoom||1}) translate(${g.posX||0}px, ${g.posY||0}px);">`;
+            :`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
         let subTag=g.soprannome?`<span style="font-size:12px;color:var(--giallo-burraco);">"${g.soprannome}"</span>`:'';
         div.innerHTML+=`<div class="card-lista" style="flex-direction:row;justify-content:space-between;align-items:center;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:55px;height:55px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">${avatarHTML}</div><div><div style="font-size:17px;font-weight:bold;">${g.nome}</div>${subTag}</div></div><button class="btn-danger" style="width:auto;padding:6px 12px;font-size:12px;" onclick="eliminaGiocatore(${i})">Elimina</button></div>`;
     });
@@ -1272,7 +1268,7 @@ function renderIstruzioni(){
         {titolo:"🎲 1. Configurare una Nuova Partita",testo:"Dalla schermata <b>Nuova Partita</b> seleziona la modalità di gioco e il traguardo. Tocca ciascun cerchio attorno al tavolo per assegnare un giocatore della rubrica."},
         {titolo:"📝 2. Contare i Punti della Partita",testo:"Usa i pulsanti <b>+</b> e <b>-</b> per indicare i Burrachi e il tasto <b>🧮 Calcolatore</b> o l'inserimento manuale per i punti carte."},
         {titolo:"↩️ 3. Correggere un Errore",testo:"Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b> per tornare indietro."},
-        {titolo:"👥 4. Gestire la Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici. Per le foto puoi usare l'<b>editor touch</b>: pinza con 2 dita (o rotellina del mouse) per zoomare, trascina per spostare."},
+        {titolo:"👥 4. Gestire la Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici. Per le foto: <b>trascina</b> (mouse o dito) per spostare, <b>rotellina</b> o <b>pinch a 2 dita</b> per zoomare."},
         {titolo:"🎨 5. Scegliere un Tema Colore",testo:"In <b>Impostazioni</b> puoi scegliere tra 5 temi colorati: Verde, Blu, Rosso, Beige e Viola."},
         {titolo:"💾 6. Backup dei Dati",testo:"In <b>Impostazioni</b> puoi esportare/importare un file JSON con tutti i tuoi dati."},
         {titolo:"📐 7. Comprimere il Menu",testo:"Clicca il tasto dorato in alto nel menu laterale per comprimerlo o riespanderlo."}
