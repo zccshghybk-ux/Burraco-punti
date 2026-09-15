@@ -136,30 +136,12 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .btn-img-opzione.emoji{border-color:rgba(255,215,0,0.5);background:linear-gradient(145deg,rgba(255,215,0,0.2),rgba(255,215,0,0.05));}
 .btn-img-opzione.emoji.aperto{background:linear-gradient(145deg,rgba(255,215,0,0.5),rgba(255,215,0,0.25));border-color:var(--giallo-burraco);box-shadow:0 0 15px rgba(255,215,0,0.6);}
 .btn-img-opzione.foto{border-color:rgba(52,199,89,0.5);background:linear-gradient(145deg,rgba(52,199,89,0.2),rgba(52,199,89,0.05));}
-
-/* === EDITOR FOTO TOUCH (v1.1.0) === */
 .editor-foto-wrapper{display:none;margin-top:14px;text-align:center;}
-.cerchio-editor-foto{
-    width:min(78vw,320px);height:min(78vw,320px);margin:0 auto;
-    border-radius:50%;position:relative;overflow:hidden;
-    background:#000;border:3px solid var(--giallo-burraco);
-    box-shadow:0 0 30px rgba(255,215,0,0.5),inset 0 0 30px rgba(0,0,0,0.6);
-    cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;
-}
+.cerchio-editor-foto{width:min(78vw,320px);height:min(78vw,320px);margin:0 auto;border-radius:50%;position:relative;overflow:hidden;background:#000;border:3px solid var(--giallo-burraco);box-shadow:0 0 30px rgba(255,215,0,0.5),inset 0 0 30px rgba(0,0,0,0.6);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;}
 .cerchio-editor-foto:active{cursor:grabbing;}
-.cerchio-editor-foto img{
-    position:absolute;top:50%;left:50%;
-    transform-origin:center center;
-    pointer-events:none;user-select:none;-webkit-user-drag:none;
-    will-change:transform;
-}
-.cerchio-editor-foto::after{
-    content:'';position:absolute;inset:0;border-radius:50%;
-    pointer-events:none;
-    box-shadow:inset 0 0 0 2px rgba(255,255,255,0.25),inset 0 0 40px rgba(0,0,0,0.4);
-}
+.cerchio-editor-foto img{position:absolute;top:50%;left:50%;transform-origin:center center;pointer-events:none;user-select:none;-webkit-user-drag:none;will-change:transform;}
+.cerchio-editor-foto::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.25),inset 0 0 40px rgba(0,0,0,0.4);}
 .istruzioni-touch{font-size:12px;color:#ffd700;margin-top:10px;text-align:center;line-height:1.5;font-weight:bold;}
-
 .griglia-temi{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:6px;}
 .btn-tema{position:relative;padding:6px 2px;border-radius:8px;border:1.2px solid rgba(255,255,255,0.22);color:white;font-weight:bold;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all 0.2s;text-shadow:0 1px 2px rgba(0,0,0,0.6);font-family:inherit;min-width:0;line-height:1;}
 .btn-tema:active{transform:scale(0.94);}
@@ -222,7 +204,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
             <div class="voce-menu" id="nav-istruzioni" onclick="cambiaSchermata('istruzioni')"><span class="icona-voce">💡</span><span class="testo-menu">Come Usare l'App</span></div>
             <div class="voce-menu" id="nav-impostazioni" onclick="cambiaSchermata('impostazioni')"><span class="icona-voce">⚙️</span><span class="testo-menu">Impostazioni</span></div>
         </div>
-        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.1.0</span></div>
+        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.1.1</span></div>
     </nav>
 
     <main>
@@ -285,6 +267,24 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
     </div>
 </div>
 
+<!-- === NUOVO MENU SCELTA FOTO (v1.1.1) === -->
+<div id="modale-scelta-foto" class="swift-sheet-overlay">
+    <div class="swift-sheet-content">
+        <h3 class="titolo-optima" style="margin-top:0;">Scegli Foto</h3>
+        <p style="font-size:12px;color:#ccc;margin:0 0 14px 0;">Da dove vuoi prendere l'immagine?</p>
+        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('camera')" style="text-align:center;">
+            <span style="font-size:20px;margin-right:8px;">📷</span> Scatta Foto
+        </button>
+        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('galleria')" style="text-align:center;">
+            <span style="font-size:20px;margin-right:8px;">🖼️</span> Galleria Foto
+        </button>
+        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('file')" style="text-align:center;">
+            <span style="font-size:20px;margin-right:8px;">📁</span> Sfoglia File
+        </button>
+        <button class="btn-danger" onclick="chiudiSceltaFoto()" style="margin-top:10px;">Annulla</button>
+    </div>
+</div>
+
 <div id="modale-gestione-giocatore" class="swift-sheet-overlay">
     <div class="swift-sheet-content" style="max-width:440px;text-align:left;max-height:92vh;overflow-y:auto;">
         <h3 class="titolo-optima" style="text-align:center;margin-top:0;">Nuovo Giocatore</h3>
@@ -329,14 +329,13 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 
             <input type="file" id="input-file-foto" accept="image/*" style="display:none;" onchange="caricaImmagineLocale(event)">
 
-            <!-- === NUOVO EDITOR FOTO TOUCH (v1.1.0) === -->
             <div id="editor-foto-wrapper" class="editor-foto-wrapper">
                 <div id="cerchio-editor-foto" class="cerchio-editor-foto">
                     <img id="img-editor-foto" src="" alt="">
                 </div>
                 <div class="istruzioni-touch">
-                    👆 Pinza con 2 dita per zoomare<br>
-                    👉 Trascina con 1 dito per spostare
+                    👆 Pinza con 2 dita per zoomare (o rotellina del mouse)<br>
+                    👉 Trascina per spostare (dito o mouse)
                 </div>
                 <button type="button" class="btn-secondary" style="margin-top:10px;padding:8px;font-size:13px;" onclick="resetFotoEditor()">↺ Centra Foto</button>
             </div>
@@ -369,7 +368,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 // =========================================================
 // VERSIONE APPLICAZIONE
 // =========================================================
-const APP_VERSION = 'v1.1.0';
+const APP_VERSION = 'v1.1.1';
 
 let appData = { giocatori: [], storico: [], tema: 'chiaro', temaColore: 'verde', menuRidotto: false, demoStoricoCaricato: false };
 let partita = { inCorso: false, modalita: '4 Coppie', traguardo: '2005', posti: [null,null,null,null], squadre: [], punteggiTotali: [], manoCorrente: [], storicoSmazzate: [] };
@@ -379,16 +378,15 @@ let slotModifica = null;
 
 let nuovoGiocatoreStato = { tipo: 'emoji', valore: '🧑‍💻', zoom: 1, posX: 0, posY: 0 };
 
-// Stato editor foto (v1.1.0)
 let fotoEditorStato = {
     attivo: false,
-    img: null,        // HTMLImageElement caricato
+    img: null,
     imgNaturalW: 0,
     imgNaturalH: 0,
-    scale: 1,         // fattore di zoom
-    offsetX: 0,       // posizione in pixel (relativa al centro del cerchio)
+    scale: 1,
+    offsetX: 0,
     offsetY: 0,
-    baseScale: 1      // scala minima per coprire il cerchio
+    baseScale: 1
 };
 
 const listaEmojiDisponibili = ["🧑‍💻","😎","👩","👧","👨","👦","🦊","🦁","🐯","🐼","🐨","🐶","🐱","🦄","⭐","🔥","👑","🍀","♠️","♥️","♦️","♣️","🃏","🏆","🎩","🎭","🎲","🎯","🚀","🎸","😀","😂","🤣","😊","😍","🤩","😜","🤔","😏","🙃","😇","🥳"];
@@ -507,7 +505,6 @@ function aggiornaEmojiManuale(val){
     if(clean.length>0){
         nuovoGiocatoreStato.tipo='emoji';
         nuovoGiocatoreStato.valore=clean;
-        // Se era attivo l'editor foto, nascondilo
         document.getElementById('editor-foto-wrapper').style.display='none';
         fotoEditorStato.attivo=false;
         aggiornaAnteprimaGiocatoreModal();
@@ -530,7 +527,6 @@ function selezionaEmoji(em){
     nuovoGiocatoreStato.valore=em;
     let inpManuale=document.getElementById('input-emoji-manuale');
     if(inpManuale) inpManuale.value='';
-    // Nascondi editor foto
     document.getElementById('editor-foto-wrapper').style.display='none';
     fotoEditorStato.attivo=false;
     aggiornaAnteprimaGiocatoreModal();
@@ -540,9 +536,38 @@ function selezionaEmoji(em){
     if(pannello&&btn){pannello.style.display='none';btn.classList.remove('aperto');}
 }
 
-function apriSelettoreFoto(){ document.getElementById('input-file-foto').click(); }
+// ====== NUOVO (v1.1.1): apre menu con 3 opzioni ======
+function apriSelettoreFoto(){
+    document.getElementById('modale-scelta-foto').style.display='flex';
+}
 
-// ====== CARICA FOTO E APRI EDITOR TOUCH ======
+function chiudiSceltaFoto(){
+    document.getElementById('modale-scelta-foto').style.display='none';
+}
+
+function scegliFotoOpzione(tipo){
+    chiudiSceltaFoto();
+    let inp=document.getElementById('input-file-foto');
+    // Rimuovi attributi precedenti
+    inp.removeAttribute('capture');
+    inp.accept='image/*';
+
+    if(tipo==='camera'){
+        // Su mobile apre la fotocamera; su PC si comporta come un normale file picker
+        inp.setAttribute('capture','environment');
+        inp.accept='image/*';
+    } else if(tipo==='galleria'){
+        // Su mobile apre la galleria foto; su PC apre il file picker
+        inp.accept='image/*';
+    } else if(tipo==='file'){
+        // Sfoglia file (con più filtri possibili)
+        inp.accept='image/*,.heic,.heif,.png,.jpg,.jpeg,.webp,.gif,.bmp,.tiff';
+    }
+
+    inp.value='';
+    inp.click();
+}
+
 function caricaImmagineLocale(event){
     let file=event.target.files[0];
     if(!file) return;
@@ -550,7 +575,6 @@ function caricaImmagineLocale(event){
     reader.onload=function(e){
         let img=new Image();
         img.onload=function(){
-            // Prepara stato editor
             fotoEditorStato.img=img;
             fotoEditorStato.imgNaturalW=img.naturalWidth;
             fotoEditorStato.imgNaturalH=img.naturalHeight;
@@ -558,10 +582,8 @@ function caricaImmagineLocale(event){
             fotoEditorStato.offsetX=0;
             fotoEditorStato.offsetY=0;
 
-            // Applica tipo foto
             nuovoGiocatoreStato.tipo='foto';
 
-            // Chiudi pannello emoji
             let pannello=document.getElementById('pannello-emoji');
             if(pannello) pannello.style.display='none';
             let btn=document.getElementById('btn-scegli-emoji');
@@ -569,7 +591,6 @@ function caricaImmagineLocale(event){
             let inpManuale=document.getElementById('input-emoji-manuale');
             if(inpManuale) inpManuale.value='';
 
-            // Mostra editor foto
             let wrapper=document.getElementById('editor-foto-wrapper');
             let imgEditor=document.getElementById('img-editor-foto');
             let cerchio=document.getElementById('cerchio-editor-foto');
@@ -577,10 +598,8 @@ function caricaImmagineLocale(event){
             imgEditor.src=e.target.result;
             fotoEditorStato.attivo=true;
 
-            // Aspetta che il layout sia pronto per calcolare baseScale
             setTimeout(()=>{
                 let diameter=cerchio.clientWidth;
-                // baseScale = quanto la foto deve essere grande per coprire il cerchio (cover)
                 let coverScale=Math.max(diameter/img.naturalWidth, diameter/img.naturalHeight);
                 fotoEditorStato.baseScale=coverScale;
                 fotoEditorStato.scale=1;
@@ -596,7 +615,6 @@ function caricaImmagineLocale(event){
     reader.readAsDataURL(file);
 }
 
-// Applica scale + offset all'img nell'editor
 function aggiornaImmagineEditor(){
     let imgEditor=document.getElementById('img-editor-foto');
     let cerchio=document.getElementById('cerchio-editor-foto');
@@ -609,7 +627,6 @@ function aggiornaImmagineEditor(){
     let w=fotoEditorStato.imgNaturalW*finalScale;
     let h=fotoEditorStato.imgNaturalH*finalScale;
 
-    // Limita offset per non far uscire la foto dal cerchio
     let maxOffsetX=Math.max(0,(w-diameter)/2);
     let maxOffsetY=Math.max(0,(h-diameter)/2);
     fotoEditorStato.offsetX=Math.max(-maxOffsetX,Math.min(maxOffsetX,fotoEditorStato.offsetX));
@@ -729,27 +746,22 @@ function resetFotoEditor(){
     }
 })();
 
-// ====== SALVA FOTO: cuoce la trasformazione in un canvas circolare ======
 function generaFotoDaEditor(){
     if(!fotoEditorStato.img) return null;
     let cerchio=document.getElementById('cerchio-editor-foto');
     if(!cerchio) return null;
     let diameter=cerchio.clientWidth;
 
-    // Output: dimensione fissa per l'app (es. 400x400)
     let outSize=400;
     let canvas=document.createElement('canvas');
     canvas.width=outSize;
     canvas.height=outSize;
     let ctx=canvas.getContext('2d');
 
-    // Sfondo nero per eventuali trasparenze
     ctx.fillStyle='#000';
     ctx.fillRect(0,0,outSize,outSize);
 
-    // Fattore di scala tra editor e output
     let factor=outSize/diameter;
-
     let base=fotoEditorStato.baseScale;
     let finalScale=base*fotoEditorStato.scale*factor;
 
@@ -758,10 +770,8 @@ function generaFotoDaEditor(){
     let cx=outSize/2+fotoEditorStato.offsetX*factor;
     let cy=outSize/2+fotoEditorStato.offsetY*factor;
 
-    // Disegna l'immagine centrata
     ctx.drawImage(fotoEditorStato.img, cx-w/2, cy-h/2, w, h);
 
-    // Clip circolare: usa composizione 'destination-in' con un cerchio
     ctx.globalCompositeOperation='destination-in';
     ctx.beginPath();
     ctx.arc(outSize/2, outSize/2, outSize/2, 0, Math.PI*2);
@@ -773,11 +783,9 @@ function generaFotoDaEditor(){
 function aggiornaAnteprimaGiocatoreModal(){
     let container=document.getElementById('anteprima-contenuto');
     if(!container) return;
-
     if(nuovoGiocatoreStato.tipo==='emoji'){
         container.innerHTML=`<span style="font-size:36px;">${nuovoGiocatoreStato.valore}</span>`;
     } else {
-        // Se editor attivo, anteprima generica; verrà generata al salvataggio
         container.innerHTML=`<img id="img-anteprima-foto" src="${nuovoGiocatoreStato.valore||''}" style="width:100%;height:100%;object-fit:cover;">`;
     }
 }
@@ -798,11 +806,9 @@ function salvaNuovoGiocatore(){
         posY:0
     };
 
-    // Se tipo foto e editor attivo: genera la foto "cotta" nel cerchio
     if(nuovoGiocatoreStato.tipo==='foto' && fotoEditorStato.attivo && fotoEditorStato.img){
         let dataUrl=generaFotoDaEditor();
         if(dataUrl) nuovoGiocatore.valore=dataUrl;
-        // Forza zoom=1 e pos=0 perché la foto è già pre-ritagliata
         nuovoGiocatore.zoom=1;
         nuovoGiocatore.posX=0;
         nuovoGiocatore.posY=0;
@@ -1266,7 +1272,7 @@ function renderIstruzioni(){
         {titolo:"🎲 1. Configurare una Nuova Partita",testo:"Dalla schermata <b>Nuova Partita</b> seleziona la modalità di gioco e il traguardo. Tocca ciascun cerchio attorno al tavolo per assegnare un giocatore della rubrica."},
         {titolo:"📝 2. Contare i Punti della Partita",testo:"Usa i pulsanti <b>+</b> e <b>-</b> per indicare i Burrachi e il tasto <b>🧮 Calcolatore</b> o l'inserimento manuale per i punti carte."},
         {titolo:"↩️ 3. Correggere un Errore",testo:"Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b> per tornare indietro."},
-        {titolo:"👥 4. Gestire la Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici. Per le foto puoi usare il nuovo <b>editor touch</b>: pinza con 2 dita per zoomare, trascina con 1 dito per spostare."},
+        {titolo:"👥 4. Gestire la Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici. Per le foto puoi usare l'<b>editor touch</b>: pinza con 2 dita (o rotellina del mouse) per zoomare, trascina per spostare."},
         {titolo:"🎨 5. Scegliere un Tema Colore",testo:"In <b>Impostazioni</b> puoi scegliere tra 5 temi colorati: Verde, Blu, Rosso, Beige e Viola."},
         {titolo:"💾 6. Backup dei Dati",testo:"In <b>Impostazioni</b> puoi esportare/importare un file JSON con tutti i tuoi dati."},
         {titolo:"📐 7. Comprimere il Menu",testo:"Clicca il tasto dorato in alto nel menu laterale per comprimerlo o riespanderlo."}
