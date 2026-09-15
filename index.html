@@ -170,7 +170,6 @@
             box-shadow: 0 0 12px rgba(255, 215, 0, 0.9), 0 0 24px rgba(255, 215, 0, 0.5);
         }
 
-        /* Titoli generici (Optima) */
         .titolo-optima {
             font-family: 'Optima', 'Georgia', 'Times New Roman', serif;
             color: var(--giallo-burraco);
@@ -335,6 +334,36 @@
         }
         .contenuto-menu::-webkit-scrollbar { width: 4px; }
         .contenuto-menu::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.3); border-radius: 4px; }
+
+        .footer-menu {
+            flex-shrink: 0;
+            padding: 8px 10px 12px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 215, 0, 0.22);
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 100%);
+            transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .versione-app {
+            font-family: 'Optima', 'Georgia', 'Times New Roman', serif;
+            font-size: 11px;
+            color: rgba(255, 215, 0, 0.75);
+            letter-spacing: 1.5px;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255,215,0,0.35), 0 1px 2px rgba(0,0,0,0.6);
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: rgba(255,215,0,0.06);
+            border: 1px solid rgba(255,215,0,0.18);
+        }
+        .menu-laterale.ridotto .footer-menu {
+            padding: 6px 4px 10px;
+        }
+        .menu-laterale.ridotto .versione-app {
+            font-size: 9px;
+            letter-spacing: 0.3px;
+            padding: 2px 4px;
+        }
 
         .voce-menu {
             display: flex; align-items: center; gap: 14px;
@@ -518,7 +547,6 @@
         .regola-titolo { font-weight: bold; font-size: 16px; color: var(--giallo-burraco); }
         .regola-testo { font-size: 14px; line-height: 1.4; color: #eee; }
 
-        /* Badge DEMO nello storico */
         .badge-demo {
             display: inline-block;
             background: linear-gradient(145deg, #ffd700, #d4a017);
@@ -578,7 +606,6 @@
             background: linear-gradient(145deg, rgba(52,199,89,0.2), rgba(52,199,89,0.05));
         }
 
-        /* PULSANTI TEMA COLORE — COMPATTI, 5 IN UNA RIGA */
         .griglia-temi {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -747,6 +774,9 @@
                 <div class="voce-menu" id="nav-impostazioni" onclick="cambiaSchermata('impostazioni')">
                     <span class="icona-voce">⚙️</span><span class="testo-menu">Impostazioni</span>
                 </div>
+            </div>
+            <div class="footer-menu">
+                <span class="versione-app" id="versione-app">v1.0.0</span>
             </div>
         </nav>
 
@@ -934,6 +964,11 @@
     </div>
 
     <script>
+        // =========================================================
+        // VERSIONE APPLICAZIONE — aggiornare qui ad ogni release
+        // =========================================================
+        const APP_VERSION = 'v1.0.0';
+
         let appData = {
             giocatori: [],
             storico: [],
@@ -986,7 +1021,6 @@
             if (navigator.vibrate) { try { navigator.vibrate(ms || 10); } catch(e){} }
         }
 
-        // Popola 4 giocatori demo se la rubrica è vuota
         function popolaGiocatoriDemo() {
             if (Array.isArray(appData.giocatori) && appData.giocatori.length > 0) return;
             appData.giocatori = [
@@ -998,7 +1032,6 @@
             salvaDati();
         }
 
-        // Popola 4 partite demo nello storico (una per ogni modalità), solo la prima volta
         function popolaStoricoDemo() {
             if (appData.demoStoricoCaricato) return;
 
@@ -1011,38 +1044,10 @@
             };
 
             const demos = [
-                {
-                    data: dataRelativa(0, 21, 15),
-                    modalita: '4 Coppie',
-                    traguardo: '2005',
-                    squadre: ['Mario & Giulia', 'Luigi & Sofia'],
-                    punti: [2010, 1850],
-                    demo: true
-                },
-                {
-                    data: dataRelativa(1, 20, 30),
-                    modalita: '2 Gioc.',
-                    traguardo: '1005',
-                    squadre: ['Mario', 'Luigi'],
-                    punti: [1050, 890],
-                    demo: true
-                },
-                {
-                    data: dataRelativa(2, 19, 45),
-                    modalita: '3 Gioc.',
-                    traguardo: '1005',
-                    squadre: ['Mario', 'Luigi', 'Giulia'],
-                    punti: [1050, 890, 720],
-                    demo: true
-                },
-                {
-                    data: dataRelativa(3, 22, 5),
-                    modalita: '4 Singoli',
-                    traguardo: '1005',
-                    squadre: ['Mario', 'Luigi', 'Giulia', 'Sofia'],
-                    punti: [1050, 890, 720, 650],
-                    demo: true
-                }
+                { data: dataRelativa(0, 21, 15), modalita: '4 Coppie', traguardo: '2005', squadre: ['Mario & Giulia', 'Luigi & Sofia'], punti: [2010, 1850], demo: true },
+                { data: dataRelativa(1, 20, 30), modalita: '2 Gioc.', traguardo: '1005', squadre: ['Mario', 'Luigi'], punti: [1050, 890], demo: true },
+                { data: dataRelativa(2, 19, 45), modalita: '3 Gioc.', traguardo: '1005', squadre: ['Mario', 'Luigi', 'Giulia'], punti: [1050, 890, 720], demo: true },
+                { data: dataRelativa(3, 22, 5), modalita: '4 Singoli', traguardo: '1005', squadre: ['Mario', 'Luigi', 'Giulia', 'Sofia'], punti: [1050, 890, 720, 650], demo: true }
             ];
 
             appData.storico = [...demos, ...(appData.storico || [])];
@@ -1067,11 +1072,8 @@
             document.body.classList.add('tema-' + nome);
 
             const bgColors = {
-                verde: '#144d18',
-                blu: '#0d2e5e',
-                rosso: '#4a0a0a',
-                beige: '#8b6f47',
-                viola: '#2a0a3d'
+                verde: '#144d18', blu: '#0d2e5e', rosso: '#4a0a0a',
+                beige: '#8b6f47', viola: '#2a0a3d'
             };
             document.documentElement.style.background = bgColors[nome] || '#144d18';
 
@@ -1094,11 +1096,8 @@
             document.body.classList.add('tema-' + nome);
 
             const bgColors = {
-                verde: '#144d18',
-                blu: '#0d2e5e',
-                rosso: '#4a0a0a',
-                beige: '#8b6f47',
-                viola: '#2a0a3d'
+                verde: '#144d18', blu: '#0d2e5e', rosso: '#4a0a0a',
+                beige: '#8b6f47', viola: '#2a0a3d'
             };
             document.documentElement.style.background = bgColors[nome] || '#144d18';
 
@@ -1398,6 +1397,9 @@
             applicaTemaColore();
             applicaStatoMenu();
 
+            let elVersione = document.getElementById('versione-app');
+            if (elVersione) elVersione.innerText = APP_VERSION;
+
             renderSegment("seg-modalita", opzioniMod, partita.modalita, (scelta) => {
                 partita.modalita = scelta;
                 let numPosti = scelta.includes('2') ? 2 : (scelta.includes('3') ? 3 : 4);
@@ -1452,7 +1454,6 @@
                 if (pt) {
                     let parsedP = JSON.parse(pt);
                     if (parsedP && typeof parsedP === 'object') {
-                        // Se il traguardo salvato è "505" (non più disponibile), riportalo a 1005
                         if (parsedP.traguardo === '505') parsedP.traguardo = '1005';
 
                         if (parsedP.inCorso) {
@@ -1664,7 +1665,6 @@
                 return;
             }
 
-            // Ripara manoCorrente se incoerente (es. dopo import/backup)
             if (!Array.isArray(partita.manoCorrente) || partita.manoCorrente.length !== partita.squadre.length) {
                 resetManoCorrente();
             }
@@ -1758,7 +1758,6 @@
             }
         }
 
-        // Aggiorna solo i bottoni di stato (evita rerender completo)
         function aggiornaBottoniStato(col) {
             let mano = partita.manoCorrente[col];
             if (!mano) return;
@@ -2040,6 +2039,7 @@
         function esportaBackup() {
             let backup = {
                 versione: 3,
+                versioneApp: APP_VERSION,
                 esportato: new Date().toISOString(),
                 appData: appData,
                 partita: partita
