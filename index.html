@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#144d18">
 <title>Burraco Punti</title>
 <style>
-:root{--giallo-burraco:#ffd700;--testo-scuro-swift:#1a1a1a;--sfondo-menu:rgba(0,0,0,0.7);--sfondo-card:rgba(0,0,0,0.45);--bg-gradiente:radial-gradient(circle at center,#2e7d32 0%,#144d18 100%);--menu-bg-1:rgba(0,35,10,0.92);--menu-bg-2:rgba(0,15,5,0.92);}
+:root{--giallo-burraco:#ffd700;--crema-accento:#fff8e1;--testo-scuro-swift:#1a1a1a;--sfondo-menu:rgba(0,0,0,0.7);--sfondo-card:rgba(0,0,0,0.45);--bg-gradiente:radial-gradient(circle at center,#2e7d32 0%,#144d18 100%);--menu-bg-1:rgba(0,35,10,0.92);--menu-bg-2:rgba(0,15,5,0.92);}
 body.tema-verde{--bg-gradiente:radial-gradient(circle at center,#2e7d32 0%,#144d18 100%);--menu-bg-1:rgba(0,35,10,0.92);--menu-bg-2:rgba(0,15,5,0.92);}
 body.tema-blu{--bg-gradiente:radial-gradient(circle at center,#1565c0 0%,#0d2e5e 100%);--menu-bg-1:rgba(0,25,55,0.92);--menu-bg-2:rgba(0,10,30,0.92);}
 body.tema-rosso{--bg-gradiente:radial-gradient(circle at center,#8e1b1b 0%,#4a0a0a 100%);--menu-bg-1:rgba(55,10,10,0.92);--menu-bg-2:rgba(30,3,3,0.92);}
@@ -48,7 +48,7 @@ body{margin:0;padding:0;font-family:-apple-system,'SF Pro Text','Helvetica Neue'
 .titolo-container{display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0 8px;position:relative;}
 .titolo-app{font-family:Georgia,'Times New Roman',serif;font-size:72px;background:linear-gradient(180deg,#fff3b0 0%,#ffd700 45%,#d4a017 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--giallo-burraco);margin:0;padding-bottom:14px;position:relative;filter:drop-shadow(3px 3px 3px rgba(0,0,0,0.85)) drop-shadow(0 0 25px rgba(255,215,0,0.55)) drop-shadow(0 0 50px rgba(255,215,0,0.3));letter-spacing:2px;white-space:nowrap;font-weight:bold;}
 .titolo-app::after{content:'';position:absolute;left:5%;right:5%;bottom:0;height:3px;background:linear-gradient(90deg,transparent 0%,#ffd700 15%,#fff3b0 50%,#ffd700 85%,transparent 100%);border-radius:3px;box-shadow:0 0 12px rgba(255,215,0,0.9),0 0 24px rgba(255,215,0,0.5);}
-.titolo-optima{font-family:Optima,Georgia,'Times New Roman',serif;color:var(--giallo-burraco);letter-spacing:1px;text-shadow:0 2px 4px rgba(0,0,0,0.55),0 0 12px rgba(255,215,0,0.25);margin:0;line-height:1.2;}
+.titolo-optima{font-family:Optima,Georgia,'Times New Roman',serif;color:var(--crema-accento);letter-spacing:1px;text-shadow:0 2px 4px rgba(0,0,0,0.65),0 0 12px rgba(255,248,225,0.25);margin:0;line-height:1.2;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;text-decoration-color:var(--crema-accento);}
 h2.titolo-optima{font-size:22px;font-weight:bold;}
 h3.titolo-optima{font-size:18px;font-weight:bold;}
 @media (max-width:1000px){.header-nuovo{gap:18px;padding:18px 8px 22px;min-height:140px;}.play-card{width:66px;height:92px;border-radius:8px;}.play-card + .play-card{margin-left:-28px;}.card-center{font-size:38px;}.card-corner .rank{font-size:14px;}.card-corner .suit{font-size:12px;}.play-card.joker .card-center{font-size:34px;}.play-card.joker .card-corner .rank{font-size:10px;}.titolo-app{font-size:56px;letter-spacing:1.5px;padding-bottom:12px;}}
@@ -64,11 +64,11 @@ h3.titolo-optima{font-size:18px;font-weight:bold;}
 .menu-laterale.ridotto{width:84px;border-top-right-radius:24px;}
 .intestazione-menu{display:flex;align-items:center;justify-content:center;padding:4px 14px 4px 14px;border-bottom:1px solid rgba(255,215,0,0.28);background:linear-gradient(180deg,rgba(255,215,0,0.1) 0%,transparent 100%);min-height:46px;gap:8px;position:relative;border-top-right-radius:23px;}
 .titolo-menu-laterale{display:flex;flex-direction:column;align-items:center;gap:3px;width:100%;overflow:hidden;}
-.testo-titolo-menu{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:bold;color:var(--giallo-burraco);letter-spacing:3px;text-shadow:0 0 10px rgba(255,215,0,0.75),0 0 20px rgba(255,215,0,0.4),2px 2px 3px rgba(0,0,0,0.7);text-transform:uppercase;text-align:center;line-height:1;}
+.testo-titolo-menu{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:bold;color:var(--crema-accento);letter-spacing:3px;text-shadow:0 0 10px rgba(255,248,225,0.75),0 0 20px rgba(255,248,225,0.4),2px 2px 3px rgba(0,0,0,0.7);text-transform:uppercase;text-align:center;line-height:1;}
 .separatore-menu{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;}
-.separatore-menu .linea{flex:1;max-width:45px;height:1.2px;background:linear-gradient(90deg,transparent,rgba(255,215,0,0.7) 40%,rgba(255,215,0,0.9) 100%);border-radius:2px;box-shadow:0 0 6px rgba(255,215,0,0.6);}
-.separatore-menu .linea.destra{background:linear-gradient(90deg,rgba(255,215,0,0.9) 0%,rgba(255,215,0,0.7) 60%,transparent 100%);}
-.separatore-menu .simbolo{color:var(--giallo-burraco);font-size:10px;text-shadow:0 0 8px rgba(255,215,0,0.9),0 0 14px rgba(255,215,0,0.5);line-height:1;flex-shrink:0;}
+.separatore-menu .linea{flex:1;max-width:45px;height:1.2px;background:linear-gradient(90deg,transparent,rgba(255,248,225,0.7) 40%,rgba(255,248,225,0.9) 100%);border-radius:2px;box-shadow:0 0 6px rgba(255,248,225,0.6);}
+.separatore-menu .linea.destra{background:linear-gradient(90deg,rgba(255,248,225,0.9) 0%,rgba(255,248,225,0.7) 60%,transparent 100%);}
+.separatore-menu .simbolo{color:var(--crema-accento);font-size:10px;text-shadow:0 0 8px rgba(255,248,225,0.9),0 0 14px rgba(255,248,225,0.5);line-height:1;flex-shrink:0;}
 .btn-toggle-menu{background:linear-gradient(145deg,rgba(255,215,0,0.25),rgba(255,215,0,0.08));border:1px solid rgba(255,215,0,0.5);color:var(--giallo-burraco);width:28px;height:28px;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;padding:0;line-height:1;position:absolute;top:50%;right:12px;transform:translateY(-50%);}
 .btn-toggle-menu:hover{background:linear-gradient(145deg,rgba(255,215,0,0.5),rgba(255,215,0,0.2));box-shadow:0 0 12px rgba(255,215,0,0.6);transform:translateY(-50%) scale(1.08);}
 .btn-toggle-menu:active{transform:translateY(-50%) scale(0.94);}
@@ -76,17 +76,17 @@ h3.titolo-optima{font-size:18px;font-weight:bold;}
 .contenuto-menu::-webkit-scrollbar{width:4px;}
 .contenuto-menu::-webkit-scrollbar-thumb{background:rgba(255,215,0,0.3);border-radius:4px;}
 .footer-menu{flex-shrink:0;padding:8px 10px 12px;text-align:center;border-top:1px solid rgba(255,215,0,0.22);background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.35) 100%);transition:padding 0.35s cubic-bezier(0.4,0,0.2,1);}
-.versione-app{font-family:Optima,Georgia,'Times New Roman',serif;font-size:11px;color:rgba(255,215,0,0.75);letter-spacing:1.5px;font-weight:bold;text-shadow:0 0 8px rgba(255,215,0,0.35),0 1px 2px rgba(0,0,0,0.6);display:inline-block;padding:2px 8px;border-radius:6px;background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.18);}
+.versione-app{font-family:Optima,Georgia,'Times New Roman',serif;font-size:11px;color:rgba(255,248,225,0.85);letter-spacing:1.5px;font-weight:bold;text-shadow:0 0 8px rgba(255,248,225,0.35),0 1px 2px rgba(0,0,0,0.6);display:inline-block;padding:2px 8px;border-radius:6px;background:rgba(255,248,225,0.06);border:1px solid rgba(255,248,225,0.18);}
 .menu-laterale.ridotto .footer-menu{padding:6px 4px 10px;}
 .menu-laterale.ridotto .versione-app{font-size:9px;letter-spacing:0.3px;padding:2px 4px;}
 .voce-menu{display:flex;align-items:center;gap:14px;padding:10px 12px;color:#e8e8e8;font-size:15px;font-weight:500;cursor:pointer;border-radius:12px;transition:all 0.2s ease;position:relative;white-space:nowrap;overflow:hidden;}
 .voce-menu .icona-voce{font-size:26px;width:46px;height:46px;border-radius:14px;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,0.12) 0%,rgba(255,255,255,0.04) 60%,rgba(0,0,0,0.15) 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s ease;border:1.5px solid rgba(255,255,255,0.12);box-shadow:0 2px 6px rgba(0,0,0,0.35),inset 0 1px 1px rgba(255,255,255,0.1);line-height:1;text-shadow:0 1px 2px rgba(0,0,0,0.4);}
 .voce-menu .testo-menu{flex:1;overflow:hidden;text-overflow:ellipsis;}
-.voce-menu:hover{background:linear-gradient(90deg,rgba(255,215,0,0.18) 0%,rgba(255,215,0,0.05) 100%);color:var(--giallo-burraco);transform:translateX(3px);}
-.voce-menu:hover .icona-voce{background:radial-gradient(circle at 30% 25%,rgba(255,215,0,0.4) 0%,rgba(255,215,0,0.15) 60%,rgba(180,140,0,0.3) 100%);border-color:rgba(255,215,0,0.7);box-shadow:0 4px 12px rgba(0,0,0,0.4),0 0 18px rgba(255,215,0,0.55),inset 0 1px 1px rgba(255,255,255,0.25);transform:scale(1.08) rotate(-3deg);}
-.voce-menu.attiva{background:linear-gradient(90deg,rgba(255,215,0,0.35) 0%,rgba(255,215,0,0.08) 100%);color:var(--giallo-burraco);font-weight:bold;}
-.voce-menu.attiva::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:4px;border-radius:0 4px 4px 0;background:linear-gradient(180deg,#fff3b0,#ffd700,#d4a017);box-shadow:0 0 12px rgba(255,215,0,0.9);}
-.voce-menu.attiva .icona-voce{background:radial-gradient(circle at 30% 25%,#fff3b0 0%,#ffd700 50%,#d4a017 100%);border-color:rgba(255,255,255,0.9);box-shadow:0 4px 14px rgba(0,0,0,0.45),0 0 22px rgba(255,215,0,0.85),inset 0 1px 1px rgba(255,255,255,0.6);color:#1a1a1a;text-shadow:none;transform:scale(1.05);}
+.voce-menu:hover{background:linear-gradient(90deg,rgba(255,248,225,0.18) 0%,rgba(255,248,225,0.05) 100%);color:var(--crema-accento);transform:translateX(3px);}
+.voce-menu:hover .icona-voce{background:radial-gradient(circle at 30% 25%,rgba(255,248,225,0.4) 0%,rgba(255,248,225,0.15) 60%,rgba(180,160,100,0.3) 100%);border-color:rgba(255,248,225,0.7);box-shadow:0 4px 12px rgba(0,0,0,0.4),0 0 18px rgba(255,248,225,0.55),inset 0 1px 1px rgba(255,255,255,0.25);transform:scale(1.08) rotate(-3deg);}
+.voce-menu.attiva{background:linear-gradient(90deg,rgba(255,248,225,0.35) 0%,rgba(255,248,225,0.08) 100%);color:var(--crema-accento);font-weight:bold;}
+.voce-menu.attiva::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:4px;border-radius:0 4px 4px 0;background:linear-gradient(180deg,#fffde7,#fff8e1,#ffb74d);box-shadow:0 0 12px rgba(255,248,225,0.9);}
+.voce-menu.attiva .icona-voce{background:radial-gradient(circle at 30% 25%,#fffde7 0%,#fff8e1 50%,#ffb74d 100%);border-color:rgba(255,255,255,0.9);box-shadow:0 4px 14px rgba(0,0,0,0.45),0 0 22px rgba(255,248,225,0.85),inset 0 1px 1px rgba(255,255,255,0.6);color:#1a1a1a;text-shadow:none;transform:scale(1.05);}
 .menu-laterale.ridotto .intestazione-menu{padding:4px 8px;justify-content:center;min-height:46px;}
 .menu-laterale.ridotto .titolo-menu-laterale{display:none;}
 .menu-laterale.ridotto .btn-toggle-menu{position:static;width:40px;height:40px;font-size:18px;border-radius:12px;background:linear-gradient(145deg,#ffe066 0%,#ffd700 45%,#d4a017 100%);color:#1a1a1a;border:2px solid rgba(255,255,255,0.75);box-shadow:0 4px 14px rgba(0,0,0,0.5),0 0 25px rgba(255,215,0,0.75),inset 0 1px 0 rgba(255,255,255,0.8),inset 0 -2px 4px rgba(0,0,0,0.15);text-shadow:0 1px 0 rgba(255,255,255,0.5);transform:none;}
@@ -107,9 +107,24 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .cerchio-posto{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.1);border:2px dashed rgba(255,255,255,0.4);display:flex;justify-content:center;align-items:center;font-size:24px;color:rgba(255,255,255,0.6);transition:0.2s;overflow:hidden;position:relative;}
 .posto-giocatore.occupato .cerchio-posto{background:var(--giallo-burraco);border:2px solid white;color:var(--testo-scuro-swift);font-weight:bold;transform:scale(1.05);}
 .nome-posto{font-size:13px;font-weight:bold;background:rgba(0,0,0,0.5);padding:3px 8px;border-radius:6px;}
-.griglia-punti{display:grid;gap:12px;align-items:start;}
+.griglia-punti{display:grid;gap:14px;align-items:start;width:100%;}
+.griglia-punti.tavolo-mode-2{grid-template-columns:1fr;max-width:460px;margin:0 auto;}
+.griglia-punti.tavolo-mode-3{grid-template-columns:1fr 1fr;grid-template-areas:"nord nord" "so se";max-width:640px;margin:0 auto;}
+.griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(1){grid-area:nord;max-width:320px;justify-self:center;width:100%;}
+.griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(2){grid-area:so;}
+.griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(3){grid-area:se;}
+.griglia-punti.tavolo-mode-4coppie{grid-template-columns:1fr;grid-template-areas:"ns" "eo";max-width:640px;margin:0 auto;}
+.griglia-punti.tavolo-mode-4singoli{grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto auto;grid-template-areas:". nord ." "ovest centro est" ". sud .";align-items:stretch;max-width:900px;margin:0 auto;}
+.griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(1){grid-area:nord;}
+.griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(2){grid-area:sud;}
+.griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(3){grid-area:ovest;}
+.griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(4){grid-area:est;}
+.tavolo-centro{grid-area:centro;display:flex;align-items:center;justify-content:center;width:100%;max-width:110px;aspect-ratio:1;align-self:center;justify-self:center;background:radial-gradient(circle at center,rgba(46,125,50,0.75) 0%,rgba(0,40,0,0.9) 100%);border-radius:50%;border:2px dashed rgba(255,248,225,0.55);font-size:38px;color:rgba(255,248,225,0.6);box-shadow:inset 0 0 25px rgba(0,0,0,0.6),0 0 20px rgba(255,248,225,0.2);text-shadow:0 0 12px rgba(255,248,225,0.5);}
+.freccia-pos{color:#ff9800;font-weight:900;font-size:1.15em;text-shadow:0 0 8px rgba(255,152,0,0.95),0 0 14px rgba(255,152,0,0.55),0 1px 2px rgba(0,0,0,0.8);display:inline-block;margin:0 2px;vertical-align:middle;line-height:1;}
+@media (max-width:900px){.griglia-punti.tavolo-mode-4singoli{grid-template-columns:1fr;grid-template-areas:"nord" "sud" "ovest" "est";}.griglia-punti.tavolo-mode-4singoli .tavolo-centro{display:none;}}
+@media (max-width:700px){.griglia-punti.tavolo-mode-3{grid-template-columns:1fr;grid-template-areas:"nord" "so" "se";}.griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(1){max-width:none;}}
 .colonna-punti{background:var(--sfondo-card);border-radius:16px;padding:15px;border:1px solid rgba(255,255,255,0.15);}
-.nome-squadra{font-family:Optima,sans-serif;font-size:18px;font-weight:bold;color:var(--giallo-burraco);text-align:center;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:8px;margin-bottom:10px;}
+.nome-squadra{font-family:Optima,sans-serif;font-size:18px;font-weight:bold;color:var(--crema-accento);text-align:center;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:8px;margin-bottom:10px;}
 .punti-totali{text-align:center;font-size:30px;font-weight:bold;margin-bottom:15px;color:white;}
 .stepper-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;margin-bottom:8px;}
 .stepper-label{font-size:12px;font-weight:bold;color:#ddd;}
@@ -117,14 +132,40 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .btn-stepper{background:rgba(255,255,255,0.2);border:none;color:white;width:28px;height:28px;border-radius:6px;font-size:18px;font-weight:bold;cursor:pointer;}
 .valore-stepper{font-size:16px;font-weight:bold;min-width:20px;text-align:center;}
 .input-carte{width:100%;padding:10px;border-radius:8px;border:none;font-size:16px;font-weight:bold;text-align:center;background:rgba(255,255,255,0.9);}
-.btn-toggle{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:white;font-weight:bold;margin-top:8px;cursor:pointer;}
-.btn-toggle.attivo{background:#34C759;border-color:#34C759;color:white;}
-.btn-toggle.penale{background:#ff3b30;border-color:#ff3b30;color:white;}
+
+/* Riga input punti carte con toggle segno */
+.input-carte-row{display:flex;gap:8px;align-items:stretch;}
+.btn-segno-carte{
+    width:48px;flex-shrink:0;
+    border-radius:8px;
+    border:1.5px solid rgba(255,255,255,0.25);
+    background:linear-gradient(145deg,rgba(255,255,255,0.1),rgba(255,255,255,0.03));
+    color:#81c784;font-size:22px;font-weight:900;
+    cursor:pointer;transition:all 0.2s ease;
+    font-family:inherit;padding:0;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    text-shadow:0 0 8px rgba(129,199,132,0.35);
+}
+.btn-segno-carte:hover{transform:translateY(-1px);border-color:rgba(129,199,132,0.6);}
+.btn-segno-carte.negativo{
+    background:linear-gradient(145deg,rgba(255,107,107,0.28),rgba(255,107,107,0.12));
+    border-color:rgba(255,107,107,0.65);
+    color:#ff8a80;
+    text-shadow:0 0 8px rgba(255,107,107,0.45);
+    box-shadow:0 0 10px rgba(255,107,107,0.2);
+}
+.btn-segno-carte.positivo{
+    background:linear-gradient(145deg,rgba(129,199,132,0.18),rgba(129,199,132,0.05));
+    border-color:rgba(129,199,132,0.5);
+    color:#a5d6a7;
+}
+.btn-segno-carte:active{transform:scale(0.95);}
+
 .btn-avvia-swift{background:#34C759;color:white;font-size:18px;font-weight:bold;padding:15px;border:none;border-radius:12px;cursor:pointer;width:100%;box-shadow:0 4px 10px rgba(0,0,0,0.3);}
 .btn-danger{background:#ff3b30;color:white;font-size:16px;font-weight:bold;padding:14px;border:none;border-radius:12px;cursor:pointer;width:100%;}
 .btn-secondary{background:rgba(255,255,255,0.15);color:white;font-size:16px;font-weight:bold;padding:14px;border:1px solid rgba(255,255,255,0.3);border-radius:12px;cursor:pointer;width:100%;}
 .card-lista{background:var(--sfondo-card);padding:15px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:6px;}
-.regola-titolo{font-weight:bold;font-size:16px;color:var(--giallo-burraco);}
+.regola-titolo{font-weight:bold;font-size:16px;color:var(--crema-accento);}
 .regola-testo{font-size:14px;line-height:1.4;color:#eee;}
 .badge-demo{display:inline-block;background:linear-gradient(145deg,#ffd700,#d4a017);color:#1a1a1a;font-size:10px;font-weight:bold;padding:2px 6px;border-radius:4px;margin-left:6px;letter-spacing:0.5px;vertical-align:middle;box-shadow:0 1px 3px rgba(0,0,0,0.4);}
 .swift-sheet-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(5px);z-index:2000;justify-content:center;align-items:flex-end;padding-bottom:20px;}
@@ -145,7 +186,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .cerchio-editor-foto.attivo{cursor:grabbing;}
 .cerchio-editor-foto img{position:absolute;top:50%;left:50%;transform-origin:center center;pointer-events:none;user-select:none;-webkit-user-drag:none;will-change:transform;}
 .cerchio-editor-foto::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.25),inset 0 0 40px rgba(0,0,0,0.4);}
-.istruzioni-touch{font-size:12px;color:#ffd700;margin-top:10px;text-align:center;line-height:1.5;font-weight:bold;}
+.istruzioni-touch{font-size:12px;color:var(--crema-accento);margin-top:10px;text-align:center;line-height:1.5;font-weight:bold;}
 #webcam-video{width:100%;max-height:60vh;border-radius:12px;background:#000;object-fit:cover;}
 .griglia-temi{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:6px;}
 .btn-tema{position:relative;padding:6px 2px;border-radius:8px;border:1.2px solid rgba(255,255,255,0.22);color:white;font-weight:bold;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all 0.2s;text-shadow:0 1px 2px rgba(0,0,0,0.6);font-family:inherit;min-width:0;line-height:1;}
@@ -160,9 +201,86 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .btn-tema .emoji-tema{font-size:15px;line-height:1;}
 .btn-tema .nome-tema{font-size:9px;font-weight:bold;letter-spacing:0.2px;line-height:1;}
 @media (max-width:400px){.griglia-temi{gap:3px;}.btn-tema{padding:5px 1px;border-radius:6px;}.btn-tema .emoji-tema{font-size:13px;}.btn-tema .nome-tema{font-size:8px;}.btn-tema.attivo::after{font-size:8px;}}
+.regola-extra-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);margin-bottom:8px;}
+.regola-extra-info{display:flex;flex-direction:column;flex:1;min-width:0;padding-right:10px;}
+.regola-extra-nome{font-weight:bold;font-size:14px;color:white;}
+.regola-extra-desc{font-size:11px;color:#bbb;margin-top:2px;line-height:1.3;}
+.btn-toggle-extra{padding:6px 14px;border-radius:20px;border:1.5px solid rgba(255,255,255,0.3);background:transparent;color:white;font-weight:bold;font-size:12px;cursor:pointer;transition:0.2s;flex-shrink:0;font-family:inherit;min-width:56px;}
+.btn-toggle-extra.attivo{background:var(--giallo-burraco);color:var(--testo-scuro-swift);border-color:var(--giallo-burraco);box-shadow:0 0 10px rgba(255,215,0,0.5);}
+
+/* Mazziere */
+@keyframes mazziere-pulse{
+    0%,100%{box-shadow:0 0 8px 2px rgba(255,215,0,0.75),0 0 18px rgba(255,215,0,0.45);}
+    50%{box-shadow:0 0 18px 5px rgba(255,215,0,1),0 0 35px rgba(255,215,0,0.75);}
+}
+.avatar-mazziere{animation:mazziere-pulse 1.8s ease-in-out infinite;border-color:#ffd700 !important;border-width:3px !important;}
+.badge-mazziere{background:linear-gradient(145deg,#ffd700,#d4a017);color:#1a1a1a;font-size:9px;font-weight:bold;padding:2px 6px;border-radius:6px;letter-spacing:0.3px;box-shadow:0 0 8px rgba(255,215,0,0.7);}
+.btn-mazziere-scelta{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:bold;font-size:13px;font-family:inherit;transition:all 0.2s;}
+.btn-mazziere-scelta:active{transform:scale(0.97);}
+
+/* Dropdown Regole Extra */
+.btn-apri-regole-extra{width:100%;background:linear-gradient(145deg,rgba(255,215,0,0.18),rgba(255,215,0,0.06));border:1.5px solid rgba(255,215,0,0.5);color:var(--crema-accento);padding:12px 14px;border-radius:12px;font-size:14px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:inherit;transition:all 0.2s;}
+.btn-apri-regole-extra:hover{background:linear-gradient(145deg,rgba(255,215,0,0.3),rgba(255,215,0,0.1));box-shadow:0 0 12px rgba(255,215,0,0.4);}
+.btn-apri-regole-extra .freccia{font-size:12px;transition:transform 0.25s;}
+.btn-apri-regole-extra.aperto .freccia{transform:rotate(180deg);}
+.pannello-regole-extra{display:none;margin-top:10px;padding:10px;background:rgba(0,0,0,0.35);border-radius:12px;border:1px solid rgba(255,215,0,0.25);}
+.pannello-regole-extra.aperto{display:block;}
+.pannello-regole-extra .regola-extra-row:last-child{margin-bottom:0;}
+
+/* ===== RIGA PULSANTI STATO (Pozzetto + Chiusa) ===== */
+.pulsanti-stato-row{display:flex;gap:8px;margin-top:12px;}
+.pulsanti-stato-row > *{flex:1;min-width:0;}
+
+.checkbox-pozzetto{
+    display:flex;align-items:center;justify-content:center;gap:7px;
+    padding:10px 10px;border-radius:10px;
+    border:1.5px solid rgba(255,255,255,0.22);
+    background:linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));
+    cursor:pointer;transition:all 0.25s ease;
+    user-select:none;font-weight:600;font-size:12px;color:#ddd;
+    font-family:inherit;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis;line-height:1.2;
+}
+.checkbox-pozzetto:hover{border-color:rgba(129,199,132,0.5);background:linear-gradient(145deg,rgba(76,175,80,0.1),rgba(76,175,80,0.02));color:#e8f5e9;transform:translateY(-1px);}
+.checkbox-pozzetto.attivo{background:linear-gradient(145deg,rgba(76,175,80,0.55),rgba(56,142,60,0.45));border-color:rgba(129,199,132,0.65);color:#f1f8e9;box-shadow:0 2px 12px rgba(76,175,80,0.25),inset 0 1px 0 rgba(255,255,255,0.12);text-shadow:0 1px 2px rgba(0,0,0,0.35);}
+.checkbox-pozzetto input{display:none;}
+.checkbox-box{width:16px;height:16px;border-radius:5px;border:1.5px solid rgba(255,255,255,0.45);background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s;position:relative;}
+.checkbox-pozzetto.attivo .checkbox-box{background:rgba(255,255,255,0.92);border-color:rgba(255,255,255,0.92);box-shadow:0 0 6px rgba(255,255,255,0.35);}
+.checkbox-pozzetto.attivo .checkbox-box::after{content:'✓';color:#2e7d32;font-size:11px;font-weight:900;line-height:1;}
+.checkbox-label{flex:0 1 auto;overflow:hidden;text-overflow:ellipsis;}
+
+.btn-toggle-chiusa{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    padding:10px 10px;border-radius:10px;
+    border:1.5px solid rgba(255,255,255,0.22);
+    background:linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));
+    color:#ddd;font-weight:600;font-size:12px;
+    cursor:pointer;transition:all 0.25s ease;
+    font-family:inherit;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis;line-height:1.2;
+}
+.btn-toggle-chiusa:hover{border-color:rgba(255,215,0,0.55);background:linear-gradient(145deg,rgba(255,215,0,0.1),rgba(255,215,0,0.02));color:#fff8e1;transform:translateY(-1px);}
+.btn-toggle-chiusa.attivo{background:linear-gradient(145deg,rgba(255,215,0,0.9),rgba(212,160,23,0.85));border-color:rgba(255,215,0,0.95);color:#1a1a1a;box-shadow:0 2px 14px rgba(255,215,0,0.45),inset 0 1px 0 rgba(255,255,255,0.55);text-shadow:0 1px 0 rgba(255,255,255,0.4);font-weight:bold;}
+.btn-toggle-chiusa.disabilitato{opacity:0.32;pointer-events:none;cursor:not-allowed;filter:grayscale(0.4);}
+
+/* OVERLAY VINCITORE */
+.overlay-vincitore{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:3000;justify-content:center;align-items:center;overflow:hidden;}
+.overlay-vincitore.attivo{display:flex;}
+.vincitore-card{background:linear-gradient(160deg,rgba(30,60,30,0.96),rgba(15,35,15,0.96));border:2px solid var(--giallo-burraco);border-radius:24px;padding:32px 36px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.85),0 0 60px rgba(255,215,0,0.55),inset 0 1px 0 rgba(255,255,255,0.12);animation:winner-zoom 0.65s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:2;max-width:90vw;}
+@keyframes winner-zoom{0%{transform:scale(0.25) rotate(-10deg);opacity:0;}60%{transform:scale(1.08) rotate(3deg);opacity:1;}100%{transform:scale(1) rotate(0deg);opacity:1;}}
+.vincitore-emoji{font-size:76px;line-height:1;margin-bottom:12px;filter:drop-shadow(0 0 22px rgba(255,215,0,0.95));animation:emoji-bounce 1s ease-in-out infinite;}
+@keyframes emoji-bounce{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-12px) scale(1.06);}}
+.vincitore-label{font-family:Optima,Georgia,serif;font-size:13px;font-weight:bold;letter-spacing:4px;color:var(--giallo-burraco);text-shadow:0 0 14px rgba(255,215,0,0.8);margin-bottom:10px;}
+.vincitore-nome{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:bold;color:#fff8e1;text-shadow:0 2px 8px rgba(0,0,0,0.85),0 0 22px rgba(255,248,225,0.55);margin-bottom:12px;word-break:break-word;line-height:1.15;}
+.vincitore-punti{font-size:22px;font-weight:bold;color:#a5d6a7;text-shadow:0 0 16px rgba(165,214,167,0.6);margin-bottom:6px;}
+.vincitore-totale{font-size:14px;font-weight:bold;color:rgba(255,248,225,0.85);letter-spacing:1px;margin-bottom:8px;}
+.vincitore-sub{font-size:12px;color:rgba(255,248,225,0.7);letter-spacing:1.5px;font-style:italic;margin-top:4px;}
+.sparkles-container{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+.sparkle{position:absolute;animation:sparkle-fly 2.2s ease-out forwards;pointer-events:none;filter:drop-shadow(0 0 8px rgba(255,215,0,0.8));}
+@keyframes sparkle-fly{0%{transform:translate(-50%,-50%) scale(0) rotate(0deg);opacity:0;}20%{transform:translate(-50%,-50%) scale(1.3) rotate(45deg);opacity:1;}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(0.4) rotate(400deg);opacity:0;}}
+
 @media (max-width:768px){.menu-laterale{display:none;}}
 @media (min-width:769px){.menu-mobile{display:none;}}
-@media (max-width:700px){.griglia-punti{grid-template-columns:1fr!important;}}
 </style>
 </head>
 <body class="tema-verde">
@@ -209,7 +327,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
             <div class="voce-menu" id="nav-istruzioni" onclick="cambiaSchermata('istruzioni')"><span class="icona-voce">💡</span><span class="testo-menu">Come Usare l'App</span></div>
             <div class="voce-menu" id="nav-impostazioni" onclick="cambiaSchermata('impostazioni')"><span class="icona-voce">⚙️</span><span class="testo-menu">Impostazioni</span></div>
         </div>
-        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.1.5</span></div>
+        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.4.1</span></div>
     </nav>
 
     <main>
@@ -219,7 +337,43 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
             <div>
                 <h2 class="titolo-optima" style="margin-bottom:8px">3. Giocatori al Tavolo (Tocca i cerchi)</h2>
                 <div class="tavolo-swift" id="tavolo-gioco"></div>
-                <div id="anteprima-coppie" style="margin-top:12px;text-align:center;font-size:14px;color:var(--giallo-burraco);font-weight:bold;"></div>
+                <div id="anteprima-coppie" style="margin-top:12px;text-align:center;font-size:14px;color:var(--crema-accento);font-weight:bold;"></div>
+            </div>
+            <div>
+                <h2 class="titolo-optima" style="margin-bottom:8px">4. Chi dà le carte (prima mano)</h2>
+                <p style="font-size:12px;color:#ccc;margin:0 0 10px 0;">Tocca il giocatore che inizia a dare le carte. Il mazziere ruota automaticamente ad ogni mano.</p>
+                <div id="selettore-mazziere" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;"></div>
+            </div>
+            <div>
+                <h2 class="titolo-optima" style="margin-bottom:8px">5. Regole Extra (opzionali)</h2>
+                <p style="font-size:12px;color:#ccc;margin:0 0 10px 0;">Attiva le varianti che vuoi usare in partita</p>
+                <button type="button" class="btn-apri-regole-extra" id="btn-apri-regole-extra" onclick="togglePannelloRegoleExtra()">
+                    <span>⚙️ Scegli regola da attivare</span>
+                    <span class="freccia">▼</span>
+                </button>
+                <div class="pannello-regole-extra" id="pannello-regole-extra">
+                    <div class="regola-extra-row">
+                        <div class="regola-extra-info">
+                            <span class="regola-extra-nome">👑 Burraco Reale</span>
+                            <span class="regola-extra-desc">7+ carte senza jolly e pinelle dal 3 all'Asso (+300 pt)</span>
+                        </div>
+                        <button class="btn-toggle-extra" id="btn-extra-burracoReale" onclick="toggleRegolaExtra('burracoReale')">OFF</button>
+                    </div>
+                    <div class="regola-extra-row">
+                        <div class="regola-extra-info">
+                            <span class="regola-extra-nome">⚡ Super Burraco</span>
+                            <span class="regola-extra-desc">12+ carte dello stesso seme senza jolly (+500 pt)</span>
+                        </div>
+                        <button class="btn-toggle-extra" id="btn-extra-superBurraco" onclick="toggleRegolaExtra('superBurraco')">OFF</button>
+                    </div>
+                    <div class="regola-extra-row">
+                        <div class="regola-extra-info">
+                            <span class="regola-extra-nome">🌍 Burraco Internazionale</span>
+                            <span class="regola-extra-desc">Variante con punteggio internazionale (+150 pt)</span>
+                        </div>
+                        <button class="btn-toggle-extra" id="btn-extra-burracoInternazionale" onclick="toggleRegolaExtra('burracoInternazionale')">OFF</button>
+                    </div>
+                </div>
             </div>
             <button class="btn-avvia-swift" onclick="iniziaPartita()">Avvia Partita ▶</button>
         </div>
@@ -298,59 +452,37 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 <div id="modale-gestione-giocatore" class="swift-sheet-overlay">
     <div class="swift-sheet-content" style="max-width:440px;text-align:left;max-height:92vh;overflow-y:auto;">
         <h3 class="titolo-optima" style="text-align:center;margin-top:0;">Nuovo Giocatore</h3>
-
         <div style="margin-bottom:10px;">
             <label style="font-size:12px;color:#ccc;">Nome *</label>
             <input type="text" id="input-nome-giocatore" placeholder="Nome o nickname..." style="width:100%;padding:10px;border-radius:8px;border:none;margin-top:4px;font-size:15px;">
         </div>
-
         <div style="margin-bottom:10px;">
             <label style="font-size:12px;color:#ccc;">Soprannome (opzionale)</label>
             <input type="text" id="input-soprannome-giocatore" placeholder="Es. Il Mago, King..." style="width:100%;padding:10px;border-radius:8px;border:none;margin-top:4px;font-size:15px;">
         </div>
-
         <div style="margin-bottom:12px;">
             <label style="font-size:12px;color:#ccc;display:block;margin-bottom:6px;">Immagine Profilo</label>
-
             <div style="display:flex;justify-content:center;margin-bottom:12px;">
                 <div id="anteprima-cerchio-profilo" style="width:76px;height:76px;border-radius:50%;background:#222;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;border:2px solid var(--giallo-burraco);">
                     <span id="anteprima-contenuto" style="font-size:32px;">🧑‍💻</span>
                 </div>
             </div>
-
             <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px;">
-                <button type="button" class="btn-img-opzione emoji" id="btn-scegli-emoji" onclick="togglePannelloEmoji()">
-                    <span class="icona">😀</span> Scegli Emoji
-                </button>
-
+                <button type="button" class="btn-img-opzione emoji" id="btn-scegli-emoji" onclick="togglePannelloEmoji()"><span class="icona">😀</span> Scegli Emoji</button>
                 <div id="pannello-emoji" style="display:none;background:rgba(0,0,0,0.4);border-radius:10px;padding:10px;border:1px solid rgba(255,215,0,0.3);">
-                    <div style="font-size:11px;color:#ffd700;text-align:center;margin-bottom:8px;line-height:1.4;">
-                        💡 <b>Su Mac</b>: clicca il campo sotto e premi <b>Cmd + Ctrl + Spazio</b> per aprire la tastiera emoji di sistema.<br>
-                        Oppure scegli direttamente dalla griglia qui sotto.
-                    </div>
+                    <div style="font-size:11px;color:#ffd700;text-align:center;margin-bottom:8px;line-height:1.4;">💡 <b>Su Mac</b>: clicca il campo sotto e premi <b>Cmd + Ctrl + Spazio</b> per aprire la tastiera emoji di sistema.<br>Oppure scegli direttamente dalla griglia qui sotto.</div>
                     <input type="text" id="input-emoji-manuale" placeholder="✏️ Scrivi o incolla qui l'emoji..." maxlength="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width:100%;padding:10px 12px;border-radius:8px;border:2px solid rgba(255,215,0,0.5);font-size:20px;text-align:center;background:rgba(255,255,255,0.95);color:#000;margin-bottom:10px;" oninput="aggiornaEmojiManuale(this.value)">
                     <div id="griglia-emoji" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;max-height:180px;overflow-y:auto;text-align:center;"></div>
                 </div>
-
-                <button type="button" class="btn-img-opzione foto" onclick="apriSelettoreFoto()">
-                    <span class="icona">🖼️</span> Scegli: selfie, foto, file
-                </button>
+                <button type="button" class="btn-img-opzione foto" onclick="apriSelettoreFoto()"><span class="icona">🖼️</span> Scegli: selfie, foto, file</button>
             </div>
-
             <input type="file" id="input-file-foto" accept="image/*" style="display:none;" onchange="caricaImmagineLocale(event)">
-
             <div id="editor-foto-wrapper" class="editor-foto-wrapper">
-                <div id="cerchio-editor-foto" class="cerchio-editor-foto">
-                    <img id="img-editor-foto" src="" alt="" draggable="false">
-                </div>
-                <div class="istruzioni-touch">
-                    👆 Pinza con 2 dita (o rotellina del mouse) per zoomare<br>
-                    👉 Trascina per spostare (dito o mouse)
-                </div>
+                <div id="cerchio-editor-foto" class="cerchio-editor-foto"><img id="img-editor-foto" src="" alt="" draggable="false"></div>
+                <div class="istruzioni-touch">👆 Pinza con 2 dita (o rotellina del mouse) per zoomare<br>👉 Trascina per spostare (dito o mouse)</div>
                 <button type="button" class="btn-secondary" style="margin-top:10px;padding:8px;font-size:13px;" onclick="resetFotoEditor()">↺ Centra Foto</button>
             </div>
         </div>
-
         <div style="display:flex;gap:10px;margin-top:15px;">
             <button class="btn-avvia-swift" style="background:#34C759;padding:12px;" onclick="salvaNuovoGiocatore()">Salva Giocatore</button>
             <button class="btn-danger" style="padding:12px;" onclick="chiudiModaleNuovoGiocatore()">Annulla</button>
@@ -365,7 +497,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
         <div id="griglia-calcolo-carte" style="display:flex;flex-direction:column;gap:8px;max-height:45vh;overflow-y:auto;margin-bottom:15px;text-align:left;"></div>
         <div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:10px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-weight:bold;font-size:14px;">Totale Calcolato:</span>
-            <span id="totale-calcolato-anteprima" style="font-size:20px;font-weight:bold;color:var(--giallo-burraco);">0 pt</span>
+            <span id="totale-calcolato-anteprima" style="font-size:20px;font-weight:bold;color:var(--crema-accento);">0 pt</span>
         </div>
         <div style="display:flex;gap:10px;">
             <button class="btn-avvia-swift" style="background:#34C759;padding:10px;" onclick="applicaPuntiCalcolati()">Usa Totale</button>
@@ -374,28 +506,156 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
     </div>
 </div>
 
+<div id="overlay-vincitore" class="overlay-vincitore">
+    <div class="sparkles-container" id="sparkles-container"></div>
+    <div class="vincitore-card">
+        <div class="vincitore-emoji">🏆</div>
+        <div class="vincitore-label">PARTITA CHIUSA!</div>
+        <div class="vincitore-nome" id="vincitore-nome">—</div>
+        <div class="vincitore-punti" id="vincitore-punti">+0 pt</div>
+        <div class="vincitore-totale" id="vincitore-totale">Totale: 0 pt</div>
+        <div class="vincitore-sub">ha chiuso la mano</div>
+    </div>
+</div>
+
 <script>
-const APP_VERSION = 'v1.1.5';
+const APP_VERSION = 'v1.4.1';
+
+const REGOLE_EXTRA_CONFIG = {
+    burracoReale:          { emoji:'👑', label:'Burraco Reale',          valore: 300, campo:'reale' },
+    superBurraco:          { emoji:'⚡', label:'Super Burraco',          valore: 500, campo:'superB' },
+    burracoInternazionale: { emoji:'🌍', label:'Burraco Internazionale', valore: 150, campo:'internazionale' }
+};
 
 let appData = { giocatori: [], storico: [], tema: 'chiaro', temaColore: 'verde', menuRidotto: false, demoStoricoCaricato: false };
-let partita = { inCorso: false, modalita: '4 Coppie', traguardo: '2005', posti: [null,null,null,null], squadre: [], punteggiTotali: [], manoCorrente: [], storicoSmazzate: [] };
+let partita = { inCorso: false, modalita: '4 Coppie', traguardo: '2005', posti: [null,null,null,null], squadre: [], punteggiTotali: [], manoCorrente: [], storicoSmazzate: [], burracoReale: false, superBurraco: false, burracoInternazionale: false, mazziereIniziale: null, mazziereCorrente: null };
 let opzioniMod = ["2 Gioc.", "3 Gioc.", "4 Coppie", "4 Singoli"];
 let opzioniTrag = ["1005", "2005", "Smazzate"];
 let slotModifica = null;
-
 let nuovoGiocatoreStato = { tipo: 'emoji', valore: '🧑‍💻', zoom: 1, posX: 0, posY: 0 };
 let fotoEditorStato = { attivo: false, img: null, imgNaturalW: 0, imgNaturalH: 0, scale: 1, offsetX: 0, offsetY: 0, baseScale: 1 };
-
 let webcamStream = null;
 let webcamAttiva = false;
-
 const listaEmojiDisponibili = ["🧑‍💻","😎","👩","👧","👨","👦","🦊","🦁","🐯","🐼","🐨","🐶","🐱","🦄","⭐","🔥","👑","🍀","♠️","♥️","♦️","♣️","🃏","🏆","🎩","🎭","🎲","🎯","🚀","🎸","😀","😂","🤣","😊","😍","🤩","😜","🤔","😏","🙃","😇","🥳"];
 
 function parsePuntiCarte(str){ if(str===""||str===null||str===undefined) return 0; let n=parseFloat(String(str).replace(',','.')); return isNaN(n)?0:n; }
 function vibra(ms){ if(navigator.vibrate){try{navigator.vibrate(ms||10);}catch(e){}} }
+function isMobileTouch(){ return ('ontouchstart' in window) || navigator.maxTouchPoints > 0; }
 
-function isMobileTouch(){
-    return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+function mostraAnimazioneVincitore(indexSquadra){
+    let squadra = partita.squadre[indexSquadra] || '—';
+    let m = partita.manoCorrente[indexSquadra];
+    let parziale = m ? calcolaParzialeMano(m) : 0;
+    let totaleNuovo = (partita.punteggiTotali[indexSquadra]||0) + parziale;
+
+    document.getElementById('vincitore-nome').innerText = squadra;
+    document.getElementById('vincitore-punti').innerText = (parziale>=0?'+':'') + parziale + ' pt';
+    document.getElementById('vincitore-totale').innerText = 'Totale: ' + totaleNuovo + ' pt';
+
+    let container = document.getElementById('sparkles-container');
+    container.innerHTML = '';
+    let emojis = ['✨','⭐','🌟','💫','🎉','🎊','🏆','👑','💛','💚'];
+    for(let i=0;i<50;i++){
+        let sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+        let startX = 50 + (Math.random()-0.5)*15;
+        let startY = 50 + (Math.random()-0.5)*15;
+        sparkle.style.left = startX + '%';
+        sparkle.style.top = startY + '%';
+        let dx = (Math.random()-0.5)*110;
+        let dy = (Math.random()-0.5)*110;
+        sparkle.style.setProperty('--dx', dx + 'vmin');
+        sparkle.style.setProperty('--dy', dy + 'vmin');
+        sparkle.style.animationDelay = (Math.random()*0.9) + 's';
+        sparkle.style.fontSize = (14 + Math.random()*26) + 'px';
+        container.appendChild(sparkle);
+    }
+
+    let overlay = document.getElementById('overlay-vincitore');
+    overlay.classList.add('attivo');
+    setTimeout(()=>{ overlay.classList.remove('attivo'); }, 2800);
+}
+
+function togglePannelloRegoleExtra(){
+    vibra(10);
+    let pannello = document.getElementById('pannello-regole-extra');
+    let btn = document.getElementById('btn-apri-regole-extra');
+    if(!pannello || !btn) return;
+    let aperto = pannello.classList.toggle('aperto');
+    btn.classList.toggle('aperto', aperto);
+}
+
+function selezionaMazziere(i){
+    vibra(15);
+    partita.mazziereIniziale = i;
+    partita.mazziereCorrente = i;
+    salvaDati();
+    renderSelettoreMazziere();
+}
+
+function renderSelettoreMazziere(){
+    let div = document.getElementById('selettore-mazziere');
+    if(!div) return;
+    let numPosti = partita.posti ? partita.posti.length : 0;
+    if(partita.mazziereIniziale !== null && partita.mazziereIniziale !== undefined){
+        if(partita.mazziereIniziale >= numPosti || !partita.posti[partita.mazziereIniziale]){
+            partita.mazziereIniziale = null;
+            partita.mazziereCorrente = null;
+        }
+    }
+    div.innerHTML='';
+    if(numPosti === 0 || partita.posti.every(p=>p===null)){
+        div.innerHTML = '<p style="color:#bbb;font-size:13px;margin:0;">Prima scegli i giocatori al tavolo (sezione 3).</p>';
+        return;
+    }
+    partita.posti.forEach((g, i) => {
+        if(!g) return;
+        let isSelected = partita.mazziereIniziale === i;
+        let avatar = g.tipo === 'emoji' 
+            ? `<span style="font-size:22px;line-height:1;">${g.valore}</span>` 
+            : `<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
+        let bg = isSelected 
+            ? 'linear-gradient(145deg,#ffe066 0%,#ffd700 45%,#d4a017 100%)' 
+            : 'rgba(255,255,255,0.08)';
+        let col = isSelected ? '#1a1a1a' : 'white';
+        let border = isSelected ? '2px solid #fff3b0' : '1.5px solid rgba(255,255,255,0.25)';
+        let shadow = isSelected ? 'box-shadow:0 0 15px rgba(255,215,0,0.8),0 4px 12px rgba(0,0,0,0.4);' : 'box-shadow:0 2px 6px rgba(0,0,0,0.3);';
+        div.innerHTML += `<button type="button" class="btn-mazziere-scelta" onclick="selezionaMazziere(${i})" style="background:${bg};color:${col};border:${border};${shadow}"><div style="width:34px;height:34px;border-radius:50%;overflow:hidden;background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">${avatar}</div><span>${g.nome}</span>${isSelected?'<span style="font-size:16px;">🎴</span>':''}</button>`;
+    });
+}
+
+function ruotaMazziere(){
+    let numPosti = partita.posti.length;
+    let corrente = partita.mazziereCorrente;
+    if(typeof corrente !== 'number' || corrente < 0 || corrente >= numPosti){
+        corrente = 0;
+    }
+    for(let step=1; step<=numPosti; step++){
+        let candidate = (corrente + step) % numPosti;
+        if(partita.posti[candidate]){
+            partita.mazziereCorrente = candidate;
+            return candidate;
+        }
+    }
+    partita.mazziereCorrente = null;
+    return null;
+}
+
+function toggleRegolaExtra(nome){
+    vibra(15);
+    partita[nome] = !partita[nome];
+    aggiornaBottoniRegoleExtra();
+    salvaDati();
+}
+
+function aggiornaBottoniRegoleExtra(){
+    Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{
+        let btn = document.getElementById('btn-extra-'+nome);
+        if(!btn) return;
+        if(partita[nome]){ btn.classList.add('attivo'); btn.innerText='ON'; }
+        else { btn.classList.remove('attivo'); btn.innerText='OFF'; }
+    });
 }
 
 function popolaGiocatoriDemo(){
@@ -476,7 +736,6 @@ function apriModaleNuovoGiocatore(){
     document.getElementById('input-soprannome-giocatore').value='';
     nuovoGiocatoreStato={tipo:'emoji',valore:'🧑‍💻',zoom:1,posX:0,posY:0};
     fotoEditorStato={attivo:false,img:null,imgNaturalW:0,imgNaturalH:0,scale:1,offsetX:0,offsetY:0,baseScale:1};
-
     let pannello=document.getElementById('pannello-emoji');
     if(pannello) pannello.style.display='none';
     let btnEmoji=document.getElementById('btn-scegli-emoji');
@@ -485,9 +744,7 @@ function apriModaleNuovoGiocatore(){
     if(inpManuale) inpManuale.value='';
     let inpFoto=document.getElementById('input-file-foto');
     if(inpFoto) inpFoto.value='';
-
     document.getElementById('editor-foto-wrapper').style.display='none';
-
     renderGrigliaEmoji();
     aggiornaAnteprimaGiocatoreModal();
     document.getElementById('modale-gestione-giocatore').style.display='flex';
@@ -545,25 +802,18 @@ function chiudiSceltaFoto(){ document.getElementById('modale-scelta-foto').style
 
 function scegliFotoOpzione(tipo){
     chiudiSceltaFoto();
-
     if(tipo==='camera'){
-        if(isMobileTouch()){
-            apriFilePicker('image/*', 'environment');
-        } else {
-            apriWebcam();
-        }
-    } else if(tipo==='galleria'){
-        apriFilePicker('image/*', null);
-    } else if(tipo==='file'){
-        apriFilePicker('image/*,.heic,.heif,.png,.jpg,.jpeg,.webp,.gif,.bmp,.tiff', null);
-    }
+        if(isMobileTouch()){ apriFilePicker('image/*','environment'); }
+        else { apriWebcam(); }
+    } else if(tipo==='galleria'){ apriFilePicker('image/*',null); }
+    else if(tipo==='file'){ apriFilePicker('image/*,.heic,.heif,.png,.jpg,.jpeg,.webp,.gif,.bmp,.tiff',null); }
 }
 
-function apriFilePicker(accept, capture){
+function apriFilePicker(accept,capture){
     let inp=document.getElementById('input-file-foto');
     inp.removeAttribute('capture');
     inp.accept=accept;
-    if(capture){ inp.setAttribute('capture', capture); }
+    if(capture){ inp.setAttribute('capture',capture); }
     inp.value='';
     inp.click();
 }
@@ -572,45 +822,26 @@ async function apriWebcam(){
     let modale=document.getElementById('modale-webcam');
     let video=document.getElementById('webcam-video');
     let status=document.getElementById('webcam-status');
-
-    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
-        alert("⚠️ La fotocamera non è disponibile in questo browser.\nProva a usare 'Galleria Foto' o 'Sfoglia File'.");
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ alert("⚠️ La fotocamera non è disponibile in questo browser.\nProva a usare 'Galleria Foto' o 'Sfoglia File'."); return; }
+    if(location.protocol==='file:'){
+        let msg="⚠️ La webcam non funziona aprendo il file direttamente da disco (file://).\n\nPer usare la fotocamera:\n• Apri l'app da un server locale (es. localhost)\n• Oppure usa 'Galleria Foto' o 'Sfoglia File'\n\nVuoi aprire il file picker come alternativa?";
+        if(confirm(msg)){ apriFilePicker('image/*',null); }
         return;
     }
-
-    if(location.protocol === 'file:'){
-        let msg = "⚠️ La webcam non funziona aprendo il file direttamente da disco (file://).\n\n" +
-                  "Per usare la fotocamera:\n" +
-                  "• Apri l'app da un server locale (es. localhost)\n" +
-                  "• Oppure usa 'Galleria Foto' o 'Sfoglia File'\n\n" +
-                  "Vuoi aprire il file picker come alternativa?";
-        if(confirm(msg)){
-            apriFilePicker('image/*', null);
-        }
-        return;
-    }
-
     status.innerText='Avvio fotocamera...';
     modale.style.display='flex';
     video.srcObject=null;
-
     try{
-        webcamStream=await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: 'user', width: {ideal: 1280}, height: {ideal: 720} },
-            audio: false
-        });
+        webcamStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:720}},audio:false});
         video.srcObject=webcamStream;
         webcamAttiva=true;
         status.innerText='Inquadra il soggetto e premi Scatta 📸';
     } catch(err){
-        console.error("Webcam error:", err);
-        let motivo = err.name || err.message;
-        let messaggio = "❌ Impossibile accedere alla fotocamera.\nMotivo: " + motivo;
-        if(err.name === 'NotAllowedError'){
-            messaggio = "❌ Permesso negato per la fotocamera.\n\nVai nelle impostazioni del browser per autorizzarla, oppure usa 'Galleria Foto' o 'Sfoglia File'.";
-        } else if(err.name === 'NotFoundError'){
-            messaggio = "❌ Nessuna fotocamera trovata sul dispositivo.\n\nUsa 'Galleria Foto' o 'Sfoglia File'.";
-        }
+        console.error("Webcam error:",err);
+        let motivo=err.name||err.message;
+        let messaggio="❌ Impossibile accedere alla fotocamera.\nMotivo: "+motivo;
+        if(err.name==='NotAllowedError'){ messaggio="❌ Permesso negato per la fotocamera.\n\nVai nelle impostazioni del browser per autorizzarla, oppure usa 'Galleria Foto' o 'Sfoglia File'."; }
+        else if(err.name==='NotFoundError'){ messaggio="❌ Nessuna fotocamera trovata sul dispositivo.\n\nUsa 'Galleria Foto' o 'Sfoglia File'."; }
         status.innerText='Errore: '+motivo;
         chiudiWebcam();
         alert(messaggio);
@@ -619,24 +850,18 @@ async function apriWebcam(){
 
 function scattaFotoWebcam(){
     let video=document.getElementById('webcam-video');
-    if(!webcamAttiva || !video.videoWidth){
-        alert("⚠️ Fotocamera non pronta. Riprova tra un istante.");
-        return;
-    }
+    if(!webcamAttiva||!video.videoWidth){ alert("⚠️ Fotocamera non pronta. Riprova tra un istante."); return; }
     let canvas=document.createElement('canvas');
     canvas.width=video.videoWidth;
     canvas.height=video.videoHeight;
-    canvas.getContext('2d').drawImage(video, 0, 0);
-    let dataUrl=canvas.toDataURL('image/jpeg', 0.9);
+    canvas.getContext('2d').drawImage(video,0,0);
+    let dataUrl=canvas.toDataURL('image/jpeg',0.9);
     chiudiWebcam();
     processaImmagineDataURL(dataUrl);
 }
 
 function chiudiWebcam(){
-    if(webcamStream){
-        try { webcamStream.getTracks().forEach(t=>t.stop()); } catch(e){}
-        webcamStream=null;
-    }
+    if(webcamStream){ try{ webcamStream.getTracks().forEach(t=>t.stop()); }catch(e){} webcamStream=null; }
     webcamAttiva=false;
     let video=document.getElementById('webcam-video');
     if(video) video.srcObject=null;
@@ -647,10 +872,7 @@ function caricaImmagineLocale(event){
     let file=event.target.files[0];
     if(!file) return;
     let reader=new FileReader();
-    reader.onload=function(e){
-        processaImmagineDataURL(e.target.result);
-        event.target.value='';
-    };
+    reader.onload=function(e){ processaImmagineDataURL(e.target.result); event.target.value=''; };
     reader.readAsDataURL(file);
 }
 
@@ -663,41 +885,36 @@ function processaImmagineDataURL(dataUrl){
         fotoEditorStato.scale=1;
         fotoEditorStato.offsetX=0;
         fotoEditorStato.offsetY=0;
-
         nuovoGiocatoreStato.tipo='foto';
-
         let pannello=document.getElementById('pannello-emoji');
         if(pannello) pannello.style.display='none';
         let btn=document.getElementById('btn-scegli-emoji');
         if(btn) btn.classList.remove('aperto');
         let inpManuale=document.getElementById('input-emoji-manuale');
         if(inpManuale) inpManuale.value='';
-
         let wrapper=document.getElementById('editor-foto-wrapper');
         let imgEditor=document.getElementById('img-editor-foto');
         let cerchio=document.getElementById('cerchio-editor-foto');
         wrapper.style.display='block';
         imgEditor.src=dataUrl;
         fotoEditorStato.attivo=true;
-
         setTimeout(()=>{
             let diameter=cerchio.clientWidth;
             if(diameter===0){
                 setTimeout(()=>{
                     diameter=cerchio.clientWidth;
-                    let coverScale=Math.max(diameter/img.naturalWidth, diameter/img.naturalHeight);
+                    let coverScale=Math.max(diameter/img.naturalWidth,diameter/img.naturalHeight);
                     fotoEditorStato.baseScale=coverScale;
                     fotoEditorStato.scale=1;
                     aggiornaImmagineEditor();
                 },150);
             } else {
-                let coverScale=Math.max(diameter/img.naturalWidth, diameter/img.naturalHeight);
+                let coverScale=Math.max(diameter/img.naturalWidth,diameter/img.naturalHeight);
                 fotoEditorStato.baseScale=coverScale;
                 fotoEditorStato.scale=1;
                 aggiornaImmagineEditor();
             }
         },80);
-
         aggiornaAnteprimaGiocatoreModal();
     };
     img.onerror=function(){ alert("Impossibile leggere l'immagine."); };
@@ -708,21 +925,16 @@ function aggiornaImmagineEditor(){
     let imgEditor=document.getElementById('img-editor-foto');
     let cerchio=document.getElementById('cerchio-editor-foto');
     if(!imgEditor||!cerchio||!fotoEditorStato.img) return;
-
     let diameter=cerchio.clientWidth;
     if(diameter===0) return;
-
     let base=fotoEditorStato.baseScale;
     let finalScale=base*fotoEditorStato.scale;
-
     let w=fotoEditorStato.imgNaturalW*finalScale;
     let h=fotoEditorStato.imgNaturalH*finalScale;
-
     let maxOffsetX=Math.max(0,(w-diameter)/2);
     let maxOffsetY=Math.max(0,(h-diameter)/2);
     fotoEditorStato.offsetX=Math.max(-maxOffsetX,Math.min(maxOffsetX,fotoEditorStato.offsetX));
     fotoEditorStato.offsetY=Math.max(-maxOffsetY,Math.min(maxOffsetY,fotoEditorStato.offsetY));
-
     imgEditor.style.width=w+'px';
     imgEditor.style.height=h+'px';
     imgEditor.style.left='50%';
@@ -730,29 +942,17 @@ function aggiornaImmagineEditor(){
     imgEditor.style.transform=`translate(calc(-50% + ${fotoEditorStato.offsetX}px), calc(-50% + ${fotoEditorStato.offsetY}px))`;
 }
 
-function resetFotoEditor(){
-    fotoEditorStato.scale=1;
-    fotoEditorStato.offsetX=0;
-    fotoEditorStato.offsetY=0;
-    aggiornaImmagineEditor();
-}
+function resetFotoEditor(){ fotoEditorStato.scale=1; fotoEditorStato.offsetX=0; fotoEditorStato.offsetY=0; aggiornaImmagineEditor(); }
 
 (function setupEditorGestures(){
     let pointers=new Map();
     let startDistance=0;
     let startScale=1;
     let lastX=0,lastY=0;
-
-    function getDistance(){
-        let pts=Array.from(pointers.values());
-        if(pts.length<2) return 0;
-        return Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y);
-    }
-
+    function getDistance(){ let pts=Array.from(pointers.values()); if(pts.length<2) return 0; return Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y); }
     function attach(){
         let cerchio=document.getElementById('cerchio-editor-foto');
         if(!cerchio) return;
-
         cerchio.addEventListener('pointerdown',function(e){
             if(!fotoEditorStato.attivo) return;
             e.preventDefault();
@@ -762,13 +962,11 @@ function resetFotoEditor(){
             if(pointers.size===1){ lastX=e.clientX; lastY=e.clientY; }
             else if(pointers.size===2){ startDistance=getDistance(); startScale=fotoEditorStato.scale; }
         });
-
         cerchio.addEventListener('pointermove',function(e){
             if(!fotoEditorStato.attivo) return;
             if(!pointers.has(e.pointerId)) return;
             e.preventDefault();
             pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-
             if(pointers.size===1){
                 let dx=e.clientX-lastX;
                 let dy=e.clientY-lastY;
@@ -786,19 +984,13 @@ function resetFotoEditor(){
                 }
             }
         });
-
         function endPointer(e){
             pointers.delete(e.pointerId);
             if(pointers.size===0){ cerchio.classList.remove('attivo'); startDistance=0; }
-            else if(pointers.size===1){
-                let pts=Array.from(pointers.values());
-                lastX=pts[0].x; lastY=pts[0].y;
-            }
+            else if(pointers.size===1){ let pts=Array.from(pointers.values()); lastX=pts[0].x; lastY=pts[0].y; }
         }
-
         cerchio.addEventListener('pointerup',endPointer);
         cerchio.addEventListener('pointercancel',endPointer);
-
         cerchio.addEventListener('wheel',function(e){
             if(!fotoEditorStato.attivo) return;
             e.preventDefault();
@@ -808,9 +1000,7 @@ function resetFotoEditor(){
             aggiornaImmagineEditor();
         },{passive:false});
     }
-
-    if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',attach); }
-    else { attach(); }
+    if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',attach); } else { attach(); }
 })();
 
 function generaFotoDaEditor(){
@@ -819,69 +1009,45 @@ function generaFotoDaEditor(){
     if(!cerchio) return null;
     let diameter=cerchio.clientWidth;
     if(diameter===0) return null;
-
     let outSize=400;
     let canvas=document.createElement('canvas');
     canvas.width=outSize;
     canvas.height=outSize;
     let ctx=canvas.getContext('2d');
-
     ctx.fillStyle='#000';
     ctx.fillRect(0,0,outSize,outSize);
-
     let factor=outSize/diameter;
     let base=fotoEditorStato.baseScale;
     let finalScale=base*fotoEditorStato.scale*factor;
-
     let w=fotoEditorStato.imgNaturalW*finalScale;
     let h=fotoEditorStato.imgNaturalH*finalScale;
     let cx=outSize/2+fotoEditorStato.offsetX*factor;
     let cy=outSize/2+fotoEditorStato.offsetY*factor;
-
     ctx.drawImage(fotoEditorStato.img,cx-w/2,cy-h/2,w,h);
-
     ctx.globalCompositeOperation='destination-in';
     ctx.beginPath();
     ctx.arc(outSize/2,outSize/2,outSize/2,0,Math.PI*2);
     ctx.fill();
-
     return canvas.toDataURL('image/jpeg',0.88);
 }
 
 function aggiornaAnteprimaGiocatoreModal(){
     let container=document.getElementById('anteprima-contenuto');
     if(!container) return;
-    if(nuovoGiocatoreStato.tipo==='emoji'){
-        container.innerHTML=`<span style="font-size:36px;">${nuovoGiocatoreStato.valore}</span>`;
-    } else {
-        container.innerHTML=`<img id="img-anteprima-foto" src="${nuovoGiocatoreStato.valore||''}" style="width:100%;height:100%;object-fit:cover;">`;
-    }
+    if(nuovoGiocatoreStato.tipo==='emoji'){ container.innerHTML=`<span style="font-size:36px;">${nuovoGiocatoreStato.valore}</span>`; }
+    else { container.innerHTML=`<img id="img-anteprima-foto" src="${nuovoGiocatoreStato.valore||''}" style="width:100%;height:100%;object-fit:cover;">`; }
 }
 
 function salvaNuovoGiocatore(){
     let nomeVal=document.getElementById('input-nome-giocatore').value.trim();
     let soprannomeVal=document.getElementById('input-soprannome-giocatore').value.trim();
-
     if(!nomeVal){ alert("⚠️ Inserisci almeno il nome del giocatore!"); return; }
-
-    let nuovoGiocatore={
-        nome:nomeVal,
-        soprannome:soprannomeVal,
-        tipo:nuovoGiocatoreStato.tipo,
-        valore:nuovoGiocatoreStato.valore,
-        zoom:1,
-        posX:0,
-        posY:0
-    };
-
-    if(nuovoGiocatoreStato.tipo==='foto' && fotoEditorStato.attivo && fotoEditorStato.img){
+    let nuovoGiocatore={nome:nomeVal,soprannome:soprannomeVal,tipo:nuovoGiocatoreStato.tipo,valore:nuovoGiocatoreStato.valore,zoom:1,posX:0,posY:0};
+    if(nuovoGiocatoreStato.tipo==='foto'&&fotoEditorStato.attivo&&fotoEditorStato.img){
         let dataUrl=generaFotoDaEditor();
         if(dataUrl) nuovoGiocatore.valore=dataUrl;
-        nuovoGiocatore.zoom=1;
-        nuovoGiocatore.posX=0;
-        nuovoGiocatore.posY=0;
+        nuovoGiocatore.zoom=1; nuovoGiocatore.posX=0; nuovoGiocatore.posY=0;
     }
-
     appData.giocatori.push(nuovoGiocatore);
     salvaDati();
     renderRubrica();
@@ -890,7 +1056,6 @@ function salvaNuovoGiocatore(){
 
 let indiceSquadraCalcolo=null;
 let conteggioCorrenteCarte={jolly:0,pinelle:0,assi:0,figure10:0,basse:0};
-
 const tipiCarteConfig=[
     {chiave:'jolly',nome:'🃏 Jolly (30 pt)',valore:30},
     {chiave:'pinelle',nome:'🂢 Pinelle - 2 (20 pt)',valore:20},
@@ -906,12 +1071,7 @@ function apriCalcolatoreCarte(colIndex){
     document.getElementById('modale-calcolatore-carte').style.display='flex';
 }
 function chiudiCalcolatoreCarte(){ document.getElementById('modale-calcolatore-carte').style.display='none'; }
-function modCardCount(chiave,delta){
-    vibra(10);
-    conteggioCorrenteCarte[chiave]+=delta;
-    if(conteggioCorrenteCarte[chiave]<0) conteggioCorrenteCarte[chiave]=0;
-    renderInterfacciaCalcolatore();
-}
+function modCardCount(chiave,delta){ vibra(10); conteggioCorrenteCarte[chiave]+=delta; if(conteggioCorrenteCarte[chiave]<0) conteggioCorrenteCarte[chiave]=0; renderInterfacciaCalcolatore(); }
 function calcolaTotaleCorrente(){ let tot=0; tipiCarteConfig.forEach(t=>{tot+=conteggioCorrenteCarte[t.chiave]*t.valore;}); return tot; }
 function renderInterfacciaCalcolatore(){
     let container=document.getElementById('griglia-calcolo-carte');
@@ -941,21 +1101,20 @@ window.onload=function(){
     if(appData.tema==='scuro') document.body.classList.add("dark-mode");
     applicaTemaColore();
     applicaStatoMenu();
-
+    aggiornaBottoniRegoleExtra();
     let elVersione=document.getElementById('versione-app');
     if(elVersione) elVersione.innerText=APP_VERSION;
-
     renderSegment("seg-modalita",opzioniMod,partita.modalita,(scelta)=>{
         partita.modalita=scelta;
         let numPosti=scelta.includes('2')?2:(scelta.includes('3')?3:4);
         let vecchi=partita.posti||[];
         partita.posti=new Array(numPosti).fill(null);
         for(let i=0;i<Math.min(numPosti,vecchi.length);i++) partita.posti[i]=vecchi[i];
+        partita.mazziereIniziale=null;
+        partita.mazziereCorrente=null;
         renderTavolo();
     });
-
     renderSegment("seg-traguardo",opzioniTrag,partita.traguardo,(scelta)=>{ partita.traguardo=scelta; });
-
     renderTavolo();
     renderRubrica();
     renderStorico();
@@ -972,10 +1131,7 @@ function salvaDati(){
         _avvisoStorageMostrato=false;
     } catch(e){
         console.warn("Errore salvataggio localStorage:",e);
-        if(!_avvisoStorageMostrato){
-            _avvisoStorageMostrato=true;
-            alert("⚠️ Errore salvataggio: memoria piena.\nProva a eliminare qualche giocatore con foto oppure esporta un backup.");
-        }
+        if(!_avvisoStorageMostrato){ _avvisoStorageMostrato=true; alert("⚠️ Errore salvataggio: memoria piena.\nProva a eliminare qualche giocatore con foto oppure esporta un backup."); }
     }
 }
 
@@ -1001,6 +1157,17 @@ function caricaDati(){
                     if(!ok){parsedP.inCorso=false;parsedP.squadre=[];parsedP.manoCorrente=[];parsedP.punteggiTotali=[];}
                 }
                 if(!Array.isArray(parsedP.storicoSmazzate)) parsedP.storicoSmazzate=[];
+                if(typeof parsedP.burracoReale!=='boolean') parsedP.burracoReale=false;
+                if(typeof parsedP.superBurraco!=='boolean') parsedP.superBurraco=false;
+                if(typeof parsedP.burracoInternazionale!=='boolean') parsedP.burracoInternazionale=false;
+                if(typeof parsedP.mazziereIniziale!=='number') parsedP.mazziereIniziale=null;
+                if(typeof parsedP.mazziereCorrente!=='number') parsedP.mazziereCorrente=null;
+                // Migrazione: aggiungi segnoCarte se mancante
+                if(Array.isArray(parsedP.manoCorrente)){
+                    parsedP.manoCorrente.forEach(m=>{
+                        if(m && typeof m.segnoCarte !== 'string') m.segnoCarte = '+';
+                    });
+                }
                 partita=parsedP;
             }
         }
@@ -1016,9 +1183,7 @@ function cambiaSchermata(idScena,btn){
     if(btn) btn.classList.add('attiva');
     let deskNav=document.getElementById('nav-'+idScena);
     if(deskNav) deskNav.classList.add('attiva');
-    if(idScena==='impostazioni'){
-        document.querySelectorAll('.btn-tema').forEach(b=>{b.classList.toggle('attivo',b.dataset.tema===(appData.temaColore||'verde'));});
-    }
+    if(idScena==='impostazioni'){ document.querySelectorAll('.btn-tema').forEach(b=>{b.classList.toggle('attivo',b.dataset.tema===(appData.temaColore||'verde'));}); }
 }
 
 function renderSegment(idDiv,opzioni,sceltaAttuale,callback){
@@ -1051,13 +1216,12 @@ function renderTavolo(){
         if(giocatoreObj){
             nomeVisualizzato=giocatoreObj.nome;
             if(giocatoreObj.tipo==='emoji'){ contenutoCerchio=giocatoreObj.valore; }
-            else{
-                contenutoCerchio=`<img src="${giocatoreObj.valore}" style="width:100%;height:100%;object-fit:cover;">`;
-            }
+            else{ contenutoCerchio=`<img src="${giocatoreObj.valore}" style="width:100%;height:100%;object-fit:cover;">`; }
         }
         div.innerHTML+=`<div class="posto-giocatore ${occ}" onclick="apriModale(${i})"><div class="cerchio-posto">${contenutoCerchio}</div><span class="nome-posto">${nomeVisualizzato}</span></div>`;
     });
     aggiornaAnteprimaCoppie();
+    renderSelettoreMazziere();
 }
 
 function aggiornaAnteprimaCoppie(){
@@ -1065,12 +1229,8 @@ function aggiornaAnteprimaCoppie(){
     if(!div) return;
     div.innerHTML="";
     if(partita.modalita==='4 Coppie'&&partita.posti.length===4){
-        if(partita.posti.every(p=>p!==null)){
-            div.innerHTML=`🤝 ${partita.posti[0].nome} + ${partita.posti[2].nome} &nbsp; VS &nbsp; ${partita.posti[1].nome} + ${partita.posti[3].nome}`;
-        } else {
-            div.innerText="Compila tutti i posti per vedere le coppie.";
-            div.style.color="#ccc";
-        }
+        if(partita.posti.every(p=>p!==null)){ div.innerHTML=`🤝 ${partita.posti[0].nome} + ${partita.posti[2].nome} &nbsp; VS &nbsp; ${partita.posti[1].nome} + ${partita.posti[3].nome}`; }
+        else { div.innerText="Compila tutti i posti per vedere le coppie."; div.style.color="#ccc"; }
     }
 }
 
@@ -1112,8 +1272,13 @@ function chiudiModale(){ document.getElementById('modale-scegli-giocatore').styl
 
 function iniziaPartita(){
     if(partita.posti.includes(null)){ alert("⚠️ Riempi tutti i posti al tavolo prima di iniziare!"); return; }
+    if(partita.mazziereIniziale === null || partita.mazziereIniziale === undefined || !partita.posti[partita.mazziereIniziale]){
+        alert("⚠️ Seleziona chi dà le carte per la prima mano (sezione 4)!");
+        return;
+    }
     partita.inCorso=true;
     partita.storicoSmazzate=[];
+    partita.mazziereCorrente = partita.mazziereIniziale;
     if(partita.modalita==='4 Coppie'){
         partita.squadre=[partita.posti[0].nome+" & "+partita.posti[2].nome,partita.posti[1].nome+" & "+partita.posti[3].nome];
     } else {
@@ -1126,7 +1291,13 @@ function iniziaPartita(){
     renderTabellone();
 }
 
-function resetManoCorrente(){ partita.manoCorrente=partita.squadre.map(()=>({puliti:0,semipuliti:0,sporchi:0,carte:"",chiuso:false,pozzetto:true})); }
+function resetManoCorrente(){
+    partita.manoCorrente=partita.squadre.map(()=>{
+        let m={puliti:0,semipuliti:0,sporchi:0,carte:"",segnoCarte:'+',chiuso:false,pozzetto:true};
+        Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{ if(partita[nome]) m[REGOLE_EXTRA_CONFIG[nome].campo]=0; });
+        return m;
+    });
+}
 
 function renderTabellone(){
     let container=document.getElementById('partita-corso-content');
@@ -1137,50 +1308,200 @@ function renderTabellone(){
     }
     if(!Array.isArray(partita.manoCorrente)||partita.manoCorrente.length!==partita.squadre.length){ resetManoCorrente(); }
     let canUndo=partita.storicoSmazzate&&partita.storicoSmazzate.length>0;
+    let layoutClass='';
+    if(partita.modalita==='2 Gioc.') layoutClass='tavolo-mode-2';
+    else if(partita.modalita==='3 Gioc.') layoutClass='tavolo-mode-3';
+    else if(partita.modalita==='4 Coppie') layoutClass='tavolo-mode-4coppie';
+    else if(partita.modalita==='4 Singoli') layoutClass='tavolo-mode-4singoli';
+
+    let mazziereNome = '';
+    let mazziereObj = null;
+    if(typeof partita.mazziereCorrente === 'number' && partita.posti[partita.mazziereCorrente]){
+        mazziereObj = partita.posti[partita.mazziereCorrente];
+        mazziereNome = mazziereObj.nome;
+    }
+    let mazziereAvatar = '';
+    if(mazziereObj){
+        mazziereAvatar = mazziereObj.tipo==='emoji'
+            ? `<span style="font-size:22px;line-height:1;">${mazziereObj.valore}</span>`
+            : `<img src="${mazziereObj.valore}" style="width:100%;height:100%;object-fit:cover;">`;
+    }
+    let mazziereBar = mazziereNome ? `
+        <div style="background:linear-gradient(145deg,rgba(255,215,0,0.28),rgba(255,215,0,0.1));border:2px solid var(--giallo-burraco);border-radius:12px;padding:8px 14px;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;box-shadow:0 0 22px rgba(255,215,0,0.4);flex-wrap:wrap;">
+            <span style="font-size:22px;filter:drop-shadow(0 0 8px #ffd700);">🎴</span>
+            <span style="font-size:12px;font-weight:bold;color:var(--crema-accento);letter-spacing:0.5px;">MAZZIERE DI QUESTA MANO:</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+                <div style="width:30px;height:30px;border-radius:50%;overflow:hidden;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;border:2px solid var(--giallo-burraco);">${mazziereAvatar}</div>
+                <span style="font-size:15px;font-weight:bold;color:white;">${mazziereNome}</span>
+            </div>
+        </div>` : '';
+
     container.innerHTML=`
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;">
             <h2 class="titolo-optima">Smazzata in Corso</h2>
             <span style="background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:8px;font-size:12px;font-weight:bold;">${partita.modalita} (Target: ${partita.traguardo})</span>
         </div>
-        <div id="griglia-tabellone" class="griglia-punti"></div>
+        ${mazziereBar}
+        <div id="griglia-tabellone" class="griglia-punti ${layoutClass}"></div>
         <button class="btn-avvia-swift" style="margin-top:20px;" onclick="salvaSmazzata()">💾 Calcola e Registra Smazzata</button>
         <button class="btn-secondary" style="margin-top:10px;${canUndo?'':'opacity:0.4;pointer-events:none;'}" onclick="annullaUltimaSmazzata()">↩️ Annulla Ultima Smazzata</button>
         <button class="btn-danger" style="margin-top:10px;" onclick="chiudiPartita()">🛑 Termina Partita</button>`;
     let griglia=document.getElementById('griglia-tabellone');
-    griglia.style.gridTemplateColumns=`repeat(${partita.squadre.length}, 1fr)`;
+
+    const FR_N = '<span class="freccia-pos">↑</span>';
+    const FR_S = '<span class="freccia-pos">↓</span>';
+    const FR_E = '<span class="freccia-pos">→</span>';
+    const FR_O = '<span class="freccia-pos">←</span>';
+    const FR_SO= '<span class="freccia-pos">↙</span>';
+    const FR_SE= '<span class="freccia-pos">↘</span>';
+
+    function getComponenti(iSquadra){
+        let comp=[];
+        if(partita.modalita==='4 Coppie'){
+            if(iSquadra===0){
+                if(partita.posti[0]) comp.push({g:partita.posti[0],fr:FR_N,pos:'Nord',idx:0});
+                if(partita.posti[2]) comp.push({g:partita.posti[2],fr:FR_S,pos:'Sud',idx:2});
+            } else {
+                if(partita.posti[1]) comp.push({g:partita.posti[1],fr:FR_E,pos:'Est',idx:1});
+                if(partita.posti[3]) comp.push({g:partita.posti[3],fr:FR_O,pos:'Ovest',idx:3});
+            }
+        } else {
+            let fr='',pos='';
+            if(partita.modalita==='2 Gioc.'){ fr=iSquadra===0?FR_N:FR_S; pos=iSquadra===0?'Nord':'Sud'; }
+            else if(partita.modalita==='3 Gioc.'){ if(iSquadra===0){fr=FR_N;pos='Nord';} else if(iSquadra===1){fr=FR_SO;pos='Sud-Ovest';} else {fr=FR_SE;pos='Sud-Est';} }
+            else if(partita.modalita==='4 Singoli'){ if(iSquadra===0){fr=FR_N;pos='Nord';} else if(iSquadra===1){fr=FR_S;pos='Sud';} else if(iSquadra===2){fr=FR_O;pos='Ovest';} else {fr=FR_E;pos='Est';} }
+            if(partita.posti[iSquadra]) comp.push({g:partita.posti[iSquadra],fr:fr,pos:pos,idx:iSquadra});
+        }
+        return comp;
+    }
+
+    function avatarHTML(g, isMazziere){
+        if(!g) return '';
+        let contenuto=g.tipo==='emoji'
+            ?`<span style="font-size:22px;line-height:1;">${g.valore}</span>`
+            :`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
+        let classe = isMazziere ? 'avatar-mazziere' : '';
+        let bordo = isMazziere ? '#ffd700' : 'var(--giallo-burraco)';
+        return `<div class="${classe}" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.12);border:2px solid ${bordo};display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,0.4);">${contenuto}</div>`;
+    }
+
+    function gruppoHTML(c){
+        let isMazziere = (partita.mazziereCorrente === c.idx);
+        let badge = isMazziere ? '<span class="badge-mazziere">🎴 DÀ</span>' : '';
+        let nomeColore = isMazziere ? '#ffd700' : 'var(--crema-accento)';
+        return `<div style="display:flex;align-items:center;gap:6px;min-width:0;flex:0 1 auto;">
+            ${avatarHTML(c.g, isMazziere)}
+            <span style="font-family:Optima,sans-serif;font-size:15px;font-weight:bold;color:${nomeColore};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.g.nome}</span>
+            ${badge}
+            ${c.fr}
+            <span style="font-family:Optima,sans-serif;font-size:12px;font-weight:bold;color:var(--crema-accento);text-transform:uppercase;white-space:nowrap;">${c.pos}</span>
+        </div>`;
+    }
+
+    function headerHTML(iSquadra){
+        let comp=getComponenti(iSquadra);
+        if(comp.length===0) return '';
+        if(comp.length===2){
+            return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.2);">
+                ${gruppoHTML(comp[0])}
+                ${gruppoHTML(comp[1])}
+            </div>`;
+        }
+        return `<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.2);">
+            ${gruppoHTML(comp[0])}
+        </div>`;
+    }
+
+    function righeExtraHTML(i,colMano){
+        let html='';
+        Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{
+            if(!partita[nome]) return;
+            let c=REGOLE_EXTRA_CONFIG[nome];
+            let qta=colMano[c.campo]||0;
+            html+=`<div class="stepper-row" style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.35);"><span class="stepper-label">${c.emoji} ${c.label} (+${c.valore})</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepperExtra(${i},'${c.campo}',-1)">-</button><span class="valore-stepper" id="valore-${i}-${c.campo}">${qta}</span><button class="btn-stepper" onclick="modStepperExtra(${i},'${c.campo}',1)">+</button></div></div>`;
+        });
+        return html;
+    }
+
+    let chiudenteIdx = -1;
+    partita.manoCorrente.forEach((m, idx)=>{ if(m && m.chiuso) chiudenteIdx = idx; });
+
     partita.squadre.forEach((squadra,i)=>{
-        let mano=partita.manoCorrente[i]||{puliti:0,semipuliti:0,sporchi:0,carte:"",chiuso:false,pozzetto:true};
-        let pozzClass=mano.pozzetto?"btn-toggle attivo":"btn-toggle penale";
-        let pozzTesto=mano.pozzetto?"✔️ Pozzetto Preso":"❌ No Pozzetto (-100)";
-        let chiusClass=mano.chiuso?"btn-toggle attivo":"btn-toggle";
-        let chiusTesto=mano.chiuso?"🏆 Chiusura (+100)":"Non ha chiuso";
+        let mano=partita.manoCorrente[i]||{puliti:0,semipuliti:0,sporchi:0,carte:"",segnoCarte:'+',chiuso:false,pozzetto:true};
+        let segno = mano.segnoCarte || '+';
+        let segnoClass = (segno === '-') ? 'negativo' : 'positivo';
+        let chiusClass, chiusTesto, chiusDisabled;
+        if(mano.chiuso){
+            chiusClass = "btn-toggle-chiusa attivo";
+            chiusTesto = "🏆 Chiusa";
+            chiusDisabled = '';
+        } else if(chiudenteIdx !== -1 && chiudenteIdx !== i){
+            chiusClass = "btn-toggle-chiusa disabilitato";
+            chiusTesto = "🏆 Chiusa";
+            chiusDisabled = 'disabled';
+        } else {
+            chiusClass = "btn-toggle-chiusa";
+            chiusTesto = "🏆 Chiusa";
+            chiusDisabled = '';
+        }
+        let pozzChecked = mano.pozzetto ? 'checked' : '';
+        let pozzClass = mano.pozzetto ? 'checkbox-pozzetto attivo' : 'checkbox-pozzetto';
         griglia.innerHTML+=`
             <div class="colonna-punti">
-                <div class="nome-squadra">${squadra}</div>
+                ${headerHTML(i)}
                 <div class="punti-totali">${partita.punteggiTotali[i]} <span style="font-size:14px">pt</span></div>
                 <div class="stepper-row"><span class="stepper-label">Puliti (+200)</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepper(${i},'puliti',-1)">-</button><span class="valore-stepper" id="valore-${i}-puliti">${mano.puliti}</span><button class="btn-stepper" onclick="modStepper(${i},'puliti',1)">+</button></div></div>
                 <div class="stepper-row"><span class="stepper-label">Semi (+150)</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepper(${i},'semipuliti',-1)">-</button><span class="valore-stepper" id="valore-${i}-semipuliti">${mano.semipuliti}</span><button class="btn-stepper" onclick="modStepper(${i},'semipuliti',1)">+</button></div></div>
                 <div class="stepper-row"><span class="stepper-label">Sporchi (+100)</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepper(${i},'sporchi',-1)">-</button><span class="valore-stepper" id="valore-${i}-sporchi">${mano.sporchi}</span><button class="btn-stepper" onclick="modStepper(${i},'sporchi',1)">+</button></div></div>
+                ${righeExtraHTML(i,mano)}
                 <div style="margin-top:10px;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
                         <label style="font-size:11px;color:#ccc;">Punti Carte (+/-)</label>
-                        <button style="background:none;border:none;color:var(--giallo-burraco);font-size:11px;font-weight:bold;cursor:pointer;" onclick="apriCalcolatoreCarte(${i})">🧮 Calcolatore</button>
+                        <button style="background:none;border:none;color:var(--crema-accento);font-size:11px;font-weight:bold;cursor:pointer;" onclick="apriCalcolatoreCarte(${i})">🧮 Calcolatore</button>
                     </div>
-                    <input type="number" class="input-carte" id="carte-${i}" placeholder="0" value="${mano.carte}" inputmode="decimal" step="any" oninput="aggiornaCarte(${i},this.value)">
+                    <div class="input-carte-row">
+                        <button class="btn-segno-carte ${segnoClass}" id="btn-segno-${i}" onclick="toggleSegnoCarte(${i})" title="Cambia + / -">${segno}</button>
+                        <input type="text" class="input-carte" id="carte-${i}" placeholder="0" value="${mano.carte}" inputmode="numeric" pattern="[0-9]*" oninput="aggiornaCarte(${i},this.value)">
+                    </div>
                 </div>
-                <button class="${pozzClass}" id="btn-pozzetto-${i}" onclick="togglePozzetto(${i})">${pozzTesto}</button>
-                <button class="${chiusClass}" id="btn-chiusura-${i}" onclick="toggleChiusura(${i})">${chiusTesto}</button>
+                <div class="pulsanti-stato-row">
+                    <label class="${pozzClass}" id="btn-pozzetto-${i}">
+                        <input type="checkbox" ${pozzChecked} onchange="togglePozzetto(${i})">
+                        <span class="checkbox-box"></span>
+                        <span class="checkbox-label">Pozzetto</span>
+                    </label>
+                    <button class="${chiusClass}" id="btn-chiusura-${i}" onclick="toggleChiusura(${i})" ${chiusDisabled}>${chiusTesto}</button>
+                </div>
                 <div id="preview-${i}" style="text-align:center;margin-top:10px;font-size:13px;color:#bbb;"></div>
             </div>`;
     });
+    if(partita.modalita==='4 Singoli'){
+        let centro=document.createElement('div');
+        centro.className='tavolo-centro';
+        centro.innerHTML='🎴';
+        griglia.appendChild(centro);
+    }
     partita.squadre.forEach((_,i)=>aggiornaPreviewMano(i));
+}
+
+function calcolaParzialeMano(m){
+    let segno = (m.segnoCarte === '-') ? -1 : 1;
+    let pC = parsePuntiCarte(m.carte) * segno;
+    let parziale=(m.puliti*200)+(m.semipuliti*150)+(m.sporchi*100)+pC+(m.chiuso?100:0)+(!m.pozzetto?-100:0);
+    Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{
+        if(partita[nome]){
+            let c=REGOLE_EXTRA_CONFIG[nome];
+            let qta=m[c.campo]||0;
+            parziale+=qta*c.valore;
+        }
+    });
+    return parziale;
 }
 
 function aggiornaPreviewMano(col){
     let m=partita.manoCorrente[col];
     if(!m) return;
-    let pC=parsePuntiCarte(m.carte);
-    let parziale=(m.puliti*200)+(m.semipuliti*150)+(m.sporchi*100)+pC+(m.chiuso?100:0)+(!m.pozzetto?-100:0);
+    let parziale=calcolaParzialeMano(m);
     let el=document.getElementById('preview-'+col);
     if(el){
         let colore=parziale>=0?'#7CFC00':'#ff6b6b';
@@ -1191,10 +1512,37 @@ function aggiornaPreviewMano(col){
 function aggiornaBottoniStato(col){
     let mano=partita.manoCorrente[col];
     if(!mano) return;
-    let btnPozz=document.getElementById('btn-pozzetto-'+col);
-    if(btnPozz){btnPozz.className=mano.pozzetto?"btn-toggle attivo":"btn-toggle penale";btnPozz.innerText=mano.pozzetto?"✔️ Pozzetto Preso":"❌ No Pozzetto (-100)";}
+    let elPozz=document.getElementById('btn-pozzetto-'+col);
+    if(elPozz){
+        elPozz.classList.toggle('attivo', mano.pozzetto);
+        let input=elPozz.querySelector('input');
+        if(input) input.checked = mano.pozzetto;
+    }
+    let btnSegno=document.getElementById('btn-segno-'+col);
+    if(btnSegno){
+        let segno = mano.segnoCarte || '+';
+        btnSegno.innerText = segno;
+        btnSegno.classList.toggle('negativo', segno==='-');
+        btnSegno.classList.toggle('positivo', segno==='+');
+    }
+    let chiudenteIdx = -1;
+    partita.manoCorrente.forEach((m, idx)=>{ if(m && m.chiuso) chiudenteIdx = idx; });
     let btnChiud=document.getElementById('btn-chiusura-'+col);
-    if(btnChiud){btnChiud.className=mano.chiuso?"btn-toggle attivo":"btn-toggle";btnChiud.innerText=mano.chiuso?"🏆 Chiusura (+100)":"Non ha chiuso";}
+    if(btnChiud){
+        if(mano.chiuso){
+            btnChiud.className = "btn-toggle-chiusa attivo";
+            btnChiud.innerText = "🏆 Chiusa";
+            btnChiud.removeAttribute('disabled');
+        } else if(chiudenteIdx !== -1 && chiudenteIdx !== col){
+            btnChiud.className = "btn-toggle-chiusa disabilitato";
+            btnChiud.innerText = "🏆 Chiusa";
+            btnChiud.setAttribute('disabled','');
+        } else {
+            btnChiud.className = "btn-toggle-chiusa";
+            btnChiud.innerText = "🏆 Chiusa";
+            btnChiud.removeAttribute('disabled');
+        }
+    }
     aggiornaPreviewMano(col);
 }
 
@@ -1207,30 +1555,62 @@ function modStepper(col,tipo,val){
     aggiornaPreviewMano(col);
 }
 
+function modStepperExtra(col,campo,val){
+    vibra(10);
+    if(typeof partita.manoCorrente[col][campo]!=='number') partita.manoCorrente[col][campo]=0;
+    partita.manoCorrente[col][campo]+=val;
+    if(partita.manoCorrente[col][campo]<0) partita.manoCorrente[col][campo]=0;
+    let el=document.getElementById('valore-'+col+'-'+campo);
+    if(el) el.innerText=partita.manoCorrente[col][campo];
+    aggiornaPreviewMano(col);
+}
+
 function aggiornaCarte(col,val){ partita.manoCorrente[col].carte=val; aggiornaPreviewMano(col); }
-function togglePozzetto(col){ vibra(15); partita.manoCorrente[col].pozzetto=!partita.manoCorrente[col].pozzetto; aggiornaBottoniStato(col); }
-function toggleChiusura(col){
+
+function toggleSegnoCarte(col){
     vibra(15);
-    partita.manoCorrente.forEach((m,idx)=>{if(idx!==col)m.chiuso=false;});
-    partita.manoCorrente[col].chiuso=!partita.manoCorrente[col].chiuso;
-    if(partita.manoCorrente[col].chiuso) partita.manoCorrente[col].pozzetto=true;
+    let m = partita.manoCorrente[col];
+    if(!m) return;
+    m.segnoCarte = (m.segnoCarte === '-') ? '+' : '-';
+    let btn = document.getElementById('btn-segno-'+col);
+    if(btn){
+        btn.innerText = m.segnoCarte;
+        btn.classList.toggle('negativo', m.segnoCarte==='-');
+        btn.classList.toggle('positivo', m.segnoCarte==='+');
+    }
+    aggiornaPreviewMano(col);
+}
+
+function togglePozzetto(col){ vibra(15); partita.manoCorrente[col].pozzetto=!partita.manoCorrente[col].pozzetto; aggiornaBottoniStato(col); }
+
+function toggleChiusura(col){
+    vibra(20);
+    let chiudenteIdx = partita.manoCorrente.findIndex(m=>m && m.chiuso);
+    if(chiudenteIdx !== -1 && chiudenteIdx !== col) return;
+    let eraChiuso = partita.manoCorrente[col].chiuso;
+    partita.manoCorrente[col].chiuso = !eraChiuso;
+    if(partita.manoCorrente[col].chiuso){
+        partita.manoCorrente[col].pozzetto = true;
+        setTimeout(()=>mostraAnimazioneVincitore(col), 100);
+    }
     partita.squadre.forEach((_,i)=>aggiornaBottoniStato(i));
 }
 
 function salvaSmazzata(){
     if(!partita.inCorso) return;
     if(!Array.isArray(partita.storicoSmazzate)) partita.storicoSmazzate=[];
-    partita.storicoSmazzate.push({punteggi:[...partita.punteggiTotali],mano:JSON.parse(JSON.stringify(partita.manoCorrente))});
+    partita.storicoSmazzate.push({
+        punteggi:[...partita.punteggiTotali],
+        mano:JSON.parse(JSON.stringify(partita.manoCorrente)),
+        mazziere: partita.mazziereCorrente
+    });
     if(partita.storicoSmazzate.length>30) partita.storicoSmazzate.shift();
     let targetNum=parseInt(partita.traguardo)||99999;
     let finePartita=false;
     let vincitore="";
     partita.squadre.forEach((sq,i)=>{
         let m=partita.manoCorrente[i];
-        let pCarte=parsePuntiCarte(m.carte);
-        let parziale=(m.puliti*200)+(m.semipuliti*150)+(m.sporchi*100)+pCarte;
-        if(m.chiuso) parziale+=100;
-        if(!m.pozzetto) parziale-=100;
+        let parziale=calcolaParzialeMano(m);
         partita.punteggiTotali[i]+=parziale;
         if(partita.traguardo!=='Smazzate'&&partita.punteggiTotali[i]>=targetNum){finePartita=true;vincitore=sq;}
     });
@@ -1238,10 +1618,13 @@ function salvaSmazzata(){
         alert("🎉 PARTITA FINITA!\nHa vinto: "+vincitore+" raggiungendo "+targetNum+" punti!");
         chiudiPartita(true);
     } else {
+        let nomePrecedente = partita.posti[partita.mazziereCorrente] ? partita.posti[partita.mazziereCorrente].nome : '—';
+        ruotaMazziere();
+        let nomeNuovo = partita.posti[partita.mazziereCorrente] ? partita.posti[partita.mazziereCorrente].nome : '—';
         resetManoCorrente();
         salvaDati();
         renderTabellone();
-        alert("✅ Smazzata calcolata e registrata!");
+        alert("✅ Smazzata calcolata e registrata!\n\n🎴 Ha dato le carte: "+nomePrecedente+"\n👉 Alla prossima mano tocca a: "+nomeNuovo);
     }
 }
 
@@ -1251,6 +1634,13 @@ function annullaUltimaSmazzata(){
     let prec=partita.storicoSmazzate.pop();
     partita.punteggiTotali=prec.punteggi;
     partita.manoCorrente=prec.mano;
+    if(typeof prec.mazziere === 'number') partita.mazziereCorrente = prec.mazziere;
+    // Migrazione di sicurezza
+    if(Array.isArray(partita.manoCorrente)){
+        partita.manoCorrente.forEach(m=>{
+            if(m && typeof m.segnoCarte !== 'string') m.segnoCarte = '+';
+        });
+    }
     salvaDati();
     renderTabellone();
     alert("↩️ Ultima smazzata annullata.");
@@ -1271,6 +1661,8 @@ function chiudiPartita(saltaConferma){
     partita.punteggiTotali=[];
     partita.manoCorrente=[];
     partita.storicoSmazzate=[];
+    partita.mazziereIniziale=null;
+    partita.mazziereCorrente=null;
     salvaDati();
     renderStorico();
     renderTavolo();
@@ -1287,10 +1679,8 @@ function renderRubrica(){
         return;
     }
     appData.giocatori.forEach((g,i)=>{
-        let avatarHTML=g.tipo==='emoji'
-            ?`<span style="font-size:36px;line-height:1;">${g.valore}</span>`
-            :`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
-        let subTag=g.soprannome?`<span style="font-size:12px;color:var(--giallo-burraco);">"${g.soprannome}"</span>`:'';
+        let avatarHTML=g.tipo==='emoji'?`<span style="font-size:36px;line-height:1;">${g.valore}</span>`:`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
+        let subTag=g.soprannome?`<span style="font-size:12px;color:var(--crema-accento);">"${g.soprannome}"</span>`:'';
         div.innerHTML+=`<div class="card-lista" style="flex-direction:row;justify-content:space-between;align-items:center;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:55px;height:55px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">${avatarHTML}</div><div><div style="font-size:17px;font-weight:bold;">${g.nome}</div>${subTag}</div></div><button class="btn-danger" style="width:auto;padding:6px 12px;font-size:12px;" onclick="eliminaGiocatore(${i})">Elimina</button></div>`;
     });
 }
@@ -1316,7 +1706,7 @@ function renderStorico(){
         s.squadre.forEach((sq,idx)=>{ res+=`${sq}: <b>${s.punti[idx]} pt</b><br>`; });
         let trag=s.traguardo?` - Target: ${s.traguardo}`:'';
         let demoBadge=s.demo?`<span class="badge-demo">DEMO</span>`:'';
-        div.innerHTML+=`<div class="card-lista" style="${s.demo?'border-color: rgba(255,215,0,0.4);':''}"><div style="color:var(--giallo-burraco);font-size:12px;font-weight:bold;">${s.data} - Modalità: ${s.modalita}${trag}${demoBadge}</div><div style="font-size:15px;margin-top:4px;">${res}</div></div>`;
+        div.innerHTML+=`<div class="card-lista" style="${s.demo?'border-color: rgba(255,215,0,0.4);':''}"><div style="color:var(--crema-accento);font-size:12px;font-weight:bold;">${s.data} - Modalità: ${s.modalita}${trag}${demoBadge}</div><div style="font-size:15px;margin-top:4px;">${res}</div></div>`;
     });
 }
 
@@ -1324,7 +1714,12 @@ function renderRegole(){
     let regole=[
         {titolo:"🃏 Valore delle Carte",testo:"<b>Jolly:</b> 30 punti<br><b>Pinella (2):</b> 20 punti<br><b>Asso:</b> 15 punti<br><b>Re, Donna, Jack, 10, 9, 8:</b> 10 punti<br><b>7, 6, 5, 4, 3:</b> 5 punti"},
         {titolo:"🏆 Punteggi Burrachi",testo:"<b>Burraco Pulito:</b> 200 punti (7+ carte senza jolly o pinelle)<br><b>Burraco Semipulito:</b> 150 punti (7+ carte con una pinella)<br><b>Burraco Sporco:</b> 100 punti (7+ carte con jolly o pinella)"},
-        {titolo:"🎯 Chiusura e Pozzetto",testo:"<b>Chiusura della partita:</b> +100 punti bonus<br><b>Pozzetto non preso:</b> Penale di -100 punti"}
+        {titolo:"👑 Burraco Reale (opzionale)",testo:"Burraco composto da 7 o più carte consecutive dello stesso seme, <b>senza jolly e senza pinelle</b>, che partono dal 3 e arrivano fino all'Asso. Vale <b>300 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
+        {titolo:"⚡ Super Burraco (opzionale)",testo:"Burraco composto da <b>12 o più carte</b> dello stesso seme, senza jolly. Vale <b>500 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
+        {titolo:"🌍 Burraco Internazionale (opzionale)",testo:"Variante con regole e punteggio internazionale. Vale <b>150 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
+        {titolo:"🎴 Mazziere (chi dà le carte)",testo:"All'inizio di ogni partita si sceglie chi dà le carte per la prima mano. Ad ogni smazzata registrata, il mazziere ruota automaticamente al giocatore successivo al tavolo (in senso orario). Il mazziere corrente è evidenziato in <b>oro</b> nel tabellone."},
+        {titolo:"➕➖ Punti Carte con segno",testo:"Accanto al campo <b>Punti Carte</b> c'è un pulsante <b>+ / −</b> che di default è su <b>+</b>. Toccalo per cambiare segno in <b>−</b> quando i punti carta vanno sottratti. Il punteggio scritto verrà sommato o sottratto in automatico dal totale."},
+        {titolo:"🎯 Chiusura e Pozzetto",testo:"<b>Chiusura della partita:</b> +100 punti bonus. Solo <b>una</b> squadra può chiudere la mano: quando attivi <b>🏆 Chiusa</b> su una squadra, l'opzione si disattiva automaticamente per gli altri e parte l'animazione con il nome del vincitore.<br><b>Pozzetto non preso:</b> Penale di -100 punti. Spunta la casella <b>Pozzetto</b> se la squadra ha preso il pozzetto. Se una squadra chiude la partita, il pozzetto è automaticamente considerato preso."}
     ];
     let div=document.getElementById('lista-regole');
     if(!div) return;
@@ -1335,12 +1730,15 @@ function renderRegole(){
 function renderIstruzioni(){
     let guida=[
         {titolo:"🎲 1. Configurare una Nuova Partita",testo:"Dalla schermata <b>Nuova Partita</b> seleziona la modalità di gioco e il traguardo. Tocca ciascun cerchio attorno al tavolo per assegnare un giocatore della rubrica."},
-        {titolo:"📝 2. Contare i Punti della Partita",testo:"Usa i pulsanti <b>+</b> e <b>-</b> per indicare i Burrachi e il tasto <b>🧮 Calcolatore</b> o l'inserimento manuale per i punti carte."},
-        {titolo:"↩️ 3. Correggere un Errore",testo:"Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b> per tornare indietro."},
-        {titolo:"👥 4. Gestire la Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici. Il tasto <b>Scegli: selfie, foto, file</b> apre il menu con le 3 opzioni. Poi <b>trascina</b> con mouse/dito per spostare e usa <b>rotellina</b> o <b>pinch</b> per zoomare."},
-        {titolo:"🎨 5. Scegliere un Tema Colore",testo:"In <b>Impostazioni</b> puoi scegliere tra 5 temi colorati: Verde, Blu, Rosso, Beige e Viola."},
-        {titolo:"💾 6. Backup dei Dati",testo:"In <b>Impostazioni</b> puoi esportare/importare un file JSON con tutti i tuoi dati."},
-        {titolo:"📐 7. Comprimere il Menu",testo:"Clicca il tasto dorato in alto nel menu laterale per comprimerlo o riespanderlo."}
+        {titolo:"🎴 2. Mazziere (Chi dà le carte)",testo:"Nella sezione <b>4. Chi dà le carte</b> scegli il giocatore che dà le carte per la <b>prima mano</b>. Durante la partita, il mazziere corrente è evidenziato in oro con un'animazione pulsante ed un badge <b>🎴 DÀ</b>. Ad ogni smazzata registrata, il mazziere ruota automaticamente al giocatore successivo."},
+        {titolo:"⚙️ 3. Regole Extra (Opzionali)",testo:"Nella sezione <b>5. Regole Extra</b> tocca <b>⚙️ Scegli regola da attivare</b> per aprire il menu. Puoi attivare <b>Burraco Reale</b>, <b>Super Burraco</b> e <b>Burraco Internazionale</b>. Una volta attivate, i relativi contatori compariranno automaticamente nel tabellone di ogni squadra."},
+        {titolo:"➕➖ 4. Inserire Punti Carte con segno",testo:"Nella riga <b>Punti Carte</b> c'è un pulsante <b>+ / −</b> (di default su <b>+</b>) e un campo per digitare il valore. Tocca il pulsante per cambiare segno quando vuoi sottrarre i punti carta: il valore scritto verrà sommato o sottratto in automatico dal totale della squadra."},
+        {titolo:"✅ 5. Pozzetto",testo:"Tocca <b>Pozzetto</b> se la squadra ha preso il pozzetto: la casella diventa verde e la penale di -100 non viene applicata. Se non spunti la casella, la penale di -100 viene automaticamente sottratta dal totale."},
+        {titolo:"🏆 6. Chiudere la Partita",testo:"Tocca <b>🏆 Chiusa</b> sulla squadra che ha chiuso la mano: parte una breve <b>animazione con scintille</b> e il nome del vincitore. Vengono aggiunti <b>+100 punti</b> di bonus e il <b>Pozzetto è automaticamente considerato preso</b>. Quando una squadra chiude, il tasto si disabilita per le altre (solo una squadra può chiudere per mano)."},
+        {titolo:"↩️ 7. Correggere un Errore",testo:"Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b> per tornare indietro (verrà ripristinato anche il mazziere precedente)."},
+        {titolo:"👥 8. Gestire la Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici. Il tasto <b>Scegli: selfie, foto, file</b> apre il menu con le 3 opzioni."},
+        {titolo:"🎨 9. Scegliere un Tema Colore",testo:"In <b>Impostazioni</b> puoi scegliere tra 5 temi colorati: Verde, Blu, Rosso, Beige e Viola."},
+        {titolo:"💾 10. Backup dei Dati",testo:"In <b>Impostazioni</b> puoi esportare/importare un file JSON con tutti i tuoi dati."}
     ];
     let div=document.getElementById('lista-istruzioni');
     if(!div) return;
@@ -1410,11 +1808,22 @@ function importaBackup(event){
                 partita=dati.partita;
                 if(!Array.isArray(partita.storicoSmazzate)) partita.storicoSmazzate=[];
                 if(partita.traguardo==='505') partita.traguardo='1005';
+                if(typeof partita.burracoReale!=='boolean') partita.burracoReale=false;
+                if(typeof partita.superBurraco!=='boolean') partita.superBurraco=false;
+                if(typeof partita.burracoInternazionale!=='boolean') partita.burracoInternazionale=false;
+                if(typeof partita.mazziereIniziale!=='number') partita.mazziereIniziale=null;
+                if(typeof partita.mazziereCorrente!=='number') partita.mazziereCorrente=null;
+                if(Array.isArray(partita.manoCorrente)){
+                    partita.manoCorrente.forEach(m=>{
+                        if(m && typeof m.segnoCarte !== 'string') m.segnoCarte = '+';
+                    });
+                }
             }
             salvaDati();
             document.body.classList.toggle("dark-mode",appData.tema==='scuro');
             applicaTemaColore();
             applicaStatoMenu();
+            aggiornaBottoniRegoleExtra();
             renderRubrica();
             renderStorico();
             renderTavolo();
