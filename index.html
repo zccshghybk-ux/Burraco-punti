@@ -131,33 +131,46 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .stepper-controls{display:flex;align-items:center;gap:8px;}
 .btn-stepper{background:rgba(255,255,255,0.2);border:none;color:white;width:28px;height:28px;border-radius:6px;font-size:18px;font-weight:bold;cursor:pointer;}
 .valore-stepper{font-size:16px;font-weight:bold;min-width:20px;text-align:center;}
-.input-carte{width:100%;padding:10px;border-radius:8px;border:none;font-size:16px;font-weight:bold;text-align:center;background:rgba(255,255,255,0.9);color:#000;}
+.input-carte{width:100%;height:28px;padding:0 8px;border-radius:0;border:none;font-size:14px;font-weight:bold;text-align:center;background:transparent;color:#000;min-width:0;outline:none;}
 
-/* Riga input punti carte con interruttore segno */
-.input-carte-row{display:flex;gap:8px;align-items:stretch;}
+/* Riga Punti Carte - stesso spessore delle altre righe */
+.input-carte-row{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;background:rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;margin-bottom:8px;}
+.input-carte-col{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 0;}
+.input-carte-col-label{font-size:10px;font-weight:bold;color:#ccc;text-align:center;letter-spacing:0.4px;line-height:1;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-/* Interruttore +/- a slitta */
+/* Casella unificata: switch + input insieme */
+.carte-combo{
+    display:flex;
+    align-items:stretch;
+    height:28px;
+    background:rgba(255,255,255,0.92);
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid rgba(0,0,0,0.08);
+    width:100%;
+}
+
+/* Interruttore +/- dentro la combo */
 .switch-segno{
     position:relative;
-    width:74px;
-    height:44px;
-    border-radius:10px;
-    background:linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
-    border:1.5px solid rgba(255,255,255,0.22);
-    cursor:pointer;
+    width:56px;
     flex-shrink:0;
-    transition:all 0.25s ease;
+    height:100%;
+    background:linear-gradient(145deg,rgba(0,0,0,0.06),rgba(0,0,0,0.12));
+    border-right:1.5px solid rgba(0,0,0,0.15);
+    cursor:pointer;
+    transition:all 0.2s ease;
     overflow:hidden;
     user-select:none;
     -webkit-user-select:none;
 }
-.switch-segno:active{transform:scale(0.96);}
+.switch-segno:active{filter:brightness(0.95);}
 .switch-knob{
     position:absolute;
-    top:3px;
-    width:32px;
-    height:32px;
-    border-radius:8px;
+    top:2px;
+    width:calc(50% - 4px);
+    height:calc(100% - 4px);
+    border-radius:4px;
     transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
     z-index:1;
 }
@@ -165,7 +178,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
     position:absolute;
     top:50%;
     transform:translateY(-50%);
-    font-size:20px;
+    font-size:15px;
     font-weight:900;
     z-index:2;
     transition:color 0.3s ease;
@@ -173,26 +186,48 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
     pointer-events:none;
     font-family:inherit;
 }
-.switch-label-meno{left:13px;}
-.switch-label-piu{right:13px;}
+.switch-label-meno{left:calc(25% - 4px);}
+.switch-label-piu{right:calc(25% - 4px);}
 
-/* Positivo (default): knob a destra, + evidenziato */
 .switch-segno.positivo .switch-knob{
-    left:calc(100% - 35px);
-    background:linear-gradient(145deg,#a5d6a7,#81c784);
-    box-shadow:0 2px 6px rgba(0,0,0,0.35),0 0 10px rgba(129,199,132,0.55);
+    left:calc(50% + 2px);
+    background:linear-gradient(145deg,#a5d6a7,#66bb6a);
+    box-shadow:0 1px 3px rgba(0,0,0,0.25);
 }
-.switch-segno.positivo .switch-label-piu{color:#1a1a1a;}
-.switch-segno.positivo .switch-label-meno{color:rgba(255,255,255,0.28);}
+.switch-segno.positivo .switch-label-piu{color:#fff;}
+.switch-segno.positivo .switch-label-meno{color:rgba(0,0,0,0.35);}
 
-/* Negativo: knob a sinistra, − evidenziato */
 .switch-segno.negativo .switch-knob{
-    left:3px;
-    background:linear-gradient(145deg,#ff8a80,#ff6b6b);
-    box-shadow:0 2px 6px rgba(0,0,0,0.35),0 0 10px rgba(255,107,107,0.55);
+    left:2px;
+    background:linear-gradient(145deg,#ff8a80,#ef5350);
+    box-shadow:0 1px 3px rgba(0,0,0,0.25);
 }
 .switch-segno.negativo .switch-label-meno{color:#fff;}
-.switch-segno.negativo .switch-label-piu{color:rgba(255,255,255,0.28);}
+.switch-segno.negativo .switch-label-piu{color:rgba(0,0,0,0.35);}
+
+/* Bottone calcolatore */
+.btn-calc-inline{
+    width:100%;
+    height:28px;
+    border-radius:6px;
+    border:1.5px solid rgba(255,215,0,0.5);
+    background:linear-gradient(145deg,rgba(255,215,0,0.2),rgba(255,215,0,0.06));
+    color:#fff8e1;
+    font-size:15px;
+    cursor:pointer;
+    transition:all 0.2s ease;
+    display:flex;align-items:center;justify-content:center;
+    padding:0;line-height:1;
+    font-family:inherit;
+    text-shadow:0 1px 2px rgba(0,0,0,0.4);
+}
+.btn-calc-inline:hover{
+    background:linear-gradient(145deg,rgba(255,215,0,0.35),rgba(255,215,0,0.12));
+    border-color:rgba(255,215,0,0.8);
+    box-shadow:0 0 10px rgba(255,215,0,0.4);
+    transform:translateY(-1px);
+}
+.btn-calc-inline:active{transform:scale(0.96);}
 
 .btn-avvia-swift{background:#34C759;color:white;font-size:18px;font-weight:bold;padding:15px;border:none;border-radius:12px;cursor:pointer;width:100%;box-shadow:0 4px 10px rgba(0,0,0,0.3);}
 .btn-danger{background:#ff3b30;color:white;font-size:16px;font-weight:bold;padding:14px;border:none;border-radius:12px;cursor:pointer;width:100%;}
@@ -360,7 +395,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
             <div class="voce-menu" id="nav-istruzioni" onclick="cambiaSchermata('istruzioni')"><span class="icona-voce">💡</span><span class="testo-menu">Come Usare l'App</span></div>
             <div class="voce-menu" id="nav-impostazioni" onclick="cambiaSchermata('impostazioni')"><span class="icona-voce">⚙️</span><span class="testo-menu">Impostazioni</span></div>
         </div>
-        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.4.2</span></div>
+        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.4.7</span></div>
     </nav>
 
     <main>
@@ -552,7 +587,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 </div>
 
 <script>
-const APP_VERSION = 'v1.4.2';
+const APP_VERSION = 'v1.4.7';
 
 const REGOLE_EXTRA_CONFIG = {
     burracoReale:          { emoji:'👑', label:'Burraco Reale',          valore: 300, campo:'reale' },
@@ -1486,18 +1521,21 @@ function renderTabellone(){
                 <div class="stepper-row"><span class="stepper-label">Semi (+150)</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepper(${i},'semipuliti',-1)">-</button><span class="valore-stepper" id="valore-${i}-semipuliti">${mano.semipuliti}</span><button class="btn-stepper" onclick="modStepper(${i},'semipuliti',1)">+</button></div></div>
                 <div class="stepper-row"><span class="stepper-label">Sporchi (+100)</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepper(${i},'sporchi',-1)">-</button><span class="valore-stepper" id="valore-${i}-sporchi">${mano.sporchi}</span><button class="btn-stepper" onclick="modStepper(${i},'sporchi',1)">+</button></div></div>
                 ${righeExtraHTML(i,mano)}
-                <div style="margin-top:10px;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
-                        <label style="font-size:11px;color:#ccc;">Punti Carte (+/−)</label>
-                        <button style="background:none;border:none;color:var(--crema-accento);font-size:11px;font-weight:bold;cursor:pointer;" onclick="apriCalcolatoreCarte(${i})">🧮 Calcolatore</button>
-                    </div>
-                    <div class="input-carte-row">
-                        <div class="switch-segno ${segnoClass}" id="switch-segno-${i}" onclick="toggleSegnoCarte(${i})" title="Tocca per cambiare + / −">
-                            <span class="switch-label switch-label-meno">−</span>
-                            <span class="switch-label switch-label-piu">+</span>
-                            <span class="switch-knob"></span>
+                <div class="input-carte-row">
+                    <div class="input-carte-col">
+                        <span class="input-carte-col-label">Punti carte in mano</span>
+                        <div class="carte-combo">
+                            <div class="switch-segno ${segnoClass}" id="switch-segno-${i}" onclick="toggleSegnoCarte(${i})" title="Tocca per cambiare + / −">
+                                <span class="switch-label switch-label-meno">−</span>
+                                <span class="switch-label switch-label-piu">+</span>
+                                <span class="switch-knob"></span>
+                            </div>
+                            <input type="text" class="input-carte" id="carte-${i}" placeholder="0" value="${mano.carte}" inputmode="decimal" pattern="[0-9.,]*" autocomplete="off" autocorrect="off" spellcheck="false" oninput="aggiornaCarte(${i},this.value)" onclick="apriTastieraCarte(this)">
                         </div>
-                        <input type="text" class="input-carte" id="carte-${i}" placeholder="0" value="${mano.carte}" inputmode="decimal" pattern="[0-9.,]*" autocomplete="off" autocorrect="off" spellcheck="false" oninput="aggiornaCarte(${i},this.value)" onclick="apriTastieraCarte(this)">
+                    </div>
+                    <div class="input-carte-col">
+                        <span class="input-carte-col-label">Calcolatore</span>
+                        <button type="button" class="btn-calc-inline" onclick="apriCalcolatoreCarte(${i})" title="Calcolatore carte">🧮</button>
                     </div>
                 </div>
                 <div class="pulsanti-stato-row">
@@ -1521,7 +1559,6 @@ function renderTabellone(){
 }
 
 function apriTastieraCarte(input){
-    // Forza tastiera numerica anche su desktop/focus via click
     if(!input) return;
     try{
         input.focus();
@@ -1759,9 +1796,9 @@ function renderRegole(){
         {titolo:"👑 Burraco Reale (opzionale)",testo:"Burraco composto da 7 o più carte consecutive dello stesso seme, <b>senza jolly e senza pinelle</b>, che partono dal 3 e arrivano fino all'Asso. Vale <b>300 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
         {titolo:"⚡ Super Burraco (opzionale)",testo:"Burraco composto da <b>12 o più carte</b> dello stesso seme, senza jolly. Vale <b>500 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
         {titolo:"🌍 Burraco Internazionale (opzionale)",testo:"Variante con regole e punteggio internazionale. Vale <b>150 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
-        {titolo:"🎴 Mazziere (chi dà le carte)",testo:"All'inizio di ogni partita si sceglie chi dà le carte per la prima mano. Ad ogni smazzata registrata, il mazziere ruota automaticamente al giocatore successivo al tavolo (in senso orario). Il mazziere corrente è evidenziato in <b>oro</b> nel tabellone."},
-        {titolo:"➕➖ Punti Carte con interruttore",testo:"Accanto al campo <b>Punti Carte</b> c'è un interruttore a slitta: <b>destra = +</b> (verde), <b>sinistra = −</b> (rosso). Di default è su <b>+</b>. Toccalo per cambiare segno quando i punti carta vanno sottratti. Il punteggio verrà sommato o sottratto automaticamente dal totale."},
-        {titolo:"🎯 Chiusura e Pozzetto",testo:"<b>Chiusura della partita:</b> +100 punti bonus. Solo <b>una</b> squadra può chiudere la mano: quando attivi <b>🏆 Chiusa</b> su una squadra, l'opzione si disattiva automaticamente per gli altri e parte l'animazione con il nome del vincitore.<br><b>Pozzetto non preso:</b> Penale di -100 punti. Spunta la casella <b>Pozzetto</b> se la squadra ha preso il pozzetto. Se una squadra chiude la partita, il pozzetto è automaticamente considerato preso."}
+        {titolo:"🎴 Mazziere (chi dà le carte)",testo:"All'inizio di ogni partita si sceglie chi dà le carte per la prima mano. Ad ogni smazzata registrata, il mazziere ruota automaticamente al giocatore successivo al tavolo (in senso orario)."},
+        {titolo:"➕➖ Punti Carte in mano",testo:"La riga <b>Punti carte in mano</b> contiene, in un'unica casella: interruttore <b>+/−</b> e campo numerico. Il pulsante <b>Calcolatore 🧮</b> è affiancato nella sua casella dedicata della stessa larghezza."},
+        {titolo:"🎯 Chiusura e Pozzetto",testo:"<b>Chiusura della partita:</b> +100 punti bonus. Solo <b>una</b> squadra può chiudere la mano.<br><b>Pozzetto non preso:</b> Penale di -100 punti."}
     ];
     let div=document.getElementById('lista-regole');
     if(!div) return;
@@ -1771,16 +1808,16 @@ function renderRegole(){
 
 function renderIstruzioni(){
     let guida=[
-        {titolo:"🎲 1. Configurare una Nuova Partita",testo:"Dalla schermata <b>Nuova Partita</b> seleziona la modalità di gioco e il traguardo. Tocca ciascun cerchio attorno al tavolo per assegnare un giocatore della rubrica."},
-        {titolo:"🎴 2. Mazziere (Chi dà le carte)",testo:"Nella sezione <b>4. Chi dà le carte</b> scegli il giocatore che dà le carte per la <b>prima mano</b>. Durante la partita, il mazziere corrente è evidenziato in oro con un'animazione pulsante ed un badge <b>🎴 DÀ</b>. Ad ogni smazzata registrata, il mazziere ruota automaticamente al giocatore successivo."},
-        {titolo:"⚙️ 3. Regole Extra (Opzionali)",testo:"Nella sezione <b>5. Regole Extra</b> tocca <b>⚙️ Scegli regola da attivare</b> per aprire il menu. Puoi attivare <b>Burraco Reale</b>, <b>Super Burraco</b> e <b>Burraco Internazionale</b>. Una volta attivate, i relativi contatori compariranno automaticamente nel tabellone di ogni squadra."},
-        {titolo:"➕➖ 4. Interruttore Punti Carte (+/−)",testo:"Nella riga <b>Punti Carte</b> trovi un <b>interruttore a slitta</b>: <b>destra = +</b> (verde, default) e <b>sinistra = −</b> (rosso). Toccalo per cambiare segno quando i punti carta vanno sottratti. Nel campo accanto scrivi il valore: cliccandolo si apre direttamente la <b>tastiera numerica</b> su telefono, tablet e PC (dove disponibile)."},
-        {titolo:"✅ 5. Pozzetto",testo:"Tocca <b>Pozzetto</b> se la squadra ha preso il pozzetto: la casella diventa verde e la penale di -100 non viene applicata. Se non spunti la casella, la penale di -100 viene automaticamente sottratta dal totale."},
-        {titolo:"🏆 6. Chiudere la Partita",testo:"Tocca <b>🏆 Chiusa</b> sulla squadra che ha chiuso la mano: parte una breve <b>animazione con scintille</b> e il nome del vincitore. Vengono aggiunti <b>+100 punti</b> di bonus e il <b>Pozzetto è automaticamente considerato preso</b>. Quando una squadra chiude, il tasto si disabilita per le altre (solo una squadra può chiudere per mano)."},
-        {titolo:"↩️ 7. Correggere un Errore",testo:"Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b> per tornare indietro (verrà ripristinato anche il mazziere precedente)."},
-        {titolo:"👥 8. Gestire la Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici. Il tasto <b>Scegli: selfie, foto, file</b> apre il menu con le 3 opzioni."},
-        {titolo:"🎨 9. Scegliere un Tema Colore",testo:"In <b>Impostazioni</b> puoi scegliere tra 5 temi colorati: Verde, Blu, Rosso, Beige e Viola."},
-        {titolo:"💾 10. Backup dei Dati",testo:"In <b>Impostazioni</b> puoi esportare/importare un file JSON con tutti i tuoi dati."}
+        {titolo:"🎲 1. Configurare una Nuova Partita",testo:"Dalla schermata <b>Nuova Partita</b> seleziona la modalità di gioco e il traguardo. Tocca ciascun cerchio attorno al tavolo per assegnare un giocatore."},
+        {titolo:"🎴 2. Mazziere (Chi dà le carte)",testo:"Nella sezione <b>4. Chi dà le carte</b> scegli il giocatore che dà le carte per la <b>prima mano</b>. Il mazziere corrente è evidenziato in oro con badge <b>🎴 DÀ</b>. Ad ogni smazzata, il mazziere ruota automaticamente."},
+        {titolo:"⚙️ 3. Regole Extra (Opzionali)",testo:"Nella sezione <b>5. Regole Extra</b> tocca <b>⚙️ Scegli regola da attivare</b>. Puoi attivare <b>Burraco Reale</b>, <b>Super Burraco</b> e <b>Burraco Internazionale</b>."},
+        {titolo:"➕➖ 4. Punti carte in mano",testo:"Le due caselle <b>Punti carte in mano</b> e <b>Calcolatore</b> hanno la <b>stessa larghezza</b>. Nella prima trovi interruttore <b>+/−</b> e campo numerico insieme; cliccando il campo si apre la tastiera numerica."},
+        {titolo:"✅ 5. Pozzetto",testo:"Tocca <b>Pozzetto</b> se la squadra ha preso il pozzetto: la casella diventa verde e la penale di -100 non viene applicata."},
+        {titolo:"🏆 6. Chiudere la Partita",testo:"Tocca <b>🏆 Chiusa</b> sulla squadra che ha chiuso la mano: parte una <b>animazione con scintille</b> e il nome del vincitore. Vengono aggiunti <b>+100 punti</b> e il <b>Pozzetto è automaticamente preso</b>."},
+        {titolo:"↩️ 7. Correggere un Errore",testo:"Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b>."},
+        {titolo:"👥 8. Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici con emoji, selfie, foto o file."},
+        {titolo:"🎨 9. Tema Colore",testo:"In <b>Impostazioni</b> puoi scegliere tra 5 temi: Verde, Blu, Rosso, Beige e Viola."},
+        {titolo:"💾 10. Backup",testo:"In <b>Impostazioni</b> puoi esportare/importare un file JSON con tutti i tuoi dati."}
     ];
     let div=document.getElementById('lista-istruzioni');
     if(!div) return;
