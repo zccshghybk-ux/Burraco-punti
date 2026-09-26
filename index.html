@@ -114,14 +114,36 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(2){grid-area:so;}
 .griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(3){grid-area:se;}
 .griglia-punti.tavolo-mode-4coppie{grid-template-columns:1fr;grid-template-areas:"ns" "eo";max-width:640px;margin:0 auto;}
-.griglia-punti.tavolo-mode-4singoli{grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto auto;grid-template-areas:". nord ." "ovest centro est" ". sud .";align-items:stretch;max-width:900px;margin:0 auto;}
+/* 4 Singoli: 2 sopra / 2 sotto, con più spazio */
+.griglia-punti.tavolo-mode-4singoli{grid-template-columns:1fr 1fr;grid-template-areas:"nord est" "ovest sud";align-items:stretch;max-width:960px;margin:0 auto;gap:18px;}
 .griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(1){grid-area:nord;}
 .griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(2){grid-area:sud;}
 .griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(3){grid-area:ovest;}
 .griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(4){grid-area:est;}
+.griglia-punti.tavolo-mode-4singoli .colonna-punti{padding:20px 18px;border-radius:18px;}
+.griglia-punti.tavolo-mode-4singoli .punti-totali{font-size:38px;margin-bottom:18px;}
+.griglia-punti.tavolo-mode-4singoli .stepper-row{padding:11px 14px;margin-bottom:10px;}
+.griglia-punti.tavolo-mode-4singoli .stepper-label{font-size:14px;}
+.griglia-punti.tavolo-mode-4singoli .btn-stepper{width:34px;height:34px;font-size:22px;border-radius:8px;}
+.griglia-punti.tavolo-mode-4singoli .valore-stepper{font-size:20px;min-width:26px;}
+.griglia-punti.tavolo-mode-4singoli .input-carte-row{padding:11px 14px;margin-bottom:10px;gap:10px;}
+.griglia-punti.tavolo-mode-4singoli .input-carte-col-label{font-size:14px;margin-bottom:2px;}
+.griglia-punti.tavolo-mode-4singoli .carte-combo{height:38px;border-radius:8px;}
+.griglia-punti.tavolo-mode-4singoli .switch-segno{width:70px;}
+.griglia-punti.tavolo-mode-4singoli .switch-label{font-size:20px;}
+.griglia-punti.tavolo-mode-4singoli .input-carte{font-size:20px;padding:0 12px;font-weight:900;}
+.griglia-punti.tavolo-mode-4singoli .btn-calc-inline{height:38px;font-size:20px;border-radius:8px;}
+.griglia-punti.tavolo-mode-4singoli .checkbox-pozzetto,
+.griglia-punti.tavolo-mode-4singoli .btn-toggle-chiusa{padding:13px 12px;font-size:14px;border-radius:12px;}
+.griglia-punti.tavolo-mode-4singoli .checkbox-box{width:18px;height:18px;}
+.griglia-punti.tavolo-mode-4singoli .checkbox-pozzetto.attivo .checkbox-box::after{font-size:13px;}
+.griglia-punti.tavolo-mode-4singoli #preview-0,
+.griglia-punti.tavolo-mode-4singoli #preview-1,
+.griglia-punti.tavolo-mode-4singoli #preview-2,
+.griglia-punti.tavolo-mode-4singoli #preview-3{font-size:15px;margin-top:12px;}
+@media (max-width:900px){.griglia-punti.tavolo-mode-4singoli{grid-template-columns:1fr;grid-template-areas:"nord" "est" "sud" "ovest";gap:16px;}}
 .tavolo-centro{grid-area:centro;display:flex;align-items:center;justify-content:center;width:100%;max-width:110px;aspect-ratio:1;align-self:center;justify-self:center;background:radial-gradient(circle at center,rgba(46,125,50,0.75) 0%,rgba(0,40,0,0.9) 100%);border-radius:50%;border:2px dashed rgba(255,248,225,0.55);font-size:38px;color:rgba(255,248,225,0.6);box-shadow:inset 0 0 25px rgba(0,0,0,0.6),0 0 20px rgba(255,248,225,0.2);text-shadow:0 0 12px rgba(255,248,225,0.5);}
 .freccia-pos{color:#ff9800;font-weight:900;font-size:1.15em;text-shadow:0 0 8px rgba(255,152,0,0.95),0 0 14px rgba(255,152,0,0.55),0 1px 2px rgba(0,0,0,0.8);display:inline-block;margin:0 2px;vertical-align:middle;line-height:1;}
-@media (max-width:900px){.griglia-punti.tavolo-mode-4singoli{grid-template-columns:1fr;grid-template-areas:"nord" "sud" "ovest" "est";}.griglia-punti.tavolo-mode-4singoli .tavolo-centro{display:none;}}
 @media (max-width:700px){.griglia-punti.tavolo-mode-3{grid-template-columns:1fr;grid-template-areas:"nord" "so" "se";}.griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(1){max-width:none;}}
 .colonna-punti{background:var(--sfondo-card);border-radius:16px;padding:15px;border:1px solid rgba(255,255,255,0.15);}
 .nome-squadra{font-family:Optima,sans-serif;font-size:18px;font-weight:bold;color:var(--crema-accento);text-align:center;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:8px;margin-bottom:10px;}
@@ -133,12 +155,10 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .valore-stepper{font-size:16px;font-weight:bold;min-width:20px;text-align:center;}
 .input-carte{width:100%;height:28px;padding:0 8px;border-radius:0;border:none;font-size:14px;font-weight:bold;text-align:center;background:transparent;color:#000;min-width:0;outline:none;}
 
-/* Riga Punti Carte - stesso spessore delle altre righe */
 .input-carte-row{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;background:rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;margin-bottom:8px;}
 .input-carte-col{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 0;}
-.input-carte-col-label{font-size:10px;font-weight:bold;color:#ccc;text-align:center;letter-spacing:0.4px;line-height:1;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.input-carte-col-label{font-size:12px;font-weight:bold;color:#ddd;text-align:center;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-/* Casella unificata: switch + input insieme */
 .carte-combo{
     display:flex;
     align-items:stretch;
@@ -150,7 +170,6 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
     width:100%;
 }
 
-/* Interruttore +/- dentro la combo */
 .switch-segno{
     position:relative;
     width:56px;
@@ -205,7 +224,6 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .switch-segno.negativo .switch-label-meno{color:#fff;}
 .switch-segno.negativo .switch-label-piu{color:rgba(0,0,0,0.35);}
 
-/* Bottone calcolatore */
 .btn-calc-inline{
     width:100%;
     height:28px;
@@ -276,7 +294,6 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .btn-toggle-extra{padding:6px 14px;border-radius:20px;border:1.5px solid rgba(255,255,255,0.3);background:transparent;color:white;font-weight:bold;font-size:12px;cursor:pointer;transition:0.2s;flex-shrink:0;font-family:inherit;min-width:56px;}
 .btn-toggle-extra.attivo{background:var(--giallo-burraco);color:var(--testo-scuro-swift);border-color:var(--giallo-burraco);box-shadow:0 0 10px rgba(255,215,0,0.5);}
 
-/* Mazziere */
 @keyframes mazziere-pulse{
     0%,100%{box-shadow:0 0 8px 2px rgba(255,215,0,0.75),0 0 18px rgba(255,215,0,0.45);}
     50%{box-shadow:0 0 18px 5px rgba(255,215,0,1),0 0 35px rgba(255,215,0,0.75);}
@@ -286,7 +303,6 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .btn-mazziere-scelta{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:bold;font-size:13px;font-family:inherit;transition:all 0.2s;}
 .btn-mazziere-scelta:active{transform:scale(0.97);}
 
-/* Dropdown Regole Extra */
 .btn-apri-regole-extra{width:100%;background:linear-gradient(145deg,rgba(255,215,0,0.18),rgba(255,215,0,0.06));border:1.5px solid rgba(255,215,0,0.5);color:var(--crema-accento);padding:12px 14px;border-radius:12px;font-size:14px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:inherit;transition:all 0.2s;}
 .btn-apri-regole-extra:hover{background:linear-gradient(145deg,rgba(255,215,0,0.3),rgba(255,215,0,0.1));box-shadow:0 0 12px rgba(255,215,0,0.4);}
 .btn-apri-regole-extra .freccia{font-size:12px;transition:transform 0.25s;}
@@ -295,7 +311,6 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .pannello-regole-extra.aperto{display:block;}
 .pannello-regole-extra .regola-extra-row:last-child{margin-bottom:0;}
 
-/* ===== RIGA PULSANTI STATO (Pozzetto + Chiusa) ===== */
 .pulsanti-stato-row{display:flex;gap:8px;margin-top:12px;}
 .pulsanti-stato-row > *{flex:1;min-width:0;}
 
@@ -331,7 +346,6 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .btn-toggle-chiusa.attivo{background:linear-gradient(145deg,rgba(255,215,0,0.9),rgba(212,160,23,0.85));border-color:rgba(255,215,0,0.95);color:#1a1a1a;box-shadow:0 2px 14px rgba(255,215,0,0.45),inset 0 1px 0 rgba(255,255,255,0.55);text-shadow:0 1px 0 rgba(255,255,255,0.4);font-weight:bold;}
 .btn-toggle-chiusa.disabilitato{opacity:0.32;pointer-events:none;cursor:not-allowed;filter:grayscale(0.4);}
 
-/* OVERLAY VINCITORE */
 .overlay-vincitore{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:3000;justify-content:center;align-items:center;overflow:hidden;}
 .overlay-vincitore.attivo{display:flex;}
 .vincitore-card{background:linear-gradient(160deg,rgba(30,60,30,0.96),rgba(15,35,15,0.96));border:2px solid var(--giallo-burraco);border-radius:24px;padding:32px 36px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.85),0 0 60px rgba(255,215,0,0.55),inset 0 1px 0 rgba(255,255,255,0.12);animation:winner-zoom 0.65s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:2;max-width:90vw;}
@@ -395,7 +409,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
             <div class="voce-menu" id="nav-istruzioni" onclick="cambiaSchermata('istruzioni')"><span class="icona-voce">💡</span><span class="testo-menu">Come Usare l'App</span></div>
             <div class="voce-menu" id="nav-impostazioni" onclick="cambiaSchermata('impostazioni')"><span class="icona-voce">⚙️</span><span class="testo-menu">Impostazioni</span></div>
         </div>
-        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.4.7</span></div>
+        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.4.9</span></div>
     </nav>
 
     <main>
@@ -587,7 +601,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 </div>
 
 <script>
-const APP_VERSION = 'v1.4.7';
+const APP_VERSION = 'v1.4.9';
 
 const REGOLE_EXTRA_CONFIG = {
     burracoReale:          { emoji:'👑', label:'Burraco Reale',          valore: 300, campo:'reale' },
@@ -1549,12 +1563,7 @@ function renderTabellone(){
                 <div id="preview-${i}" style="text-align:center;margin-top:10px;font-size:13px;color:#bbb;"></div>
             </div>`;
     });
-    if(partita.modalita==='4 Singoli'){
-        let centro=document.createElement('div');
-        centro.className='tavolo-centro';
-        centro.innerHTML='🎴';
-        griglia.appendChild(centro);
-    }
+    /* Rimosso il tavolo-centro per 4 Singoli */
     partita.squadre.forEach((_,i)=>aggiornaPreviewMano(i));
 }
 
@@ -1797,7 +1806,8 @@ function renderRegole(){
         {titolo:"⚡ Super Burraco (opzionale)",testo:"Burraco composto da <b>12 o più carte</b> dello stesso seme, senza jolly. Vale <b>500 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
         {titolo:"🌍 Burraco Internazionale (opzionale)",testo:"Variante con regole e punteggio internazionale. Vale <b>150 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
         {titolo:"🎴 Mazziere (chi dà le carte)",testo:"All'inizio di ogni partita si sceglie chi dà le carte per la prima mano. Ad ogni smazzata registrata, il mazziere ruota automaticamente al giocatore successivo al tavolo (in senso orario)."},
-        {titolo:"➕➖ Punti Carte in mano",testo:"La riga <b>Punti carte in mano</b> contiene, in un'unica casella: interruttore <b>+/−</b> e campo numerico. Il pulsante <b>Calcolatore 🧮</b> è affiancato nella sua casella dedicata della stessa larghezza."},
+        {titolo:"➕➖ Punti Carte in mano",testo:"La riga <b>Punti carte in mano</b> contiene, in un'unica casella: interruttore <b>+/−</b> e campo numerico. Il pulsante <b>Calcolatore 🧮</b> è affiancato nella sua casella dedicata."},
+        {titolo:"👤 4 Singoli",testo:"In modalità <b>4 Singoli</b> i 4 tabelloni sono disposti <b>2 in alto e 2 in basso</b> (Nord, Est sopra — Ovest, Sud sotto). Su schermi piccoli si dispongono automaticamente <b>uno sotto l'altro</b> per la massima leggibilità."},
         {titolo:"🎯 Chiusura e Pozzetto",testo:"<b>Chiusura della partita:</b> +100 punti bonus. Solo <b>una</b> squadra può chiudere la mano.<br><b>Pozzetto non preso:</b> Penale di -100 punti."}
     ];
     let div=document.getElementById('lista-regole');
@@ -1809,15 +1819,15 @@ function renderRegole(){
 function renderIstruzioni(){
     let guida=[
         {titolo:"🎲 1. Configurare una Nuova Partita",testo:"Dalla schermata <b>Nuova Partita</b> seleziona la modalità di gioco e il traguardo. Tocca ciascun cerchio attorno al tavolo per assegnare un giocatore."},
-        {titolo:"🎴 2. Mazziere (Chi dà le carte)",testo:"Nella sezione <b>4. Chi dà le carte</b> scegli il giocatore che dà le carte per la <b>prima mano</b>. Il mazziere corrente è evidenziato in oro con badge <b>🎴 DÀ</b>. Ad ogni smazzata, il mazziere ruota automaticamente."},
+        {titolo:"🎴 2. Mazziere (Chi dà le carte)",testo:"Nella sezione <b>4. Chi dà le carte</b> scegli il giocatore che dà le carte per la <b>prima mano</b>. Il mazziere corrente è evidenziato in oro con badge <b>🎴 DÀ</b>."},
         {titolo:"⚙️ 3. Regole Extra (Opzionali)",testo:"Nella sezione <b>5. Regole Extra</b> tocca <b>⚙️ Scegli regola da attivare</b>. Puoi attivare <b>Burraco Reale</b>, <b>Super Burraco</b> e <b>Burraco Internazionale</b>."},
-        {titolo:"➕➖ 4. Punti carte in mano",testo:"Le due caselle <b>Punti carte in mano</b> e <b>Calcolatore</b> hanno la <b>stessa larghezza</b>. Nella prima trovi interruttore <b>+/−</b> e campo numerico insieme; cliccando il campo si apre la tastiera numerica."},
-        {titolo:"✅ 5. Pozzetto",testo:"Tocca <b>Pozzetto</b> se la squadra ha preso il pozzetto: la casella diventa verde e la penale di -100 non viene applicata."},
-        {titolo:"🏆 6. Chiudere la Partita",testo:"Tocca <b>🏆 Chiusa</b> sulla squadra che ha chiuso la mano: parte una <b>animazione con scintille</b> e il nome del vincitore. Vengono aggiunti <b>+100 punti</b> e il <b>Pozzetto è automaticamente preso</b>."},
-        {titolo:"↩️ 7. Correggere un Errore",testo:"Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b>."},
-        {titolo:"👥 8. Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici con emoji, selfie, foto o file."},
-        {titolo:"🎨 9. Tema Colore",testo:"In <b>Impostazioni</b> puoi scegliere tra 5 temi: Verde, Blu, Rosso, Beige e Viola."},
-        {titolo:"💾 10. Backup",testo:"In <b>Impostazioni</b> puoi esportare/importare un file JSON con tutti i tuoi dati."}
+        {titolo:"👤 4. Modalità 4 Singoli",testo:"In <b>4 Singoli</b> i tabelloni sono più grandi e disposti <b>2 sopra e 2 sotto</b> (Nord, Est / Ovest, Sud). Su telefono si dispongono automaticamente <b>uno sotto l'altro</b> per garantire la massima leggibilità."},
+        {titolo:"➕➖ 5. Punti carte in mano",testo:"Le due caselle <b>Punti carte in mano</b> e <b>Calcolatore</b> hanno la <b>stessa larghezza</b>. Nella prima trovi interruttore <b>+/−</b> e campo numerico insieme; cliccando il campo si apre la tastiera numerica."},
+        {titolo:"✅ 6. Pozzetto",testo:"Tocca <b>Pozzetto</b> se la squadra ha preso il pozzetto: la casella diventa verde e la penale di -100 non viene applicata."},
+        {titolo:"🏆 7. Chiudere la Partita",testo:"Tocca <b>🏆 Chiusa</b> sulla squadra che ha chiuso la mano: parte una <b>animazione con scintille</b> e il nome del vincitore. Vengono aggiunti <b>+100 punti</b> e il <b>Pozzetto è automaticamente preso</b>."},
+        {titolo:"↩️ 8. Correggere un Errore",testo:"Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b>."},
+        {titolo:"👥 9. Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici con emoji, selfie, foto o file."},
+        {titolo:"🎨 10. Tema Colore",testo:"In <b>Impostazioni</b> puoi scegliere tra 5 temi: Verde, Blu, Rosso, Beige e Viola."}
     ];
     let div=document.getElementById('lista-istruzioni');
     if(!div) return;
