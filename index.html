@@ -113,8 +113,11 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(1){grid-area:nord;max-width:320px;justify-self:center;width:100%;}
 .griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(2){grid-area:so;}
 .griglia-punti.tavolo-mode-3 .colonna-punti:nth-child(3){grid-area:se;}
+.griglia-punti.tavolo-mode-3-pozzetto{grid-template-columns:1fr 1fr;grid-template-areas:"solo team";max-width:900px;margin:0 auto;gap:18px;}
+.griglia-punti.tavolo-mode-3-pozzetto .colonna-punti:nth-child(1){grid-area:solo;}
+.griglia-punti.tavolo-mode-3-pozzetto .colonna-punti:nth-child(2){grid-area:team;}
+@media (max-width:700px){.griglia-punti.tavolo-mode-3-pozzetto{grid-template-columns:1fr;grid-template-areas:"solo" "team";}}
 .griglia-punti.tavolo-mode-4coppie{grid-template-columns:1fr;grid-template-areas:"ns" "eo";max-width:640px;margin:0 auto;}
-/* 4 Singoli: 2 sopra / 2 sotto, con più spazio */
 .griglia-punti.tavolo-mode-4singoli{grid-template-columns:1fr 1fr;grid-template-areas:"nord est" "ovest sud";align-items:stretch;max-width:960px;margin:0 auto;gap:18px;}
 .griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(1){grid-area:nord;}
 .griglia-punti.tavolo-mode-4singoli .colonna-punti:nth-child(2){grid-area:sud;}
@@ -154,129 +157,92 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .btn-stepper{background:rgba(255,255,255,0.2);border:none;color:white;width:28px;height:28px;border-radius:6px;font-size:18px;font-weight:bold;cursor:pointer;}
 .valore-stepper{font-size:16px;font-weight:bold;min-width:20px;text-align:center;}
 .input-carte{width:100%;height:28px;padding:0 8px;border-radius:0;border:none;font-size:14px;font-weight:bold;text-align:center;background:transparent;color:#000;min-width:0;outline:none;}
-
 .input-carte-row{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;background:rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;margin-bottom:8px;}
 .input-carte-col{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 0;}
 .input-carte-col-label{font-size:12px;font-weight:bold;color:#ddd;text-align:center;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-
-.carte-combo{
-    display:flex;
-    align-items:stretch;
-    height:28px;
-    background:rgba(255,255,255,0.92);
-    border-radius:6px;
-    overflow:hidden;
-    border:1px solid rgba(0,0,0,0.08);
-    width:100%;
-}
-
-.switch-segno{
-    position:relative;
-    width:56px;
-    flex-shrink:0;
-    height:100%;
-    background:linear-gradient(145deg,rgba(0,0,0,0.06),rgba(0,0,0,0.12));
-    border-right:1.5px solid rgba(0,0,0,0.15);
-    cursor:pointer;
-    transition:all 0.2s ease;
-    overflow:hidden;
-    user-select:none;
-    -webkit-user-select:none;
-}
+.carte-combo{display:flex;align-items:stretch;height:28px;background:rgba(255,255,255,0.92);border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);width:100%;}
+.switch-segno{position:relative;width:56px;flex-shrink:0;height:100%;background:linear-gradient(145deg,rgba(0,0,0,0.06),rgba(0,0,0,0.12));border-right:1.5px solid rgba(0,0,0,0.15);cursor:pointer;transition:all 0.2s ease;overflow:hidden;user-select:none;-webkit-user-select:none;}
 .switch-segno:active{filter:brightness(0.95);}
-.switch-knob{
-    position:absolute;
-    top:2px;
-    width:calc(50% - 4px);
-    height:calc(100% - 4px);
-    border-radius:4px;
-    transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    z-index:1;
-}
-.switch-label{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:15px;
-    font-weight:900;
-    z-index:2;
-    transition:color 0.3s ease;
-    line-height:1;
-    pointer-events:none;
-    font-family:inherit;
-}
+.switch-knob{position:absolute;top:2px;width:calc(50% - 4px);height:calc(100% - 4px);border-radius:4px;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);z-index:1;}
+.switch-label{position:absolute;top:50%;transform:translateY(-50%);font-size:15px;font-weight:900;z-index:2;transition:color 0.3s ease;line-height:1;pointer-events:none;font-family:inherit;}
 .switch-label-meno{left:calc(25% - 4px);}
 .switch-label-piu{right:calc(25% - 4px);}
-
-.switch-segno.positivo .switch-knob{
-    left:calc(50% + 2px);
-    background:linear-gradient(145deg,#a5d6a7,#66bb6a);
-    box-shadow:0 1px 3px rgba(0,0,0,0.25);
-}
+.switch-segno.positivo .switch-knob{left:calc(50% + 2px);background:linear-gradient(145deg,#a5d6a7,#66bb6a);box-shadow:0 1px 3px rgba(0,0,0,0.25);}
 .switch-segno.positivo .switch-label-piu{color:#fff;}
 .switch-segno.positivo .switch-label-meno{color:rgba(0,0,0,0.35);}
-
-.switch-segno.negativo .switch-knob{
-    left:2px;
-    background:linear-gradient(145deg,#ff8a80,#ef5350);
-    box-shadow:0 1px 3px rgba(0,0,0,0.25);
-}
+.switch-segno.negativo .switch-knob{left:2px;background:linear-gradient(145deg,#ff8a80,#ef5350);box-shadow:0 1px 3px rgba(0,0,0,0.25);}
 .switch-segno.negativo .switch-label-meno{color:#fff;}
 .switch-segno.negativo .switch-label-piu{color:rgba(0,0,0,0.35);}
-
-.btn-calc-inline{
-    width:100%;
-    height:28px;
-    border-radius:6px;
-    border:1.5px solid rgba(255,215,0,0.5);
-    background:linear-gradient(145deg,rgba(255,215,0,0.2),rgba(255,215,0,0.06));
-    color:#fff8e1;
-    font-size:15px;
-    cursor:pointer;
-    transition:all 0.2s ease;
-    display:flex;align-items:center;justify-content:center;
-    padding:0;line-height:1;
-    font-family:inherit;
-    text-shadow:0 1px 2px rgba(0,0,0,0.4);
-}
-.btn-calc-inline:hover{
-    background:linear-gradient(145deg,rgba(255,215,0,0.35),rgba(255,215,0,0.12));
-    border-color:rgba(255,215,0,0.8);
-    box-shadow:0 0 10px rgba(255,215,0,0.4);
-    transform:translateY(-1px);
-}
+.btn-calc-inline{width:100%;height:28px;border-radius:6px;border:1.5px solid rgba(255,215,0,0.5);background:linear-gradient(145deg,rgba(255,215,0,0.2),rgba(255,215,0,0.06));color:#fff8e1;font-size:15px;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;font-family:inherit;text-shadow:0 1px 2px rgba(0,0,0,0.4);}
+.btn-calc-inline:hover{background:linear-gradient(145deg,rgba(255,215,0,0.35),rgba(255,215,0,0.12));border-color:rgba(255,215,0,0.8);box-shadow:0 0 10px rgba(255,215,0,0.4);transform:translateY(-1px);}
 .btn-calc-inline:active{transform:scale(0.96);}
-
 .btn-avvia-swift{background:#34C759;color:white;font-size:18px;font-weight:bold;padding:15px;border:none;border-radius:12px;cursor:pointer;width:100%;box-shadow:0 4px 10px rgba(0,0,0,0.3);}
+.btn-avvia-partita{background:linear-gradient(145deg,#ffe082 0%,#ffd700 45%,#d4a017 100%);color:#2a1a00;font-family:Optima,Georgia,'Times New Roman',serif;font-size:20px;font-weight:bold;letter-spacing:1.5px;padding:17px 15px;border:2px solid rgba(255,248,225,0.65);border-radius:14px;cursor:pointer;width:100%;box-shadow:0 6px 20px rgba(0,0,0,0.5),0 0 30px rgba(255,215,0,0.5),inset 0 1px 0 rgba(255,255,255,0.75),inset 0 -2px 6px rgba(140,100,0,0.3);text-shadow:0 1px 1px rgba(255,255,255,0.55);transition:all 0.25s ease;}
+.btn-avvia-partita:hover{background:linear-gradient(145deg,#fff3b0 0%,#ffe082 45%,#ffd700 100%);box-shadow:0 8px 24px rgba(0,0,0,0.55),0 0 45px rgba(255,215,0,0.75),inset 0 1px 0 rgba(255,255,255,0.9),inset 0 -2px 6px rgba(140,100,0,0.3);transform:translateY(-2px) scale(1.01);}
+.btn-avvia-partita:active{transform:translateY(0) scale(0.99);box-shadow:0 3px 12px rgba(0,0,0,0.5),0 0 20px rgba(255,215,0,0.5),inset 0 1px 0 rgba(255,255,255,0.7),inset 0 2px 6px rgba(140,100,0,0.35);}
+.btn-avvia-partita .icona-play{display:inline-block;margin-left:6px;font-size:0.9em;transform:translateY(1px);}
+.azioni-partita-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px;width:100%;}
+.btn-azione-soft{padding:9px 8px;font-size:13px;font-weight:600;border-radius:10px;cursor:pointer;border:1px solid transparent;font-family:inherit;letter-spacing:0.3px;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;text-align:center;line-height:1.1;}
+.btn-azione-soft:hover{transform:translateY(-1px);}
+.btn-azione-soft:active{transform:scale(0.98);}
+.btn-azione-soft:disabled{opacity:0.4;pointer-events:none;}
+.btn-azione-verde{background:linear-gradient(145deg,rgba(76,175,80,0.20),rgba(56,142,60,0.10));border-color:rgba(129,199,132,0.32);color:rgba(232,245,233,0.95);}
+.btn-azione-verde:hover{background:linear-gradient(145deg,rgba(76,175,80,0.30),rgba(56,142,60,0.16));border-color:rgba(129,199,132,0.50);box-shadow:0 2px 10px rgba(0,0,0,0.25),0 0 10px rgba(76,175,80,0.22);}
+.btn-azione-ambra{background:linear-gradient(145deg,rgba(255,179,0,0.16),rgba(245,124,0,0.08));border-color:rgba(255,183,77,0.32);color:rgba(255,236,179,0.95);}
+.btn-azione-ambra:hover{background:linear-gradient(145deg,rgba(255,179,0,0.26),rgba(245,124,0,0.14));border-color:rgba(255,183,77,0.50);box-shadow:0 2px 10px rgba(0,0,0,0.25),0 0 10px rgba(255,179,0,0.22);}
+.btn-azione-grigio{background:linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03));border-color:rgba(255,255,255,0.16);color:rgba(224,224,224,0.92);}
+.btn-azione-grigio:hover{background:linear-gradient(145deg,rgba(255,255,255,0.14),rgba(255,255,255,0.06));border-color:rgba(255,255,255,0.28);box-shadow:0 2px 10px rgba(0,0,0,0.25),0 0 8px rgba(255,255,255,0.10);}
+.btn-azione-rosso{background:linear-gradient(145deg,rgba(244,67,54,0.16),rgba(198,40,40,0.08));border-color:rgba(239,83,80,0.32);color:rgba(255,205,210,0.95);}
+.btn-azione-rosso:hover{background:linear-gradient(145deg,rgba(244,67,54,0.26),rgba(198,40,40,0.14));border-color:rgba(239,83,80,0.50);box-shadow:0 2px 10px rgba(0,0,0,0.25),0 0 10px rgba(244,67,54,0.22);}
+@media (max-width:400px){.btn-azione-soft{padding:8px 6px;font-size:12px;}.azioni-partita-grid{gap:6px;}}
+.pozzetto-selector{background:linear-gradient(145deg,rgba(0,0,0,0.4),rgba(0,0,0,0.25));border:1.5px solid rgba(255,215,0,0.35);border-radius:12px;padding:10px 12px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,0.35);}
+.pozzetto-selector .pozzetto-label{font-size:12px;font-weight:bold;color:var(--giallo-burraco);letter-spacing:0.8px;text-shadow:0 0 8px rgba(255,215,0,0.5);width:100%;text-align:center;margin-bottom:4px;}
+.pozzetto-btn{padding:7px 14px;border-radius:18px;border:1.5px solid rgba(255,255,255,0.28);background:rgba(255,255,255,0.08);color:#fff;font-weight:bold;font-size:13px;cursor:pointer;transition:all 0.2s ease;font-family:inherit;display:flex;align-items:center;gap:6px;}
+.pozzetto-btn:hover{background:rgba(255,255,255,0.16);border-color:rgba(255,215,0,0.5);transform:translateY(-1px);}
+.pozzetto-btn.attivo{background:linear-gradient(145deg,#ffe066 0%,#ffd700 45%,#d4a017 100%);color:#1a1a1a;border-color:#fff3b0;box-shadow:0 2px 10px rgba(255,215,0,0.6),inset 0 1px 0 rgba(255,255,255,0.7);}
+.pozzetto-btn .mini-avatar{width:22px;height:22px;border-radius:50%;overflow:hidden;background:rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;line-height:1;}
+.pozzetto-btn .mini-avatar img{width:100%;height:100%;object-fit:cover;}
 .btn-danger{background:#ff3b30;color:white;font-size:16px;font-weight:bold;padding:14px;border:none;border-radius:12px;cursor:pointer;width:100%;}
 .btn-secondary{background:rgba(255,255,255,0.15);color:white;font-size:16px;font-weight:bold;padding:14px;border:1px solid rgba(255,255,255,0.3);border-radius:12px;cursor:pointer;width:100%;}
+.btn-pausa{background:linear-gradient(145deg,#ffb300,#f57c00);color:#1a1a1a;font-size:16px;font-weight:bold;padding:14px;border:none;border-radius:12px;cursor:pointer;width:100%;box-shadow:0 4px 10px rgba(0,0,0,0.3);text-shadow:0 1px 0 rgba(255,255,255,0.3);}
+.btn-riprendi{background:linear-gradient(145deg,#34C759,#2ea84c);color:white;font-size:14px;font-weight:bold;padding:10px 16px;border:none;border-radius:10px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.35);white-space:nowrap;}
+.btn-elimina-pausa{background:rgba(255,59,48,0.85);color:white;font-size:14px;font-weight:bold;padding:10px 14px;border:none;border-radius:10px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.35);white-space:nowrap;}
 .card-lista{background:var(--sfondo-card);padding:15px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:6px;}
+.card-lista.card-cliccabile{cursor:pointer;transition:all 0.2s ease;}
+.card-lista.card-cliccabile:hover{transform:translateY(-2px);border-color:rgba(255,215,0,0.5);box-shadow:0 6px 18px rgba(0,0,0,0.4),0 0 18px rgba(255,215,0,0.25);}
+.card-pausa{background:linear-gradient(145deg,rgba(255,179,0,0.14),rgba(245,124,0,0.06));border:1.5px solid rgba(255,179,0,0.55);border-radius:14px;padding:14px 16px;box-shadow:0 4px 14px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.08);}
+.card-pausa-header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.card-pausa-nome{font-family:Optima,Georgia,serif;font-size:16px;font-weight:bold;color:#ffd700;text-shadow:0 1px 3px rgba(0,0,0,0.6);word-break:break-word;}
+.card-pausa-meta{font-size:11px;color:rgba(255,248,225,0.75);letter-spacing:0.3px;}
+.card-pausa-punteggi{background:rgba(0,0,0,0.25);border-radius:8px;padding:8px 10px;margin-bottom:10px;font-size:13px;line-height:1.5;}
+.card-pausa-punteggi b{color:#a5d6a7;}
+.card-pausa-azioni{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;}
 .regola-titolo{font-weight:bold;font-size:16px;color:var(--crema-accento);}
 .regola-testo{font-size:14px;line-height:1.4;color:#eee;}
 .badge-demo{display:inline-block;background:linear-gradient(145deg,#ffd700,#d4a017);color:#1a1a1a;font-size:10px;font-weight:bold;padding:2px 6px;border-radius:4px;margin-left:6px;letter-spacing:0.5px;vertical-align:middle;box-shadow:0 1px 3px rgba(0,0,0,0.4);}
+.badge-apri{display:inline-block;background:linear-gradient(145deg,rgba(255,215,0,0.25),rgba(255,215,0,0.08));color:var(--giallo-burraco);font-size:10px;font-weight:bold;padding:2px 8px;border-radius:10px;margin-left:6px;letter-spacing:0.5px;vertical-align:middle;border:1px solid rgba(255,215,0,0.4);}
 .swift-sheet-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(5px);z-index:2000;justify-content:center;align-items:flex-end;padding-bottom:20px;}
 .swift-sheet-content{background:#1c1c1e;padding:20px;border-radius:20px;width:92%;max-width:400px;border:1px solid rgba(255,255,255,0.1);text-align:center;}
 #modale-scelta-foto{z-index:2500;}
 #modale-scelta-foto .swift-sheet-content{background:#2a2a2e;border:2px solid var(--giallo-burraco);box-shadow:0 10px 40px rgba(0,0,0,0.8),0 0 30px rgba(255,215,0,0.3);}
 #modale-webcam{z-index:2600;}
 #modale-webcam .swift-sheet-content{max-width:520px;}
+#modale-dettaglio-storico{z-index:2700;}
+#modale-dettaglio-storico .swift-sheet-content{background:#141a14;border:2px solid var(--giallo-burraco);box-shadow:0 10px 50px rgba(0,0,0,0.85),0 0 40px rgba(255,215,0,0.35);max-width:640px;text-align:left;max-height:90vh;overflow-y:auto;}
 .btn-lista-gioc{display:block;width:100%;background:rgba(255,255,255,0.1);color:white;border:none;padding:12px;margin-bottom:8px;border-radius:10px;font-size:15px;font-weight:bold;cursor:pointer;text-align:left;}
 .btn-img-opzione{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 12px;border-radius:12px;border:2px solid rgba(255,215,0,0.4);background:linear-gradient(145deg,rgba(255,215,0,0.15),rgba(255,215,0,0.05));color:white;font-size:15px;font-weight:bold;cursor:pointer;transition:all 0.2s;text-align:center;}
-.btn-img-opzione:active{transform:scale(0.98);}
 .btn-img-opzione .icona{font-size:22px;flex-shrink:0;}
 .btn-img-opzione.emoji{border-color:rgba(255,215,0,0.5);background:linear-gradient(145deg,rgba(255,215,0,0.2),rgba(255,215,0,0.05));}
 .btn-img-opzione.emoji.aperto{background:linear-gradient(145deg,rgba(255,215,0,0.5),rgba(255,215,0,0.25));border-color:var(--giallo-burraco);box-shadow:0 0 15px rgba(255,215,0,0.6);}
 .btn-img-opzione.foto{border-color:rgba(52,199,89,0.5);background:linear-gradient(145deg,rgba(52,199,89,0.2),rgba(52,199,89,0.05));}
 .editor-foto-wrapper{display:none;margin-top:14px;text-align:center;}
 .cerchio-editor-foto{width:min(78vw,320px);height:min(78vw,320px);margin:0 auto;border-radius:50%;position:relative;overflow:hidden;background:#000;border:3px solid var(--giallo-burraco);box-shadow:0 0 30px rgba(255,215,0,0.5),inset 0 0 30px rgba(0,0,0,0.6);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;overscroll-behavior:contain;}
-.cerchio-editor-foto.attivo{cursor:grabbing;}
 .cerchio-editor-foto img{position:absolute;top:50%;left:50%;transform-origin:center center;pointer-events:none;user-select:none;-webkit-user-drag:none;will-change:transform;}
 .cerchio-editor-foto::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.25),inset 0 0 40px rgba(0,0,0,0.4);}
 .istruzioni-touch{font-size:12px;color:var(--crema-accento);margin-top:10px;text-align:center;line-height:1.5;font-weight:bold;}
 #webcam-video{width:100%;max-height:60vh;border-radius:12px;background:#000;object-fit:cover;}
 .griglia-temi{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:6px;}
 .btn-tema{position:relative;padding:6px 2px;border-radius:8px;border:1.2px solid rgba(255,255,255,0.22);color:white;font-weight:bold;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all 0.2s;text-shadow:0 1px 2px rgba(0,0,0,0.6);font-family:inherit;min-width:0;line-height:1;}
-.btn-tema:active{transform:scale(0.94);}
 .btn-tema.attivo{border-color:var(--giallo-burraco);border-width:2px;box-shadow:0 0 8px rgba(255,215,0,0.7),inset 0 0 6px rgba(255,215,0,0.2);}
 .btn-tema.attivo::after{content:'✓';position:absolute;top:1px;right:3px;font-size:9px;color:var(--giallo-burraco);text-shadow:0 0 6px rgba(255,215,0,0.9);font-weight:bold;}
 .btn-tema[data-tema="verde"]{background:linear-gradient(145deg,#2e7d32,#144d18);}
@@ -286,81 +252,80 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 .btn-tema[data-tema="viola"]{background:linear-gradient(145deg,#6a1b9a,#2a0a3d);}
 .btn-tema .emoji-tema{font-size:15px;line-height:1;}
 .btn-tema .nome-tema{font-size:9px;font-weight:bold;letter-spacing:0.2px;line-height:1;}
-@media (max-width:400px){.griglia-temi{gap:3px;}.btn-tema{padding:5px 1px;border-radius:6px;}.btn-tema .emoji-tema{font-size:13px;}.btn-tema .nome-tema{font-size:8px;}.btn-tema.attivo::after{font-size:8px;}}
 .regola-extra-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);margin-bottom:8px;}
 .regola-extra-info{display:flex;flex-direction:column;flex:1;min-width:0;padding-right:10px;}
 .regola-extra-nome{font-weight:bold;font-size:14px;color:white;}
 .regola-extra-desc{font-size:11px;color:#bbb;margin-top:2px;line-height:1.3;}
 .btn-toggle-extra{padding:6px 14px;border-radius:20px;border:1.5px solid rgba(255,255,255,0.3);background:transparent;color:white;font-weight:bold;font-size:12px;cursor:pointer;transition:0.2s;flex-shrink:0;font-family:inherit;min-width:56px;}
 .btn-toggle-extra.attivo{background:var(--giallo-burraco);color:var(--testo-scuro-swift);border-color:var(--giallo-burraco);box-shadow:0 0 10px rgba(255,215,0,0.5);}
-
-@keyframes mazziere-pulse{
-    0%,100%{box-shadow:0 0 8px 2px rgba(255,215,0,0.75),0 0 18px rgba(255,215,0,0.45);}
-    50%{box-shadow:0 0 18px 5px rgba(255,215,0,1),0 0 35px rgba(255,215,0,0.75);}
-}
+@keyframes mazziere-pulse{0%,100%{box-shadow:0 0 8px 2px rgba(255,215,0,0.75),0 0 18px rgba(255,215,0,0.45);}50%{box-shadow:0 0 18px 5px rgba(255,215,0,1),0 0 35px rgba(255,215,0,0.75);}}
 .avatar-mazziere{animation:mazziere-pulse 1.8s ease-in-out infinite;border-color:#ffd700 !important;border-width:3px !important;}
 .badge-mazziere{background:linear-gradient(145deg,#ffd700,#d4a017);color:#1a1a1a;font-size:9px;font-weight:bold;padding:2px 6px;border-radius:6px;letter-spacing:0.3px;box-shadow:0 0 8px rgba(255,215,0,0.7);}
 .btn-mazziere-scelta{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:bold;font-size:13px;font-family:inherit;transition:all 0.2s;}
-.btn-mazziere-scelta:active{transform:scale(0.97);}
-
 .btn-apri-regole-extra{width:100%;background:linear-gradient(145deg,rgba(255,215,0,0.18),rgba(255,215,0,0.06));border:1.5px solid rgba(255,215,0,0.5);color:var(--crema-accento);padding:12px 14px;border-radius:12px;font-size:14px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:inherit;transition:all 0.2s;}
-.btn-apri-regole-extra:hover{background:linear-gradient(145deg,rgba(255,215,0,0.3),rgba(255,215,0,0.1));box-shadow:0 0 12px rgba(255,215,0,0.4);}
 .btn-apri-regole-extra .freccia{font-size:12px;transition:transform 0.25s;}
 .btn-apri-regole-extra.aperto .freccia{transform:rotate(180deg);}
 .pannello-regole-extra{display:none;margin-top:10px;padding:10px;background:rgba(0,0,0,0.35);border-radius:12px;border:1px solid rgba(255,215,0,0.25);}
 .pannello-regole-extra.aperto{display:block;}
 .pannello-regole-extra .regola-extra-row:last-child{margin-bottom:0;}
-
 .pulsanti-stato-row{display:flex;gap:8px;margin-top:12px;}
 .pulsanti-stato-row > *{flex:1;min-width:0;}
-
-.checkbox-pozzetto{
-    display:flex;align-items:center;justify-content:center;gap:7px;
-    padding:10px 10px;border-radius:10px;
-    border:1.5px solid rgba(255,255,255,0.22);
-    background:linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));
-    cursor:pointer;transition:all 0.25s ease;
-    user-select:none;font-weight:600;font-size:12px;color:#ddd;
-    font-family:inherit;white-space:nowrap;overflow:hidden;
-    text-overflow:ellipsis;line-height:1.2;
-}
-.checkbox-pozzetto:hover{border-color:rgba(129,199,132,0.5);background:linear-gradient(145deg,rgba(76,175,80,0.1),rgba(76,175,80,0.02));color:#e8f5e9;transform:translateY(-1px);}
-.checkbox-pozzetto.attivo{background:linear-gradient(145deg,rgba(76,175,80,0.55),rgba(56,142,60,0.45));border-color:rgba(129,199,132,0.65);color:#f1f8e9;box-shadow:0 2px 12px rgba(76,175,80,0.25),inset 0 1px 0 rgba(255,255,255,0.12);text-shadow:0 1px 2px rgba(0,0,0,0.35);}
-.checkbox-pozzetto input{display:none;}
-.checkbox-box{width:16px;height:16px;border-radius:5px;border:1.5px solid rgba(255,255,255,0.45);background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s;position:relative;}
-.checkbox-pozzetto.attivo .checkbox-box{background:rgba(255,255,255,0.92);border-color:rgba(255,255,255,0.92);box-shadow:0 0 6px rgba(255,255,255,0.35);}
-.checkbox-pozzetto.attivo .checkbox-box::after{content:'✓';color:#2e7d32;font-size:11px;font-weight:900;line-height:1;}
-.checkbox-label{flex:0 1 auto;overflow:hidden;text-overflow:ellipsis;}
-
-.btn-toggle-chiusa{
-    display:flex;align-items:center;justify-content:center;gap:6px;
-    padding:10px 10px;border-radius:10px;
-    border:1.5px solid rgba(255,255,255,0.22);
-    background:linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));
-    color:#ddd;font-weight:600;font-size:12px;
-    cursor:pointer;transition:all 0.25s ease;
-    font-family:inherit;white-space:nowrap;overflow:hidden;
-    text-overflow:ellipsis;line-height:1.2;
-}
-.btn-toggle-chiusa:hover{border-color:rgba(255,215,0,0.55);background:linear-gradient(145deg,rgba(255,215,0,0.1),rgba(255,215,0,0.02));color:#fff8e1;transform:translateY(-1px);}
-.btn-toggle-chiusa.attivo{background:linear-gradient(145deg,rgba(255,215,0,0.9),rgba(212,160,23,0.85));border-color:rgba(255,215,0,0.95);color:#1a1a1a;box-shadow:0 2px 14px rgba(255,215,0,0.45),inset 0 1px 0 rgba(255,255,255,0.55);text-shadow:0 1px 0 rgba(255,255,255,0.4);font-weight:bold;}
-.btn-toggle-chiusa.disabilitato{opacity:0.32;pointer-events:none;cursor:not-allowed;filter:grayscale(0.4);}
-
-.overlay-vincitore{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:3000;justify-content:center;align-items:center;overflow:hidden;}
+/* === NUOVO: SLIDER POZZETTO a 3 posizioni === */
+.pozzetto-slider{position:relative;width:100%;height:38px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.22);background:linear-gradient(145deg,rgba(0,0,0,0.35),rgba(0,0,0,0.2));cursor:pointer;overflow:hidden;user-select:none;-webkit-user-select:none;transition:border-color 0.2s ease;}
+.pozzetto-slider:hover{border-color:rgba(255,215,0,0.5);}
+.pozzetto-slider .pozzetto-knob{position:absolute;top:3px;bottom:3px;width:calc((100% - 6px)/3);border-radius:7px;transition:left 0.35s cubic-bezier(0.34,1.56,0.64,1),background 0.25s ease;z-index:1;}
+.pozzetto-slider[data-stato="-1"] .pozzetto-knob{left:3px;background:linear-gradient(145deg,#ff8a80,#ef5350);box-shadow:0 2px 10px rgba(239,83,80,0.6),inset 0 1px 0 rgba(255,255,255,0.3);}
+.pozzetto-slider[data-stato="0"] .pozzetto-knob{left:calc(3px + (100% - 6px)/3);background:linear-gradient(145deg,rgba(255,255,255,0.3),rgba(255,255,255,0.15));box-shadow:0 2px 8px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.35);}
+.pozzetto-slider[data-stato="1"] .pozzetto-knob{left:calc(3px + 2*((100% - 6px)/3));background:linear-gradient(145deg,#a5d6a7,#66bb6a);box-shadow:0 2px 10px rgba(76,175,80,0.6),inset 0 1px 0 rgba(255,255,255,0.3);}
+.pozzetto-slider .pozzetto-track{position:relative;z-index:2;display:flex;height:100%;align-items:center;}
+.pozzetto-slider .pozzetto-lbl{flex:1;text-align:center;font-size:11px;font-weight:900;letter-spacing:0.3px;color:rgba(255,255,255,0.5);transition:color 0.25s ease,text-shadow 0.25s ease;pointer-events:none;line-height:1;white-space:nowrap;}
+.pozzetto-slider[data-stato="-1"] .lbl-neg{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.5);}
+.pozzetto-slider[data-stato="0"] .lbl-neu{color:#fff8e1;text-shadow:0 0 8px rgba(255,248,225,0.6);}
+.pozzetto-slider[data-stato="1"] .lbl-pos{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.5);}
+.pozzetto-slider.locked{opacity:0.78;pointer-events:none;cursor:not-allowed;}
+.overlay-vincitore{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);z-index:3000;justify-content:center;align-items:center;overflow:hidden;}
 .overlay-vincitore.attivo{display:flex;}
-.vincitore-card{background:linear-gradient(160deg,rgba(30,60,30,0.96),rgba(15,35,15,0.96));border:2px solid var(--giallo-burraco);border-radius:24px;padding:32px 36px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.85),0 0 60px rgba(255,215,0,0.55),inset 0 1px 0 rgba(255,255,255,0.12);animation:winner-zoom 0.65s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:2;max-width:90vw;}
+.vincitore-card{background:linear-gradient(160deg,rgba(30,60,30,0.96),rgba(15,35,15,0.96));border:2px solid var(--giallo-burraco);border-radius:24px;padding:32px 36px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.85),0 0 60px rgba(255,215,0,0.55);animation:winner-zoom 0.65s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:2;max-width:90vw;}
 @keyframes winner-zoom{0%{transform:scale(0.25) rotate(-10deg);opacity:0;}60%{transform:scale(1.08) rotate(3deg);opacity:1;}100%{transform:scale(1) rotate(0deg);opacity:1;}}
 .vincitore-emoji{font-size:76px;line-height:1;margin-bottom:12px;filter:drop-shadow(0 0 22px rgba(255,215,0,0.95));animation:emoji-bounce 1s ease-in-out infinite;}
 @keyframes emoji-bounce{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-12px) scale(1.06);}}
 .vincitore-label{font-family:Optima,Georgia,serif;font-size:13px;font-weight:bold;letter-spacing:4px;color:var(--giallo-burraco);text-shadow:0 0 14px rgba(255,215,0,0.8);margin-bottom:10px;}
 .vincitore-nome{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:bold;color:#fff8e1;text-shadow:0 2px 8px rgba(0,0,0,0.85),0 0 22px rgba(255,248,225,0.55);margin-bottom:12px;word-break:break-word;line-height:1.15;}
-.vincitore-punti{font-size:22px;font-weight:bold;color:#a5d6a7;text-shadow:0 0 16px rgba(165,214,167,0.6);margin-bottom:6px;}
-.vincitore-totale{font-size:14px;font-weight:bold;color:rgba(255,248,225,0.85);letter-spacing:1px;margin-bottom:8px;}
+.vincitore-punti{font-size:22px;font-weight:bold;color:#a5d6a7;margin-bottom:6px;}
+.vincitore-totale{font-size:14px;font-weight:bold;color:rgba(255,248,225,0.85);letter-spacing:1px;}
 .vincitore-sub{font-size:12px;color:rgba(255,248,225,0.7);letter-spacing:1.5px;font-style:italic;margin-top:4px;}
 .sparkles-container{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
-.sparkle{position:absolute;animation:sparkle-fly 2.2s ease-out forwards;pointer-events:none;filter:drop-shadow(0 0 8px rgba(255,215,0,0.8));}
-@keyframes sparkle-fly{0%{transform:translate(-50%,-50%) scale(0) rotate(0deg);opacity:0;}20%{transform:translate(-50%,-50%) scale(1.3) rotate(45deg);opacity:1;}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(0.4) rotate(400deg);opacity:0;}}
-
+.sparkle{position:absolute;animation:sparkle-fly 2.2s ease-out forwards;pointer-events:none;}
+@keyframes sparkle-fly{0%{transform:translate(-50%,-50%) scale(0);opacity:0;}20%{transform:translate(-50%,-50%) scale(1.3);opacity:1;}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(0.4);opacity:0;}}
+.dettaglio-header{background:linear-gradient(145deg,rgba(255,215,0,0.18),rgba(255,215,0,0.05));border:1px solid rgba(255,215,0,0.45);border-radius:14px;padding:14px 16px;margin-bottom:16px;}
+.dettaglio-header h3{font-family:Optima,Georgia,serif;font-size:18px;color:#fff8e1;margin:0 0 4px 0;text-align:center;}
+.dettaglio-header .meta{font-size:12px;color:rgba(255,248,225,0.8);text-align:center;margin-bottom:10px;}
+.dettaglio-punteggi-finali{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+.dettaglio-punteggio-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(0,0,0,0.25);border-radius:8px;font-size:14px;}
+.dettaglio-punteggio-row .nome{font-weight:bold;color:#fff8e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.dettaglio-punteggio-row .punti{font-weight:bold;color:#a5d6a7;font-size:16px;flex-shrink:0;margin-left:8px;}
+.dettaglio-punteggio-row.vincitore{background:linear-gradient(90deg,rgba(255,215,0,0.25),rgba(255,215,0,0.08));border:1px solid rgba(255,215,0,0.55);}
+.dettaglio-punteggio-row.vincitore .punti{color:#ffd700;}
+.smazzata-block{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:12px;margin-bottom:10px;}
+.smazzata-titolo{display:flex;justify-content:space-between;align-items:center;font-family:Optima,Georgia,serif;font-size:15px;font-weight:bold;color:#ffd700;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(255,215,0,0.3);}
+.smazzata-titolo .totale{font-size:12px;color:rgba(255,248,225,0.85);font-weight:normal;}
+.squadra-dettaglio{background:rgba(0,0,0,0.28);border-radius:10px;padding:10px;margin-bottom:8px;}
+.squadra-nome-dett{font-size:13px;font-weight:bold;color:#fff8e1;margin-bottom:6px;padding-bottom:4px;border-bottom:1px dashed rgba(255,255,255,0.15);display:flex;justify-content:space-between;align-items:center;gap:6px;}
+.squadra-nome-dett .parziale{font-size:13px;font-weight:bold;flex-shrink:0;}
+.squadra-nome-dett .parziale.pos{color:#7CFC00;}
+.squadra-nome-dett .parziale.neg{color:#ff6b6b;}
+.dett-riga{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#ddd;padding:3px 0;gap:8px;}
+.dett-riga .label{color:#bbb;}
+.dett-riga .valore{font-weight:bold;color:#fff;}
+.dett-badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.dett-badge{display:inline-block;font-size:10px;font-weight:bold;padding:2px 7px;border-radius:10px;}
+.dett-badge.chiuso{background:linear-gradient(145deg,rgba(255,215,0,0.9),rgba(212,160,23,0.85));color:#1a1a1a;}
+.dett-badge.pozzetto-ok{background:linear-gradient(145deg,rgba(76,175,80,0.75),rgba(56,142,60,0.65));color:#fff;}
+.dett-badge.pozzetto-no{background:linear-gradient(145deg,rgba(244,67,54,0.7),rgba(198,40,40,0.6));color:#fff;}
+.dett-badge.pozzetto-neu{background:rgba(255,255,255,0.15);color:#ccc;}
+.dett-badge.extra{background:linear-gradient(145deg,rgba(255,215,0,0.25),rgba(255,215,0,0.1));color:#ffd700;border:1px solid rgba(255,215,0,0.5);}
+.dett-vuoto{text-align:center;padding:24px 12px;color:#bbb;font-size:13px;line-height:1.5;}
+.dett-azioni{margin-top:14px;display:flex;gap:8px;}
 @media (max-width:768px){.menu-laterale{display:none;}}
 @media (min-width:769px){.menu-mobile{display:none;}}
 </style>
@@ -398,7 +363,7 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
                 <span class="testo-titolo-menu">Menu</span>
                 <div class="separatore-menu"><span class="linea"></span><span class="simbolo">◆</span><span class="linea destra"></span></div>
             </div>
-            <button class="btn-toggle-menu" id="btn-toggle-menu-id" onclick="toggleMenuLaterale()" title="Comprimi / Espandi menu">⟨</button>
+            <button class="btn-toggle-menu" id="btn-toggle-menu-id" onclick="toggleMenuLaterale()">⟨</button>
         </div>
         <div class="contenuto-menu">
             <div class="voce-menu attiva" id="nav-nuova-partita" onclick="cambiaSchermata('nuova-partita')"><span class="icona-voce">🎲</span><span class="testo-menu">Nuova Partita</span></div>
@@ -409,11 +374,15 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
             <div class="voce-menu" id="nav-istruzioni" onclick="cambiaSchermata('istruzioni')"><span class="icona-voce">💡</span><span class="testo-menu">Come Usare l'App</span></div>
             <div class="voce-menu" id="nav-impostazioni" onclick="cambiaSchermata('impostazioni')"><span class="icona-voce">⚙️</span><span class="testo-menu">Impostazioni</span></div>
         </div>
-        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.4.9</span></div>
+        <div class="footer-menu"><span class="versione-app" id="versione-app">v1.5.3</span></div>
     </nav>
 
     <main>
         <div id="nuova-partita" class="schermata attiva">
+            <div id="sezione-partite-in-pausa" style="display:none;flex-direction:column;gap:12px;">
+                <h2 class="titolo-optima" style="margin-bottom:4px">⏸️ Partite in Pausa</h2>
+                <div id="lista-partite-in-pausa" style="display:flex;flex-direction:column;gap:12px;"></div>
+            </div>
             <div><h2 class="titolo-optima" style="margin-bottom:8px">1. Modalità Giocatori</h2><div class="segment-control" id="seg-modalita"></div></div>
             <div><h2 class="titolo-optima" style="margin-bottom:8px">2. Punteggio Traguardo</h2><div class="segment-control" id="seg-traguardo"></div></div>
             <div>
@@ -423,48 +392,29 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
             </div>
             <div>
                 <h2 class="titolo-optima" style="margin-bottom:8px">4. Chi dà le carte (prima mano)</h2>
-                <p style="font-size:12px;color:#ccc;margin:0 0 10px 0;">Tocca il giocatore che inizia a dare le carte. Il mazziere ruota automaticamente ad ogni mano.</p>
+                <p style="font-size:12px;color:#ccc;margin:0 0 10px 0;">Tocca il giocatore che inizia a dare le carte.</p>
                 <div id="selettore-mazziere" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;"></div>
             </div>
             <div>
                 <h2 class="titolo-optima" style="margin-bottom:8px">5. Regole Extra (opzionali)</h2>
-                <p style="font-size:12px;color:#ccc;margin:0 0 10px 0;">Attiva le varianti che vuoi usare in partita</p>
                 <button type="button" class="btn-apri-regole-extra" id="btn-apri-regole-extra" onclick="togglePannelloRegoleExtra()">
                     <span>⚙️ Scegli regola da attivare</span>
                     <span class="freccia">▼</span>
                 </button>
                 <div class="pannello-regole-extra" id="pannello-regole-extra">
-                    <div class="regola-extra-row">
-                        <div class="regola-extra-info">
-                            <span class="regola-extra-nome">👑 Burraco Reale</span>
-                            <span class="regola-extra-desc">7+ carte senza jolly e pinelle dal 3 all'Asso (+300 pt)</span>
-                        </div>
-                        <button class="btn-toggle-extra" id="btn-extra-burracoReale" onclick="toggleRegolaExtra('burracoReale')">OFF</button>
-                    </div>
-                    <div class="regola-extra-row">
-                        <div class="regola-extra-info">
-                            <span class="regola-extra-nome">⚡ Super Burraco</span>
-                            <span class="regola-extra-desc">12+ carte dello stesso seme senza jolly (+500 pt)</span>
-                        </div>
-                        <button class="btn-toggle-extra" id="btn-extra-superBurraco" onclick="toggleRegolaExtra('superBurraco')">OFF</button>
-                    </div>
-                    <div class="regola-extra-row">
-                        <div class="regola-extra-info">
-                            <span class="regola-extra-nome">🌍 Burraco Internazionale</span>
-                            <span class="regola-extra-desc">Variante con punteggio internazionale (+150 pt)</span>
-                        </div>
-                        <button class="btn-toggle-extra" id="btn-extra-burracoInternazionale" onclick="toggleRegolaExtra('burracoInternazionale')">OFF</button>
-                    </div>
+                    <div class="regola-extra-row"><div class="regola-extra-info"><span class="regola-extra-nome">👑 Burraco Reale</span><span class="regola-extra-desc">7+ carte senza jolly e pinelle dal 3 all'Asso (+300 pt)</span></div><button class="btn-toggle-extra" id="btn-extra-burracoReale" onclick="toggleRegolaExtra('burracoReale')">OFF</button></div>
+                    <div class="regola-extra-row"><div class="regola-extra-info"><span class="regola-extra-nome">⚡ Super Burraco</span><span class="regola-extra-desc">12+ carte dello stesso seme senza jolly (+500 pt)</span></div><button class="btn-toggle-extra" id="btn-extra-superBurraco" onclick="toggleRegolaExtra('superBurraco')">OFF</button></div>
+                    <div class="regola-extra-row"><div class="regola-extra-info"><span class="regola-extra-nome">🌍 Burraco Internazionale</span><span class="regola-extra-desc">Variante con punteggio internazionale (+150 pt)</span></div><button class="btn-toggle-extra" id="btn-extra-burracoInternazionale" onclick="toggleRegolaExtra('burracoInternazionale')">OFF</button></div>
                 </div>
             </div>
-            <button class="btn-avvia-swift" onclick="iniziaPartita()">Avvia Partita ▶</button>
+            <button class="btn-avvia-partita" onclick="iniziaPartita()">Avvia Partita <span class="icona-play">▶</span></button>
         </div>
 
         <div id="partita-corso" class="schermata"><div id="partita-corso-content"></div></div>
 
         <div id="giocatori" class="schermata">
             <h2 class="titolo-optima">Rubrica Giocatori</h2>
-            <button class="btn-avvia-swift" onclick="apriModaleNuovoGiocatore()">➕ Aggiungi Nuovo Giocatore</button>
+            <button class="btn-avvia-partita" onclick="apriModaleNuovoGiocatore()">➕ Aggiungi Nuovo Giocatore</button>
             <div id="lista-rubrica" style="display:flex;flex-direction:column;gap:10px;margin-top:10px;"></div>
         </div>
 
@@ -481,7 +431,6 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
             <h2 class="titolo-optima">Impostazioni App</h2>
             <div>
                 <h3 class="titolo-optima" style="font-size:16px;margin-bottom:4px;">🎨 Tema Colore</h3>
-                <p style="font-size:12px;color:#ccc;margin:0 0 6px 0;">Scegli il colore principale dell'app</p>
                 <div class="griglia-temi">
                     <button type="button" class="btn-tema" data-tema="verde" onclick="cambiaTemaColore('verde')"><span class="emoji-tema">🟢</span><span class="nome-tema">Verde</span></button>
                     <button type="button" class="btn-tema" data-tema="blu" onclick="cambiaTemaColore('blu')"><span class="emoji-tema">🔵</span><span class="nome-tema">Blu</span></button>
@@ -511,10 +460,9 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 <div id="modale-scelta-foto" class="swift-sheet-overlay">
     <div class="swift-sheet-content">
         <h3 class="titolo-optima" style="margin-top:0;">Scegli Foto</h3>
-        <p style="font-size:12px;color:#ccc;margin:0 0 14px 0;">Da dove vuoi prendere l'immagine?</p>
-        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('camera')" style="text-align:center;"><span style="font-size:20px;margin-right:8px;">📷</span> Scatta Foto</button>
-        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('galleria')" style="text-align:center;"><span style="font-size:20px;margin-right:8px;">🖼️</span> Galleria Foto</button>
-        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('file')" style="text-align:center;"><span style="font-size:20px;margin-right:8px;">📁</span> Sfoglia File</button>
+        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('camera')" style="text-align:center;">📷 Scatta Foto</button>
+        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('galleria')" style="text-align:center;">🖼️ Galleria Foto</button>
+        <button class="btn-lista-gioc" onclick="scegliFotoOpzione('file')" style="text-align:center;">📁 Sfoglia File</button>
         <button class="btn-danger" onclick="chiudiSceltaFoto()" style="margin-top:10px;">Annulla</button>
     </div>
 </div>
@@ -534,34 +482,23 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 <div id="modale-gestione-giocatore" class="swift-sheet-overlay">
     <div class="swift-sheet-content" style="max-width:440px;text-align:left;max-height:92vh;overflow-y:auto;">
         <h3 class="titolo-optima" style="text-align:center;margin-top:0;">Nuovo Giocatore</h3>
-        <div style="margin-bottom:10px;">
-            <label style="font-size:12px;color:#ccc;">Nome *</label>
-            <input type="text" id="input-nome-giocatore" placeholder="Nome o nickname..." style="width:100%;padding:10px;border-radius:8px;border:none;margin-top:4px;font-size:15px;">
-        </div>
-        <div style="margin-bottom:10px;">
-            <label style="font-size:12px;color:#ccc;">Soprannome (opzionale)</label>
-            <input type="text" id="input-soprannome-giocatore" placeholder="Es. Il Mago, King..." style="width:100%;padding:10px;border-radius:8px;border:none;margin-top:4px;font-size:15px;">
-        </div>
+        <div style="margin-bottom:10px;"><label style="font-size:12px;color:#ccc;">Nome *</label><input type="text" id="input-nome-giocatore" placeholder="Nome..." style="width:100%;padding:10px;border-radius:8px;border:none;margin-top:4px;font-size:15px;"></div>
+        <div style="margin-bottom:10px;"><label style="font-size:12px;color:#ccc;">Soprannome (opzionale)</label><input type="text" id="input-soprannome-giocatore" placeholder="Es. Il Mago..." style="width:100%;padding:10px;border-radius:8px;border:none;margin-top:4px;font-size:15px;"></div>
         <div style="margin-bottom:12px;">
             <label style="font-size:12px;color:#ccc;display:block;margin-bottom:6px;">Immagine Profilo</label>
-            <div style="display:flex;justify-content:center;margin-bottom:12px;">
-                <div id="anteprima-cerchio-profilo" style="width:76px;height:76px;border-radius:50%;background:#222;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;border:2px solid var(--giallo-burraco);">
-                    <span id="anteprima-contenuto" style="font-size:32px;">🧑‍💻</span>
-                </div>
-            </div>
+            <div style="display:flex;justify-content:center;margin-bottom:12px;"><div id="anteprima-cerchio-profilo" style="width:76px;height:76px;border-radius:50%;background:#222;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;border:2px solid var(--giallo-burraco);"><span id="anteprima-contenuto" style="font-size:32px;">🧑‍💻</span></div></div>
             <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px;">
                 <button type="button" class="btn-img-opzione emoji" id="btn-scegli-emoji" onclick="togglePannelloEmoji()"><span class="icona">😀</span> Scegli Emoji</button>
                 <div id="pannello-emoji" style="display:none;background:rgba(0,0,0,0.4);border-radius:10px;padding:10px;border:1px solid rgba(255,215,0,0.3);">
-                    <div style="font-size:11px;color:#ffd700;text-align:center;margin-bottom:8px;line-height:1.4;">💡 <b>Su Mac</b>: clicca il campo sotto e premi <b>Cmd + Ctrl + Spazio</b> per aprire la tastiera emoji di sistema.<br>Oppure scegli direttamente dalla griglia qui sotto.</div>
-                    <input type="text" id="input-emoji-manuale" placeholder="✏️ Scrivi o incolla qui l'emoji..." maxlength="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width:100%;padding:10px 12px;border-radius:8px;border:2px solid rgba(255,215,0,0.5);font-size:20px;text-align:center;background:rgba(255,255,255,0.95);color:#000;margin-bottom:10px;" oninput="aggiornaEmojiManuale(this.value)">
-                    <div id="griglia-emoji" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;max-height:180px;overflow-y:auto;text-align:center;"></div>
+                    <input type="text" id="input-emoji-manuale" placeholder="✏️ Scrivi o incolla emoji..." maxlength="10" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="width:100%;padding:10px 12px;border-radius:8px;border:2px solid rgba(255,215,0,0.5);font-size:20px;text-align:center;background:rgba(255,255,255,0.95);color:#000;margin-bottom:10px;" oninput="aggiornaEmojiManuale(this.value)">
+                    <div id="griglia-emoji" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;max-height:180px;overflow-y:auto;"></div>
                 </div>
                 <button type="button" class="btn-img-opzione foto" onclick="apriSelettoreFoto()"><span class="icona">🖼️</span> Scegli: selfie, foto, file</button>
             </div>
             <input type="file" id="input-file-foto" accept="image/*" style="display:none;" onchange="caricaImmagineLocale(event)">
             <div id="editor-foto-wrapper" class="editor-foto-wrapper">
                 <div id="cerchio-editor-foto" class="cerchio-editor-foto"><img id="img-editor-foto" src="" alt="" draggable="false"></div>
-                <div class="istruzioni-touch">👆 Pinza con 2 dita (o rotellina del mouse) per zoomare<br>👉 Trascina per spostare (dito o mouse)</div>
+                <div class="istruzioni-touch">👆 Pinza per zoomare • 👉 Trascina per spostare</div>
                 <button type="button" class="btn-secondary" style="margin-top:10px;padding:8px;font-size:13px;" onclick="resetFotoEditor()">↺ Centra Foto</button>
             </div>
         </div>
@@ -575,16 +512,22 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 <div id="modale-calcolatore-carte" class="swift-sheet-overlay">
     <div class="swift-sheet-content" style="max-width:420px;">
         <h3 class="titolo-optima" style="margin-top:0;">Calcolatore Punti Carte</h3>
-        <p style="font-size:12px;color:#ccc;margin-bottom:15px;">Seleziona la quantità di ciascuna carta:</p>
         <div id="griglia-calcolo-carte" style="display:flex;flex-direction:column;gap:8px;max-height:45vh;overflow-y:auto;margin-bottom:15px;text-align:left;"></div>
         <div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:10px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-weight:bold;font-size:14px;">Totale Calcolato:</span>
+            <span style="font-weight:bold;font-size:14px;">Totale:</span>
             <span id="totale-calcolato-anteprima" style="font-size:20px;font-weight:bold;color:var(--crema-accento);">0 pt</span>
         </div>
         <div style="display:flex;gap:10px;">
             <button class="btn-avvia-swift" style="background:#34C759;padding:10px;" onclick="applicaPuntiCalcolati()">Usa Totale</button>
             <button class="btn-danger" style="padding:10px;" onclick="chiudiCalcolatoreCarte()">Annulla</button>
         </div>
+    </div>
+</div>
+
+<div id="modale-dettaglio-storico" class="swift-sheet-overlay">
+    <div class="swift-sheet-content">
+        <div id="dettaglio-storico-content"></div>
+        <div class="dett-azioni"><button class="btn-secondary" style="padding:12px;" onclick="chiudiDettaglioStorico()">Chiudi</button></div>
     </div>
 </div>
 
@@ -601,39 +544,42 @@ main{flex-grow:1;padding:20px;padding-bottom:60px;overflow-y:auto;}
 </div>
 
 <script>
-const APP_VERSION = 'v1.4.9';
-
+const APP_VERSION = 'v1.5.3';
 const REGOLE_EXTRA_CONFIG = {
     burracoReale:          { emoji:'👑', label:'Burraco Reale',          valore: 300, campo:'reale' },
     superBurraco:          { emoji:'⚡', label:'Super Burraco',          valore: 500, campo:'superB' },
     burracoInternazionale: { emoji:'🌍', label:'Burraco Internazionale', valore: 150, campo:'internazionale' }
 };
-
-let appData = { giocatori: [], storico: [], tema: 'chiaro', temaColore: 'verde', menuRidotto: false, demoStoricoCaricato: false };
-let partita = { inCorso: false, modalita: '4 Coppie', traguardo: '2005', posti: [null,null,null,null], squadre: [], punteggiTotali: [], manoCorrente: [], storicoSmazzate: [], burracoReale: false, superBurraco: false, burracoInternazionale: false, mazziereIniziale: null, mazziereCorrente: null };
+let appData = { giocatori: [], storico: [], partiteInPausa: [], tema: 'chiaro', temaColore: 'verde', menuRidotto: false, demoStoricoCaricato: false };
+let partita = { inCorso: false, modalita: '4 Coppie', traguardo: '2005', posti: [null,null,null,null], squadre: [], punteggiTotali: [], manoCorrente: [], storicoSmazzate: [], burracoReale: false, superBurraco: false, burracoInternazionale: false, mazziereIniziale: null, mazziereCorrente: null, pozzettoPlayer: null };
 let opzioniMod = ["2 Gioc.", "3 Gioc.", "4 Coppie", "4 Singoli"];
 let opzioniTrag = ["1005", "2005", "Smazzate"];
 let slotModifica = null;
 let nuovoGiocatoreStato = { tipo: 'emoji', valore: '🧑‍💻', zoom: 1, posX: 0, posY: 0 };
 let fotoEditorStato = { attivo: false, img: null, imgNaturalW: 0, imgNaturalH: 0, scale: 1, offsetX: 0, offsetY: 0, baseScale: 1 };
-let webcamStream = null;
-let webcamAttiva = false;
+let webcamStream = null, webcamAttiva = false;
 const listaEmojiDisponibili = ["🧑‍💻","😎","👩","👧","👨","👦","🦊","🦁","🐯","🐼","🐨","🐶","🐱","🦄","⭐","🔥","👑","🍀","♠️","♥️","♦️","♣️","🃏","🏆","🎩","🎭","🎲","🎯","🚀","🎸","😀","😂","🤣","😊","😍","🤩","😜","🤔","😏","🙃","😇","🥳"];
 
 function parsePuntiCarte(str){ if(str===""||str===null||str===undefined) return 0; let n=parseFloat(String(str).replace(',','.')); return isNaN(n)?0:n; }
 function vibra(ms){ if(navigator.vibrate){try{navigator.vibrate(ms||10);}catch(e){}} }
 function isMobileTouch(){ return ('ontouchstart' in window) || navigator.maxTouchPoints > 0; }
+function escapeHtml(s){ if(s===null||s===undefined) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+// Normalizza pozzetto in numero: -1 (non preso), 0 (neutro), 1 (preso)
+function normalizzaPozzetto(v){
+    if(typeof v === 'number') return (v === -1 || v === 1) ? v : 0;
+    if(v === true) return 1;
+    if(v === false) return -1;
+    return 0;
+}
 
 function mostraAnimazioneVincitore(indexSquadra){
     let squadra = partita.squadre[indexSquadra] || '—';
     let m = partita.manoCorrente[indexSquadra];
     let parziale = m ? calcolaParzialeMano(m) : 0;
     let totaleNuovo = (partita.punteggiTotali[indexSquadra]||0) + parziale;
-
     document.getElementById('vincitore-nome').innerText = squadra;
     document.getElementById('vincitore-punti').innerText = (parziale>=0?'+':'') + parziale + ' pt';
     document.getElementById('vincitore-totale').innerText = 'Totale: ' + totaleNuovo + ' pt';
-
     let container = document.getElementById('sparkles-container');
     container.innerHTML = '';
     let emojis = ['✨','⭐','🌟','💫','🎉','🎊','🏆','👑','💛','💚'];
@@ -641,96 +587,211 @@ function mostraAnimazioneVincitore(indexSquadra){
         let sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
         sparkle.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-        let startX = 50 + (Math.random()-0.5)*15;
-        let startY = 50 + (Math.random()-0.5)*15;
-        sparkle.style.left = startX + '%';
-        sparkle.style.top = startY + '%';
-        let dx = (Math.random()-0.5)*110;
-        let dy = (Math.random()-0.5)*110;
-        sparkle.style.setProperty('--dx', dx + 'vmin');
-        sparkle.style.setProperty('--dy', dy + 'vmin');
+        sparkle.style.left = (50 + (Math.random()-0.5)*15) + '%';
+        sparkle.style.top = (50 + (Math.random()-0.5)*15) + '%';
+        sparkle.style.setProperty('--dx', ((Math.random()-0.5)*110) + 'vmin');
+        sparkle.style.setProperty('--dy', ((Math.random()-0.5)*110) + 'vmin');
         sparkle.style.animationDelay = (Math.random()*0.9) + 's';
         sparkle.style.fontSize = (14 + Math.random()*26) + 'px';
         container.appendChild(sparkle);
     }
-
     let overlay = document.getElementById('overlay-vincitore');
     overlay.classList.add('attivo');
     setTimeout(()=>{ overlay.classList.remove('attivo'); }, 2800);
 }
-
-function togglePannelloRegoleExtra(){
-    vibra(10);
-    let pannello = document.getElementById('pannello-regole-extra');
-    let btn = document.getElementById('btn-apri-regole-extra');
-    if(!pannello || !btn) return;
-    let aperto = pannello.classList.toggle('aperto');
-    btn.classList.toggle('aperto', aperto);
+function generaNomePartita(){
+    let sq = (partita && partita.squadre) ? partita.squadre : [];
+    if(partita && partita.modalita === '4 Coppie' && sq.length === 2){ return sq[0] + '  vs  ' + sq[1]; }
+    else if(sq.length > 0){ return sq.join(' • '); }
+    return 'Partita ' + ((partita && partita.modalita) || '');
 }
-
-function selezionaMazziere(i){
+function creaSnapshotPartita(){
+    return {
+        modalita: partita.modalita, traguardo: partita.traguardo,
+        posti: JSON.parse(JSON.stringify(partita.posti||[])),
+        squadre: [...(partita.squadre||[])],
+        punteggiTotali: [...(partita.punteggiTotali||[])],
+        manoCorrente: JSON.parse(JSON.stringify(partita.manoCorrente||[])),
+        storicoSmazzate: JSON.parse(JSON.stringify(partita.storicoSmazzate||[])),
+        burracoReale: !!partita.burracoReale, superBurraco: !!partita.superBurraco, burracoInternazionale: !!partita.burracoInternazionale,
+        mazziereIniziale: (typeof partita.mazziereIniziale === 'number') ? partita.mazziereIniziale : null,
+        mazziereCorrente: (typeof partita.mazziereCorrente === 'number') ? partita.mazziereCorrente : null,
+        pozzettoPlayer: (typeof partita.pozzettoPlayer === 'number') ? partita.pozzettoPlayer : null
+    };
+}
+function resetPartitaCorrente(){
+    partita = { inCorso: false, modalita: partita.modalita||'4 Coppie', traguardo: partita.traguardo||'2005',
+        posti: new Array((partita.posti||[]).length||4).fill(null),
+        squadre: [], punteggiTotali: [], manoCorrente: [], storicoSmazzate: [],
+        burracoReale: !!partita.burracoReale, superBurraco: !!partita.superBurraco, burracoInternazionale: !!partita.burracoInternazionale,
+        mazziereIniziale: null, mazziereCorrente: null, pozzettoPlayer: null };
+}
+function mettiInPausa(){
+    if(!partita.inCorso){ alert("Nessuna partita in corso."); return; }
+    if(!confirm("Mettere la partita in pausa?")) return;
+    let nome = generaNomePartita(), now = new Date(), snapshot = creaSnapshotPartita();
+    let pausa = Object.assign({ id: Date.now()+Math.floor(Math.random()*1000), nome,
+        dataCreazione: now.toLocaleDateString()+' '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),
+        dataPausa: now.toLocaleDateString()+' '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) }, snapshot);
+    if(!Array.isArray(appData.partiteInPausa)) appData.partiteInPausa = [];
+    appData.partiteInPausa.push(pausa);
+    resetPartitaCorrente(); salvaDati();
+    renderPartiteInPausa(); renderTabellone(); renderTavolo(); renderSelettoreMazziere();
+    renderSegment("seg-modalita",opzioniMod,partita.modalita,(scelta)=>{ partita.modalita=scelta; let numPosti=scelta.includes('2')?2:(scelta.includes('3')?3:4); let vecchi=partita.posti||[]; partita.posti=new Array(numPosti).fill(null); for(let i=0;i<Math.min(numPosti,vecchi.length);i++) partita.posti[i]=vecchi[i]; partita.mazziereIniziale=null; partita.mazziereCorrente=null; partita.pozzettoPlayer=null; renderTavolo(); });
+    renderSegment("seg-traguardo",opzioniTrag,partita.traguardo,(scelta)=>{ partita.traguardo=scelta; });
+    vibra(30); alert("⏸️ Partita in pausa!"); cambiaSchermata('nuova-partita');
+}
+function riprendiPartitaInPausa(id){
+    if(!Array.isArray(appData.partiteInPausa)) return;
+    let idx = appData.partiteInPausa.findIndex(p => p.id === id);
+    if(idx === -1){ alert("Partita non trovata."); return; }
+    let p = appData.partiteInPausa[idx];
+    if(partita.inCorso){
+        if(!confirm("C'è una partita in corso. Metterla in pausa e riprendere quella selezionata?")) return;
+        let nome = generaNomePartita(), now = new Date(), snapshot = creaSnapshotPartita();
+        let pausa = Object.assign({ id: Date.now()+Math.floor(Math.random()*1000), nome,
+            dataCreazione: now.toLocaleDateString()+' '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),
+            dataPausa: now.toLocaleDateString()+' '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) }, snapshot);
+        appData.partiteInPausa.push(pausa);
+        idx = appData.partiteInPausa.findIndex(x => x.id === id);
+        if(idx === -1){ alert("Errore."); return; }
+        p = appData.partiteInPausa[idx];
+    }
+    if(!confirm("Riprendere la partita: '" + (p.nome||'Partita') + "' ?")) return;
+    appData.partiteInPausa.splice(idx, 1);
+    partita = { inCorso: true, modalita: p.modalita||'4 Coppie', traguardo: p.traguardo||'2005',
+        posti: JSON.parse(JSON.stringify(p.posti||[])), squadre: [...(p.squadre||[])],
+        punteggiTotali: [...(p.punteggiTotali||[])], manoCorrente: JSON.parse(JSON.stringify(p.manoCorrente||[])),
+        storicoSmazzate: JSON.parse(JSON.stringify(p.storicoSmazzate||[])),
+        burracoReale: !!p.burracoReale, superBurraco: !!p.superBurraco, burracoInternazionale: !!p.burracoInternazionale,
+        mazziereIniziale: (typeof p.mazziereIniziale === 'number') ? p.mazziereIniziale : null,
+        mazziereCorrente: (typeof p.mazziereCorrente === 'number') ? p.mazziereCorrente : null,
+        pozzettoPlayer: (typeof p.pozzettoPlayer === 'number') ? p.pozzettoPlayer : null };
+    if(Array.isArray(partita.manoCorrente)) partita.manoCorrente.forEach(m => { if(m) m.pozzetto = normalizzaPozzetto(m.pozzetto); });
+    if(!Array.isArray(partita.manoCorrente) || partita.manoCorrente.length !== partita.squadre.length){ resetManoCorrente(); }
+    salvaDati(); aggiornaBottoniRegoleExtra(); renderPartiteInPausa(); renderTavolo(); renderSelettoreMazziere();
+    renderSegment("seg-modalita",opzioniMod,partita.modalita,(scelta)=>{ partita.modalita=scelta; let numPosti=scelta.includes('2')?2:(scelta.includes('3')?3:4); let vecchi=partita.posti||[]; partita.posti=new Array(numPosti).fill(null); for(let i=0;i<Math.min(numPosti,vecchi.length);i++) partita.posti[i]=vecchi[i]; partita.mazziereIniziale=null; partita.mazziereCorrente=null; partita.pozzettoPlayer=null; renderTavolo(); });
+    renderSegment("seg-traguardo",opzioniTrag,partita.traguardo,(scelta)=>{ partita.traguardo=scelta; });
+    vibra(30); cambiaSchermata('partita-corso'); renderTabellone(); alert("▶️ Partita ripresa!");
+}
+function eliminaPartitaInPausa(id){
+    if(!Array.isArray(appData.partiteInPausa)) return;
+    let idx = appData.partiteInPausa.findIndex(p => p.id === id);
+    if(idx === -1) return;
+    if(!confirm("Eliminare definitivamente la partita in pausa?")) return;
+    appData.partiteInPausa.splice(idx, 1); salvaDati(); renderPartiteInPausa(); vibra(20);
+}
+function renderPartiteInPausa(){
+    let sez = document.getElementById('sezione-partite-in-pausa');
+    let lista = document.getElementById('lista-partite-in-pausa');
+    if(!sez || !lista) return;
+    let arr = Array.isArray(appData.partiteInPausa) ? appData.partiteInPausa : [];
+    if(arr.length === 0){ sez.style.display = 'none'; lista.innerHTML = ''; return; }
+    sez.style.display = 'flex'; lista.innerHTML = '';
+    arr.forEach(p => {
+        let punteggi = (p.squadre||[]).map((sq, i) => escapeHtml(sq)+': <b>'+((p.punteggiTotali&&p.punteggiTotali[i])||0)+' pt</b>').join(' • ');
+        let numMani = (Array.isArray(p.storicoSmazzate)?p.storicoSmazzate.length:0);
+        let trag = p.traguardo ? ('Target: ' + escapeHtml(p.traguardo)) : '';
+        lista.innerHTML += `<div class="card-pausa"><div class="card-pausa-header"><div class="card-pausa-nome">⏸️ ${escapeHtml(p.nome||'Partita')}</div><div class="card-pausa-meta">${escapeHtml(p.dataPausa||'')}</div></div><div class="card-pausa-meta" style="margin-bottom:8px;">${escapeHtml(p.modalita||'')} ${trag?' • '+trag:''} • ${numMani} ${numMani===1?'mano':'mani'}</div><div class="card-pausa-punteggi">${punteggi||'—'}</div><div class="card-pausa-azioni"><button class="btn-riprendi" onclick="riprendiPartitaInPausa(${p.id})">▶️ Riprendi</button><button class="btn-elimina-pausa" onclick="eliminaPartitaInPausa(${p.id})">🗑️ Elimina</button></div></div>`;
+    });
+}
+function apriDettaglioStorico(indexStorico){
     vibra(15);
-    partita.mazziereIniziale = i;
-    partita.mazziereCorrente = i;
-    salvaDati();
-    renderSelettoreMazziere();
+    let s = appData.storico[indexStorico];
+    if(!s) return;
+    let box = document.getElementById('dettaglio-storico-content');
+    if(!box) return;
+    let maxPunti = -Infinity;
+    if(Array.isArray(s.punti) && s.punti.length){ maxPunti = Math.max(...s.punti.map(p=>Number(p)||0)); }
+    let html = '<div class="dettaglio-header"><h3>📜 Dettaglio Partita</h3><div class="meta">'+escapeHtml(s.data||'')+' • '+escapeHtml(s.modalita||'')+(s.traguardo?' • Target: '+escapeHtml(s.traguardo):'')+(s.demo?' • <span style="color:#ffd700;font-weight:bold;">DEMO</span>':'')+'</div><div class="dettaglio-punteggi-finali">';
+    (s.squadre||[]).forEach((sq, i)=>{
+        let p = (s.punti && s.punti[i] !== undefined) ? s.punti[i] : 0;
+        let isVinc = (Number(p) === maxPunti);
+        html += '<div class="dettaglio-punteggio-row'+(isVinc?' vincitore':'')+'"><span class="nome">'+(isVinc?'🏆 ':'')+escapeHtml(sq)+'</span><span class="punti">'+p+' pt</span></div>';
+    });
+    html += '</div></div>';
+    let smazz = Array.isArray(s.smazzate) ? s.smazzate : null;
+    if(smazz && smazz.length > 0){
+        html += '<div style="font-family:Optima,Georgia,serif;font-size:15px;font-weight:bold;color:#ffd700;margin-bottom:10px;text-align:center;">'+smazz.length+' smazzate registrate</div>';
+        smazz.forEach((sm, idx)=>{
+            html += '<div class="smazzata-block"><div class="smazzata-titolo"><span>🎴 Smazzata #'+(idx+1)+'</span>';
+            if(sm.mazziere !== null && sm.mazziere !== undefined && s.postiOld && s.postiOld[sm.mazziere]){ html += '<span class="totale">Mazziere: '+escapeHtml(s.postiOld[sm.mazziere].nome||'')+'</span>'; }
+            else if(sm.mazziereNome){ html += '<span class="totale">Mazziere: '+escapeHtml(sm.mazziereNome)+'</span>'; }
+            html += '</div>';
+            if(sm.pozzettoPlayer !== null && sm.pozzettoPlayer !== undefined && s.squadre && s.squadre[sm.pozzettoPlayer]){
+                html += '<div style="font-size:11px;color:#ffd700;text-align:center;margin-bottom:8px;font-weight:bold;">👤 Solo: '+escapeHtml(s.squadre[sm.pozzettoPlayer])+'</div>';
+            }
+            let mani = Array.isArray(sm.mano) ? sm.mano : null;
+            if(mani){
+                (s.squadre||[]).forEach((sq, i)=>{
+                    let m = mani[i];
+                    if(!m){ return; }
+                    let segno = (m.segnoCarte === '-') ? -1 : 1;
+                    let pC = parsePuntiCarte(m.carte) * segno;
+                    let pz = normalizzaPozzetto(m.pozzetto);
+                    let pzBonus = pz === -1 ? -100 : (pz === 1 ? 100 : 0);
+                    let parziale = (Number(m.puliti)||0)*200 + (Number(m.semipuliti)||0)*150 + (Number(m.sporchi)||0)*100 + pC + (m.chiuso?100:0) + pzBonus;
+                    Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{ if(m[REGOLE_EXTRA_CONFIG[nome].campo] !== undefined){ parziale += (Number(m[REGOLE_EXTRA_CONFIG[nome].campo])||0) * REGOLE_EXTRA_CONFIG[nome].valore; } });
+                    let cls = parziale >= 0 ? 'pos' : 'neg';
+                    let sign = parziale >= 0 ? '+' : '';
+                    html += '<div class="squadra-dettaglio"><div class="squadra-nome-dett"><span>'+escapeHtml(sq)+'</span><span class="parziale '+cls+'">'+sign+parziale+' pt</span></div>';
+                    if(m.puliti) html += '<div class="dett-riga"><span class="label">Puliti (+200)</span><span class="valore">'+m.puliti+'</span></div>';
+                    if(m.semipuliti) html += '<div class="dett-riga"><span class="label">Semipuliti (+150)</span><span class="valore">'+m.semipuliti+'</span></div>';
+                    if(m.sporchi) html += '<div class="dett-riga"><span class="label">Sporchi (+100)</span><span class="valore">'+m.sporchi+'</span></div>';
+                    if(m.carte !== '' && m.carte !== null && m.carte !== undefined){ html += '<div class="dett-riga"><span class="label">Punti carte in mano</span><span class="valore">'+(segno<0?'−':'+') + Math.abs(pC)+'</span></div>'; }
+                    if(pz === -1) html += '<div class="dett-riga"><span class="label">Pozzetto non preso</span><span class="valore" style="color:#ff6b6b;">−100</span></div>';
+                    else if(pz === 1) html += '<div class="dett-riga"><span class="label">Pozzetto preso</span><span class="valore" style="color:#7CFC00;">+100</span></div>';
+                    if(parziale === 0 && !m.puliti && !m.semipuliti && !m.sporchi && !m.carte && pz === 0){ html += '<div class="dett-riga"><span class="label" style="font-style:italic;color:#888;">Nessun punto registrato</span><span></span></div>'; }
+                    let badges = '';
+                    if(m.chiuso) badges += '<span class="dett-badge chiuso">🏆 Chiusura +100</span>';
+                    if(pz === 1) badges += '<span class="dett-badge pozzetto-ok">✔️ Pozzetto +100</span>';
+                    else if(pz === -1) badges += '<span class="dett-badge pozzetto-no">❌ No Pozzetto −100</span>';
+                    else badges += '<span class="dett-badge pozzetto-neu">— Pozzetto n.d.</span>';
+                    Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{ let q = Number(m[REGOLE_EXTRA_CONFIG[nome].campo])||0; if(q > 0){ let c = REGOLE_EXTRA_CONFIG[nome]; badges += '<span class="dett-badge extra">'+c.emoji+' '+c.label+' ×'+q+'</span>'; } });
+                    if(badges) html += '<div class="dett-badges">'+badges+'</div>';
+                    html += '</div>';
+                });
+            }
+            html += '</div>';
+        });
+    } else { html += '<div class="dett-vuoto">📭<br><br>Per questa partita non è disponibile il dettaglio delle singole smazzate.</div>'; }
+    box.innerHTML = html;
+    document.getElementById('modale-dettaglio-storico').style.display = 'flex';
 }
-
+function chiudiDettaglioStorico(){ document.getElementById('modale-dettaglio-storico').style.display = 'none'; }
+function togglePannelloRegoleExtra(){ vibra(10); let p = document.getElementById('pannello-regole-extra'); let b = document.getElementById('btn-apri-regole-extra'); if(!p||!b) return; let a = p.classList.toggle('aperto'); b.classList.toggle('aperto', a); }
+function selezionaMazziere(i){ vibra(15); partita.mazziereIniziale = i; partita.mazziereCorrente = i; salvaDati(); renderSelettoreMazziere(); }
 function renderSelettoreMazziere(){
     let div = document.getElementById('selettore-mazziere');
     if(!div) return;
     let numPosti = partita.posti ? partita.posti.length : 0;
     if(partita.mazziereIniziale !== null && partita.mazziereIniziale !== undefined){
-        if(partita.mazziereIniziale >= numPosti || !partita.posti[partita.mazziereIniziale]){
-            partita.mazziereIniziale = null;
-            partita.mazziereCorrente = null;
-        }
+        if(partita.mazziereIniziale >= numPosti || !partita.posti[partita.mazziereIniziale]){ partita.mazziereIniziale = null; partita.mazziereCorrente = null; }
     }
     div.innerHTML='';
-    if(numPosti === 0 || partita.posti.every(p=>p===null)){
-        div.innerHTML = '<p style="color:#bbb;font-size:13px;margin:0;">Prima scegli i giocatori al tavolo (sezione 3).</p>';
-        return;
-    }
+    if(numPosti === 0 || partita.posti.every(p=>p===null)){ div.innerHTML = '<p style="color:#bbb;font-size:13px;margin:0;">Prima scegli i giocatori al tavolo.</p>'; return; }
     partita.posti.forEach((g, i) => {
         if(!g) return;
         let isSelected = partita.mazziereIniziale === i;
-        let avatar = g.tipo === 'emoji' 
-            ? `<span style="font-size:22px;line-height:1;">${g.valore}</span>` 
-            : `<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
-        let bg = isSelected 
-            ? 'linear-gradient(145deg,#ffe066 0%,#ffd700 45%,#d4a017 100%)' 
-            : 'rgba(255,255,255,0.08)';
+        let avatar = g.tipo === 'emoji' ? `<span style="font-size:22px;line-height:1;">${g.valore}</span>` : `<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
+        let bg = isSelected ? 'linear-gradient(145deg,#ffe066 0%,#ffd700 45%,#d4a017 100%)' : 'rgba(255,255,255,0.08)';
         let col = isSelected ? '#1a1a1a' : 'white';
         let border = isSelected ? '2px solid #fff3b0' : '1.5px solid rgba(255,255,255,0.25)';
         let shadow = isSelected ? 'box-shadow:0 0 15px rgba(255,215,0,0.8),0 4px 12px rgba(0,0,0,0.4);' : 'box-shadow:0 2px 6px rgba(0,0,0,0.3);';
         div.innerHTML += `<button type="button" class="btn-mazziere-scelta" onclick="selezionaMazziere(${i})" style="background:${bg};color:${col};border:${border};${shadow}"><div style="width:34px;height:34px;border-radius:50%;overflow:hidden;background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">${avatar}</div><span>${g.nome}</span>${isSelected?'<span style="font-size:16px;">🎴</span>':''}</button>`;
     });
 }
-
 function ruotaMazziere(){
     let numPosti = partita.posti.length;
     let corrente = partita.mazziereCorrente;
-    if(typeof corrente !== 'number' || corrente < 0 || corrente >= numPosti){
-        corrente = 0;
-    }
+    if(typeof corrente !== 'number' || corrente < 0 || corrente >= numPosti){ corrente = 0; }
     for(let step=1; step<=numPosti; step++){
         let candidate = (corrente + step) % numPosti;
-        if(partita.posti[candidate]){
-            partita.mazziereCorrente = candidate;
-            return candidate;
-        }
+        if(partita.posti[candidate]){ partita.mazziereCorrente = candidate; return candidate; }
     }
-    partita.mazziereCorrente = null;
-    return null;
+    partita.mazziereCorrente = null; return null;
 }
-
-function toggleRegolaExtra(nome){
-    vibra(15);
-    partita[nome] = !partita[nome];
-    aggiornaBottoniRegoleExtra();
-    salvaDati();
-}
-
+function toggleRegolaExtra(nome){ vibra(15); partita[nome] = !partita[nome]; aggiornaBottoniRegoleExtra(); salvaDati(); }
 function aggiornaBottoniRegoleExtra(){
     Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{
         let btn = document.getElementById('btn-extra-'+nome);
@@ -739,331 +800,210 @@ function aggiornaBottoniRegoleExtra(){
         else { btn.classList.remove('attivo'); btn.innerText='OFF'; }
     });
 }
-
+function setPozzettoPlayer(index){
+    if(partita.modalita !== '3 Gioc.') return;
+    vibra(15);
+    if(partita.pozzettoPlayer === index){
+        partita.pozzettoPlayer = null;
+        partita.manoCorrente.forEach(m => { if(m) m.pozzetto = 0; });
+    } else {
+        partita.pozzettoPlayer = index;
+        let teammates = [0,1,2].filter(x => x !== index);
+        if(partita.manoCorrente[index]) partita.manoCorrente[index].pozzetto = 1;
+        teammates.forEach(t => { if(partita.manoCorrente[t]) partita.manoCorrente[t].pozzetto = -1; });
+    }
+    salvaDati(); renderTabellone();
+}
 function popolaGiocatoriDemo(){
     if(Array.isArray(appData.giocatori)&&appData.giocatori.length>0) return;
     appData.giocatori=[
-        {nome:"Mario",soprannome:"Il Re",tipo:"emoji",valore:"😎",zoom:1,posX:0,posY:0},
-        {nome:"Luigi",soprannome:"Volpe",tipo:"emoji",valore:"🦊",zoom:1,posX:0,posY:0},
-        {nome:"Giulia",soprannome:"",tipo:"emoji",valore:"👩",zoom:1,posX:0,posY:0},
-        {nome:"Sofia",soprannome:"Unicorno",tipo:"emoji",valore:"🦄",zoom:1,posX:0,posY:0}
+        {nome:"Mario",soprannome:"Il Re",tipo:"emoji",valore:"😎"},
+        {nome:"Luigi",soprannome:"Volpe",tipo:"emoji",valore:"🦊"},
+        {nome:"Giulia",soprannome:"",tipo:"emoji",valore:"👩"},
+        {nome:"Sofia",soprannome:"Unicorno",tipo:"emoji",valore:"🦄"}
     ];
     salvaDati();
 }
-
 function popolaStoricoDemo(){
     if(appData.demoStoricoCaricato) return;
     const oggi=new Date();
     const dataRelativa=(g,hh,mm)=>{let d=new Date(oggi);d.setDate(d.getDate()-g);d.setHours(hh,mm,0,0);return d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});};
-    const demos=[
+    appData.storico=[...[
         {data:dataRelativa(0,21,15),modalita:'4 Coppie',traguardo:'2005',squadre:['Mario & Giulia','Luigi & Sofia'],punti:[2010,1850],demo:true},
         {data:dataRelativa(1,20,30),modalita:'2 Gioc.',traguardo:'1005',squadre:['Mario','Luigi'],punti:[1050,890],demo:true},
         {data:dataRelativa(2,19,45),modalita:'3 Gioc.',traguardo:'1005',squadre:['Mario','Luigi','Giulia'],punti:[1050,890,720],demo:true},
         {data:dataRelativa(3,22,5),modalita:'4 Singoli',traguardo:'1005',squadre:['Mario','Luigi','Giulia','Sofia'],punti:[1050,890,720,650],demo:true}
-    ];
-    appData.storico=[...demos,...(appData.storico||[])];
-    appData.demoStoricoCaricato=true;
-    salvaDati();
+    ],...(appData.storico||[])];
+    appData.demoStoricoCaricato=true; salvaDati();
 }
-
-function rimuoviPartiteDemo(){ if(!confirm("Rimuovere tutte le partite demo dallo storico?\nLe partite reali resteranno.")) return; appData.storico=appData.storico.filter(s=>!s.demo); salvaDati(); renderStorico(); vibra(20); }
-
+function rimuoviPartiteDemo(){ if(!confirm("Rimuovere tutte le partite demo?")) return; appData.storico=appData.storico.filter(s=>!s.demo); salvaDati(); renderStorico(); vibra(20); }
 function cambiaTemaColore(nome){
     if(!nome) return;
-    let temiValidi=['verde','blu','rosso','beige','viola'];
-    if(!temiValidi.includes(nome)) return;
+    let temiValidi=['verde','blu','rosso','beige','viola']; if(!temiValidi.includes(nome)) return;
     document.body.classList.remove('tema-verde','tema-blu','tema-rosso','tema-beige','tema-viola');
     document.body.classList.add('tema-'+nome);
     const bgColors={verde:'#144d18',blu:'#0d2e5e',rosso:'#4a0a0a',beige:'#8b6f47',viola:'#2a0a3d'};
     document.documentElement.style.background=bgColors[nome]||'#144d18';
-    appData.temaColore=nome;
-    salvaDati();
-    document.querySelectorAll('.btn-tema').forEach(b=>{b.classList.toggle('attivo',b.dataset.tema===nome);});
-    vibra(20);
+    appData.temaColore=nome; salvaDati();
+    document.querySelectorAll('.btn-tema').forEach(b=>{b.classList.toggle('attivo',b.dataset.tema===nome);}); vibra(20);
 }
-
 function applicaTemaColore(){
-    let nome=appData.temaColore||'verde';
-    let temiValidi=['verde','blu','rosso','beige','viola'];
-    if(!temiValidi.includes(nome)) nome='verde';
+    let nome=appData.temaColore||'verde'; let temiValidi=['verde','blu','rosso','beige','viola']; if(!temiValidi.includes(nome)) nome='verde';
     document.body.classList.remove('tema-verde','tema-blu','tema-rosso','tema-beige','tema-viola');
     document.body.classList.add('tema-'+nome);
     const bgColors={verde:'#144d18',blu:'#0d2e5e',rosso:'#4a0a0a',beige:'#8b6f47',viola:'#2a0a3d'};
     document.documentElement.style.background=bgColors[nome]||'#144d18';
     document.querySelectorAll('.btn-tema').forEach(b=>{b.classList.toggle('attivo',b.dataset.tema===nome);});
 }
-
 function toggleMenuLaterale(){
-    let menu=document.getElementById('menu-laterale-id');
-    let btn=document.getElementById('btn-toggle-menu-id');
+    let menu=document.getElementById('menu-laterale-id'), btn=document.getElementById('btn-toggle-menu-id');
     if(!menu||!btn) return;
     let ridotto=menu.classList.toggle('ridotto');
-    btn.innerText=ridotto?'⟩':'⟨';
-    btn.title=ridotto?'Espandi menu':'Comprimi menu';
-    appData.menuRidotto=ridotto;
-    salvaDati();
-    vibra(15);
+    btn.innerText=ridotto?'⟩':'⟨'; btn.title=ridotto?'Espandi':'Comprimi';
+    appData.menuRidotto=ridotto; salvaDati(); vibra(15);
 }
-
 function applicaStatoMenu(){
-    let menu=document.getElementById('menu-laterale-id');
-    let btn=document.getElementById('btn-toggle-menu-id');
+    let menu=document.getElementById('menu-laterale-id'), btn=document.getElementById('btn-toggle-menu-id');
     if(!menu||!btn) return;
-    if(appData.menuRidotto){menu.classList.add('ridotto');btn.innerText='⟩';btn.title='Espandi menu';}
-    else{menu.classList.remove('ridotto');btn.innerText='⟨';btn.title='Comprimi menu';}
+    if(appData.menuRidotto){menu.classList.add('ridotto');btn.innerText='⟩';btn.title='Espandi';}
+    else{menu.classList.remove('ridotto');btn.innerText='⟨';btn.title='Comprimi';}
 }
-
 function apriModaleNuovoGiocatore(){
     document.getElementById('input-nome-giocatore').value='';
     document.getElementById('input-soprannome-giocatore').value='';
     nuovoGiocatoreStato={tipo:'emoji',valore:'🧑‍💻',zoom:1,posX:0,posY:0};
     fotoEditorStato={attivo:false,img:null,imgNaturalW:0,imgNaturalH:0,scale:1,offsetX:0,offsetY:0,baseScale:1};
-    let pannello=document.getElementById('pannello-emoji');
-    if(pannello) pannello.style.display='none';
-    let btnEmoji=document.getElementById('btn-scegli-emoji');
-    if(btnEmoji) btnEmoji.classList.remove('aperto');
-    let inpManuale=document.getElementById('input-emoji-manuale');
-    if(inpManuale) inpManuale.value='';
-    let inpFoto=document.getElementById('input-file-foto');
-    if(inpFoto) inpFoto.value='';
+    document.getElementById('pannello-emoji').style.display='none';
+    document.getElementById('btn-scegli-emoji').classList.remove('aperto');
+    document.getElementById('input-emoji-manuale').value='';
+    document.getElementById('input-file-foto').value='';
     document.getElementById('editor-foto-wrapper').style.display='none';
-    renderGrigliaEmoji();
-    aggiornaAnteprimaGiocatoreModal();
+    renderGrigliaEmoji(); aggiornaAnteprimaGiocatoreModal();
     document.getElementById('modale-gestione-giocatore').style.display='flex';
 }
-
 function chiudiModaleNuovoGiocatore(){ document.getElementById('modale-gestione-giocatore').style.display='none'; }
-
 function togglePannelloEmoji(){
-    let pannello=document.getElementById('pannello-emoji');
-    let btn=document.getElementById('btn-scegli-emoji');
-    if(!pannello) return;
-    let isNascosto=pannello.style.display==='none'||pannello.style.display==='';
-    if(isNascosto){pannello.style.display='block';btn.classList.add('aperto');renderGrigliaEmoji();}
-    else{pannello.style.display='none';btn.classList.remove('aperto');}
+    let p=document.getElementById('pannello-emoji'), b=document.getElementById('btn-scegli-emoji'); if(!p) return;
+    let n=p.style.display==='none'||p.style.display==='';
+    if(n){p.style.display='block';b.classList.add('aperto');renderGrigliaEmoji();}
+    else{p.style.display='none';b.classList.remove('aperto');}
 }
-
-function aggiornaEmojiManuale(val){
-    let clean=(val||'').trim();
-    if(clean.length>0){
-        nuovoGiocatoreStato.tipo='emoji';
-        nuovoGiocatoreStato.valore=clean;
-        document.getElementById('editor-foto-wrapper').style.display='none';
-        fotoEditorStato.attivo=false;
-        aggiornaAnteprimaGiocatoreModal();
-    }
-}
-
+function aggiornaEmojiManuale(val){ let c=(val||'').trim(); if(c.length>0){ nuovoGiocatoreStato.tipo='emoji'; nuovoGiocatoreStato.valore=c; document.getElementById('editor-foto-wrapper').style.display='none'; fotoEditorStato.attivo=false; aggiornaAnteprimaGiocatoreModal(); } }
 function renderGrigliaEmoji(){
-    let grid=document.getElementById('griglia-emoji');
-    if(!grid) return;
-    grid.innerHTML='';
+    let grid=document.getElementById('griglia-emoji'); if(!grid) return; grid.innerHTML='';
     listaEmojiDisponibili.forEach(em=>{
         let isSelected=(nuovoGiocatoreStato.tipo==='emoji'&&nuovoGiocatoreStato.valore===em);
         let bg=isSelected?'var(--giallo-burraco)':'rgba(255,255,255,0.08)';
-        grid.innerHTML+=`<div onclick="selezionaEmoji('${em}')" style="font-size:26px;cursor:pointer;padding:6px;border-radius:8px;background:${bg};transition:0.15s;display:flex;align-items:center;justify-content:center;height:40px;" onmouseover="this.style.background='rgba(255,215,0,0.35)'" onmouseout="this.style.background='${bg}'">${em}</div>`;
+        grid.innerHTML+=`<div onclick="selezionaEmoji('${em}')" style="font-size:26px;cursor:pointer;padding:6px;border-radius:8px;background:${bg};display:flex;align-items:center;justify-content:center;height:40px;">${em}</div>`;
     });
 }
-
 function selezionaEmoji(em){
-    nuovoGiocatoreStato.tipo='emoji';
-    nuovoGiocatoreStato.valore=em;
-    let inpManuale=document.getElementById('input-emoji-manuale');
-    if(inpManuale) inpManuale.value='';
-    document.getElementById('editor-foto-wrapper').style.display='none';
-    fotoEditorStato.attivo=false;
-    aggiornaAnteprimaGiocatoreModal();
-    renderGrigliaEmoji();
-    let pannello=document.getElementById('pannello-emoji');
-    let btn=document.getElementById('btn-scegli-emoji');
-    if(pannello&&btn){pannello.style.display='none';btn.classList.remove('aperto');}
+    nuovoGiocatoreStato.tipo='emoji'; nuovoGiocatoreStato.valore=em;
+    document.getElementById('input-emoji-manuale').value='';
+    document.getElementById('editor-foto-wrapper').style.display='none'; fotoEditorStato.attivo=false;
+    aggiornaAnteprimaGiocatoreModal(); renderGrigliaEmoji();
+    document.getElementById('pannello-emoji').style.display='none'; document.getElementById('btn-scegli-emoji').classList.remove('aperto');
 }
-
 function apriSelettoreFoto(){ document.getElementById('modale-scelta-foto').style.display='flex'; }
 function chiudiSceltaFoto(){ document.getElementById('modale-scelta-foto').style.display='none'; }
-
 function scegliFotoOpzione(tipo){
     chiudiSceltaFoto();
-    if(tipo==='camera'){
-        if(isMobileTouch()){ apriFilePicker('image/*','environment'); }
-        else { apriWebcam(); }
-    } else if(tipo==='galleria'){ apriFilePicker('image/*',null); }
+    if(tipo==='camera'){ if(isMobileTouch()){ apriFilePicker('image/*','environment'); } else { apriWebcam(); } }
+    else if(tipo==='galleria'){ apriFilePicker('image/*',null); }
     else if(tipo==='file'){ apriFilePicker('image/*,.heic,.heif,.png,.jpg,.jpeg,.webp,.gif,.bmp,.tiff',null); }
 }
-
 function apriFilePicker(accept,capture){
     let inp=document.getElementById('input-file-foto');
-    inp.removeAttribute('capture');
-    inp.accept=accept;
-    if(capture){ inp.setAttribute('capture',capture); }
-    inp.value='';
-    inp.click();
+    inp.removeAttribute('capture'); inp.accept=accept;
+    if(capture) inp.setAttribute('capture',capture);
+    inp.value=''; inp.click();
 }
-
 async function apriWebcam(){
-    let modale=document.getElementById('modale-webcam');
-    let video=document.getElementById('webcam-video');
-    let status=document.getElementById('webcam-status');
-    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ alert("⚠️ La fotocamera non è disponibile in questo browser.\nProva a usare 'Galleria Foto' o 'Sfoglia File'."); return; }
-    if(location.protocol==='file:'){
-        let msg="⚠️ La webcam non funziona aprendo il file direttamente da disco (file://).\n\nPer usare la fotocamera:\n• Apri l'app da un server locale (es. localhost)\n• Oppure usa 'Galleria Foto' o 'Sfoglia File'\n\nVuoi aprire il file picker come alternativa?";
-        if(confirm(msg)){ apriFilePicker('image/*',null); }
-        return;
-    }
-    status.innerText='Avvio fotocamera...';
-    modale.style.display='flex';
-    video.srcObject=null;
+    let modale=document.getElementById('modale-webcam'), video=document.getElementById('webcam-video'), status=document.getElementById('webcam-status');
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ alert("⚠️ Fotocamera non disponibile."); return; }
+    if(location.protocol==='file:'){ if(confirm("La webcam non funziona su file://. Usa Galleria/File?")){ apriFilePicker('image/*',null); } return; }
+    status.innerText='Avvio...'; modale.style.display='flex'; video.srcObject=null;
     try{
-        webcamStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:720}},audio:false});
-        video.srcObject=webcamStream;
-        webcamAttiva=true;
-        status.innerText='Inquadra il soggetto e premi Scatta 📸';
-    } catch(err){
-        console.error("Webcam error:",err);
-        let motivo=err.name||err.message;
-        let messaggio="❌ Impossibile accedere alla fotocamera.\nMotivo: "+motivo;
-        if(err.name==='NotAllowedError'){ messaggio="❌ Permesso negato per la fotocamera.\n\nVai nelle impostazioni del browser per autorizzarla, oppure usa 'Galleria Foto' o 'Sfoglia File'."; }
-        else if(err.name==='NotFoundError'){ messaggio="❌ Nessuna fotocamera trovata sul dispositivo.\n\nUsa 'Galleria Foto' o 'Sfoglia File'."; }
-        status.innerText='Errore: '+motivo;
-        chiudiWebcam();
-        alert(messaggio);
-    }
+        webcamStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
+        video.srcObject=webcamStream; webcamAttiva=true;
+        status.innerText='Premi Scatta 📸';
+    } catch(err){ status.innerText='Errore: '+(err.name||err.message); chiudiWebcam(); alert('❌ Impossibile accedere alla fotocamera.'); }
 }
-
 function scattaFotoWebcam(){
     let video=document.getElementById('webcam-video');
-    if(!webcamAttiva||!video.videoWidth){ alert("⚠️ Fotocamera non pronta. Riprova tra un istante."); return; }
-    let canvas=document.createElement('canvas');
-    canvas.width=video.videoWidth;
-    canvas.height=video.videoHeight;
+    if(!webcamAttiva||!video.videoWidth){ alert("⚠️ Non pronta."); return; }
+    let canvas=document.createElement('canvas'); canvas.width=video.videoWidth; canvas.height=video.videoHeight;
     canvas.getContext('2d').drawImage(video,0,0);
     let dataUrl=canvas.toDataURL('image/jpeg',0.9);
-    chiudiWebcam();
-    processaImmagineDataURL(dataUrl);
+    chiudiWebcam(); processaImmagineDataURL(dataUrl);
 }
-
 function chiudiWebcam(){
     if(webcamStream){ try{ webcamStream.getTracks().forEach(t=>t.stop()); }catch(e){} webcamStream=null; }
-    webcamAttiva=false;
-    let video=document.getElementById('webcam-video');
-    if(video) video.srcObject=null;
+    webcamAttiva=false; let video=document.getElementById('webcam-video'); if(video) video.srcObject=null;
     document.getElementById('modale-webcam').style.display='none';
 }
-
 function caricaImmagineLocale(event){
-    let file=event.target.files[0];
-    if(!file) return;
+    let file=event.target.files[0]; if(!file) return;
     let reader=new FileReader();
     reader.onload=function(e){ processaImmagineDataURL(e.target.result); event.target.value=''; };
     reader.readAsDataURL(file);
 }
-
 function processaImmagineDataURL(dataUrl){
     let img=new Image();
     img.onload=function(){
-        fotoEditorStato.img=img;
-        fotoEditorStato.imgNaturalW=img.naturalWidth;
-        fotoEditorStato.imgNaturalH=img.naturalHeight;
-        fotoEditorStato.scale=1;
-        fotoEditorStato.offsetX=0;
-        fotoEditorStato.offsetY=0;
+        fotoEditorStato.img=img; fotoEditorStato.imgNaturalW=img.naturalWidth; fotoEditorStato.imgNaturalH=img.naturalHeight;
+        fotoEditorStato.scale=1; fotoEditorStato.offsetX=0; fotoEditorStato.offsetY=0;
         nuovoGiocatoreStato.tipo='foto';
-        let pannello=document.getElementById('pannello-emoji');
-        if(pannello) pannello.style.display='none';
-        let btn=document.getElementById('btn-scegli-emoji');
-        if(btn) btn.classList.remove('aperto');
-        let inpManuale=document.getElementById('input-emoji-manuale');
-        if(inpManuale) inpManuale.value='';
+        document.getElementById('pannello-emoji').style.display='none';
+        document.getElementById('btn-scegli-emoji').classList.remove('aperto');
+        document.getElementById('input-emoji-manuale').value='';
         let wrapper=document.getElementById('editor-foto-wrapper');
         let imgEditor=document.getElementById('img-editor-foto');
         let cerchio=document.getElementById('cerchio-editor-foto');
-        wrapper.style.display='block';
-        imgEditor.src=dataUrl;
-        fotoEditorStato.attivo=true;
+        wrapper.style.display='block'; imgEditor.src=dataUrl; fotoEditorStato.attivo=true;
         setTimeout(()=>{
             let diameter=cerchio.clientWidth;
-            if(diameter===0){
-                setTimeout(()=>{
-                    diameter=cerchio.clientWidth;
-                    let coverScale=Math.max(diameter/img.naturalWidth,diameter/img.naturalHeight);
-                    fotoEditorStato.baseScale=coverScale;
-                    fotoEditorStato.scale=1;
-                    aggiornaImmagineEditor();
-                },150);
-            } else {
-                let coverScale=Math.max(diameter/img.naturalWidth,diameter/img.naturalHeight);
-                fotoEditorStato.baseScale=coverScale;
-                fotoEditorStato.scale=1;
-                aggiornaImmagineEditor();
-            }
+            if(diameter===0){ setTimeout(()=>{ diameter=cerchio.clientWidth; fotoEditorStato.baseScale=Math.max(diameter/img.naturalWidth,diameter/img.naturalHeight); fotoEditorStato.scale=1; aggiornaImmagineEditor(); },150); }
+            else { fotoEditorStato.baseScale=Math.max(diameter/img.naturalWidth,diameter/img.naturalHeight); fotoEditorStato.scale=1; aggiornaImmagineEditor(); }
         },80);
         aggiornaAnteprimaGiocatoreModal();
     };
-    img.onerror=function(){ alert("Impossibile leggere l'immagine."); };
-    img.src=dataUrl;
+    img.onerror=function(){ alert("Errore immagine."); }; img.src=dataUrl;
 }
-
 function aggiornaImmagineEditor(){
-    let imgEditor=document.getElementById('img-editor-foto');
-    let cerchio=document.getElementById('cerchio-editor-foto');
+    let imgEditor=document.getElementById('img-editor-foto'), cerchio=document.getElementById('cerchio-editor-foto');
     if(!imgEditor||!cerchio||!fotoEditorStato.img) return;
-    let diameter=cerchio.clientWidth;
-    if(diameter===0) return;
-    let base=fotoEditorStato.baseScale;
-    let finalScale=base*fotoEditorStato.scale;
-    let w=fotoEditorStato.imgNaturalW*finalScale;
-    let h=fotoEditorStato.imgNaturalH*finalScale;
-    let maxOffsetX=Math.max(0,(w-diameter)/2);
-    let maxOffsetY=Math.max(0,(h-diameter)/2);
+    let diameter=cerchio.clientWidth; if(diameter===0) return;
+    let finalScale=fotoEditorStato.baseScale*fotoEditorStato.scale;
+    let w=fotoEditorStato.imgNaturalW*finalScale, h=fotoEditorStato.imgNaturalH*finalScale;
+    let maxOffsetX=Math.max(0,(w-diameter)/2), maxOffsetY=Math.max(0,(h-diameter)/2);
     fotoEditorStato.offsetX=Math.max(-maxOffsetX,Math.min(maxOffsetX,fotoEditorStato.offsetX));
     fotoEditorStato.offsetY=Math.max(-maxOffsetY,Math.min(maxOffsetY,fotoEditorStato.offsetY));
-    imgEditor.style.width=w+'px';
-    imgEditor.style.height=h+'px';
-    imgEditor.style.left='50%';
-    imgEditor.style.top='50%';
+    imgEditor.style.width=w+'px'; imgEditor.style.height=h+'px';
+    imgEditor.style.left='50%'; imgEditor.style.top='50%';
     imgEditor.style.transform=`translate(calc(-50% + ${fotoEditorStato.offsetX}px), calc(-50% + ${fotoEditorStato.offsetY}px))`;
 }
-
 function resetFotoEditor(){ fotoEditorStato.scale=1; fotoEditorStato.offsetX=0; fotoEditorStato.offsetY=0; aggiornaImmagineEditor(); }
-
 (function setupEditorGestures(){
-    let pointers=new Map();
-    let startDistance=0;
-    let startScale=1;
-    let lastX=0,lastY=0;
+    let pointers=new Map(), startDistance=0, startScale=1, lastX=0, lastY=0;
     function getDistance(){ let pts=Array.from(pointers.values()); if(pts.length<2) return 0; return Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y); }
     function attach(){
-        let cerchio=document.getElementById('cerchio-editor-foto');
-        if(!cerchio) return;
+        let cerchio=document.getElementById('cerchio-editor-foto'); if(!cerchio) return;
         cerchio.addEventListener('pointerdown',function(e){
-            if(!fotoEditorStato.attivo) return;
-            e.preventDefault();
-            cerchio.classList.add('attivo');
-            try{ cerchio.setPointerCapture(e.pointerId); }catch(err){}
+            if(!fotoEditorStato.attivo) return; e.preventDefault();
+            cerchio.classList.add('attivo'); try{ cerchio.setPointerCapture(e.pointerId); }catch(err){}
             pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
             if(pointers.size===1){ lastX=e.clientX; lastY=e.clientY; }
             else if(pointers.size===2){ startDistance=getDistance(); startScale=fotoEditorStato.scale; }
         });
         cerchio.addEventListener('pointermove',function(e){
-            if(!fotoEditorStato.attivo) return;
-            if(!pointers.has(e.pointerId)) return;
-            e.preventDefault();
-            pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+            if(!fotoEditorStato.attivo) return; if(!pointers.has(e.pointerId)) return;
+            e.preventDefault(); pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
             if(pointers.size===1){
-                let dx=e.clientX-lastX;
-                let dy=e.clientY-lastY;
-                fotoEditorStato.offsetX=fotoEditorStato.offsetX+dx;
-                fotoEditorStato.offsetY=fotoEditorStato.offsetY+dy;
-                lastX=e.clientX; lastY=e.clientY;
-                aggiornaImmagineEditor();
+                fotoEditorStato.offsetX+=e.clientX-lastX; fotoEditorStato.offsetY+=e.clientY-lastY;
+                lastX=e.clientX; lastY=e.clientY; aggiornaImmagineEditor();
             } else if(pointers.size===2){
-                let d=getDistance();
-                if(startDistance>0){
-                    let ratio=d/startDistance;
-                    let nuovoScale=Math.max(1,Math.min(5,startScale*ratio));
-                    fotoEditorStato.scale=nuovoScale;
-                    aggiornaImmagineEditor();
-                }
+                let d=getDistance(); if(startDistance>0){ fotoEditorStato.scale=Math.max(1,Math.min(5,startScale*(d/startDistance))); aggiornaImmagineEditor(); }
             }
         });
         function endPointer(e){
@@ -1071,71 +1011,42 @@ function resetFotoEditor(){ fotoEditorStato.scale=1; fotoEditorStato.offsetX=0; 
             if(pointers.size===0){ cerchio.classList.remove('attivo'); startDistance=0; }
             else if(pointers.size===1){ let pts=Array.from(pointers.values()); lastX=pts[0].x; lastY=pts[0].y; }
         }
-        cerchio.addEventListener('pointerup',endPointer);
-        cerchio.addEventListener('pointercancel',endPointer);
+        cerchio.addEventListener('pointerup',endPointer); cerchio.addEventListener('pointercancel',endPointer);
         cerchio.addEventListener('wheel',function(e){
-            if(!fotoEditorStato.attivo) return;
-            e.preventDefault();
-            let delta=e.deltaY>0?0.92:1.08;
-            let nuovoScale=Math.max(1,Math.min(5,fotoEditorStato.scale*delta));
-            fotoEditorStato.scale=nuovoScale;
-            aggiornaImmagineEditor();
+            if(!fotoEditorStato.attivo) return; e.preventDefault();
+            let delta=e.deltaY>0?0.92:1.08; fotoEditorStato.scale=Math.max(1,Math.min(5,fotoEditorStato.scale*delta)); aggiornaImmagineEditor();
         },{passive:false});
     }
     if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',attach); } else { attach(); }
 })();
-
 function generaFotoDaEditor(){
     if(!fotoEditorStato.img) return null;
-    let cerchio=document.getElementById('cerchio-editor-foto');
-    if(!cerchio) return null;
-    let diameter=cerchio.clientWidth;
-    if(diameter===0) return null;
-    let outSize=400;
-    let canvas=document.createElement('canvas');
-    canvas.width=outSize;
-    canvas.height=outSize;
-    let ctx=canvas.getContext('2d');
-    ctx.fillStyle='#000';
-    ctx.fillRect(0,0,outSize,outSize);
-    let factor=outSize/diameter;
-    let base=fotoEditorStato.baseScale;
-    let finalScale=base*fotoEditorStato.scale*factor;
-    let w=fotoEditorStato.imgNaturalW*finalScale;
-    let h=fotoEditorStato.imgNaturalH*finalScale;
-    let cx=outSize/2+fotoEditorStato.offsetX*factor;
-    let cy=outSize/2+fotoEditorStato.offsetY*factor;
+    let cerchio=document.getElementById('cerchio-editor-foto'); if(!cerchio) return null;
+    let diameter=cerchio.clientWidth; if(diameter===0) return null;
+    let outSize=400; let canvas=document.createElement('canvas'); canvas.width=outSize; canvas.height=outSize;
+    let ctx=canvas.getContext('2d'); ctx.fillStyle='#000'; ctx.fillRect(0,0,outSize,outSize);
+    let factor=outSize/diameter, finalScale=fotoEditorStato.baseScale*fotoEditorStato.scale*factor;
+    let w=fotoEditorStato.imgNaturalW*finalScale, h=fotoEditorStato.imgNaturalH*finalScale;
+    let cx=outSize/2+fotoEditorStato.offsetX*factor, cy=outSize/2+fotoEditorStato.offsetY*factor;
     ctx.drawImage(fotoEditorStato.img,cx-w/2,cy-h/2,w,h);
-    ctx.globalCompositeOperation='destination-in';
-    ctx.beginPath();
-    ctx.arc(outSize/2,outSize/2,outSize/2,0,Math.PI*2);
-    ctx.fill();
+    ctx.globalCompositeOperation='destination-in'; ctx.beginPath(); ctx.arc(outSize/2,outSize/2,outSize/2,0,Math.PI*2); ctx.fill();
     return canvas.toDataURL('image/jpeg',0.88);
 }
-
 function aggiornaAnteprimaGiocatoreModal(){
-    let container=document.getElementById('anteprima-contenuto');
-    if(!container) return;
-    if(nuovoGiocatoreStato.tipo==='emoji'){ container.innerHTML=`<span style="font-size:36px;">${nuovoGiocatoreStato.valore}</span>`; }
-    else { container.innerHTML=`<img id="img-anteprima-foto" src="${nuovoGiocatoreStato.valore||''}" style="width:100%;height:100%;object-fit:cover;">`; }
+    let c=document.getElementById('anteprima-contenuto'); if(!c) return;
+    if(nuovoGiocatoreStato.tipo==='emoji'){ c.innerHTML=`<span style="font-size:36px;">${nuovoGiocatoreStato.valore}</span>`; }
+    else { c.innerHTML=`<img src="${nuovoGiocatoreStato.valore||''}" style="width:100%;height:100%;object-fit:cover;">`; }
 }
-
 function salvaNuovoGiocatore(){
     let nomeVal=document.getElementById('input-nome-giocatore').value.trim();
     let soprannomeVal=document.getElementById('input-soprannome-giocatore').value.trim();
-    if(!nomeVal){ alert("⚠️ Inserisci almeno il nome del giocatore!"); return; }
-    let nuovoGiocatore={nome:nomeVal,soprannome:soprannomeVal,tipo:nuovoGiocatoreStato.tipo,valore:nuovoGiocatoreStato.valore,zoom:1,posX:0,posY:0};
+    if(!nomeVal){ alert("⚠️ Inserisci il nome!"); return; }
+    let nuovoGiocatore={nome:nomeVal,soprannome:soprannomeVal,tipo:nuovoGiocatoreStato.tipo,valore:nuovoGiocatoreStato.valore};
     if(nuovoGiocatoreStato.tipo==='foto'&&fotoEditorStato.attivo&&fotoEditorStato.img){
-        let dataUrl=generaFotoDaEditor();
-        if(dataUrl) nuovoGiocatore.valore=dataUrl;
-        nuovoGiocatore.zoom=1; nuovoGiocatore.posX=0; nuovoGiocatore.posY=0;
+        let dataUrl=generaFotoDaEditor(); if(dataUrl) nuovoGiocatore.valore=dataUrl;
     }
-    appData.giocatori.push(nuovoGiocatore);
-    salvaDati();
-    renderRubrica();
-    chiudiModaleNuovoGiocatore();
+    appData.giocatori.push(nuovoGiocatore); salvaDati(); renderRubrica(); chiudiModaleNuovoGiocatore();
 }
-
 let indiceSquadraCalcolo=null;
 let conteggioCorrenteCarte={jolly:0,pinelle:0,assi:0,figure10:0,basse:0};
 const tipiCarteConfig=[
@@ -1145,7 +1056,6 @@ const tipiCarteConfig=[
     {chiave:'figure10',nome:'👑 Re, Q, J, 10, 9, 8 (10 pt)',valore:10},
     {chiave:'basse',nome:'🔢 7, 6, 5, 4, 3 (5 pt)',valore:5}
 ];
-
 function apriCalcolatoreCarte(colIndex){
     indiceSquadraCalcolo=colIndex;
     conteggioCorrenteCarte={jolly:0,pinelle:0,assi:0,figure10:0,basse:0};
@@ -1156,55 +1066,39 @@ function chiudiCalcolatoreCarte(){ document.getElementById('modale-calcolatore-c
 function modCardCount(chiave,delta){ vibra(10); conteggioCorrenteCarte[chiave]+=delta; if(conteggioCorrenteCarte[chiave]<0) conteggioCorrenteCarte[chiave]=0; renderInterfacciaCalcolatore(); }
 function calcolaTotaleCorrente(){ let tot=0; tipiCarteConfig.forEach(t=>{tot+=conteggioCorrenteCarte[t.chiave]*t.valore;}); return tot; }
 function renderInterfacciaCalcolatore(){
-    let container=document.getElementById('griglia-calcolo-carte');
-    if(!container) return;
-    container.innerHTML="";
+    let c=document.getElementById('griglia-calcolo-carte'); if(!c) return; c.innerHTML="";
     tipiCarteConfig.forEach(t=>{
-        let qta=conteggioCorrenteCarte[t.chiave];
-        container.innerHTML+=`<div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);padding:8px 10px;border-radius:8px;"><span style="font-size:13px;font-weight:bold;">${t.nome}</span><div style="display:flex;align-items:center;gap:8px;"><button class="btn-stepper" onclick="modCardCount('${t.chiave}',-1)">-</button><span style="font-size:15px;font-weight:bold;min-width:20px;text-align:center;">${qta}</span><button class="btn-stepper" onclick="modCardCount('${t.chiave}',1)">+</button></div></div>`;
+        let q=conteggioCorrenteCarte[t.chiave];
+        c.innerHTML+=`<div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);padding:8px 10px;border-radius:8px;"><span style="font-size:13px;font-weight:bold;">${t.nome}</span><div style="display:flex;align-items:center;gap:8px;"><button class="btn-stepper" onclick="modCardCount('${t.chiave}',-1)">-</button><span style="font-size:15px;font-weight:bold;min-width:20px;text-align:center;">${q}</span><button class="btn-stepper" onclick="modCardCount('${t.chiave}',1)">+</button></div></div>`;
     });
     document.getElementById('totale-calcolato-anteprima').innerText=calcolaTotaleCorrente()+" pt";
 }
 function applicaPuntiCalcolati(){
-    let totaleFinale=calcolaTotaleCorrente();
+    let tot=calcolaTotaleCorrente();
     if(indiceSquadraCalcolo!==null&&Array.isArray(partita.manoCorrente)&&partita.manoCorrente[indiceSquadraCalcolo]){
-        partita.manoCorrente[indiceSquadraCalcolo].carte=totaleFinale.toString();
-        let el=document.getElementById('carte-'+indiceSquadraCalcolo);
-        if(el) el.value=totaleFinale;
+        partita.manoCorrente[indiceSquadraCalcolo].carte=tot.toString();
+        let el=document.getElementById('carte-'+indiceSquadraCalcolo); if(el) el.value=tot;
         aggiornaPreviewMano(indiceSquadraCalcolo);
     }
     chiudiCalcolatoreCarte();
 }
-
 window.onload=function(){
-    caricaDati();
-    popolaGiocatoriDemo();
-    popolaStoricoDemo();
+    caricaDati(); popolaGiocatoriDemo(); popolaStoricoDemo();
     if(appData.tema==='scuro') document.body.classList.add("dark-mode");
-    applicaTemaColore();
-    applicaStatoMenu();
-    aggiornaBottoniRegoleExtra();
-    let elVersione=document.getElementById('versione-app');
-    if(elVersione) elVersione.innerText=APP_VERSION;
+    applicaTemaColore(); applicaStatoMenu(); aggiornaBottoniRegoleExtra();
+    let v=document.getElementById('versione-app'); if(v) v.innerText=APP_VERSION;
     renderSegment("seg-modalita",opzioniMod,partita.modalita,(scelta)=>{
         partita.modalita=scelta;
         let numPosti=scelta.includes('2')?2:(scelta.includes('3')?3:4);
-        let vecchi=partita.posti||[];
-        partita.posti=new Array(numPosti).fill(null);
+        let vecchi=partita.posti||[]; partita.posti=new Array(numPosti).fill(null);
         for(let i=0;i<Math.min(numPosti,vecchi.length);i++) partita.posti[i]=vecchi[i];
-        partita.mazziereIniziale=null;
-        partita.mazziereCorrente=null;
+        partita.mazziereIniziale=null; partita.mazziereCorrente=null; partita.pozzettoPlayer=null;
         renderTavolo();
     });
     renderSegment("seg-traguardo",opzioniTrag,partita.traguardo,(scelta)=>{ partita.traguardo=scelta; });
-    renderTavolo();
-    renderRubrica();
-    renderStorico();
-    renderRegole();
-    renderIstruzioni();
-    renderTabellone();
+    renderTavolo(); renderRubrica(); renderStorico(); renderRegole(); renderIstruzioni();
+    renderTabellone(); renderPartiteInPausa();
 };
-
 let _avvisoStorageMostrato=false;
 function salvaDati(){
     try{
@@ -1212,18 +1106,17 @@ function salvaDati(){
         localStorage.setItem('burracoPartita_v3',JSON.stringify(partita));
         _avvisoStorageMostrato=false;
     } catch(e){
-        console.warn("Errore salvataggio localStorage:",e);
-        if(!_avvisoStorageMostrato){ _avvisoStorageMostrato=true; alert("⚠️ Errore salvataggio: memoria piena.\nProva a eliminare qualche giocatore con foto oppure esporta un backup."); }
+        if(!_avvisoStorageMostrato){ _avvisoStorageMostrato=true; alert("⚠️ Errore salvataggio: memoria piena."); }
     }
 }
-
 function caricaDati(){
     try{
         let d=localStorage.getItem('burracoData_v3');
         if(d){
             let p=JSON.parse(d);
-            if(p&&Array.isArray(p.giocatori)) appData.giocatori=p.giocatori.map(g=>typeof g==='string'?{nome:g,soprannome:"",tipo:"emoji",valore:"👤",zoom:1,posX:0,posY:0}:g);
+            if(p&&Array.isArray(p.giocatori)) appData.giocatori=p.giocatori.map(g=>typeof g==='string'?{nome:g,soprannome:"",tipo:"emoji",valore:"👤"}:g);
             if(p&&Array.isArray(p.storico)) appData.storico=p.storico;
+            if(p&&Array.isArray(p.partiteInPausa)) appData.partiteInPausa=p.partiteInPausa; else appData.partiteInPausa=[];
             if(p&&p.tema) appData.tema=p.tema;
             if(p&&p.temaColore) appData.temaColore=p.temaColore;
             if(typeof p.menuRidotto==='boolean') appData.menuRidotto=p.menuRidotto;
@@ -1244,46 +1137,40 @@ function caricaDati(){
                 if(typeof parsedP.burracoInternazionale!=='boolean') parsedP.burracoInternazionale=false;
                 if(typeof parsedP.mazziereIniziale!=='number') parsedP.mazziereIniziale=null;
                 if(typeof parsedP.mazziereCorrente!=='number') parsedP.mazziereCorrente=null;
+                if(typeof parsedP.pozzettoPlayer!=='number') parsedP.pozzettoPlayer=null;
+                // MIGRAZIONE: converti booleano pozzetto in numero
                 if(Array.isArray(parsedP.manoCorrente)){
                     parsedP.manoCorrente.forEach(m=>{
                         if(m && typeof m.segnoCarte !== 'string') m.segnoCarte = '+';
+                        if(m) m.pozzetto = normalizzaPozzetto(m.pozzetto);
                     });
                 }
                 partita=parsedP;
             }
         }
-    } catch(e){ console.warn("Errore caricamento dati:",e); }
+    } catch(e){ console.warn("Errore caricamento:",e); }
 }
-
 function cambiaSchermata(idScena,btn){
     document.querySelectorAll('.schermata').forEach(s=>s.classList.remove('attiva'));
-    let target=document.getElementById(idScena);
-    if(target) target.classList.add('attiva');
+    let target=document.getElementById(idScena); if(target) target.classList.add('attiva');
     document.querySelectorAll('.swift-capsule').forEach(b=>b.classList.remove('attiva'));
     document.querySelectorAll('.voce-menu').forEach(b=>b.classList.remove('attiva'));
     if(btn) btn.classList.add('attiva');
-    let deskNav=document.getElementById('nav-'+idScena);
-    if(deskNav) deskNav.classList.add('attiva');
+    let d=document.getElementById('nav-'+idScena); if(d) d.classList.add('attiva');
     if(idScena==='impostazioni'){ document.querySelectorAll('.btn-tema').forEach(b=>{b.classList.toggle('attivo',b.dataset.tema===(appData.temaColore||'verde'));}); }
+    if(idScena==='nuova-partita'){ renderPartiteInPausa(); }
 }
-
 function renderSegment(idDiv,opzioni,sceltaAttuale,callback){
-    let div=document.getElementById(idDiv);
-    if(!div) return;
-    div.innerHTML="";
+    let div=document.getElementById(idDiv); if(!div) return; div.innerHTML="";
     opzioni.forEach(opz=>{
         let btn=document.createElement("button");
-        btn.className="segment-btn"+(opz===sceltaAttuale?" attivo":"");
-        btn.innerText=opz;
+        btn.className="segment-btn"+(opz===sceltaAttuale?" attivo":""); btn.innerText=opz;
         btn.onclick=()=>{Array.from(div.children).forEach(c=>c.classList.remove("attivo"));btn.classList.add("attivo");callback(opz);};
         div.appendChild(btn);
     });
 }
-
 function renderTavolo(){
-    let div=document.getElementById('tavolo-gioco');
-    if(!div) return;
-    div.innerHTML="";
+    let div=document.getElementById('tavolo-gioco'); if(!div) return; div.innerHTML="";
     let numPosti=partita.modalita.includes('2')?2:(partita.modalita.includes('3')?3:4);
     if(!Array.isArray(partita.posti)||partita.posti.length!==numPosti){
         let vecchi=Array.isArray(partita.posti)?partita.posti:[];
@@ -1291,603 +1178,389 @@ function renderTavolo(){
         for(let i=0;i<Math.min(numPosti,vecchi.length);i++) partita.posti[i]=vecchi[i]||null;
     }
     partita.posti.forEach((giocatoreObj,i)=>{
-        let occ=giocatoreObj?'occupato':'';
-        let nomeVisualizzato='Posto '+(i+1);
-        let contenutoCerchio='+';
+        let occ=giocatoreObj?'occupato':''; let nome='Posto '+(i+1); let cont='+';
         if(giocatoreObj){
-            nomeVisualizzato=giocatoreObj.nome;
-            if(giocatoreObj.tipo==='emoji'){ contenutoCerchio=giocatoreObj.valore; }
-            else{ contenutoCerchio=`<img src="${giocatoreObj.valore}" style="width:100%;height:100%;object-fit:cover;">`; }
+            nome=giocatoreObj.nome;
+            if(giocatoreObj.tipo==='emoji'){ cont=giocatoreObj.valore; }
+            else{ cont=`<img src="${giocatoreObj.valore}" style="width:100%;height:100%;object-fit:cover;">`; }
         }
-        div.innerHTML+=`<div class="posto-giocatore ${occ}" onclick="apriModale(${i})"><div class="cerchio-posto">${contenutoCerchio}</div><span class="nome-posto">${nomeVisualizzato}</span></div>`;
+        div.innerHTML+=`<div class="posto-giocatore ${occ}" onclick="apriModale(${i})"><div class="cerchio-posto">${cont}</div><span class="nome-posto">${nome}</span></div>`;
     });
-    aggiornaAnteprimaCoppie();
-    renderSelettoreMazziere();
+    aggiornaAnteprimaCoppie(); renderSelettoreMazziere();
 }
-
 function aggiornaAnteprimaCoppie(){
-    let div=document.getElementById('anteprima-coppie');
-    if(!div) return;
-    div.innerHTML="";
+    let div=document.getElementById('anteprima-coppie'); if(!div) return; div.innerHTML="";
     if(partita.modalita==='4 Coppie'&&partita.posti.length===4){
         if(partita.posti.every(p=>p!==null)){ div.innerHTML=`🤝 ${partita.posti[0].nome} + ${partita.posti[2].nome} &nbsp; VS &nbsp; ${partita.posti[1].nome} + ${partita.posti[3].nome}`; }
-        else { div.innerText="Compila tutti i posti per vedere le coppie."; div.style.color="#ccc"; }
+        else { div.innerText="Compila tutti i posti."; div.style.color="#ccc"; }
     }
 }
-
 function apriModale(indice){
     slotModifica=indice;
-    let lista=document.getElementById('lista-modale');
-    if(!lista) return;
-    lista.innerHTML="";
-    if(appData.giocatori.length===0){
-        lista.innerHTML=`<p style="color:#ccc;text-align:center;padding:15px;">La rubrica è vuota.<br>Vai in <b>👥 Giocatori</b> e aggiungine almeno uno!</p>`;
-        document.getElementById('modale-scegli-giocatore').style.display='flex';
-        return;
-    }
-    let nomiGiaAlTavolo=partita.posti.filter(p=>p!==null).map(p=>p.nome);
+    let lista=document.getElementById('lista-modale'); if(!lista) return; lista.innerHTML="";
+    if(appData.giocatori.length===0){ lista.innerHTML=`<p style="color:#ccc;text-align:center;padding:15px;">Rubrica vuota.</p>`; document.getElementById('modale-scegli-giocatore').style.display='flex'; return; }
+    let nomi=partita.posti.filter(p=>p!==null).map(p=>p.nome);
     appData.giocatori.forEach(g=>{
-        if(!nomiGiaAlTavolo.includes(g.nome)){
-            let btn=document.createElement('button');
-            btn.className='btn-lista-gioc';
-            let renderImg=g.tipo==='emoji'?g.valore:'📷';
-            let subText=g.soprannome?` (${g.soprannome})`:'';
-            btn.innerHTML=`${renderImg} <b>${g.nome}</b>${subText}`;
-            btn.onclick=()=>siedi(g);
-            lista.appendChild(btn);
+        if(!nomi.includes(g.nome)){
+            let btn=document.createElement('button'); btn.className='btn-lista-gioc';
+            let r=g.tipo==='emoji'?g.valore:'📷';
+            let s=g.soprannome?` (${g.soprannome})`:'';
+            btn.innerHTML=`${r} <b>${g.nome}</b>${s}`; btn.onclick=()=>siedi(g); lista.appendChild(btn);
         }
     });
     if(partita.posti[indice]){
-        let btnRimuovi=document.createElement('button');
-        btnRimuovi.className='btn-danger';
-        btnRimuovi.style.marginTop='10px';
-        btnRimuovi.innerText="Rimuovi dal tavolo";
-        btnRimuovi.onclick=()=>siedi(null);
-        lista.appendChild(btnRimuovi);
+        let btnR=document.createElement('button'); btnR.className='btn-danger'; btnR.style.marginTop='10px';
+        btnR.innerText="Rimuovi dal tavolo"; btnR.onclick=()=>siedi(null); lista.appendChild(btnR);
     }
     document.getElementById('modale-scegli-giocatore').style.display='flex';
 }
-
-function siedi(giocatoreObj){ partita.posti[slotModifica]=giocatoreObj; renderTavolo(); chiudiModale(); }
+function siedi(g){ partita.posti[slotModifica]=g; renderTavolo(); chiudiModale(); }
 function chiudiModale(){ document.getElementById('modale-scegli-giocatore').style.display='none'; }
-
 function iniziaPartita(){
-    if(partita.posti.includes(null)){ alert("⚠️ Riempi tutti i posti al tavolo prima di iniziare!"); return; }
-    if(partita.mazziereIniziale === null || partita.mazziereIniziale === undefined || !partita.posti[partita.mazziereIniziale]){
-        alert("⚠️ Seleziona chi dà le carte per la prima mano (sezione 4)!");
-        return;
-    }
-    partita.inCorso=true;
-    partita.storicoSmazzate=[];
-    partita.mazziereCorrente = partita.mazziereIniziale;
-    if(partita.modalita==='4 Coppie'){
-        partita.squadre=[partita.posti[0].nome+" & "+partita.posti[2].nome,partita.posti[1].nome+" & "+partita.posti[3].nome];
-    } else {
-        partita.squadre=partita.posti.map(p=>p.nome);
-    }
+    if(partita.posti.includes(null)){ alert("⚠️ Riempi tutti i posti!"); return; }
+    if(partita.mazziereIniziale === null || partita.mazziereIniziale === undefined || !partita.posti[partita.mazziereIniziale]){ alert("⚠️ Seleziona il mazziere!"); return; }
+    partita.inCorso=true; partita.storicoSmazzate=[]; partita.mazziereCorrente=partita.mazziereIniziale; partita.pozzettoPlayer=null;
+    if(partita.modalita==='4 Coppie'){ partita.squadre=[partita.posti[0].nome+" & "+partita.posti[2].nome,partita.posti[1].nome+" & "+partita.posti[3].nome]; }
+    else { partita.squadre=partita.posti.map(p=>p.nome); }
     partita.punteggiTotali=new Array(partita.squadre.length).fill(0);
-    resetManoCorrente();
-    salvaDati();
-    cambiaSchermata('partita-corso');
-    renderTabellone();
+    resetManoCorrente(); salvaDati(); cambiaSchermata('partita-corso'); renderTabellone();
 }
-
+// MODIFICATO: pozzetto di default 0 (centro)
 function resetManoCorrente(){
     partita.manoCorrente=partita.squadre.map(()=>{
-        let m={puliti:0,semipuliti:0,sporchi:0,carte:"",segnoCarte:'+',chiuso:false,pozzetto:true};
+        let m={puliti:0,semipuliti:0,sporchi:0,carte:"",segnoCarte:'+',chiuso:false,pozzetto:0};
         Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{ if(partita[nome]) m[REGOLE_EXTRA_CONFIG[nome].campo]=0; });
         return m;
     });
 }
-
+function customSoloHeader(idx){
+    let g=partita.posti[idx]; if(!g) return '';
+    let isM=(partita.mazziereCorrente===idx);
+    let av=g.tipo==='emoji'?`<span style="font-size:22px;line-height:1;">${g.valore}</span>`:`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
+    return `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(74,144,226,0.6);"><div style="display:flex;align-items:center;gap:8px;"><div class="${isM?'avatar-mazziere':''}" style="width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.12);border:2px solid ${isM?'#ffd700':'#4a90e2'};display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">${av}</div><span style="font-family:Optima,sans-serif;font-size:17px;font-weight:bold;color:${isM?'#ffd700':'var(--crema-accento)'};">${g.nome}${isM?' 🎴':''}</span></div><span style="background:linear-gradient(145deg,#4a90e2,#2c5f8d);color:#fff;font-size:10px;font-weight:bold;padding:2px 12px;border-radius:10px;letter-spacing:1px;">👤 SOLO</span></div>`;
+}
+function customTeamHeader(teamIndices){
+    let html=`<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-bottom:6px;padding-bottom:8px;">`;
+    teamIndices.forEach((idx,k)=>{
+        let g=partita.posti[idx]; if(!g) return;
+        let isM=(partita.mazziereCorrente===idx);
+        let av=g.tipo==='emoji'?`<span style="font-size:18px;line-height:1;">${g.valore}</span>`:`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
+        html+=`<div style="display:flex;align-items:center;gap:5px;"><div class="${isM?'avatar-mazziere':''}" style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.12);border:2px solid ${isM?'#ffd700':'#34C759'};display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">${av}</div><span style="font-family:Optima,sans-serif;font-size:13px;font-weight:bold;color:${isM?'#ffd700':'var(--crema-accento)'};">${g.nome}${isM?' 🎴':''}</span></div>`;
+        if(k<teamIndices.length-1) html+=`<span style="color:var(--giallo-burraco);font-size:16px;font-weight:bold;">&</span>`;
+    });
+    html+=`</div><div style="text-align:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(52,199,89,0.6);"><span style="background:linear-gradient(145deg,#34C759,#2ea84c);color:#fff;font-size:10px;font-weight:bold;padding:2px 12px;border-radius:10px;letter-spacing:1px;">🤝 COPPIA</span></div>`;
+    return html;
+}
+// NUOVO: click handler per lo slider del pozzetto
+function clickPozzettoSlider(event, col){
+    if(partita.modalita === '3 Gioc.' && partita.pozzettoPlayer !== null) return;
+    let slider = event.currentTarget;
+    if(!slider) return;
+    let rect = slider.getBoundingClientRect();
+    let clientX = (event.clientX !== undefined) ? event.clientX : (event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientX : 0);
+    if(!clientX) return;
+    let ratio = (clientX - rect.left) / rect.width;
+    let newStato;
+    if(ratio < 1/3) newStato = -1;
+    else if(ratio < 2/3) newStato = 0;
+    else newStato = 1;
+    let m = partita.manoCorrente[col];
+    if(!m) return;
+    if(m.pozzetto === newStato) return;
+    m.pozzetto = newStato;
+    vibra(15);
+    slider.dataset.stato = String(newStato);
+    salvaDati();
+    aggiornaPreviewMano(col);
+}
 function renderTabellone(){
-    let container=document.getElementById('partita-corso-content');
-    if(!container) return;
+    let container=document.getElementById('partita-corso-content'); if(!container) return;
     if(!partita.inCorso||!partita.squadre||partita.squadre.length===0){
-        container.innerHTML=`<div style="text-align:center;padding:40px 10px;"><p style="font-size:18px;color:#ccc;">Nessuna partita attiva in questo momento.</p><button class="btn-avvia-swift" onclick="cambiaSchermata('nuova-partita')">🎲 Configura Nuova Partita</button></div>`;
+        let pA=Array.isArray(appData.partiteInPausa)?appData.partiteInPausa:[]; let pH='';
+        if(pA.length>0){ pH+='<div style="margin-top:24px;text-align:left;max-width:480px;margin-left:auto;margin-right:auto;"><div style="font-family:Optima,Georgia,serif;font-size:16px;font-weight:bold;color:#ffd700;text-align:center;margin-bottom:10px;">⏸️ Partite in Pausa ('+pA.length+')</div>';
+            pA.forEach(p=>{ let pun=(p.squadre||[]).map((sq,i)=>escapeHtml(sq)+': '+(p.punteggiTotali&&p.punteggiTotali[i]||0)+' pt').join(' • ');
+                pH+='<div class="card-pausa" style="margin-bottom:10px;"><div class="card-pausa-header"><div class="card-pausa-nome">⏸️ '+escapeHtml(p.nome||'Partita')+'</div><div class="card-pausa-meta">'+escapeHtml(p.dataPausa||'')+'</div></div><div class="card-pausa-meta" style="margin-bottom:8px;">'+escapeHtml(p.modalita||'')+' • '+(Array.isArray(p.storicoSmazzate)?p.storicoSmazzate.length:0)+' mani</div><div class="card-pausa-punteggi">'+pun+'</div><div class="card-pausa-azioni"><button class="btn-riprendi" onclick="riprendiPartitaInPausa('+p.id+')">▶️ Riprendi</button><button class="btn-elimina-pausa" onclick="eliminaPartitaInPausa('+p.id+')">🗑️ Elimina</button></div></div>';
+            }); pH+='</div>';
+        } else { pH='<p style="font-size:13px;color:#bbb;margin-top:16px;">Nessuna partita in pausa.</p>'; }
+        container.innerHTML=`<div style="text-align:center;padding:40px 10px;"><div style="font-size:48px;margin-bottom:10px;opacity:0.7;">🎲</div><p style="font-size:18px;color:#ccc;margin:0 0 16px 0;">Nessuna partita attiva.</p><button class="btn-avvia-partita" onclick="cambiaSchermata('nuova-partita')" style="max-width:340px;margin:0 auto;">🎲 Nuova Partita</button>${pH}</div>`;
         return;
     }
     if(!Array.isArray(partita.manoCorrente)||partita.manoCorrente.length!==partita.squadre.length){ resetManoCorrente(); }
+    // assicura pozzetto numerico
+    partita.manoCorrente.forEach(m => { if(m) m.pozzetto = normalizzaPozzetto(m.pozzetto); });
     let canUndo=partita.storicoSmazzate&&partita.storicoSmazzate.length>0;
     let layoutClass='';
     if(partita.modalita==='2 Gioc.') layoutClass='tavolo-mode-2';
-    else if(partita.modalita==='3 Gioc.') layoutClass='tavolo-mode-3';
+    else if(partita.modalita==='3 Gioc.'){ layoutClass = (partita.pozzettoPlayer !== null) ? 'tavolo-mode-3-pozzetto' : 'tavolo-mode-3'; }
     else if(partita.modalita==='4 Coppie') layoutClass='tavolo-mode-4coppie';
     else if(partita.modalita==='4 Singoli') layoutClass='tavolo-mode-4singoli';
-
-    let mazziereNome = '';
-    let mazziereObj = null;
-    if(typeof partita.mazziereCorrente === 'number' && partita.posti[partita.mazziereCorrente]){
-        mazziereObj = partita.posti[partita.mazziereCorrente];
-        mazziereNome = mazziereObj.nome;
+    let mzNome='', mzObj=null, mzAvatar='';
+    if(typeof partita.mazziereCorrente === 'number' && partita.posti[partita.mazziereCorrente]){ mzObj=partita.posti[partita.mazziereCorrente]; mzNome=mzObj.nome; }
+    if(mzObj){ mzAvatar = mzObj.tipo==='emoji' ? `<span style="font-size:22px;line-height:1;">${mzObj.valore}</span>` : `<img src="${mzObj.valore}" style="width:100%;height:100%;object-fit:cover;">`; }
+    let mzBar = mzNome ? `<div style="background:linear-gradient(145deg,rgba(255,215,0,0.28),rgba(255,215,0,0.1));border:2px solid var(--giallo-burraco);border-radius:12px;padding:8px 14px;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;box-shadow:0 0 22px rgba(255,215,0,0.4);flex-wrap:wrap;"><span style="font-size:22px;filter:drop-shadow(0 0 8px #ffd700);">🎴</span><span style="font-size:12px;font-weight:bold;color:var(--crema-accento);">MAZZIERE:</span><div style="display:flex;align-items:center;gap:6px;"><div style="width:30px;height:30px;border-radius:50%;overflow:hidden;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;border:2px solid var(--giallo-burraco);">${mzAvatar}</div><span style="font-size:15px;font-weight:bold;color:white;">${mzNome}</span></div></div>` : '';
+    let pzSel='';
+    if(partita.modalita==='3 Gioc.'){
+        pzSel='<div class="pozzetto-selector"><div class="pozzetto-label">🃏 CHI HA PRESO IL POZZETTO IN QUESTA MANO?</div>';
+        partita.posti.forEach((g,i)=>{
+            if(!g) return;
+            let isSel=(partita.pozzettoPlayer===i);
+            let av=g.tipo==='emoji'?g.valore:`<img src="${g.valore}">`;
+            pzSel+=`<button type="button" class="pozzetto-btn ${isSel?'attivo':''}" onclick="setPozzettoPlayer(${i})"><span class="mini-avatar">${av}</span>${escapeHtml(g.nome)}${isSel?' ✓':''}</button>`;
+        });
+        pzSel+='</div>';
     }
-    let mazziereAvatar = '';
-    if(mazziereObj){
-        mazziereAvatar = mazziereObj.tipo==='emoji'
-            ? `<span style="font-size:22px;line-height:1;">${mazziereObj.valore}</span>`
-            : `<img src="${mazziereObj.valore}" style="width:100%;height:100%;object-fit:cover;">`;
-    }
-    let mazziereBar = mazziereNome ? `
-        <div style="background:linear-gradient(145deg,rgba(255,215,0,0.28),rgba(255,215,0,0.1));border:2px solid var(--giallo-burraco);border-radius:12px;padding:8px 14px;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;box-shadow:0 0 22px rgba(255,215,0,0.4);flex-wrap:wrap;">
-            <span style="font-size:22px;filter:drop-shadow(0 0 8px #ffd700);">🎴</span>
-            <span style="font-size:12px;font-weight:bold;color:var(--crema-accento);letter-spacing:0.5px;">MAZZIERE DI QUESTA MANO:</span>
-            <div style="display:flex;align-items:center;gap:6px;">
-                <div style="width:30px;height:30px;border-radius:50%;overflow:hidden;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;border:2px solid var(--giallo-burraco);">${mazziereAvatar}</div>
-                <span style="font-size:15px;font-weight:bold;color:white;">${mazziereNome}</span>
-            </div>
-        </div>` : '';
-
     container.innerHTML=`
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;">
-            <h2 class="titolo-optima">Smazzata in Corso</h2>
-            <span style="background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:8px;font-size:12px;font-weight:bold;">${partita.modalita} (Target: ${partita.traguardo})</span>
-        </div>
-        ${mazziereBar}
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;"><h2 class="titolo-optima">Smazzata in Corso</h2><span style="background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:8px;font-size:12px;font-weight:bold;">${partita.modalita} (Target: ${partita.traguardo})</span></div>
+        ${mzBar}
+        ${pzSel}
         <div id="griglia-tabellone" class="griglia-punti ${layoutClass}"></div>
-        <button class="btn-avvia-swift" style="margin-top:20px;" onclick="salvaSmazzata()">💾 Calcola e Registra Smazzata</button>
-        <button class="btn-secondary" style="margin-top:10px;${canUndo?'':'opacity:0.4;pointer-events:none;'}" onclick="annullaUltimaSmazzata()">↩️ Annulla Ultima Smazzata</button>
-        <button class="btn-danger" style="margin-top:10px;" onclick="chiudiPartita()">🛑 Termina Partita</button>`;
+        <div class="azioni-partita-grid">
+            <button class="btn-azione-soft btn-azione-verde" onclick="salvaSmazzata()">💾 Registra Smazzata</button>
+            <button class="btn-azione-soft btn-azione-ambra" onclick="mettiInPausa()">⏸️ Metti in Pausa</button>
+            <button class="btn-azione-soft btn-azione-grigio" onclick="annullaUltimaSmazzata()" ${canUndo?'':'disabled'}>↩️ Annulla Smazzata</button>
+            <button class="btn-azione-soft btn-azione-rosso" onclick="chiudiPartita()">🛑 Termina Partita</button>
+        </div>`;
     let griglia=document.getElementById('griglia-tabellone');
-
-    const FR_N = '<span class="freccia-pos">↑</span>';
-    const FR_S = '<span class="freccia-pos">↓</span>';
-    const FR_E = '<span class="freccia-pos">→</span>';
-    const FR_O = '<span class="freccia-pos">←</span>';
-    const FR_SO= '<span class="freccia-pos">↙</span>';
-    const FR_SE= '<span class="freccia-pos">↘</span>';
-
-    function getComponenti(iSquadra){
-        let comp=[];
+    const FR_N='<span class="freccia-pos">↑</span>', FR_S='<span class="freccia-pos">↓</span>', FR_E='<span class="freccia-pos">→</span>', FR_O='<span class="freccia-pos">←</span>', FR_SO='<span class="freccia-pos">↙</span>', FR_SE='<span class="freccia-pos">↘</span>';
+    function getComponenti(iS){
+        let c=[];
         if(partita.modalita==='4 Coppie'){
-            if(iSquadra===0){
-                if(partita.posti[0]) comp.push({g:partita.posti[0],fr:FR_N,pos:'Nord',idx:0});
-                if(partita.posti[2]) comp.push({g:partita.posti[2],fr:FR_S,pos:'Sud',idx:2});
-            } else {
-                if(partita.posti[1]) comp.push({g:partita.posti[1],fr:FR_E,pos:'Est',idx:1});
-                if(partita.posti[3]) comp.push({g:partita.posti[3],fr:FR_O,pos:'Ovest',idx:3});
-            }
+            if(iS===0){ if(partita.posti[0]) c.push({g:partita.posti[0],fr:FR_N,pos:'Nord',idx:0}); if(partita.posti[2]) c.push({g:partita.posti[2],fr:FR_S,pos:'Sud',idx:2}); }
+            else { if(partita.posti[1]) c.push({g:partita.posti[1],fr:FR_E,pos:'Est',idx:1}); if(partita.posti[3]) c.push({g:partita.posti[3],fr:FR_O,pos:'Ovest',idx:3}); }
         } else {
             let fr='',pos='';
-            if(partita.modalita==='2 Gioc.'){ fr=iSquadra===0?FR_N:FR_S; pos=iSquadra===0?'Nord':'Sud'; }
-            else if(partita.modalita==='3 Gioc.'){ if(iSquadra===0){fr=FR_N;pos='Nord';} else if(iSquadra===1){fr=FR_SO;pos='Sud-Ovest';} else {fr=FR_SE;pos='Sud-Est';} }
-            else if(partita.modalita==='4 Singoli'){ if(iSquadra===0){fr=FR_N;pos='Nord';} else if(iSquadra===1){fr=FR_S;pos='Sud';} else if(iSquadra===2){fr=FR_O;pos='Ovest';} else {fr=FR_E;pos='Est';} }
-            if(partita.posti[iSquadra]) comp.push({g:partita.posti[iSquadra],fr:fr,pos:pos,idx:iSquadra});
+            if(partita.modalita==='2 Gioc.'){ fr=iS===0?FR_N:FR_S; pos=iS===0?'Nord':'Sud'; }
+            else if(partita.modalita==='3 Gioc.'){ if(iS===0){fr=FR_N;pos='Nord';} else if(iS===1){fr=FR_SO;pos='Sud-Ovest';} else {fr=FR_SE;pos='Sud-Est';} }
+            else if(partita.modalita==='4 Singoli'){ if(iS===0){fr=FR_N;pos='Nord';} else if(iS===1){fr=FR_S;pos='Sud';} else if(iS===2){fr=FR_O;pos='Ovest';} else {fr=FR_E;pos='Est';} }
+            if(partita.posti[iS]) c.push({g:partita.posti[iS],fr:fr,pos:pos,idx:iS});
         }
-        return comp;
+        return c;
     }
-
-    function avatarHTML(g, isMazziere){
+    function avatarHTML(g,isM){
         if(!g) return '';
-        let contenuto=g.tipo==='emoji'
-            ?`<span style="font-size:22px;line-height:1;">${g.valore}</span>`
-            :`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
-        let classe = isMazziere ? 'avatar-mazziere' : '';
-        let bordo = isMazziere ? '#ffd700' : 'var(--giallo-burraco)';
-        return `<div class="${classe}" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.12);border:2px solid ${bordo};display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,0.4);">${contenuto}</div>`;
+        let c=g.tipo==='emoji'?`<span style="font-size:22px;line-height:1;">${g.valore}</span>`:`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
+        return `<div class="${isM?'avatar-mazziere':''}" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.12);border:2px solid ${isM?'#ffd700':'var(--giallo-burraco)'};display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,0.4);">${c}</div>`;
     }
-
     function gruppoHTML(c){
-        let isMazziere = (partita.mazziereCorrente === c.idx);
-        let badge = isMazziere ? '<span class="badge-mazziere">🎴 DÀ</span>' : '';
-        let nomeColore = isMazziere ? '#ffd700' : 'var(--crema-accento)';
-        return `<div style="display:flex;align-items:center;gap:6px;min-width:0;flex:0 1 auto;">
-            ${avatarHTML(c.g, isMazziere)}
-            <span style="font-family:Optima,sans-serif;font-size:15px;font-weight:bold;color:${nomeColore};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.g.nome}</span>
-            ${badge}
-            ${c.fr}
-            <span style="font-family:Optima,sans-serif;font-size:12px;font-weight:bold;color:var(--crema-accento);text-transform:uppercase;white-space:nowrap;">${c.pos}</span>
-        </div>`;
+        let isM=(partita.mazziereCorrente===c.idx);
+        return `<div style="display:flex;align-items:center;gap:6px;min-width:0;flex:0 1 auto;">${avatarHTML(c.g,isM)}<span style="font-family:Optima,sans-serif;font-size:15px;font-weight:bold;color:${isM?'#ffd700':'var(--crema-accento)'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.g.nome}</span>${isM?'<span class="badge-mazziere">🎴 DÀ</span>':''}${c.fr}<span style="font-family:Optima,sans-serif;font-size:12px;font-weight:bold;color:var(--crema-accento);text-transform:uppercase;white-space:nowrap;">${c.pos}</span></div>`;
     }
-
-    function headerHTML(iSquadra){
-        let comp=getComponenti(iSquadra);
-        if(comp.length===0) return '';
-        if(comp.length===2){
-            return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.2);">
-                ${gruppoHTML(comp[0])}
-                ${gruppoHTML(comp[1])}
-            </div>`;
-        }
-        return `<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.2);">
-            ${gruppoHTML(comp[0])}
-        </div>`;
+    function headerHTML(iS){
+        let c=getComponenti(iS); if(c.length===0) return '';
+        if(c.length===2) return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.2);">${gruppoHTML(c[0])}${gruppoHTML(c[1])}</div>`;
+        return `<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.2);">${gruppoHTML(c[0])}</div>`;
     }
-
-    function righeExtraHTML(i,colMano){
-        let html='';
+    function righeExtraHTML(i,m){
+        let h='';
         Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{
             if(!partita[nome]) return;
-            let c=REGOLE_EXTRA_CONFIG[nome];
-            let qta=colMano[c.campo]||0;
-            html+=`<div class="stepper-row" style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.35);"><span class="stepper-label">${c.emoji} ${c.label} (+${c.valore})</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepperExtra(${i},'${c.campo}',-1)">-</button><span class="valore-stepper" id="valore-${i}-${c.campo}">${qta}</span><button class="btn-stepper" onclick="modStepperExtra(${i},'${c.campo}',1)">+</button></div></div>`;
+            let c=REGOLE_EXTRA_CONFIG[nome]; let q=m[c.campo]||0;
+            h+=`<div class="stepper-row" style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.35);"><span class="stepper-label">${c.emoji} ${c.label} (+${c.valore})</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepperExtra(${i},'${c.campo}',-1)">-</button><span class="valore-stepper" id="valore-${i}-${c.campo}">${q}</span><button class="btn-stepper" onclick="modStepperExtra(${i},'${c.campo}',1)">+</button></div></div>`;
         });
-        return html;
+        return h;
     }
-
-    let chiudenteIdx = -1;
-    partita.manoCorrente.forEach((m, idx)=>{ if(m && m.chiuso) chiudenteIdx = idx; });
-
-    partita.squadre.forEach((squadra,i)=>{
-        let mano=partita.manoCorrente[i]||{puliti:0,semipuliti:0,sporchi:0,carte:"",segnoCarte:'+',chiuso:false,pozzetto:true};
-        let segno = mano.segnoCarte || '+';
-        let segnoClass = (segno === '-') ? 'negativo' : 'positivo';
+    let chiudenteIdx=-1;
+    partita.manoCorrente.forEach((m,idx)=>{ if(m&&m.chiuso) chiudenteIdx=idx; });
+    let panelsToRender=[];
+    if(partita.modalita==='3 Gioc.'&&partita.pozzettoPlayer!==null){
+        let soloIdx=partita.pozzettoPlayer;
+        let teammates=[0,1,2].filter(x=>x!==soloIdx);
+        panelsToRender.push({bindIdx:soloIdx,isSolo:true,teammates:null});
+        panelsToRender.push({bindIdx:teammates[0],isTeam:true,teammates:teammates});
+    } else {
+        partita.squadre.forEach((s,i)=>{ panelsToRender.push({bindIdx:i,isSolo:false,isTeam:false,teammates:null}); });
+    }
+    let pzLocked=(partita.modalita==='3 Gioc.'&&partita.pozzettoPlayer!==null);
+    panelsToRender.forEach(panel=>{
+        let i=panel.bindIdx;
+        let mano=partita.manoCorrente[i]||{puliti:0,semipuliti:0,sporchi:0,carte:"",segnoCarte:'+',chiuso:false,pozzetto:0};
+        Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{ let c=REGOLE_EXTRA_CONFIG[nome]; if(mano[c.campo]===undefined) mano[c.campo]=0; });
+        let segno=mano.segnoCarte||'+'; let segnoClass=(segno==='-')?'negativo':'positivo';
         let chiusClass, chiusTesto, chiusDisabled;
-        if(mano.chiuso){
-            chiusClass = "btn-toggle-chiusa attivo";
-            chiusTesto = "🏆 Chiusa";
-            chiusDisabled = '';
-        } else if(chiudenteIdx !== -1 && chiudenteIdx !== i){
-            chiusClass = "btn-toggle-chiusa disabilitato";
-            chiusTesto = "🏆 Chiusa";
-            chiusDisabled = 'disabled';
+        if(mano.chiuso){ chiusClass="btn-toggle-chiusa attivo"; chiusTesto="🏆 Chiusa"; chiusDisabled=''; }
+        else if(chiudenteIdx!==-1&&chiudenteIdx!==i){ chiusClass="btn-toggle-chiusa disabilitato"; chiusTesto="🏆 Chiusa"; chiusDisabled='disabled'; }
+        else { chiusClass="btn-toggle-chiusa"; chiusTesto="🏆 Chiusa"; chiusDisabled=''; }
+        let pzStato = normalizzaPozzetto(mano.pozzetto);
+        let pzLockedClass = pzLocked ? ' locked' : '';
+        let headerHtml;
+        if(panel.isTeam){ headerHtml=customTeamHeader(panel.teammates); }
+        else if(panel.isSolo){ headerHtml=customSoloHeader(i); }
+        else { headerHtml=headerHTML(i); }
+        let totalDisplay;
+        if(panel.isTeam){
+            totalDisplay='<div style="text-align:center;font-size:12px;color:#a5d6a7;margin-bottom:12px;font-weight:bold;">'+panel.teammates.map(ti=>`<div style="display:flex;justify-content:space-between;padding:2px 0;"><span style="color:#fff8e1;">${escapeHtml(partita.squadre[ti])}</span><span>${partita.punteggiTotali[ti]} pt</span></div>`).join('')+'</div>';
         } else {
-            chiusClass = "btn-toggle-chiusa";
-            chiusTesto = "🏆 Chiusa";
-            chiusDisabled = '';
+            totalDisplay=`<div class="punti-totali">${partita.punteggiTotali[i]} <span style="font-size:14px">pt</span></div>`;
         }
-        let pozzChecked = mano.pozzetto ? 'checked' : '';
-        let pozzClass = mano.pozzetto ? 'checkbox-pozzetto attivo' : 'checkbox-pozzetto';
         griglia.innerHTML+=`
             <div class="colonna-punti">
-                ${headerHTML(i)}
-                <div class="punti-totali">${partita.punteggiTotali[i]} <span style="font-size:14px">pt</span></div>
+                ${headerHtml}${totalDisplay}
                 <div class="stepper-row"><span class="stepper-label">Puliti (+200)</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepper(${i},'puliti',-1)">-</button><span class="valore-stepper" id="valore-${i}-puliti">${mano.puliti}</span><button class="btn-stepper" onclick="modStepper(${i},'puliti',1)">+</button></div></div>
                 <div class="stepper-row"><span class="stepper-label">Semi (+150)</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepper(${i},'semipuliti',-1)">-</button><span class="valore-stepper" id="valore-${i}-semipuliti">${mano.semipuliti}</span><button class="btn-stepper" onclick="modStepper(${i},'semipuliti',1)">+</button></div></div>
                 <div class="stepper-row"><span class="stepper-label">Sporchi (+100)</span><div class="stepper-controls"><button class="btn-stepper" onclick="modStepper(${i},'sporchi',-1)">-</button><span class="valore-stepper" id="valore-${i}-sporchi">${mano.sporchi}</span><button class="btn-stepper" onclick="modStepper(${i},'sporchi',1)">+</button></div></div>
                 ${righeExtraHTML(i,mano)}
                 <div class="input-carte-row">
-                    <div class="input-carte-col">
-                        <span class="input-carte-col-label">Punti carte in mano</span>
-                        <div class="carte-combo">
-                            <div class="switch-segno ${segnoClass}" id="switch-segno-${i}" onclick="toggleSegnoCarte(${i})" title="Tocca per cambiare + / −">
-                                <span class="switch-label switch-label-meno">−</span>
-                                <span class="switch-label switch-label-piu">+</span>
-                                <span class="switch-knob"></span>
-                            </div>
-                            <input type="text" class="input-carte" id="carte-${i}" placeholder="0" value="${mano.carte}" inputmode="decimal" pattern="[0-9.,]*" autocomplete="off" autocorrect="off" spellcheck="false" oninput="aggiornaCarte(${i},this.value)" onclick="apriTastieraCarte(this)">
-                        </div>
-                    </div>
-                    <div class="input-carte-col">
-                        <span class="input-carte-col-label">Calcolatore</span>
-                        <button type="button" class="btn-calc-inline" onclick="apriCalcolatoreCarte(${i})" title="Calcolatore carte">🧮</button>
-                    </div>
+                    <div class="input-carte-col"><span class="input-carte-col-label">Punti carte in mano</span><div class="carte-combo"><div class="switch-segno ${segnoClass}" id="switch-segno-${i}" onclick="toggleSegnoCarte(${i})"><span class="switch-label switch-label-meno">−</span><span class="switch-label switch-label-piu">+</span><span class="switch-knob"></span></div><input type="text" class="input-carte" id="carte-${i}" placeholder="0" value="${mano.carte}" inputmode="decimal" oninput="aggiornaCarte(${i},this.value)"></div></div>
+                    <div class="input-carte-col" style="flex:0 0 60px;"><span class="input-carte-col-label">Calc.</span><button type="button" class="btn-calc-inline" onclick="apriCalcolatoreCarte(${i})">🧮</button></div>
                 </div>
                 <div class="pulsanti-stato-row">
-                    <label class="${pozzClass}" id="btn-pozzetto-${i}">
-                        <input type="checkbox" ${pozzChecked} onchange="togglePozzetto(${i})">
-                        <span class="checkbox-box"></span>
-                        <span class="checkbox-label">Pozzetto</span>
-                    </label>
+                    <div class="pozzetto-slider${pzLockedClass}" id="btn-pozzetto-${i}" data-stato="${pzStato}" onclick="clickPozzettoSlider(event, ${i})"><div class="pozzetto-knob"></div><div class="pozzetto-track"><span class="pozzetto-lbl lbl-neg">−100</span><span class="pozzetto-lbl lbl-neu">0</span><span class="pozzetto-lbl lbl-pos">+100</span></div></div>
                     <button class="${chiusClass}" id="btn-chiusura-${i}" onclick="toggleChiusura(${i})" ${chiusDisabled}>${chiusTesto}</button>
                 </div>
                 <div id="preview-${i}" style="text-align:center;margin-top:10px;font-size:13px;color:#bbb;"></div>
             </div>`;
     });
-    /* Rimosso il tavolo-centro per 4 Singoli */
-    partita.squadre.forEach((_,i)=>aggiornaPreviewMano(i));
+    panelsToRender.forEach(p=>aggiornaPreviewMano(p.bindIdx));
 }
-
-function apriTastieraCarte(input){
-    if(!input) return;
-    try{
-        input.focus();
-        input.setSelectionRange(input.value.length, input.value.length);
-    }catch(e){}
-}
-
 function calcolaParzialeMano(m){
-    let segno = (m.segnoCarte === '-') ? -1 : 1;
-    let pC = parsePuntiCarte(m.carte) * segno;
-    let parziale=(m.puliti*200)+(m.semipuliti*150)+(m.sporchi*100)+pC+(m.chiuso?100:0)+(!m.pozzetto?-100:0);
-    Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{
-        if(partita[nome]){
-            let c=REGOLE_EXTRA_CONFIG[nome];
-            let qta=m[c.campo]||0;
-            parziale+=qta*c.valore;
-        }
-    });
+    let segno=(m.segnoCarte==='-')?-1:1;
+    let pC=parsePuntiCarte(m.carte)*segno;
+    let pz=normalizzaPozzetto(m.pozzetto);
+    let pzBonus = pz === -1 ? -100 : (pz === 1 ? 100 : 0);
+    let parziale=(m.puliti*200)+(m.semipuliti*150)+(m.sporchi*100)+pC+(m.chiuso?100:0)+pzBonus;
+    Object.keys(REGOLE_EXTRA_CONFIG).forEach(nome=>{ if(partita[nome]){ let c=REGOLE_EXTRA_CONFIG[nome]; parziale+=(m[c.campo]||0)*c.valore; } });
     return parziale;
 }
-
 function aggiornaPreviewMano(col){
-    let m=partita.manoCorrente[col];
-    if(!m) return;
-    let parziale=calcolaParzialeMano(m);
+    let m=partita.manoCorrente[col]; if(!m) return;
+    let p=calcolaParzialeMano(m);
     let el=document.getElementById('preview-'+col);
-    if(el){
-        let colore=parziale>=0?'#7CFC00':'#ff6b6b';
-        el.innerHTML=`Mano: <b style="color:${colore}">${parziale>=0?'+':''}${parziale} pt</b>`;
-    }
+    if(el){ let c=p>=0?'#7CFC00':'#ff6b6b'; el.innerHTML=`Mano: <b style="color:${c}">${p>=0?'+':''}${p} pt</b>`; }
 }
-
 function aggiornaBottoniStato(col){
-    let mano=partita.manoCorrente[col];
-    if(!mano) return;
-    let elPozz=document.getElementById('btn-pozzetto-'+col);
-    if(elPozz){
-        elPozz.classList.toggle('attivo', mano.pozzetto);
-        let input=elPozz.querySelector('input');
-        if(input) input.checked = mano.pozzetto;
-    }
+    let mano=partita.manoCorrente[col]; if(!mano) return;
+    let slider=document.getElementById('btn-pozzetto-'+col);
+    if(slider){ slider.dataset.stato=String(normalizzaPozzetto(mano.pozzetto)); }
     let sw=document.getElementById('switch-segno-'+col);
-    if(sw){
-        let segno = mano.segnoCarte || '+';
-        sw.classList.toggle('negativo', segno==='-');
-        sw.classList.toggle('positivo', segno==='+');
-    }
-    let chiudenteIdx = -1;
-    partita.manoCorrente.forEach((m, idx)=>{ if(m && m.chiuso) chiudenteIdx = idx; });
-    let btnChiud=document.getElementById('btn-chiusura-'+col);
-    if(btnChiud){
-        if(mano.chiuso){
-            btnChiud.className = "btn-toggle-chiusa attivo";
-            btnChiud.innerText = "🏆 Chiusa";
-            btnChiud.removeAttribute('disabled');
-        } else if(chiudenteIdx !== -1 && chiudenteIdx !== col){
-            btnChiud.className = "btn-toggle-chiusa disabilitato";
-            btnChiud.innerText = "🏆 Chiusa";
-            btnChiud.setAttribute('disabled','');
-        } else {
-            btnChiud.className = "btn-toggle-chiusa";
-            btnChiud.innerText = "🏆 Chiusa";
-            btnChiud.removeAttribute('disabled');
-        }
+    if(sw){ let s=mano.segnoCarte||'+'; sw.classList.toggle('negativo',s==='-'); sw.classList.toggle('positivo',s==='+'); }
+    let chiudenteIdx=-1;
+    partita.manoCorrente.forEach((m,idx)=>{ if(m&&m.chiuso) chiudenteIdx=idx; });
+    let btn=document.getElementById('btn-chiusura-'+col);
+    if(btn){
+        if(mano.chiuso){ btn.className="btn-toggle-chiusa attivo"; btn.innerText="🏆 Chiusa"; btn.removeAttribute('disabled'); }
+        else if(chiudenteIdx!==-1&&chiudenteIdx!==col){ btn.className="btn-toggle-chiusa disabilitato"; btn.innerText="🏆 Chiusa"; btn.setAttribute('disabled',''); }
+        else { btn.className="btn-toggle-chiusa"; btn.innerText="🏆 Chiusa"; btn.removeAttribute('disabled'); }
     }
     aggiornaPreviewMano(col);
 }
-
-function modStepper(col,tipo,val){
-    vibra(10);
-    partita.manoCorrente[col][tipo]+=val;
-    if(partita.manoCorrente[col][tipo]<0) partita.manoCorrente[col][tipo]=0;
-    let el=document.getElementById('valore-'+col+'-'+tipo);
-    if(el) el.innerText=partita.manoCorrente[col][tipo];
-    aggiornaPreviewMano(col);
-}
-
-function modStepperExtra(col,campo,val){
-    vibra(10);
-    if(typeof partita.manoCorrente[col][campo]!=='number') partita.manoCorrente[col][campo]=0;
-    partita.manoCorrente[col][campo]+=val;
-    if(partita.manoCorrente[col][campo]<0) partita.manoCorrente[col][campo]=0;
-    let el=document.getElementById('valore-'+col+'-'+campo);
-    if(el) el.innerText=partita.manoCorrente[col][campo];
-    aggiornaPreviewMano(col);
-}
-
+function modStepper(col,tipo,val){ vibra(10); partita.manoCorrente[col][tipo]+=val; if(partita.manoCorrente[col][tipo]<0) partita.manoCorrente[col][tipo]=0; let el=document.getElementById('valore-'+col+'-'+tipo); if(el) el.innerText=partita.manoCorrente[col][tipo]; aggiornaPreviewMano(col); }
+function modStepperExtra(col,campo,val){ vibra(10); if(typeof partita.manoCorrente[col][campo]!=='number') partita.manoCorrente[col][campo]=0; partita.manoCorrente[col][campo]+=val; if(partita.manoCorrente[col][campo]<0) partita.manoCorrente[col][campo]=0; let el=document.getElementById('valore-'+col+'-'+campo); if(el) el.innerText=partita.manoCorrente[col][campo]; aggiornaPreviewMano(col); }
 function aggiornaCarte(col,val){ partita.manoCorrente[col].carte=val; aggiornaPreviewMano(col); }
-
-function toggleSegnoCarte(col){
-    vibra(15);
-    let m = partita.manoCorrente[col];
-    if(!m) return;
-    m.segnoCarte = (m.segnoCarte === '-') ? '+' : '-';
-    let sw = document.getElementById('switch-segno-'+col);
-    if(sw){
-        sw.classList.toggle('negativo', m.segnoCarte==='-');
-        sw.classList.toggle('positivo', m.segnoCarte==='+');
-    }
-    aggiornaPreviewMano(col);
-}
-
-function togglePozzetto(col){ vibra(15); partita.manoCorrente[col].pozzetto=!partita.manoCorrente[col].pozzetto; aggiornaBottoniStato(col); }
-
+function toggleSegnoCarte(col){ vibra(15); let m=partita.manoCorrente[col]; if(!m) return; m.segnoCarte=(m.segnoCarte==='-')?'+':'-'; let sw=document.getElementById('switch-segno-'+col); if(sw){ sw.classList.toggle('negativo',m.segnoCarte==='-'); sw.classList.toggle('positivo',m.segnoCarte==='+'); } aggiornaPreviewMano(col); }
 function toggleChiusura(col){
-    vibra(20);
-    let chiudenteIdx = partita.manoCorrente.findIndex(m=>m && m.chiuso);
-    if(chiudenteIdx !== -1 && chiudenteIdx !== col) return;
-    let eraChiuso = partita.manoCorrente[col].chiuso;
-    partita.manoCorrente[col].chiuso = !eraChiuso;
-    if(partita.manoCorrente[col].chiuso){
-        partita.manoCorrente[col].pozzetto = true;
-        setTimeout(()=>mostraAnimazioneVincitore(col), 100);
-    }
+    vibra(20); let c=partita.manoCorrente.findIndex(m=>m&&m.chiuso); if(c!==-1&&c!==col) return;
+    let e=partita.manoCorrente[col].chiuso; partita.manoCorrente[col].chiuso=!e;
+    if(partita.manoCorrente[col].chiuso){ partita.manoCorrente[col].pozzetto=1; setTimeout(()=>mostraAnimazioneVincitore(col),100); }
     partita.squadre.forEach((_,i)=>aggiornaBottoniStato(i));
 }
-
 function salvaSmazzata(){
     if(!partita.inCorso) return;
     if(!Array.isArray(partita.storicoSmazzate)) partita.storicoSmazzate=[];
-    partita.storicoSmazzate.push({
-        punteggi:[...partita.punteggiTotali],
-        mano:JSON.parse(JSON.stringify(partita.manoCorrente)),
-        mazziere: partita.mazziereCorrente
-    });
+    if(partita.modalita==='3 Gioc.'&&partita.pozzettoPlayer!==null){ let t=[0,1,2].filter(x=>x!==partita.pozzettoPlayer); partita.manoCorrente[t[1]]=JSON.parse(JSON.stringify(partita.manoCorrente[t[0]])); }
+    partita.storicoSmazzate.push({ punteggi:[...partita.punteggiTotali], mano:JSON.parse(JSON.stringify(partita.manoCorrente)), mazziere:partita.mazziereCorrente, mazziereNome:(typeof partita.mazziereCorrente==='number'&&partita.posti[partita.mazziereCorrente])?partita.posti[partita.mazziereCorrente].nome:'', pozzettoPlayer:(partita.modalita==='3 Gioc.')?partita.pozzettoPlayer:null });
     if(partita.storicoSmazzate.length>30) partita.storicoSmazzate.shift();
-    let targetNum=parseInt(partita.traguardo)||99999;
-    let finePartita=false;
-    let vincitore="";
-    partita.squadre.forEach((sq,i)=>{
-        let m=partita.manoCorrente[i];
-        let parziale=calcolaParzialeMano(m);
-        partita.punteggiTotali[i]+=parziale;
-        if(partita.traguardo!=='Smazzate'&&partita.punteggiTotali[i]>=targetNum){finePartita=true;vincitore=sq;}
-    });
-    if(finePartita){
-        alert("🎉 PARTITA FINITA!\nHa vinto: "+vincitore+" raggiungendo "+targetNum+" punti!");
-        chiudiPartita(true);
-    } else {
-        let nomePrecedente = partita.posti[partita.mazziereCorrente] ? partita.posti[partita.mazziereCorrente].nome : '—';
+    let targetNum=parseInt(partita.traguardo)||99999; let fine=false; let vinc='';
+    partita.squadre.forEach((sq,i)=>{ let p=calcolaParzialeMano(partita.manoCorrente[i]); partita.punteggiTotali[i]+=p; if(partita.traguardo!=='Smazzate'&&partita.punteggiTotali[i]>=targetNum){fine=true;vinc=sq;} });
+    if(fine){ alert("🎉 PARTITA FINITA!\nHa vinto: "+vinc); chiudiPartita(true); }
+    else {
+        let nP=partita.posti[partita.mazziereCorrente]?partita.posti[partita.mazziereCorrente].nome:'—';
         ruotaMazziere();
-        let nomeNuovo = partita.posti[partita.mazziereCorrente] ? partita.posti[partita.mazziereCorrente].nome : '—';
-        resetManoCorrente();
-        salvaDati();
-        renderTabellone();
-        alert("✅ Smazzata calcolata e registrata!\n\n🎴 Ha dato le carte: "+nomePrecedente+"\n👉 Alla prossima mano tocca a: "+nomeNuovo);
+        let nN=partita.posti[partita.mazziereCorrente]?partita.posti[partita.mazziereCorrente].nome:'—';
+        if(partita.modalita==='3 Gioc.'){ partita.pozzettoPlayer=null; }
+        resetManoCorrente(); salvaDati(); renderTabellone();
+        alert("✅ Smazzata registrata!\n\n🎴 Ha dato: "+nP+"\n👉 Prossimo: "+nN);
     }
 }
-
 function annullaUltimaSmazzata(){
-    if(!partita.storicoSmazzate||partita.storicoSmazzate.length===0){ alert("Nessuna smazzata da annullare."); return; }
-    if(!confirm("Annullare l'ultima smazzata registrata?")) return;
-    let prec=partita.storicoSmazzate.pop();
-    partita.punteggiTotali=prec.punteggi;
-    partita.manoCorrente=prec.mano;
-    if(typeof prec.mazziere === 'number') partita.mazziereCorrente = prec.mazziere;
-    if(Array.isArray(partita.manoCorrente)){
-        partita.manoCorrente.forEach(m=>{
-            if(m && typeof m.segnoCarte !== 'string') m.segnoCarte = '+';
-        });
-    }
-    salvaDati();
-    renderTabellone();
-    alert("↩️ Ultima smazzata annullata.");
+    if(!partita.storicoSmazzate||partita.storicoSmazzate.length===0){ alert("Nessuna smazzata."); return; }
+    if(!confirm("Annullare l'ultima smazzata?")) return;
+    let p=partita.storicoSmazzate.pop();
+    partita.punteggiTotali=p.punteggi; partita.manoCorrente=p.mano;
+    if(typeof p.mazziere==='number') partita.mazziereCorrente=p.mazziere;
+    if(p.pozzettoPlayer!==null&&p.pozzettoPlayer!==undefined) partita.pozzettoPlayer=p.pozzettoPlayer;
+    else if(partita.modalita==='3 Gioc.') partita.pozzettoPlayer=null;
+    if(Array.isArray(partita.manoCorrente)) partita.manoCorrente.forEach(m=>{ if(m){ if(typeof m.segnoCarte!=='string') m.segnoCarte='+'; m.pozzetto=normalizzaPozzetto(m.pozzetto); } });
+    salvaDati(); renderTabellone();
 }
-
-function chiudiPartita(saltaConferma){
+function chiudiPartita(salta){
     if(!partita.inCorso) return;
-    if(!saltaConferma){ if(!confirm("Terminare la partita? Verrà salvata nello storico.")) return; }
+    if(!salta){ if(!confirm("Terminare la partita?")) return; }
     let now=new Date();
-    appData.storico.unshift({
-        data:now.toLocaleDateString()+' '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),
-        modalita:partita.modalita,traguardo:partita.traguardo,squadre:[...partita.squadre],punti:[...partita.punteggiTotali]
-    });
+    appData.storico.unshift({ data:now.toLocaleDateString()+' '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}), modalita:partita.modalita, traguardo:partita.traguardo, squadre:[...partita.squadre], punti:[...partita.punteggiTotali], smazzate:JSON.parse(JSON.stringify(partita.storicoSmazzate||[])), postiOld:JSON.parse(JSON.stringify(partita.posti||[])), burracoReale:!!partita.burracoReale, superBurraco:!!partita.superBurraco, burracoInternazionale:!!partita.burracoInternazionale });
     partita.inCorso=false;
-    let numPosti=partita.modalita.includes('2')?2:(partita.modalita.includes('3')?3:4);
-    partita.posti=new Array(numPosti).fill(null);
-    partita.squadre=[];
-    partita.punteggiTotali=[];
-    partita.manoCorrente=[];
-    partita.storicoSmazzate=[];
-    partita.mazziereIniziale=null;
-    partita.mazziereCorrente=null;
-    salvaDati();
-    renderStorico();
-    renderTavolo();
-    renderTabellone();
-    cambiaSchermata('storico');
+    let n=partita.modalita.includes('2')?2:(partita.modalita.includes('3')?3:4);
+    partita.posti=new Array(n).fill(null); partita.squadre=[]; partita.punteggiTotali=[]; partita.manoCorrente=[]; partita.storicoSmazzate=[]; partita.mazziereIniziale=null; partita.mazziereCorrente=null; partita.pozzettoPlayer=null;
+    salvaDati(); renderStorico(); renderTavolo(); renderTabellone(); cambiaSchermata('storico');
 }
-
 function renderRubrica(){
-    let div=document.getElementById('lista-rubrica');
-    if(!div) return;
-    div.innerHTML="";
-    if(appData.giocatori.length===0){
-        div.innerHTML=`<div style="text-align:center;padding:30px 15px;color:#bbb;"><div style="font-size:50px;margin-bottom:10px;">👥</div><p style="font-size:15px;margin:0;">Nessun giocatore in rubrica.</p><p style="font-size:13px;margin-top:6px;">Clicca <b>➕ Aggiungi Nuovo Giocatore</b> per iniziare!</p></div>`;
-        return;
-    }
+    let d=document.getElementById('lista-rubrica'); if(!d) return; d.innerHTML="";
+    if(appData.giocatori.length===0){ d.innerHTML=`<div style="text-align:center;padding:30px 15px;color:#bbb;"><div style="font-size:50px;margin-bottom:10px;">👥</div><p>Rubrica vuota.</p></div>`; return; }
     appData.giocatori.forEach((g,i)=>{
-        let avatarHTML=g.tipo==='emoji'?`<span style="font-size:36px;line-height:1;">${g.valore}</span>`:`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
-        let subTag=g.soprannome?`<span style="font-size:12px;color:var(--crema-accento);">"${g.soprannome}"</span>`:'';
-        div.innerHTML+=`<div class="card-lista" style="flex-direction:row;justify-content:space-between;align-items:center;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:55px;height:55px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">${avatarHTML}</div><div><div style="font-size:17px;font-weight:bold;">${g.nome}</div>${subTag}</div></div><button class="btn-danger" style="width:auto;padding:6px 12px;font-size:12px;" onclick="eliminaGiocatore(${i})">Elimina</button></div>`;
+        let av=g.tipo==='emoji'?`<span style="font-size:36px;line-height:1;">${g.valore}</span>`:`<img src="${g.valore}" style="width:100%;height:100%;object-fit:cover;">`;
+        let s=g.soprannome?`<span style="font-size:12px;color:var(--crema-accento);">"${g.soprannome}"</span>`:'';
+        d.innerHTML+=`<div class="card-lista" style="flex-direction:row;justify-content:space-between;align-items:center;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:55px;height:55px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">${av}</div><div><div style="font-size:17px;font-weight:bold;">${g.nome}</div>${s}</div></div><button class="btn-danger" style="width:auto;padding:6px 12px;font-size:12px;" onclick="eliminaGiocatore(${i})">Elimina</button></div>`;
     });
 }
-
-function eliminaGiocatore(i){
-    let g=appData.giocatori[i];
-    if(!g) return;
-    if(!confirm(`Eliminare "${g.nome}" dalla rubrica?`)) return;
-    appData.giocatori.splice(i,1);
-    salvaDati();
-    renderRubrica();
-}
-
+function eliminaGiocatore(i){ if(!appData.giocatori[i]) return; if(!confirm(`Eliminare "${appData.giocatori[i].nome}"?`)) return; appData.giocatori.splice(i,1); salvaDati(); renderRubrica(); }
 function renderStorico(){
-    let div=document.getElementById('lista-storico');
-    if(!div) return;
-    div.innerHTML="";
-    let btnDemo=document.getElementById('btn-rimuovi-demo');
-    if(btnDemo){ let hasDemo=appData.storico.some(s=>s.demo); btnDemo.style.display=hasDemo?'block':'none'; }
-    if(appData.storico.length===0){ div.innerHTML="<p style='color:#ccc;text-align:center;'>Nessuna partita archiviata nello storico.</p>"; return; }
-    appData.storico.forEach(s=>{
-        let res="";
-        s.squadre.forEach((sq,idx)=>{ res+=`${sq}: <b>${s.punti[idx]} pt</b><br>`; });
-        let trag=s.traguardo?` - Target: ${s.traguardo}`:'';
-        let demoBadge=s.demo?`<span class="badge-demo">DEMO</span>`:'';
-        div.innerHTML+=`<div class="card-lista" style="${s.demo?'border-color: rgba(255,215,0,0.4);':''}"><div style="color:var(--crema-accento);font-size:12px;font-weight:bold;">${s.data} - Modalità: ${s.modalita}${trag}${demoBadge}</div><div style="font-size:15px;margin-top:4px;">${res}</div></div>`;
+    let d=document.getElementById('lista-storico'); if(!d) return; d.innerHTML="";
+    let b=document.getElementById('btn-rimuovi-demo'); if(b){ let h=appData.storico.some(s=>s.demo); b.style.display=h?'block':'none'; }
+    if(appData.storico.length===0){ d.innerHTML="<p style='color:#ccc;text-align:center;'>Nessuna partita.</p>"; return; }
+    appData.storico.forEach((s,idx)=>{
+        let r=""; s.squadre.forEach((sq,i)=>{ r+=`${escapeHtml(sq)}: <b>${s.punti[i]} pt</b><br>`; });
+        let t=s.traguardo?` - Target: ${escapeHtml(s.traguardo)}`:''; let bd=s.demo?`<span class="badge-demo">DEMO</span>`:'';
+        let hs=Array.isArray(s.smazzate)&&s.smazzate.length>0;
+        let ba=hs?`<span class="badge-apri">👁️ ${s.smazzate.length} mani</span>`:`<span class="badge-apri" style="opacity:0.5;">👁️ Riepilogo</span>`;
+        d.innerHTML+=`<div class="card-lista card-cliccabile" style="${s.demo?'border-color:rgba(255,215,0,0.4);':''}" onclick="apriDettaglioStorico(${idx})"><div style="color:var(--crema-accento);font-size:12px;font-weight:bold;">${escapeHtml(s.data)} - ${escapeHtml(s.modalita)}${t}${bd}${ba}</div><div style="font-size:15px;margin-top:4px;">${r}</div></div>`;
     });
 }
-
 function renderRegole(){
-    let regole=[
-        {titolo:"🃏 Valore delle Carte",testo:"<b>Jolly:</b> 30 punti<br><b>Pinella (2):</b> 20 punti<br><b>Asso:</b> 15 punti<br><b>Re, Donna, Jack, 10, 9, 8:</b> 10 punti<br><b>7, 6, 5, 4, 3:</b> 5 punti"},
-        {titolo:"🏆 Punteggi Burrachi",testo:"<b>Burraco Pulito:</b> 200 punti (7+ carte senza jolly o pinelle)<br><b>Burraco Semipulito:</b> 150 punti (7+ carte con una pinella)<br><b>Burraco Sporco:</b> 100 punti (7+ carte con jolly o pinella)"},
-        {titolo:"👑 Burraco Reale (opzionale)",testo:"Burraco composto da 7 o più carte consecutive dello stesso seme, <b>senza jolly e senza pinelle</b>, che partono dal 3 e arrivano fino all'Asso. Vale <b>300 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
-        {titolo:"⚡ Super Burraco (opzionale)",testo:"Burraco composto da <b>12 o più carte</b> dello stesso seme, senza jolly. Vale <b>500 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
-        {titolo:"🌍 Burraco Internazionale (opzionale)",testo:"Variante con regole e punteggio internazionale. Vale <b>150 punti</b>.<br><i>Attivabile nelle Regole Extra della Nuova Partita.</i>"},
-        {titolo:"🎴 Mazziere (chi dà le carte)",testo:"All'inizio di ogni partita si sceglie chi dà le carte per la prima mano. Ad ogni smazzata registrata, il mazziere ruota automaticamente al giocatore successivo al tavolo (in senso orario)."},
-        {titolo:"➕➖ Punti Carte in mano",testo:"La riga <b>Punti carte in mano</b> contiene, in un'unica casella: interruttore <b>+/−</b> e campo numerico. Il pulsante <b>Calcolatore 🧮</b> è affiancato nella sua casella dedicata."},
-        {titolo:"👤 4 Singoli",testo:"In modalità <b>4 Singoli</b> i 4 tabelloni sono disposti <b>2 in alto e 2 in basso</b> (Nord, Est sopra — Ovest, Sud sotto). Su schermi piccoli si dispongono automaticamente <b>uno sotto l'altro</b> per la massima leggibilità."},
-        {titolo:"🎯 Chiusura e Pozzetto",testo:"<b>Chiusura della partita:</b> +100 punti bonus. Solo <b>una</b> squadra può chiudere la mano.<br><b>Pozzetto non preso:</b> Penale di -100 punti."}
-    ];
-    let div=document.getElementById('lista-regole');
-    if(!div) return;
-    div.innerHTML="";
-    regole.forEach(r=>{ div.innerHTML+=`<div class="card-lista"><span class="regola-titolo">${r.titolo}</span><span class="regola-testo" style="margin-top:4px;">${r.testo}</span></div>`; });
+    let r=[{titolo:"🃏 Valore delle Carte",testo:"Jolly: 30 • Pinella (2): 20 • Asso: 15 • Re/Donna/Jack/10/9/8: 10 • 7/6/5/4/3: 5"},
+        {titolo:"🏆 Punteggi Burrachi",testo:"Pulito: 200 • Semipulito: 150 • Sporco: 100"},
+        {titolo:"👑 Burraco Reale (opzionale)",testo:"7+ carte senza jolly e pinelle dal 3 all'Asso. Vale 300 pt."},
+        {titolo:"⚡ Super Burraco (opzionale)",testo:"12+ carte dello stesso seme senza jolly. Vale 500 pt."},
+        {titolo:"🌍 Burraco Internazionale (opzionale)",testo:"Variante internazionale. Vale 150 pt."},
+        {titolo:"👤 Burraco a 3 Giocatori",testo:"In 3 giocatori: 3 tabelloni separati. Quando un giocatore prende il pozzetto, gioca da solo e gli altri due formano coppia. Le coppie cambiano ad ogni mano."},
+        {titolo:"🎴 Mazziere",testo:"Il mazziere ruota automaticamente ad ogni smazzata."},
+        {titolo:"⏸️ Partita in Pausa",testo:"Puoi sospendere e riprendere quando vuoi."},
+        {titolo:"🃏 Pozzetto",testo:"<b>Slider a 3 posizioni</b>:<br>• Sinistra (−100) = pozzetto non preso<br>• Centro (0) = non indicato (default)<br>• Destra (+100) = pozzetto preso"},
+        {titolo:"🎯 Chiusura",testo:"+100 pt bonus. Solo una squadra può chiudere la mano."}];
+    let d=document.getElementById('lista-regole'); if(!d) return; d.innerHTML="";
+    r.forEach(x=>{ d.innerHTML+=`<div class="card-lista"><span class="regola-titolo">${x.titolo}</span><span class="regola-testo" style="margin-top:4px;">${x.testo}</span></div>`; });
 }
-
 function renderIstruzioni(){
-    let guida=[
-        {titolo:"🎲 1. Configurare una Nuova Partita",testo:"Dalla schermata <b>Nuova Partita</b> seleziona la modalità di gioco e il traguardo. Tocca ciascun cerchio attorno al tavolo per assegnare un giocatore."},
-        {titolo:"🎴 2. Mazziere (Chi dà le carte)",testo:"Nella sezione <b>4. Chi dà le carte</b> scegli il giocatore che dà le carte per la <b>prima mano</b>. Il mazziere corrente è evidenziato in oro con badge <b>🎴 DÀ</b>."},
-        {titolo:"⚙️ 3. Regole Extra (Opzionali)",testo:"Nella sezione <b>5. Regole Extra</b> tocca <b>⚙️ Scegli regola da attivare</b>. Puoi attivare <b>Burraco Reale</b>, <b>Super Burraco</b> e <b>Burraco Internazionale</b>."},
-        {titolo:"👤 4. Modalità 4 Singoli",testo:"In <b>4 Singoli</b> i tabelloni sono più grandi e disposti <b>2 sopra e 2 sotto</b> (Nord, Est / Ovest, Sud). Su telefono si dispongono automaticamente <b>uno sotto l'altro</b> per garantire la massima leggibilità."},
-        {titolo:"➕➖ 5. Punti carte in mano",testo:"Le due caselle <b>Punti carte in mano</b> e <b>Calcolatore</b> hanno la <b>stessa larghezza</b>. Nella prima trovi interruttore <b>+/−</b> e campo numerico insieme; cliccando il campo si apre la tastiera numerica."},
-        {titolo:"✅ 6. Pozzetto",testo:"Tocca <b>Pozzetto</b> se la squadra ha preso il pozzetto: la casella diventa verde e la penale di -100 non viene applicata."},
-        {titolo:"🏆 7. Chiudere la Partita",testo:"Tocca <b>🏆 Chiusa</b> sulla squadra che ha chiuso la mano: parte una <b>animazione con scintille</b> e il nome del vincitore. Vengono aggiunti <b>+100 punti</b> e il <b>Pozzetto è automaticamente preso</b>."},
-        {titolo:"↩️ 8. Correggere un Errore",testo:"Se sbagli a registrare una smazzata, usa <b>Annulla Ultima Smazzata</b>."},
-        {titolo:"👥 9. Rubrica Giocatori",testo:"Nella sezione <b>Rubrica Giocatori</b> puoi aggiungere amici con emoji, selfie, foto o file."},
-        {titolo:"🎨 10. Tema Colore",testo:"In <b>Impostazioni</b> puoi scegliere tra 5 temi: Verde, Blu, Rosso, Beige e Viola."}
-    ];
-    let div=document.getElementById('lista-istruzioni');
-    if(!div) return;
-    div.innerHTML="";
-    guida.forEach(g=>{ div.innerHTML+=`<div class="card-lista"><span class="regola-titolo">${g.titolo}</span><span class="regola-testo" style="margin-top:4px;">${g.testo}</span></div>`; });
+    let g=[{titolo:"🎲 1. Nuova Partita",testo:"Configura modalità, traguardo e giocatori."},
+        {titolo:"👤 2. Modalità 3 Giocatori",testo:"3 tabelloni separati. Clicca su chi ha preso il pozzetto: gioca da solo, gli altri due in coppia."},
+        {titolo:"⏸️ 3. Pausa",testo:"Puoi sospendere e riprendere quando vuoi."},
+        {titolo:"🎴 4. Mazziere",testo:"Si sceglie il mazziere iniziale, poi ruota automaticamente."},
+        {titolo:"⚙️ 5. Regole Extra",testo:"Burraco Reale, Super Burraco, Internazionale."},
+        {titolo:"📜 6. Storico",testo:"Tocca una partita per il dettaglio completo."},
+        {titolo:"🃏 7. Pozzetto (slider)",testo:"Lo <b>slider del pozzetto</b> ha 3 posizioni:<br>• <b>Sinistra (−100)</b>: pozzetto NON preso → −100 pt<br>• <b>Centro (0)</b>: posizione di default, non incide<br>• <b>Destra (+100)</b>: pozzetto preso → +100 pt<br>Tocca la parte dello slider corrispondente per spostare il cursore."},
+        {titolo:"👤 8. Pozzetto in 3 Giocatori",testo:"Quando selezioni chi ha preso il pozzetto, il suo slider si sposta <b>automaticamente</b> a destra (+100) e quello dei due avversari a sinistra (−100)."},
+        {titolo:"🏆 9. Chiudere la Mano",testo:"Tocca 🏆 Chiusa: +100 pt e animazione."}];
+    let d=document.getElementById('lista-istruzioni'); if(!d) return; d.innerHTML="";
+    g.forEach(x=>{ d.innerHTML+=`<div class="card-lista"><span class="regola-titolo">${x.titolo}</span><span class="regola-testo" style="margin-top:4px;">${x.testo}</span></div>`; });
 }
-
-function toggleTema(){
-    let isDark=document.body.classList.toggle("dark-mode");
-    appData.tema=isDark?'scuro':'chiaro';
-    salvaDati();
-}
-
-function azzeraStorico(){
-    if(confirm("Sei sicuro di voler cancellare tutto lo storico delle partite?")){
-        appData.storico=[];
-        appData.demoStoricoCaricato=true;
-        salvaDati();
-        renderStorico();
-        alert("Storico azzerato.");
-    }
-}
-
-function azzeraRubrica(){
-    if(confirm("Sei sicuro di voler cancellare TUTTI i giocatori dalla rubrica?")){
-        appData.giocatori=[];
-        salvaDati();
-        renderRubrica();
-        renderTavolo();
-        alert("Rubrica azzerata completamente.");
-    }
-}
-
+function toggleTema(){ let d=document.body.classList.toggle("dark-mode"); appData.tema=d?'scuro':'chiaro'; salvaDati(); }
+function azzeraStorico(){ if(confirm("Azzerare tutto lo storico?")){ appData.storico=[]; appData.demoStoricoCaricato=true; salvaDati(); renderStorico(); alert("Storico azzerato."); } }
+function azzeraRubrica(){ if(confirm("Azzerare la rubrica?")){ appData.giocatori=[]; salvaDati(); renderRubrica(); renderTavolo(); alert("Rubrica azzerata."); } }
 function esportaBackup(){
-    let backup={versione:3,versioneApp:APP_VERSION,esportato:new Date().toISOString(),appData:appData,partita:partita};
-    let blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
-    let url=URL.createObjectURL(blob);
-    let a=document.createElement('a');
-    let stamp=new Date().toISOString().slice(0,10);
-    a.href=url;
-    a.download=`burraco-backup-${stamp}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    alert("📤 Backup esportato!");
+    let b={versione:3,versioneApp:APP_VERSION,esportato:new Date().toISOString(),appData:appData,partita:partita};
+    let blob=new Blob([JSON.stringify(b,null,2)],{type:'application/json'}); let url=URL.createObjectURL(blob);
+    let a=document.createElement('a'); a.href=url; a.download=`burraco-backup-${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); alert("📤 Backup esportato!");
 }
-
 function importaBackup(event){
-    let file=event.target.files[0];
-    if(!file) return;
+    let file=event.target.files[0]; if(!file) return;
     let reader=new FileReader();
     reader.onload=function(e){
         try{
-            let dati=JSON.parse(e.target.result);
-            if(!dati||typeof dati!=='object') throw new Error("File non valido");
-            if(!confirm("Sovrascrivere i dati attuali con quelli del backup?")){ event.target.value=''; return; }
+            let dati=JSON.parse(e.target.result); if(!dati||typeof dati!=='object') throw new Error("File non valido");
+            if(!confirm("Sovrascrivere i dati?")){ event.target.value=''; return; }
             if(dati.appData){
                 if(Array.isArray(dati.appData.giocatori)) appData.giocatori=dati.appData.giocatori;
                 if(Array.isArray(dati.appData.storico)) appData.storico=dati.appData.storico;
+                if(Array.isArray(dati.appData.partiteInPausa)) appData.partiteInPausa=dati.appData.partiteInPausa;
                 if(dati.appData.tema) appData.tema=dati.appData.tema;
                 if(dati.appData.temaColore) appData.temaColore=dati.appData.temaColore;
                 if(typeof dati.appData.menuRidotto==='boolean') appData.menuRidotto=dati.appData.menuRidotto;
@@ -1902,23 +1575,15 @@ function importaBackup(event){
                 if(typeof partita.burracoInternazionale!=='boolean') partita.burracoInternazionale=false;
                 if(typeof partita.mazziereIniziale!=='number') partita.mazziereIniziale=null;
                 if(typeof partita.mazziereCorrente!=='number') partita.mazziereCorrente=null;
-                if(Array.isArray(partita.manoCorrente)){
-                    partita.manoCorrente.forEach(m=>{
-                        if(m && typeof m.segnoCarte !== 'string') m.segnoCarte = '+';
-                    });
-                }
+                if(typeof partita.pozzettoPlayer!=='number') partita.pozzettoPlayer=null;
+                if(Array.isArray(partita.manoCorrente)) partita.manoCorrente.forEach(m=>{ if(m){ if(typeof m.segnoCarte!=='string') m.segnoCarte='+'; m.pozzetto=normalizzaPozzetto(m.pozzetto); } });
             }
             salvaDati();
             document.body.classList.toggle("dark-mode",appData.tema==='scuro');
-            applicaTemaColore();
-            applicaStatoMenu();
-            aggiornaBottoniRegoleExtra();
-            renderRubrica();
-            renderStorico();
-            renderTavolo();
-            renderTabellone();
-            alert("📥 Backup importato correttamente!");
-        } catch(err){ alert("❌ File di backup non valido: "+err.message); }
+            applicaTemaColore(); applicaStatoMenu(); aggiornaBottoniRegoleExtra();
+            renderRubrica(); renderStorico(); renderTavolo(); renderTabellone(); renderPartiteInPausa();
+            alert("📥 Backup importato!");
+        } catch(err){ alert("❌ Errore: "+err.message); }
         event.target.value='';
     };
     reader.readAsText(file);
